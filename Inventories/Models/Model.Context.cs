@@ -29,5 +29,9 @@ namespace Inventories.Models
         public virtual DbSet<tblAccessLevel> tblAccessLevels { get; set; }
         public virtual DbSet<tblMenu> tblMenus { get; set; }
         public virtual DbSet<tblRole> tblRoles { get; set; }
+        public virtual DbSet<tblContact> tblContacts { get; set; }
+        public virtual DbSet<tblCategory> tblCategories { get; set; }
+        public virtual DbSet<tblUnit> tblUnits { get; set; }
+        public virtual DbSet<tblWarehouse> tblWarehouses { get; set; }
     }
 }

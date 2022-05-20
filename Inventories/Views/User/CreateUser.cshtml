@@ -142,8 +142,7 @@
                             <div class="form-group">
                                 <label>Role<span style="color:red;">*</span> <small id="LblRoleError" style="display:none; color:red;">Role Must be selected!!!</small></label><br />
                                 <select class="form-control" id="Role" name="RoleId" required>
-                                    <option value="0">Select Role</option>
-                                    @*@foreach (Inventories.Models.tblRole Role in @ViewBag.Roles)
+                                    @foreach (Inventories.Models.tblRole Role in @ViewBag.Roles)
                                     {
                                         if (@Role.RoleId == RoleId)
                                         {
@@ -153,7 +152,7 @@
                                         {
                                             <option value="@Role.RoleId">@Role.Role</option>
                                         }
-                                    }*@
+                                    }
                                 </select>
                             </div>
                         </div>

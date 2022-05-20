@@ -25,7 +25,7 @@ namespace Inventories.Controllers
         public ActionResult CreateUser(int? id)
         {
             tblUser User = null;
-            //ViewBag.Roles = DB.tblRoles.Where(x => x.isActive == true).ToList();
+            ViewBag.Roles = DB.tblRoles.Where(x => x.isActive == true).ToList();
             if (id != null && id != 0)
             {
                 User = DB.tblUsers.Where(x => x.UserId == id).FirstOrDefault();

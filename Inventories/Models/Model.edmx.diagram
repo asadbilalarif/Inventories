@@ -12,6 +12,11 @@
         <AssociationConnector Association="InventoriesModel.FK_AccessManu" />
         <AssociationConnector Association="InventoriesModel.FK_AccessRole" />
         <AssociationConnector Association="InventoriesModel.FK_MenuTable" />
+        <AssociationConnector Association="InventoriesModel.FK_tblUser_tblRole" />
+        <EntityTypeShape EntityType="InventoriesModel.tblContact" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="InventoriesModel.tblCategory" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="InventoriesModel.tblUnit" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="InventoriesModel.tblWarehouse" Width="1.5" PointX="8.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

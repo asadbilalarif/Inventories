@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+
+    ViewBag.Access = Session["Access"];
+    int PID = 0;
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from doccure-html.dreamguystech.com/template/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 15:15:59 GMT -->
@@ -174,16 +181,58 @@
                         <li class="menu-title">
                             <span>Main</span>
                         </li>
-                        <li class="active">
-                            <a href="@Url.Action("Index","Home")"><i class="fe fe-home"></i> <span>Dashboard</span></a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-users"></i> <span>User Management</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li><a href="@Url.Action("Users","User")">Users</a></li>
-                                <li><a href="@Url.Action("RolesPermission","User")">Permissions</a></li>
-                            </ul>
-                        </li>
+                        @foreach (var AccessLevel in @ViewBag.Access)
+                        {
+
+
+                            if (@AccessLevel.tblMenu.ParentId == 0)
+                            {
+                                {
+
+                                    PID = @AccessLevel.tblMenu.MenuId;
+
+
+                                }
+                                <li class="submenu" id="@AccessLevel.tblMenu.ElementId">
+                                    <a href="#"><i class="@AccessLevel.tblMenu.FontAwesome"></i> <span>@AccessLevel.tblMenu.Name</span> <span class="menu-arrow"></span></a>
+
+                                    <ul style="display: none;">
+                                        @foreach (var AccessLevel1 in @ViewBag.Access)
+                                        {
+                                            if (@AccessLevel1.tblMenu.ParentId == @PID)
+                                            {
+                                                if (@AccessLevel1.tblMenu.Name == "Roles & Permissions")
+                                                {
+                                                    <li id="@AccessLevel1.tblMenu.ElementId">
+                                                        <a href="@Url.Action(@AccessLevel1.tblMenu.ActionName, @AccessLevel1.tblMenu.ControllerName,new {id=0 })"> <i class="@AccessLevel1.tblMenu.FontAwesome"></i> <span> @AccessLevel1.tblMenu.Name </span></a>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li id="@AccessLevel1.tblMenu.ElementId">
+                                                        <a href="@Url.Action(@AccessLevel1.tblMenu.ActionName, @AccessLevel1.tblMenu.ControllerName)"> <i class="@AccessLevel1.tblMenu.FontAwesome"></i> <span> @AccessLevel1.tblMenu.Name </span></a>
+                                                    </li>
+                                                }
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                            
+                        }
+
+
+                        @*
+        <li class="active">
+            <a href="@Url.Action("Index","Home")"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+        </li>
+        <li class="submenu">
+            <a href="#"><i class="fa fa-users"></i> <span>User Management</span> <span class="menu-arrow"></span></a>
+            <ul style="display: none;">
+                <li><a href="@Url.Action("Users","User")">Users</a></li>
+                <li><a href="@Url.Action("RolesPermission","User")">Permissions</a></li>
+            </ul>
+        </li>*@
                     </ul>
                 </div>
             </div>

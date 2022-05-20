@@ -18,6 +18,7 @@ namespace Inventories.Models
         public tblRole()
         {
             this.tblAccessLevels = new HashSet<tblAccessLevel>();
+            this.tblUsers = new HashSet<tblUser>();
         }
     
         public int RoleId { get; set; }
@@ -30,5 +31,7 @@ namespace Inventories.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblAccessLevel> tblAccessLevels { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblUser> tblUsers { get; set; }
     }
 }

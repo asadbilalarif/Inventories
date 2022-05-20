@@ -129,8 +129,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -153,15 +157,28 @@
     <Compile Include="Models\tblAccessLevel.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblCategory.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblContact.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblMenu.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblRole.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblUnit.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblUser.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblWarehouse.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WarehouseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +250,7 @@
     <Content Include="Content\assets\js\chart.morris.js" />
     <Content Include="Content\assets\js\form-validation.js" />
     <Content Include="Content\assets\js\jquery-3.2.1.min.js" />
+    <Content Include="Content\assets\js\jquery-3.5.1.js" />
     <Content Include="Content\assets\js\jquery.maskedinput.min.js" />
     <Content Include="Content\assets\js\mask.js" />
     <Content Include="Content\assets\js\popper.min.js" />
@@ -332,6 +350,16 @@
     <Content Include="Views\User\Users.cshtml" />
     <Content Include="Views\User\CreateUser.cshtml" />
     <Content Include="Views\User\RolesPermission.cshtml" />
+    <Content Include="Views\Account\ForgetPassword.cshtml" />
+    <Content Include="Views\Account\ChangeForgetPassword.cshtml" />
+    <Content Include="Views\Contact\Contacts.cshtml" />
+    <Content Include="Views\Contact\CreateContact.cshtml" />
+    <Content Include="Views\Category\Categories.cshtml" />
+    <Content Include="Views\Category\CreateCategory.cshtml" />
+    <Content Include="Views\Unit\Units.cshtml" />
+    <Content Include="Views\Unit\CreateUnit.cshtml" />
+    <Content Include="Views\Warehouse\Warehouses.cshtml" />
+    <Content Include="Views\Warehouse\CreateWarehouse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

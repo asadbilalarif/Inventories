@@ -1,0 +1,102 @@
+﻿@model  Inventories.Models.tblCategory
+@{
+    int CategoryId = 0;
+    string Name = "";
+    string Code = "";
+
+    if (Model != null)
+    {
+        CategoryId = Model.CategoryId;
+        Name = Model.Name;
+        Code = Model.Code;
+    }
+
+
+
+}
+<head>
+    @*<link href="~/Theme/template/admin/assets/css/select2.min.css" rel="stylesheet" />*@
+
+</head>
+
+<!-- Page Wrapper -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <!-- /Page Header -->
+
+    <div class="row">
+        <div class="col-md-12">
+
+            @using (Html.BeginForm("CreateCategory", "Category", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {@Html.AntiForgeryToken()
+            <div class="card">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="breadcrumb-bar">
+                            <div class="container-fluid">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6 col-6">
+                                        @if (Model == null)
+                                        {
+                                            <h5 class="breadcrumb-title">Create Category</h5>
+                                        }
+                                        else
+                                        {
+                                            <h5 class="breadcrumb-title">Edit Category</h5>
+                                        }
+                                    </div>
+                                    <div class="col-md-6 col-6 text-right" id="CreateCategoryB">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <span style="color:red;">@ViewBag.Error</span>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" style="display:none;" name="CategoryId" value="@CategoryId" required>
+                                <label>Name<span style="color:red;">*</span></label>
+                                <input type="text" class="form-control" id="Name" name="Name" value="@Name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Code</label>
+                                <input type="text" class="form-control" id="Code" name="Code" value="@Code">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <div class="form-group">
+                                <label></label>
+                                <button class="btn btn-primary" type="submit" id="SaveChanges">Save</button>
+                                <a href="@Url.Action("CreateCategory","Category",new { id=0})"> <input class="btn btn-danger" type="button" value="Cancel"></a>
+                                <a href="@Url.Action("Categories","Category")" class="btn btn-secondary"><i class="fa fa-list"></i> List</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        }
+        </div>
+    </div>
+
+</div>
+
+<!-- /Page Wrapper -->
+@*<script src="~/Theme/template/admin/assets/js/jquery-3.2.1.min.js"></script>*@
+<script src="~/Content/assets/js/jquery-3.5.1.js"></script>

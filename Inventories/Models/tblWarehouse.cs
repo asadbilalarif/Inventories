@@ -12,22 +12,19 @@ namespace Inventories.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tblUser
+    public partial class tblWarehouse
     {
-        public int UserId { get; set; }
+        public int WarehouseId { get; set; }
         public string Name { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public Nullable<int> Warehouse { get; set; }
+        public string Code { get; set; }
         public string Phone { get; set; }
-        public Nullable<int> RoleId { get; set; }
+        public string Email { get; set; }
+        public string Logo { get; set; }
+        public string Address { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> EditBy { get; set; }
         public Nullable<System.DateTime> EditDate { get; set; }
         public Nullable<bool> isActive { get; set; }
-    
-        public virtual tblRole tblRole { get; set; }
     }
 }
