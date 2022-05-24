@@ -12,34 +12,33 @@ namespace Inventories.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tblWarehouse
+    public partial class tblItem
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblWarehouse()
+        public tblItem()
         {
-            this.tblUsers = new HashSet<tblUser>();
-            this.tblTransfers = new HashSet<tblTransfer>();
-            this.tblTransfers1 = new HashSet<tblTransfer>();
+            this.tblTransferItems = new HashSet<tblTransferItem>();
         }
     
-        public int WarehouseId { get; set; }
+        public int ItemId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string Logo { get; set; }
-        public string Address { get; set; }
+        public Nullable<int> CategoryId { get; set; }
+        public string Unit { get; set; }
+        public string BarcodeSymbology { get; set; }
+        public string RackLocation { get; set; }
+        public string SKU { get; set; }
+        public string Details { get; set; }
+        public Nullable<int> Alertonlowstock { get; set; }
+        public Nullable<bool> TrackQuantity { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> EditBy { get; set; }
         public Nullable<System.DateTime> EditDate { get; set; }
         public Nullable<bool> isActive { get; set; }
     
+        public virtual tblCategory tblCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblUser> tblUsers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblTransfer> tblTransfers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblTransfer> tblTransfers1 { get; set; }
+        public virtual ICollection<tblTransferItem> tblTransferItems { get; set; }
     }
 }

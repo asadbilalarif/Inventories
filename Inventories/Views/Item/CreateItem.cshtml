@@ -1,0 +1,265 @@
+﻿@model  Inventories.Models.tblItem
+@{
+    int ItemId = 0;
+    string Name = "";
+    string Code = "";
+    int? CategoryId = 0;
+    string Unit = "";
+    string BarcodeSymbology = "";
+    string RackLocation = "";
+    string SKU = "";
+    string Details = "";
+    bool? TrackQuantity = false;
+    int? Alertonlowstock = 0;
+    bool? isActive = false;
+
+    if (Model != null)
+    {
+        ItemId = Model.ItemId;
+        Name = Model.Name;
+        Code = Model.Code;
+        CategoryId = Model.CategoryId;
+        Unit = Model.Unit;
+        BarcodeSymbology = Model.BarcodeSymbology;
+        RackLocation = Model.RackLocation;
+        SKU = Model.SKU;
+        Details = Model.Details;
+        TrackQuantity = Model.TrackQuantity;
+        Alertonlowstock = Model.Alertonlowstock;
+        isActive = Model.isActive;
+    }
+
+
+
+}
+<head>
+    @*<link href="~/Theme/template/admin/assets/css/select2.min.css" rel="stylesheet" />*@
+
+</head>
+
+<!-- Page Wrapper -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <!-- /Page Header -->
+
+    <div class="row">
+        <div class="col-md-12">
+
+            @using (Html.BeginForm("CreateItem", "Item", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {@Html.AntiForgeryToken()
+            <div class="card">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="breadcrumb-bar">
+                            <div class="container-fluid">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6 col-6">
+                                        @if (Model == null)
+                                        {
+                                            <h5 class="breadcrumb-title">Create Item</h5>
+                                        }
+                                        else
+                                        {
+                                            <h5 class="breadcrumb-title">Edit Item</h5>
+                                        }
+                                    </div>
+                                    <div class="col-md-6 col-6 text-right" id="CreateItemB">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <span style="color:red;">@ViewBag.Error</span>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" style="display:none;" name="ItemId" value="@ItemId" required>
+                                <label>Name<span style="color:red;">*</span></label>
+                                <input type="text" class="form-control" id="Name" name="Name" value="@Name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Code<span style="color:red;">*</span></label>
+                                <input type="text" class="form-control" id="Code" name="Code" value="@Code" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Category<span style="color:red;">*</span></label>
+                                <select class="form-control" id="CategoryId" name="CategoryId" required>
+                                    <option value="">Select Category</option>
+                                    @foreach (Inventories.Models.tblCategory Category in @ViewBag.Caterories)
+                                    {
+                                        if (@Category.CategoryId == CategoryId)
+                                        {
+                                            <option value="@Category.CategoryId" selected>@Category.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Category.CategoryId">@Category.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Unit<span style="color:red;">*</span></label>
+                                <select class="form-control" id="Unit" name="Unit" required>
+                                    <option value="">Select Unit</option>
+                                    @if (Unit == "Meter")
+                                    {
+                                        <option value="Meter" selected>Meter</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Meter">Meter</option>
+                                    }
+                                    @if (Unit == "Piece")
+                                    {
+                                        <option value="Piece" selected>Piece</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Piece">Piece</option>
+                                    }
+                                    @if (Unit == "Kilogram")
+                                    {
+                                        <option value="Kilogram" selected>Kilogram</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="Kilogram">Kilogram</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Barcode Symbology<span style="color:red;"></span></label>
+                                <select class="form-control" id="BarcodeSymbology" name="BarcodeSymbology" required>
+                                    <option value="">Select Barcode Symbology</option>
+                                    @if (BarcodeSymbology == "CODE128")
+                                    {
+                                        <option value="CODE128" selected>CODE128</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="CODE128">CODE128</option>
+                                    }
+                                    @if (BarcodeSymbology == "CODE39")
+                                    {
+                                        <option value="CODE39" selected>CODE39</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="CODE39">CODE39</option>
+                                    }
+                                    @if (BarcodeSymbology == "EAN-5")
+                                    {
+                                        <option value="EAN-5" selected>EAN-5</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="EAN-5">EAN-5</option>
+                                    }
+                                    @if (BarcodeSymbology == "EAN-8")
+                                    {
+                                        <option value="EAN-8" selected>EAN-8</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="EAN-8">EAN-8</option>
+                                    }
+                                    @if (BarcodeSymbology == "EAN-13")
+                                    {
+                                        <option value="EAN-13" selected>EAN-13</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="EAN-13">EAN-13</option>
+                                    }
+                                    @if (BarcodeSymbology == "UPC-A")
+                                    {
+                                        <option value="UPC-A" selected>UPC-A</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="UPC-A">UPC-A</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Rack Location<span style="color:red;"></span></label>
+                                <input type="text" class="form-control" id="RackLocation" name="RackLocation" value="@RackLocation">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Details</label>
+                                <textarea class="form-control" id="Details" name="Details">@Details</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @if (TrackQuantity == true)
+                                {
+                                    <input type="checkbox" id="TrackQuantity" name="TrackQuantity" value="true" checked />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" id="TrackQuantity" name="TrackQuantity" value="true" />
+                                }
+                                <label>Track Quantity</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Alert on Low Stock</label>
+                                <input class="form-control" type="number" id="Alertonlowstock" name="Alertonlowstock" value="@Alertonlowstock">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <div class="form-group">
+                                <label></label>
+                                <button class="btn btn-primary" type="submit" id="SaveChanges">Save</button>
+                                <a href="@Url.Action("CreateItem","Item",new { id=0})"> <input class="btn btn-danger" type="button" value="Cancel"></a>
+                                <a href="@Url.Action("Items","Item")" class="btn btn-secondary"><i class="fa fa-list"></i> List</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        }
+        </div>
+    </div>
+
+</div>
+
+<!-- /Page Wrapper -->
+@*<script src="~/Theme/template/admin/assets/js/jquery-3.2.1.min.js"></script>*@
+<script src="~/Content/assets/js/jquery-3.5.1.js"></script>
+
+
+<script>
+
+
+</script>

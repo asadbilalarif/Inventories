@@ -1,0 +1,236 @@
+﻿@model IEnumerable<Inventories.Models.tblItem>
+
+@{
+    ViewData["Title"] = "Items";
+    string Succ = @ViewBag.Success;
+    string Update = @ViewBag.Update;
+    string Delete = @ViewBag.Delete;
+}
+
+
+<head>
+
+    <style>
+        .select2-container {
+            width: 100% !important;
+        }
+    </style>
+
+
+
+</head>
+
+
+
+
+<!-- Page Wrapper -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <!-- /Page Header -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="breadcrumb-bar">
+                            <div class="container-fluid">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6 col-6">
+                                        <h5 class="breadcrumb-title">Item List</h5>
+                                    </div>
+                                    <div class="col-md-6 col-6 text-right" id="CreateItemB">
+                                        <a href="@Url.Action("CreateItem","Item")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> Create New Item</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div style="display:none;" class="alert alert-success alert-dismissible fade show" id="SuccessAlert" role="alert">
+                    <strong>Success!</strong> @ViewBag.Success
+                </div>
+                <div style="display:none;" class="alert alert-info alert-dismissible fade show" id="UpdateAlert" role="alert">
+                    <strong>Success!</strong> @ViewBag.Update
+                </div>
+                <div style="display:none;" class="alert alert-warning alert-dismissible fade show" id="DeleteAlert" role="alert">
+                    <strong>Success!</strong> @ViewBag.Delete
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="table-responsive">
+                            <table class="cell-border table table-hover table-center  mb-0 " id="ItemTable">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">Item ID</th>
+                                        <th>Name</th>
+                                        <th>Code</th>
+                                        @*<th>Base Item</th>
+                                        <th>Formula</th>*@
+
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Inventories.Models.tblItem Item in Model)
+                                    {
+                                        <tr>
+                                            <td style="display:none;">@Item.ItemId</td>
+                                            <td>@Item.Name</td>
+                                            <td>@Item.Code</td>
+                                            @*<td>@Item.BaseItem</td>
+
+                                            <td>@Item.Formula</td>*@
+
+                                            <td class="text-end">
+                                                <div class="actions">
+                                                    <a href="@Url.Action("CreateItem","Item",new {id=Item.ItemId })" id="EditItem" class="text-black">
+                                                        <i class="fa fa-edit"></i> Edit
+                                                    </a>
+                                                    <a class="text-danger" href="#" data-toggle="modal" data-target="#ItemDelete" id="DeleteItem">
+                                                        <i class="fa fa-trash"></i> Delete
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="ItemDelete" class="modal fade delete-modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img src="~/Content/assets/img/sent.png" alt="" width="50" height="46">
+                <input class="form-control" type="text" id="DeleteItemID" style="display:none;">
+                <h5>Are you sure want to delete this Item information?</h5>
+                <div class="m-t-20">
+                    <p id="ConfigDerror" style="color:red;"></p>
+                    <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                    <input type="button" class="btn btn-danger" id="CDeleteItem" value="Delete">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /Page Wrapper -->
+<!-- jQuery -->
+@*<script src="~/Content/assets/js/jquery-3.5.1.js"></script>*@
+
+
+<script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>
+@*<script src="~/Theme/template/admin/assets/js/jquery.min.js"></script>*@
+<script>
+
+
+    $("body").on("click", "#DeleteItem", function () {
+        $("#ConfigDerror").text("");
+        $("#CDeleteItem").attr("disabled", false);
+        var currentRow = $(this).closest("tr");
+        $("#DeleteItemID").val(currentRow.find("td:eq(0)").text());
+        //alert($("#DeleteDeviceInfoID").val());
+    });
+
+    $("#CDeleteItem").on("click", function () {
+
+
+        $("#CDeleteItem").attr("disabled", true);
+
+        var ID = $("#DeleteItemID").val();
+
+        var model = {
+            ItemId: ID,
+        };
+        console.log(model);
+
+
+        //Send the JSON array to Controller using AJAX.
+        $.ajax({
+            type: "POST",
+            url: "/Item/DeleteItem",
+            data: JSON.stringify(model),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                if (r == 1) {
+
+                    var url = window.location.origin;
+                    url += '/Item/Items?Delete=Item has been delete successfully.';
+                    window.location.href = url;
+                }
+                //alert(r + " record(s) inserted.");
+            }
+        });
+
+    });
+
+
+
+    $(document).ready(function () {
+
+
+        if ("@Succ"!="") {
+            $('#SuccessAlert').fadeIn();
+            $('#SuccessAlert').fadeOut(6000);
+        }
+        else {
+            $('#SuccessAlert').fadeOut();
+        }
+        if ("@Update" != "") {
+            $('#UpdateAlert').fadeIn();
+            $('#UpdateAlert').fadeOut(6000);
+        }
+        else {
+            $('#UpdateAlert').fadeOut();
+        }
+        if ("@Delete" != "") {
+            $('#DeleteAlert').fadeIn();
+            $('#DeleteAlert').fadeOut(6000);
+        }
+        else {
+            $('#DeleteAlert').fadeOut();
+        }
+
+        $('#ItemTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'pageLength',
+                {
+
+
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: [ 1, 2,3,4,5,6,7,8,9,10,11,12,13,14]
+                    }
+                }
+            ],
+            @*"lengthMenu": [@Retrieves],*@
+            searching: true, paging: true
+        });
+
+
+
+        $(".nav li ul li").removeClass("active");
+        $('#Items').addClass('active');
+        $('#UM a').addClass('subdrop');
+        $("#UM  ul").first().css('display', 'block');
+
+
+    });
+
+
+
+
+</script>

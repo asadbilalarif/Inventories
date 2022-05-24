@@ -12,6 +12,8 @@ namespace Inventories.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class InventoriesEntities : DbContext
     {
@@ -33,5 +35,14 @@ namespace Inventories.Models
         public virtual DbSet<tblCategory> tblCategories { get; set; }
         public virtual DbSet<tblUnit> tblUnits { get; set; }
         public virtual DbSet<tblWarehouse> tblWarehouses { get; set; }
+        public virtual DbSet<tblItem> tblItems { get; set; }
+        public virtual DbSet<tblTransfer> tblTransfers { get; set; }
+        public virtual DbSet<tblTransferItem> tblTransferItems { get; set; }
+        public virtual DbSet<tblTempPath> tblTempPaths { get; set; }
+    
+        public virtual ObjectResult<string> TransfrNumber()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("TransfrNumber");
+        }
     }
 }

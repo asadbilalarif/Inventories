@@ -51,6 +51,27 @@
           <Property Name="EditDate" Type="datetime" />
           <Property Name="isActive" Type="bit" />
         </EntityType>
+        <EntityType Name="tblItem">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="Unit" Type="nvarchar(max)" />
+          <Property Name="BarcodeSymbology" Type="nvarchar(max)" />
+          <Property Name="RackLocation" Type="nvarchar(max)" />
+          <Property Name="SKU" Type="nvarchar(max)" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="Alertonlowstock" Type="int" />
+          <Property Name="TrackQuantity" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
         <EntityType Name="tblMenu">
           <Key>
             <PropertyRef Name="MenuId" />
@@ -77,6 +98,57 @@
           </Key>
           <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Role" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblTempPath">
+          <Key>
+            <PropertyRef Name="TempPathId" />
+          </Key>
+          <Property Name="TempPathId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TNumber" Type="nvarchar(max)" />
+          <Property Name="CINumber" Type="nvarchar(max)" />
+          <Property Name="CONumber" Type="nvarchar(max)" />
+          <Property Name="ANumber" Type="nvarchar(max)" />
+          <Property Name="Path" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblTransfer">
+          <Key>
+            <PropertyRef Name="TransferId" />
+          </Key>
+          <Property Name="TransferId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransferNumber" Type="nvarchar(max)" />
+          <Property Name="TransferDate" Type="date" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar(max)" />
+          <Property Name="FromWarehouse" Type="int" />
+          <Property Name="ToWarehouse" Type="int" />
+          <Property Name="Attachment" Type="nvarchar(max)" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="draft" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblTransferItem">
+          <Key>
+            <PropertyRef Name="TransferItemId" />
+          </Key>
+          <Property Name="TransferItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransferId" Type="int" />
+          <Property Name="ItemId" Type="int" />
+          <Property Name="ItemWeight" Type="int" />
+          <Property Name="ItemQuantity" Type="int" />
+          <Property Name="ItemUnit" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="EditBy" Type="int" />
@@ -159,12 +231,89 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblUser_tblWarehouse">
+          <End Role="tblWarehouse" Type="Self.tblWarehouse" Multiplicity="0..1" />
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ItemCategory">
+          <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="0..1" />
+          <End Role="tblItem" Type="Self.tblItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="tblItem">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TransferFromWarehouse">
+          <End Role="tblWarehouse" Type="Self.tblWarehouse" Multiplicity="0..1" />
+          <End Role="tblTransfer" Type="Self.tblTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblTransfer">
+              <PropertyRef Name="FromWarehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TransferItem">
+          <End Role="tblItem" Type="Self.tblItem" Multiplicity="0..1" />
+          <End Role="tblTransferItem" Type="Self.tblTransferItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="tblTransferItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TransferToWarehouse">
+          <End Role="tblWarehouse" Type="Self.tblWarehouse" Multiplicity="0..1" />
+          <End Role="tblTransfer" Type="Self.tblTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblTransfer">
+              <PropertyRef Name="ToWarehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TransferTransfer">
+          <End Role="tblTransfer" Type="Self.tblTransfer" Multiplicity="0..1" />
+          <End Role="tblTransferItem" Type="Self.tblTransferItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransfer">
+              <PropertyRef Name="TransferId" />
+            </Principal>
+            <Dependent Role="tblTransferItem">
+              <PropertyRef Name="TransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="TransfrNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="InventoriesModelStoreContainer">
           <EntitySet Name="tblAccessLevel" EntityType="Self.tblAccessLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCategory" EntityType="Self.tblCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblContact" EntityType="Self.tblContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblItem" EntityType="Self.tblItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMenu" EntityType="Self.tblMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRole" EntityType="Self.tblRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTempPath" EntityType="Self.tblTempPath" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTransfer" EntityType="Self.tblTransfer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTransferItem" EntityType="Self.tblTransferItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUnit" EntityType="Self.tblUnit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblWarehouse" EntityType="Self.tblWarehouse" Schema="dbo" store:Type="Tables" />
@@ -175,6 +324,30 @@
           <AssociationSet Name="FK_tblUser_tblRole" Association="Self.FK_tblUser_tblRole">
             <End Role="tblRole" EntitySet="tblRole" />
             <End Role="tblUser" EntitySet="tblUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUser_tblWarehouse" Association="Self.FK_tblUser_tblWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouse" />
+            <End Role="tblUser" EntitySet="tblUser" />
+          </AssociationSet>
+          <AssociationSet Name="ItemCategory" Association="Self.ItemCategory">
+            <End Role="tblCategory" EntitySet="tblCategory" />
+            <End Role="tblItem" EntitySet="tblItem" />
+          </AssociationSet>
+          <AssociationSet Name="TransferFromWarehouse" Association="Self.TransferFromWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouse" />
+            <End Role="tblTransfer" EntitySet="tblTransfer" />
+          </AssociationSet>
+          <AssociationSet Name="TransferItem" Association="Self.TransferItem">
+            <End Role="tblItem" EntitySet="tblItem" />
+            <End Role="tblTransferItem" EntitySet="tblTransferItem" />
+          </AssociationSet>
+          <AssociationSet Name="TransferToWarehouse" Association="Self.TransferToWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouse" />
+            <End Role="tblTransfer" EntitySet="tblTransfer" />
+          </AssociationSet>
+          <AssociationSet Name="TransferTransfer" Association="Self.TransferTransfer">
+            <End Role="tblTransfer" EntitySet="tblTransfer" />
+            <End Role="tblTransferItem" EntitySet="tblTransferItem" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -199,6 +372,7 @@
           <Property Name="EditDate" Type="DateTime" Precision="3" />
           <Property Name="isActive" Type="Boolean" />
           <NavigationProperty Name="tblRole" Relationship="InventoriesModel.FK_tblUser_tblRole" FromRole="tblUser" ToRole="tblRole" />
+          <NavigationProperty Name="tblWarehouse" Relationship="InventoriesModel.FK_tblUser_tblWarehouse" FromRole="tblUser" ToRole="tblWarehouse" />
         </EntityType>
         <EntityContainer Name="InventoriesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
@@ -225,6 +399,35 @@
           <EntitySet Name="tblCategories" EntityType="InventoriesModel.tblCategory" />
           <EntitySet Name="tblUnits" EntityType="InventoriesModel.tblUnit" />
           <EntitySet Name="tblWarehouses" EntityType="InventoriesModel.tblWarehouse" />
+          <AssociationSet Name="FK_tblUser_tblWarehouse" Association="InventoriesModel.FK_tblUser_tblWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouses" />
+            <End Role="tblUser" EntitySet="tblUsers" />
+          </AssociationSet>
+          <EntitySet Name="tblItems" EntityType="InventoriesModel.tblItem" />
+          <AssociationSet Name="ItemCategory" Association="InventoriesModel.ItemCategory">
+            <End Role="tblCategory" EntitySet="tblCategories" />
+            <End Role="tblItem" EntitySet="tblItems" />
+          </AssociationSet>
+          <EntitySet Name="tblTransfers" EntityType="InventoriesModel.tblTransfer" />
+          <EntitySet Name="tblTransferItems" EntityType="InventoriesModel.tblTransferItem" />
+          <AssociationSet Name="TransferItem" Association="InventoriesModel.TransferItem">
+            <End Role="tblItem" EntitySet="tblItems" />
+            <End Role="tblTransferItem" EntitySet="tblTransferItems" />
+          </AssociationSet>
+          <AssociationSet Name="TransferFromWarehouse" Association="InventoriesModel.TransferFromWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouses" />
+            <End Role="tblTransfer" EntitySet="tblTransfers" />
+          </AssociationSet>
+          <AssociationSet Name="TransferToWarehouse" Association="InventoriesModel.TransferToWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouses" />
+            <End Role="tblTransfer" EntitySet="tblTransfers" />
+          </AssociationSet>
+          <AssociationSet Name="TransferTransfer" Association="InventoriesModel.TransferTransfer">
+            <End Role="tblTransfer" EntitySet="tblTransfers" />
+            <End Role="tblTransferItem" EntitySet="tblTransferItems" />
+          </AssociationSet>
+          <FunctionImport Name="TransfrNumber" ReturnType="Collection(String)" />
+          <EntitySet Name="tblTempPaths" EntityType="InventoriesModel.tblTempPath" />
         </EntityContainer>
         <EntityType Name="tblAccessLevel">
           <Key>
@@ -358,6 +561,7 @@
           <Property Name="EditBy" Type="Int32" />
           <Property Name="EditDate" Type="DateTime" Precision="3" />
           <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblItems" Relationship="InventoriesModel.ItemCategory" FromRole="tblCategory" ToRole="tblItem" />
         </EntityType>
         <EntityType Name="tblUnit">
           <Key>
@@ -387,6 +591,160 @@
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblUsers" Relationship="InventoriesModel.FK_tblUser_tblWarehouse" FromRole="tblWarehouse" ToRole="tblUser" />
+          <NavigationProperty Name="tblTransfers" Relationship="InventoriesModel.TransferFromWarehouse" FromRole="tblWarehouse" ToRole="tblTransfer" />
+          <NavigationProperty Name="tblTransfers1" Relationship="InventoriesModel.TransferToWarehouse" FromRole="tblWarehouse" ToRole="tblTransfer" />
+        </EntityType>
+        <Association Name="FK_tblUser_tblWarehouse">
+          <End Type="InventoriesModel.tblWarehouse" Role="tblWarehouse" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblUser" Role="tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblItem">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="Unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BarcodeSymbology" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RackLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SKU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Alertonlowstock" Type="Int32" />
+          <Property Name="TrackQuantity" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblCategory" Relationship="InventoriesModel.ItemCategory" FromRole="tblItem" ToRole="tblCategory" />
+          <NavigationProperty Name="tblTransferItems" Relationship="InventoriesModel.TransferItem" FromRole="tblItem" ToRole="tblTransferItem" />
+        </EntityType>
+        <Association Name="ItemCategory">
+          <End Type="InventoriesModel.tblCategory" Role="tblCategory" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblItem" Role="tblItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="tblItem">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblTransfer">
+          <Key>
+            <PropertyRef Name="TransferId" />
+          </Key>
+          <Property Name="TransferId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransferDate" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FromWarehouse" Type="Int32" />
+          <Property Name="ToWarehouse" Type="Int32" />
+          <Property Name="Attachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="draft" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblWarehouse" Relationship="InventoriesModel.TransferFromWarehouse" FromRole="tblTransfer" ToRole="tblWarehouse" />
+          <NavigationProperty Name="tblWarehouse1" Relationship="InventoriesModel.TransferToWarehouse" FromRole="tblTransfer" ToRole="tblWarehouse" />
+          <NavigationProperty Name="tblTransferItems" Relationship="InventoriesModel.TransferTransfer" FromRole="tblTransfer" ToRole="tblTransferItem" />
+          <Property Name="TransferNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblTransferItem">
+          <Key>
+            <PropertyRef Name="TransferItemId" />
+          </Key>
+          <Property Name="TransferItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransferId" Type="Int32" />
+          <Property Name="ItemId" Type="Int32" />
+          <Property Name="ItemWeight" Type="Int32" />
+          <Property Name="ItemQuantity" Type="Int32" />
+          <Property Name="ItemUnit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblItem" Relationship="InventoriesModel.TransferItem" FromRole="tblTransferItem" ToRole="tblItem" />
+          <NavigationProperty Name="tblTransfer" Relationship="InventoriesModel.TransferTransfer" FromRole="tblTransferItem" ToRole="tblTransfer" />
+        </EntityType>
+        <Association Name="TransferItem">
+          <End Type="InventoriesModel.tblItem" Role="tblItem" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblTransferItem" Role="tblTransferItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="tblTransferItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TransferFromWarehouse">
+          <End Type="InventoriesModel.tblWarehouse" Role="tblWarehouse" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblTransfer" Role="tblTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblTransfer">
+              <PropertyRef Name="FromWarehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TransferToWarehouse">
+          <End Type="InventoriesModel.tblWarehouse" Role="tblWarehouse" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblTransfer" Role="tblTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblTransfer">
+              <PropertyRef Name="ToWarehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TransferTransfer">
+          <End Type="InventoriesModel.tblTransfer" Role="tblTransfer" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblTransferItem" Role="tblTransferItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTransfer">
+              <PropertyRef Name="TransferId" />
+            </Principal>
+            <Dependent Role="tblTransferItem">
+              <PropertyRef Name="TransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblTempPath">
+          <Key>
+            <PropertyRef Name="TempPathId" />
+          </Key>
+          <Property Name="TempPathId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CINumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CONumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ANumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="EditBy" Type="Int32" />
@@ -534,6 +892,83 @@
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblItems">
+            <EntityTypeMapping TypeName="InventoriesModel.tblItem">
+              <MappingFragment StoreEntitySet="tblItem">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="TrackQuantity" ColumnName="TrackQuantity" />
+                <ScalarProperty Name="Alertonlowstock" ColumnName="Alertonlowstock" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="SKU" ColumnName="SKU" />
+                <ScalarProperty Name="RackLocation" ColumnName="RackLocation" />
+                <ScalarProperty Name="BarcodeSymbology" ColumnName="BarcodeSymbology" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTransfers">
+            <EntityTypeMapping TypeName="InventoriesModel.tblTransfer">
+              <MappingFragment StoreEntitySet="tblTransfer">
+                <ScalarProperty Name="TransferNumber" ColumnName="TransferNumber" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="draft" ColumnName="draft" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="ToWarehouse" ColumnName="ToWarehouse" />
+                <ScalarProperty Name="FromWarehouse" ColumnName="FromWarehouse" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="TransferDate" ColumnName="TransferDate" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTransferItems">
+            <EntityTypeMapping TypeName="InventoriesModel.tblTransferItem">
+              <MappingFragment StoreEntitySet="tblTransferItem">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ItemUnit" ColumnName="ItemUnit" />
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+                <ScalarProperty Name="ItemWeight" ColumnName="ItemWeight" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="TransferItemId" ColumnName="TransferItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="TransfrNumber" FunctionName="InventoriesModel.Store.TransfrNumber" />
+          <EntitySetMapping Name="tblTempPaths">
+            <EntityTypeMapping TypeName="InventoriesModel.tblTempPath">
+              <MappingFragment StoreEntitySet="tblTempPath">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="ANumber" ColumnName="ANumber" />
+                <ScalarProperty Name="CONumber" ColumnName="CONumber" />
+                <ScalarProperty Name="CINumber" ColumnName="CINumber" />
+                <ScalarProperty Name="TNumber" ColumnName="TNumber" />
+                <ScalarProperty Name="TempPathId" ColumnName="TempPathId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

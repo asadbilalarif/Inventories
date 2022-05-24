@@ -132,6 +132,8 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\TransferController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
@@ -163,10 +165,22 @@
     <Compile Include="Models\tblContact.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblMenu.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblRole.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblTempPath.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblTransfer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblTransferItem.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblUnit.cs">
@@ -252,6 +266,7 @@
     <Content Include="Content\assets\js\jquery-3.2.1.min.js" />
     <Content Include="Content\assets\js\jquery-3.5.1.js" />
     <Content Include="Content\assets\js\jquery.maskedinput.min.js" />
+    <Content Include="Content\assets\js\jquery.mcautocomplete.js" />
     <Content Include="Content\assets\js\mask.js" />
     <Content Include="Content\assets\js\popper.min.js" />
     <Content Include="Content\assets\js\script.js" />
@@ -360,6 +375,10 @@
     <Content Include="Views\Unit\CreateUnit.cshtml" />
     <Content Include="Views\Warehouse\Warehouses.cshtml" />
     <Content Include="Views\Warehouse\CreateWarehouse.cshtml" />
+    <Content Include="Views\Item\Items.cshtml" />
+    <Content Include="Views\Item\CreateItem.cshtml" />
+    <Content Include="Views\Transfer\Transfers.cshtml" />
+    <Content Include="Views\Transfer\CreateTransfer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

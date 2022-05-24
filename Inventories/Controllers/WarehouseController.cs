@@ -44,15 +44,16 @@ namespace Inventories.Controllers
             tblWarehouse Data = new tblWarehouse();
             try
             {
+                string folder = Server.MapPath(string.Format("~/{0}/", "Uploading"));
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
                 if (Warehouse.WarehouseId == 0)
                 {
                     if (DB.tblWarehouses.Select(r => r).Where(x => x.Name == Warehouse.Name).FirstOrDefault() == null)
                     {
-                        string folder = Server.MapPath(string.Format("~/{0}/", "Uploading"));
-                        if (!Directory.Exists(folder))
-                        {
-                            Directory.CreateDirectory(folder);
-                        }
+                       
                         string path = null;
 
                         if (CLogo != null)

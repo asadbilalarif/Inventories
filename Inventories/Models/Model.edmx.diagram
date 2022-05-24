@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="260c814450974ad1b2ca1b122d13b809" Name="Diagram1">
+      <Diagram DiagramId="260c814450974ad1b2ca1b122d13b809" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="InventoriesModel.tblUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoriesModel.tblAccessLevel" Width="1.5" PointX="5.625" PointY="1.25" />
         <EntityTypeShape EntityType="InventoriesModel.tblMenu" Width="1.5" PointX="3.375" PointY="1" />
@@ -17,6 +17,16 @@
         <EntityTypeShape EntityType="InventoriesModel.tblCategory" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="InventoriesModel.tblUnit" Width="1.5" PointX="7.375" PointY="6.75" />
         <EntityTypeShape EntityType="InventoriesModel.tblWarehouse" Width="1.5" PointX="8.375" PointY="0.75" />
+        <AssociationConnector Association="InventoriesModel.FK_tblUser_tblWarehouse" />
+        <EntityTypeShape EntityType="InventoriesModel.tblItem" Width="1.5" PointX="7.625" PointY="11" />
+        <AssociationConnector Association="InventoriesModel.ItemCategory" />
+        <EntityTypeShape EntityType="InventoriesModel.tblTransfer" Width="1.5" PointX="10.625" PointY="7.375" />
+        <EntityTypeShape EntityType="InventoriesModel.tblTransferItem" Width="1.5" PointX="12.875" PointY="9.625" />
+        <AssociationConnector Association="InventoriesModel.TransferItem" />
+        <AssociationConnector Association="InventoriesModel.TransferFromWarehouse" />
+        <AssociationConnector Association="InventoriesModel.TransferToWarehouse" />
+        <AssociationConnector Association="InventoriesModel.TransferTransfer" />
+        <EntityTypeShape EntityType="InventoriesModel.tblTempPath" Width="1.5" PointX="0.75" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
