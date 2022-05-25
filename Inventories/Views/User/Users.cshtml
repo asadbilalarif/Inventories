@@ -83,7 +83,6 @@
                                         <th>Phone Number</th>
                                         <th>Email</th>
                                         <th>Role</th>
-                                        @*<th>Active</th>*@
 
                                         <th>Action</th>
                                     </tr>
@@ -99,20 +98,6 @@
 
                                             <td>@User.Email</td>
                                             <td>@User.tblRole.Role</td>
-                                            @*@if (User.isActive == true)
-                                                {
-                                                    <td>
-                                                        <span class="badge badge-primary">Active</span>
-                                                    </td>
-                                                    /**/
-
-                                                }
-                                                else
-                                                {
-                                                    <td>
-                                                        <span class="badge badge-danger">In-Active</span>
-                                                    </td>
-                                                }*@
 
                                             <td class="text-end">
                                                 <div class="actions">

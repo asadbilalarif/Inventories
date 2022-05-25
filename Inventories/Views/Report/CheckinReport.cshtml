@@ -7,21 +7,22 @@
 
     //string[] StateDepartment = (string[])ViewBag.StateDepartment;
 
-    string StartDate = DateTime.Now.ToString("yyyy-MM-dd");
-    string EndDate = DateTime.Now.ToString("yyyy-MM-dd");
+    string StartDate = ViewBag.StartDate;
+    string EndDate = ViewBag.EndDate;
 
-    string StartCreatedDate = DateTime.Now.ToString("yyyy-MM-dd");
-    string EndCreatedDate = DateTime.Now.ToString("yyyy-MM-dd");
-    string Reference = "";
-    int Contact = 0;
+    string StartCreatedDate = ViewBag.StartCreatedDate;
+    string EndCreatedDate = ViewBag.EndCreatedDate;
+    string Reference = ViewBag.Reference;
+    int Contact = ViewBag.Contact;
     List<tblContact> Contacts = (List<tblContact>)ViewBag.Contacts;
-    int Warehouse = 0;
+    int Warehouse = ViewBag.Warehouse;
     List<tblWarehouse> Warehouses = (List<tblWarehouse>)ViewBag.Warehouses;
-    int User = 0;
+    int User = ViewBag.User;
     List<tblUser> Users = (List<tblUser>)ViewBag.Users;
-    int Category = 0;
+    int Category = ViewBag.Category;
     List<tblCategory> Categories = (List<tblCategory>)ViewBag.Categories;
-    
+    bool draft= ViewBag.draft;
+
 
 
 }
@@ -52,7 +53,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @using (Html.BeginForm("Marketing", "Reports", FormMethod.Post))
+                    @using (Html.BeginForm("CheckinReport", "Report", FormMethod.Post))
                     {
                         <form>
                             <div class="row">
@@ -116,7 +117,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label>User</label>
-                                    <select class="form-control" name="Warehouse">
+                                    <select class="form-control" name="User">
                                         <option value="">User</option>
                                         @foreach (tblUser item in Users)
                                         {
@@ -133,7 +134,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label>Category</label>
-                                    <select class="form-control" name="Warehouse">
+                                    <select class="form-control" name="Category">
                                         <option value="">Category</option>
                                         @foreach (tblCategory item in Categories)
                                         {
@@ -148,13 +149,26 @@
                                         }
                                     </select>
                                 </div>
+                                <div class="col-md-3">
+                                    <br />
+                                    @if (@draft == true)
+                                    {
+                                        <input type="checkbox" name="draft" value="true" checked />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" name="draft" value="true" />
+                                    }
+
+                                    <label>Only draft records</label>
+                                </div>
 
 
                             </div><br />
                             <div class="row">
                                 <div class="col-md-12">
                                     <button class="btn btn-primary" style="float:right;">Search</button>
-                                    <a href="@Url.Action("ChickinReport")"><button type="button" class="btn btn-danger" style="margin-right:1%;float:right;">Cancel</button></a>
+                                    <a href="@Url.Action("CheckinReport")"><button type="button" class="btn btn-danger" style="margin-right:1%;float:right;">Reset</button></a>
                                 </div>
                             </div>
 
