@@ -12,20 +12,23 @@ namespace Inventories.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tblContact
+    public partial class tblAdjustment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblContact()
+        public tblAdjustment()
         {
-            this.tblCheckins = new HashSet<tblCheckin>();
-            this.tblCheckouts = new HashSet<tblCheckout>();
+            this.tblAdjustmentItems = new HashSet<tblAdjustmentItem>();
         }
     
-        public int ContactId { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public int AdjustmentId { get; set; }
+        public string AdjustmentNumber { get; set; }
+        public System.DateTime AdjustmentDate { get; set; }
+        public string Reference { get; set; }
+        public string Type { get; set; }
+        public Nullable<int> Warehouse { get; set; }
+        public string Attachment { get; set; }
         public string Details { get; set; }
+        public Nullable<bool> draft { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> EditBy { get; set; }
@@ -33,8 +36,7 @@ namespace Inventories.Models
         public Nullable<bool> isActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCheckin> tblCheckins { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCheckout> tblCheckouts { get; set; }
+        public virtual ICollection<tblAdjustmentItem> tblAdjustmentItems { get; set; }
+        public virtual tblWarehouse tblWarehouse { get; set; }
     }
 }

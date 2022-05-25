@@ -12,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Doccure - Dashboard</title>
+    <title>Invertories - Dashboard</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/assets/img/favicon.png">
@@ -185,40 +185,41 @@
                         {
 
 
-                            if (@AccessLevel.tblMenu.ParentId == 0)
+                        if (@AccessLevel.tblMenu.isParent == true)
+                        {
                             {
-                                {
 
-                                    PID = @AccessLevel.tblMenu.MenuId;
+                            PID = @AccessLevel.tblMenu.MenuId;
 
 
-                                }
-                                <li class="submenu" id="@AccessLevel.tblMenu.ElementId">
-                                    <a href="#"><i class="@AccessLevel.tblMenu.FontAwesome"></i> <span>@AccessLevel.tblMenu.Name</span> <span class="menu-arrow"></span></a>
-
-                                    <ul style="display: none;">
-                                        @foreach (var AccessLevel1 in @ViewBag.Access)
-                                        {
-                                            if (@AccessLevel1.tblMenu.ParentId == @PID)
-                                            {
-                                                if (@AccessLevel1.tblMenu.Name == "Roles & Permissions")
-                                                {
-                                                    <li id="@AccessLevel1.tblMenu.ElementId">
-                                                        <a href="@Url.Action(@AccessLevel1.tblMenu.ActionName, @AccessLevel1.tblMenu.ControllerName,new {id=0 })"> <i class="@AccessLevel1.tblMenu.FontAwesome"></i> <span> @AccessLevel1.tblMenu.Name </span></a>
-                                                    </li>
-                                                }
-                                                else
-                                                {
-                                                    <li id="@AccessLevel1.tblMenu.ElementId">
-                                                        <a href="@Url.Action(@AccessLevel1.tblMenu.ActionName, @AccessLevel1.tblMenu.ControllerName)"> <i class="@AccessLevel1.tblMenu.FontAwesome"></i> <span> @AccessLevel1.tblMenu.Name </span></a>
-                                                    </li>
-                                                }
-                                            }
-                                        }
-                                    </ul>
-                                </li>
                             }
-                            
+                        <li class="submenu" id="@AccessLevel.tblMenu.ElementId">
+                            <a href="#"><i class="@AccessLevel.tblMenu.FontAwesome"></i> <span>@AccessLevel.tblMenu.Name</span> <span class="menu-arrow"></span></a>
+
+                            <ul style="display: none;">
+                                @foreach (var AccessLevel1 in @ViewBag.Access)
+                                {
+                                    if (@AccessLevel1.tblMenu.ParentId == @PID)
+                                    {
+                                        <li id="@AccessLevel1.tblMenu.ElementId">
+                                            <a href="@Url.Action(@AccessLevel1.tblMenu.ActionName, @AccessLevel1.tblMenu.ControllerName)"> <i class="@AccessLevel1.tblMenu.FontAwesome"></i> <span>@AccessLevel1.tblMenu.Name </span></a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                        }
+                        else
+                        {
+                        if (@AccessLevel.tblMenu.ParentId == 0)
+                        {
+                        <li class="" id="@AccessLevel.tblMenu.ElementId">
+                            <a href="@Url.Action(@AccessLevel.tblMenu.ActionName, @AccessLevel.tblMenu.ControllerName)"><i class="@AccessLevel.tblMenu.FontAwesome"></i> <span>@AccessLevel.tblMenu.Name</span> </a>
+                        </li>
+                        }
+
+                        }
+
                         }
 
 
@@ -255,9 +256,16 @@
     <!-- Slimscroll JS -->
     <script src="~/Content/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <script src="~/Content/assets/plugins/raphael/raphael.min.js"></script>
-    <script src="~/Content/assets/plugins/morris/morris.min.js"></script>
-    <script src="~/Content/assets/js/chart.morris.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+    <script src="~/Content/assets/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/assets/js/datatables.min.js"></script>
+    <script src="~/Content/assets/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/assets/js/jszip.min.js"></script>
+    <script src="~/Content/assets/js/pdfmake.min.js"></script>
+    <script src="~/Content/assets/js/vfs_fonts.js"></script>
+    <script src="~/Content/assets/js/buttons.print.min.js"></script>
+    <script src="~/Content/assets/js/buttons.html5.min.js"></script>
 
     <!-- Custom JS -->
     <script src="~/Content/assets/js/script.js"></script>

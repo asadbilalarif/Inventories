@@ -23,6 +23,41 @@
           <Property Name="DeletedDate" Type="datetime" />
           <Property Name="isActive" Type="bit" />
         </EntityType>
+        <EntityType Name="tblAdjustment">
+          <Key>
+            <PropertyRef Name="AdjustmentId" />
+          </Key>
+          <Property Name="AdjustmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdjustmentNumber" Type="nvarchar(max)" />
+          <Property Name="AdjustmentDate" Type="date" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar(max)" />
+          <Property Name="Type" Type="nvarchar(max)" />
+          <Property Name="Warehouse" Type="int" />
+          <Property Name="Attachment" Type="nvarchar(max)" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="draft" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblAdjustmentItem">
+          <Key>
+            <PropertyRef Name="AdjustmentItemId" />
+          </Key>
+          <Property Name="AdjustmentItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdjustmentId" Type="int" />
+          <Property Name="ItemId" Type="int" />
+          <Property Name="ItemWeight" Type="int" />
+          <Property Name="ItemQuantity" Type="int" />
+          <Property Name="ItemUnit" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
         <EntityType Name="tblCategory">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -30,6 +65,76 @@
           <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblCheckin">
+          <Key>
+            <PropertyRef Name="CheckinId" />
+          </Key>
+          <Property Name="CheckinId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CheckinNumber" Type="nvarchar(max)" />
+          <Property Name="CheckinDate" Type="date" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar(max)" />
+          <Property Name="Contact" Type="int" />
+          <Property Name="Warehouse" Type="int" />
+          <Property Name="Attachment" Type="nvarchar(max)" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="draft" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblCheckinItem">
+          <Key>
+            <PropertyRef Name="CheckinItemId" />
+          </Key>
+          <Property Name="CheckinItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CheckinId" Type="int" />
+          <Property Name="ItemId" Type="int" />
+          <Property Name="ItemWeight" Type="int" />
+          <Property Name="ItemQuantity" Type="int" />
+          <Property Name="ItemUnit" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblCheckout">
+          <Key>
+            <PropertyRef Name="CheckoutId" />
+          </Key>
+          <Property Name="CheckoutId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CheckoutNumber" Type="nvarchar(max)" />
+          <Property Name="CheckoutDate" Type="date" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar(max)" />
+          <Property Name="Contact" Type="int" />
+          <Property Name="Warehouse" Type="int" />
+          <Property Name="Attachment" Type="nvarchar(max)" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="draft" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblCheckoutItem">
+          <Key>
+            <PropertyRef Name="CheckoutItemId" />
+          </Key>
+          <Property Name="CheckoutItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CheckoutId" Type="int" />
+          <Property Name="ItemId" Type="int" />
+          <Property Name="ItemWeight" Type="int" />
+          <Property Name="ItemQuantity" Type="int" />
+          <Property Name="ItemUnit" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="EditBy" Type="int" />
@@ -114,6 +219,7 @@
           <Property Name="CONumber" Type="nvarchar(max)" />
           <Property Name="ANumber" Type="nvarchar(max)" />
           <Property Name="Path" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="EditBy" Type="int" />
@@ -207,6 +313,138 @@
           <Property Name="EditDate" Type="datetime" />
           <Property Name="isActive" Type="bit" />
         </EntityType>
+        <Association Name="AdjustmentAdjustment">
+          <End Role="tblAdjustment" Type="Self.tblAdjustment" Multiplicity="0..1" />
+          <End Role="tblAdjustmentItem" Type="Self.tblAdjustmentItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAdjustment">
+              <PropertyRef Name="AdjustmentId" />
+            </Principal>
+            <Dependent Role="tblAdjustmentItem">
+              <PropertyRef Name="AdjustmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdjustmentItem">
+          <End Role="tblItem" Type="Self.tblItem" Multiplicity="0..1" />
+          <End Role="tblAdjustmentItem" Type="Self.tblAdjustmentItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="tblAdjustmentItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdjustmentWarehouse">
+          <End Role="tblWarehouse" Type="Self.tblWarehouse" Multiplicity="0..1" />
+          <End Role="tblAdjustment" Type="Self.tblAdjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblAdjustment">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckinCheckin">
+          <End Role="tblCheckin" Type="Self.tblCheckin" Multiplicity="0..1" />
+          <End Role="tblCheckinItem" Type="Self.tblCheckinItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCheckin">
+              <PropertyRef Name="CheckinId" />
+            </Principal>
+            <Dependent Role="tblCheckinItem">
+              <PropertyRef Name="CheckinId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckinContact">
+          <End Role="tblContact" Type="Self.tblContact" Multiplicity="0..1" />
+          <End Role="tblCheckin" Type="Self.tblCheckin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="tblCheckin">
+              <PropertyRef Name="Contact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckinItem">
+          <End Role="tblItem" Type="Self.tblItem" Multiplicity="0..1" />
+          <End Role="tblCheckinItem" Type="Self.tblCheckinItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="tblCheckinItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckinWarehouse">
+          <End Role="tblWarehouse" Type="Self.tblWarehouse" Multiplicity="0..1" />
+          <End Role="tblCheckin" Type="Self.tblCheckin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblCheckin">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckoutCheckout">
+          <End Role="tblCheckout" Type="Self.tblCheckout" Multiplicity="0..1" />
+          <End Role="tblCheckoutItem" Type="Self.tblCheckoutItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCheckout">
+              <PropertyRef Name="CheckoutId" />
+            </Principal>
+            <Dependent Role="tblCheckoutItem">
+              <PropertyRef Name="CheckoutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckoutContact">
+          <End Role="tblContact" Type="Self.tblContact" Multiplicity="0..1" />
+          <End Role="tblCheckout" Type="Self.tblCheckout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="tblCheckout">
+              <PropertyRef Name="Contact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckoutItem">
+          <End Role="tblItem" Type="Self.tblItem" Multiplicity="0..1" />
+          <End Role="tblCheckoutItem" Type="Self.tblCheckoutItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="tblCheckoutItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckoutWarehouse">
+          <End Role="tblWarehouse" Type="Self.tblWarehouse" Multiplicity="0..1" />
+          <End Role="tblCheckout" Type="Self.tblCheckout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblCheckout">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AccessManu">
           <End Role="tblMenu" Type="Self.tblMenu" Multiplicity="0..1" />
           <End Role="tblAccessLevel" Type="Self.tblAccessLevel" Multiplicity="*" />
@@ -303,10 +541,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AdjustmentNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="CheckinNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="CheckoutNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="TransfrNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="InventoriesModelStoreContainer">
           <EntitySet Name="tblAccessLevel" EntityType="Self.tblAccessLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAdjustment" EntityType="Self.tblAdjustment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAdjustmentItem" EntityType="Self.tblAdjustmentItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCategory" EntityType="Self.tblCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCheckin" EntityType="Self.tblCheckin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCheckinItem" EntityType="Self.tblCheckinItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCheckout" EntityType="Self.tblCheckout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCheckoutItem" EntityType="Self.tblCheckoutItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblContact" EntityType="Self.tblContact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblItem" EntityType="Self.tblItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMenu" EntityType="Self.tblMenu" Schema="dbo" store:Type="Tables" />
@@ -317,6 +564,50 @@
           <EntitySet Name="tblUnit" EntityType="Self.tblUnit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblWarehouse" EntityType="Self.tblWarehouse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="AdjustmentAdjustment" Association="Self.AdjustmentAdjustment">
+            <End Role="tblAdjustment" EntitySet="tblAdjustment" />
+            <End Role="tblAdjustmentItem" EntitySet="tblAdjustmentItem" />
+          </AssociationSet>
+          <AssociationSet Name="AdjustmentItem" Association="Self.AdjustmentItem">
+            <End Role="tblItem" EntitySet="tblItem" />
+            <End Role="tblAdjustmentItem" EntitySet="tblAdjustmentItem" />
+          </AssociationSet>
+          <AssociationSet Name="AdjustmentWarehouse" Association="Self.AdjustmentWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouse" />
+            <End Role="tblAdjustment" EntitySet="tblAdjustment" />
+          </AssociationSet>
+          <AssociationSet Name="CheckinCheckin" Association="Self.CheckinCheckin">
+            <End Role="tblCheckin" EntitySet="tblCheckin" />
+            <End Role="tblCheckinItem" EntitySet="tblCheckinItem" />
+          </AssociationSet>
+          <AssociationSet Name="CheckinContact" Association="Self.CheckinContact">
+            <End Role="tblContact" EntitySet="tblContact" />
+            <End Role="tblCheckin" EntitySet="tblCheckin" />
+          </AssociationSet>
+          <AssociationSet Name="CheckinItem" Association="Self.CheckinItem">
+            <End Role="tblItem" EntitySet="tblItem" />
+            <End Role="tblCheckinItem" EntitySet="tblCheckinItem" />
+          </AssociationSet>
+          <AssociationSet Name="CheckinWarehouse" Association="Self.CheckinWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouse" />
+            <End Role="tblCheckin" EntitySet="tblCheckin" />
+          </AssociationSet>
+          <AssociationSet Name="CheckoutCheckout" Association="Self.CheckoutCheckout">
+            <End Role="tblCheckout" EntitySet="tblCheckout" />
+            <End Role="tblCheckoutItem" EntitySet="tblCheckoutItem" />
+          </AssociationSet>
+          <AssociationSet Name="CheckoutContact" Association="Self.CheckoutContact">
+            <End Role="tblContact" EntitySet="tblContact" />
+            <End Role="tblCheckout" EntitySet="tblCheckout" />
+          </AssociationSet>
+          <AssociationSet Name="CheckoutItem" Association="Self.CheckoutItem">
+            <End Role="tblItem" EntitySet="tblItem" />
+            <End Role="tblCheckoutItem" EntitySet="tblCheckoutItem" />
+          </AssociationSet>
+          <AssociationSet Name="CheckoutWarehouse" Association="Self.CheckoutWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouse" />
+            <End Role="tblCheckout" EntitySet="tblCheckout" />
+          </AssociationSet>
           <AssociationSet Name="FK_AccessManu" Association="Self.FK_AccessManu">
             <End Role="tblMenu" EntitySet="tblMenu" />
             <End Role="tblAccessLevel" EntitySet="tblAccessLevel" />
@@ -428,6 +719,59 @@
           </AssociationSet>
           <FunctionImport Name="TransfrNumber" ReturnType="Collection(String)" />
           <EntitySet Name="tblTempPaths" EntityType="InventoriesModel.tblTempPath" />
+          <EntitySet Name="tblCheckins" EntityType="InventoriesModel.tblCheckin" />
+          <EntitySet Name="tblCheckinItems" EntityType="InventoriesModel.tblCheckinItem" />
+          <AssociationSet Name="CheckinCheckin" Association="InventoriesModel.CheckinCheckin">
+            <End Role="tblCheckin" EntitySet="tblCheckins" />
+            <End Role="tblCheckinItem" EntitySet="tblCheckinItems" />
+          </AssociationSet>
+          <AssociationSet Name="CheckinContact" Association="InventoriesModel.CheckinContact">
+            <End Role="tblContact" EntitySet="tblContacts" />
+            <End Role="tblCheckin" EntitySet="tblCheckins" />
+          </AssociationSet>
+          <AssociationSet Name="CheckinWarehouse" Association="InventoriesModel.CheckinWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouses" />
+            <End Role="tblCheckin" EntitySet="tblCheckins" />
+          </AssociationSet>
+          <AssociationSet Name="CheckinItem" Association="InventoriesModel.CheckinItem">
+            <End Role="tblItem" EntitySet="tblItems" />
+            <End Role="tblCheckinItem" EntitySet="tblCheckinItems" />
+          </AssociationSet>
+          <FunctionImport Name="CheckinNumber" ReturnType="Collection(String)" />
+          <EntitySet Name="tblCheckouts" EntityType="InventoriesModel.tblCheckout" />
+          <EntitySet Name="tblCheckoutItems" EntityType="InventoriesModel.tblCheckoutItem" />
+          <AssociationSet Name="CheckoutCheckout" Association="InventoriesModel.CheckoutCheckout">
+            <End Role="tblCheckout" EntitySet="tblCheckouts" />
+            <End Role="tblCheckoutItem" EntitySet="tblCheckoutItems" />
+          </AssociationSet>
+          <AssociationSet Name="CheckoutContact" Association="InventoriesModel.CheckoutContact">
+            <End Role="tblContact" EntitySet="tblContacts" />
+            <End Role="tblCheckout" EntitySet="tblCheckouts" />
+          </AssociationSet>
+          <AssociationSet Name="CheckoutWarehouse" Association="InventoriesModel.CheckoutWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouses" />
+            <End Role="tblCheckout" EntitySet="tblCheckouts" />
+          </AssociationSet>
+          <AssociationSet Name="CheckoutItem" Association="InventoriesModel.CheckoutItem">
+            <End Role="tblItem" EntitySet="tblItems" />
+            <End Role="tblCheckoutItem" EntitySet="tblCheckoutItems" />
+          </AssociationSet>
+          <FunctionImport Name="CheckoutNumber" ReturnType="Collection(String)" />
+          <EntitySet Name="tblAdjustments" EntityType="InventoriesModel.tblAdjustment" />
+          <EntitySet Name="tblAdjustmentItems" EntityType="InventoriesModel.tblAdjustmentItem" />
+          <AssociationSet Name="AdjustmentAdjustment" Association="InventoriesModel.AdjustmentAdjustment">
+            <End Role="tblAdjustment" EntitySet="tblAdjustments" />
+            <End Role="tblAdjustmentItem" EntitySet="tblAdjustmentItems" />
+          </AssociationSet>
+          <AssociationSet Name="AdjustmentWarehouse" Association="InventoriesModel.AdjustmentWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouses" />
+            <End Role="tblAdjustment" EntitySet="tblAdjustments" />
+          </AssociationSet>
+          <AssociationSet Name="AdjustmentItem" Association="InventoriesModel.AdjustmentItem">
+            <End Role="tblItem" EntitySet="tblItems" />
+            <End Role="tblAdjustmentItem" EntitySet="tblAdjustmentItems" />
+          </AssociationSet>
+          <FunctionImport Name="AdjustmentNumber" ReturnType="Collection(String)" />
         </EntityContainer>
         <EntityType Name="tblAccessLevel">
           <Key>
@@ -548,6 +892,8 @@
           <Property Name="EditBy" Type="Int32" />
           <Property Name="EditDate" Type="DateTime" Precision="3" />
           <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblCheckins" Relationship="InventoriesModel.CheckinContact" FromRole="tblContact" ToRole="tblCheckin" />
+          <NavigationProperty Name="tblCheckouts" Relationship="InventoriesModel.CheckoutContact" FromRole="tblContact" ToRole="tblCheckout" />
         </EntityType>
         <EntityType Name="tblCategory">
           <Key>
@@ -599,6 +945,9 @@
           <NavigationProperty Name="tblUsers" Relationship="InventoriesModel.FK_tblUser_tblWarehouse" FromRole="tblWarehouse" ToRole="tblUser" />
           <NavigationProperty Name="tblTransfers" Relationship="InventoriesModel.TransferFromWarehouse" FromRole="tblWarehouse" ToRole="tblTransfer" />
           <NavigationProperty Name="tblTransfers1" Relationship="InventoriesModel.TransferToWarehouse" FromRole="tblWarehouse" ToRole="tblTransfer" />
+          <NavigationProperty Name="tblCheckins" Relationship="InventoriesModel.CheckinWarehouse" FromRole="tblWarehouse" ToRole="tblCheckin" />
+          <NavigationProperty Name="tblCheckouts" Relationship="InventoriesModel.CheckoutWarehouse" FromRole="tblWarehouse" ToRole="tblCheckout" />
+          <NavigationProperty Name="tblAdjustments" Relationship="InventoriesModel.AdjustmentWarehouse" FromRole="tblWarehouse" ToRole="tblAdjustment" />
         </EntityType>
         <Association Name="FK_tblUser_tblWarehouse">
           <End Type="InventoriesModel.tblWarehouse" Role="tblWarehouse" Multiplicity="0..1" />
@@ -634,6 +983,9 @@
           <Property Name="isActive" Type="Boolean" />
           <NavigationProperty Name="tblCategory" Relationship="InventoriesModel.ItemCategory" FromRole="tblItem" ToRole="tblCategory" />
           <NavigationProperty Name="tblTransferItems" Relationship="InventoriesModel.TransferItem" FromRole="tblItem" ToRole="tblTransferItem" />
+          <NavigationProperty Name="tblCheckinItems" Relationship="InventoriesModel.CheckinItem" FromRole="tblItem" ToRole="tblCheckinItem" />
+          <NavigationProperty Name="tblCheckoutItems" Relationship="InventoriesModel.CheckoutItem" FromRole="tblItem" ToRole="tblCheckoutItem" />
+          <NavigationProperty Name="tblAdjustmentItems" Relationship="InventoriesModel.AdjustmentItem" FromRole="tblItem" ToRole="tblAdjustmentItem" />
         </EntityType>
         <Association Name="ItemCategory">
           <End Type="InventoriesModel.tblCategory" Role="tblCategory" Multiplicity="0..1" />
@@ -750,7 +1102,259 @@
           <Property Name="EditBy" Type="Int32" />
           <Property Name="EditDate" Type="DateTime" Precision="3" />
           <Property Name="isActive" Type="Boolean" />
+          <Property Name="UserId" Type="Int32" />
         </EntityType>
+        <EntityType Name="tblCheckin">
+          <Key>
+            <PropertyRef Name="CheckinId" />
+          </Key>
+          <Property Name="CheckinId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CheckinDate" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="Int32" />
+          <Property Name="Warehouse" Type="Int32" />
+          <Property Name="Attachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="draft" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblCheckinItems" Relationship="InventoriesModel.CheckinCheckin" FromRole="tblCheckin" ToRole="tblCheckinItem" />
+          <NavigationProperty Name="tblContact" Relationship="InventoriesModel.CheckinContact" FromRole="tblCheckin" ToRole="tblContact" />
+          <NavigationProperty Name="tblWarehouse" Relationship="InventoriesModel.CheckinWarehouse" FromRole="tblCheckin" ToRole="tblWarehouse" />
+          <Property Name="CheckinNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblCheckinItem">
+          <Key>
+            <PropertyRef Name="CheckinItemId" />
+          </Key>
+          <Property Name="CheckinItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CheckinId" Type="Int32" />
+          <Property Name="ItemId" Type="Int32" />
+          <Property Name="ItemWeight" Type="Int32" />
+          <Property Name="ItemQuantity" Type="Int32" />
+          <Property Name="ItemUnit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblCheckin" Relationship="InventoriesModel.CheckinCheckin" FromRole="tblCheckinItem" ToRole="tblCheckin" />
+          <NavigationProperty Name="tblItem" Relationship="InventoriesModel.CheckinItem" FromRole="tblCheckinItem" ToRole="tblItem" />
+        </EntityType>
+        <Association Name="CheckinCheckin">
+          <End Type="InventoriesModel.tblCheckin" Role="tblCheckin" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblCheckinItem" Role="tblCheckinItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCheckin">
+              <PropertyRef Name="CheckinId" />
+            </Principal>
+            <Dependent Role="tblCheckinItem">
+              <PropertyRef Name="CheckinId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckinContact">
+          <End Type="InventoriesModel.tblContact" Role="tblContact" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblCheckin" Role="tblCheckin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="tblCheckin">
+              <PropertyRef Name="Contact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckinWarehouse">
+          <End Type="InventoriesModel.tblWarehouse" Role="tblWarehouse" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblCheckin" Role="tblCheckin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblCheckin">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckinItem">
+          <End Type="InventoriesModel.tblItem" Role="tblItem" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblCheckinItem" Role="tblCheckinItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="tblCheckinItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblCheckout">
+          <Key>
+            <PropertyRef Name="CheckoutId" />
+          </Key>
+          <Property Name="CheckoutId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CheckoutDate" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="Int32" />
+          <Property Name="Warehouse" Type="Int32" />
+          <Property Name="Attachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="draft" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblCheckoutItems" Relationship="InventoriesModel.CheckoutCheckout" FromRole="tblCheckout" ToRole="tblCheckoutItem" />
+          <NavigationProperty Name="tblContact" Relationship="InventoriesModel.CheckoutContact" FromRole="tblCheckout" ToRole="tblContact" />
+          <NavigationProperty Name="tblWarehouse" Relationship="InventoriesModel.CheckoutWarehouse" FromRole="tblCheckout" ToRole="tblWarehouse" />
+          <Property Name="CheckoutNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblCheckoutItem">
+          <Key>
+            <PropertyRef Name="CheckoutItemId" />
+          </Key>
+          <Property Name="CheckoutItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CheckoutId" Type="Int32" />
+          <Property Name="ItemId" Type="Int32" />
+          <Property Name="ItemWeight" Type="Int32" />
+          <Property Name="ItemQuantity" Type="Int32" />
+          <Property Name="ItemUnit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblCheckout" Relationship="InventoriesModel.CheckoutCheckout" FromRole="tblCheckoutItem" ToRole="tblCheckout" />
+          <NavigationProperty Name="tblItem" Relationship="InventoriesModel.CheckoutItem" FromRole="tblCheckoutItem" ToRole="tblItem" />
+        </EntityType>
+        <Association Name="CheckoutCheckout">
+          <End Type="InventoriesModel.tblCheckout" Role="tblCheckout" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblCheckoutItem" Role="tblCheckoutItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCheckout">
+              <PropertyRef Name="CheckoutId" />
+            </Principal>
+            <Dependent Role="tblCheckoutItem">
+              <PropertyRef Name="CheckoutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckoutContact">
+          <End Type="InventoriesModel.tblContact" Role="tblContact" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblCheckout" Role="tblCheckout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="tblCheckout">
+              <PropertyRef Name="Contact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckoutWarehouse">
+          <End Type="InventoriesModel.tblWarehouse" Role="tblWarehouse" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblCheckout" Role="tblCheckout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblCheckout">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CheckoutItem">
+          <End Type="InventoriesModel.tblItem" Role="tblItem" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblCheckoutItem" Role="tblCheckoutItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="tblCheckoutItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblAdjustment">
+          <Key>
+            <PropertyRef Name="AdjustmentId" />
+          </Key>
+          <Property Name="AdjustmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdjustmentNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AdjustmentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Warehouse" Type="Int32" />
+          <Property Name="Attachment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="draft" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblAdjustmentItems" Relationship="InventoriesModel.AdjustmentAdjustment" FromRole="tblAdjustment" ToRole="tblAdjustmentItem" />
+          <NavigationProperty Name="tblWarehouse" Relationship="InventoriesModel.AdjustmentWarehouse" FromRole="tblAdjustment" ToRole="tblWarehouse" />
+        </EntityType>
+        <EntityType Name="tblAdjustmentItem">
+          <Key>
+            <PropertyRef Name="AdjustmentItemId" />
+          </Key>
+          <Property Name="AdjustmentItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdjustmentId" Type="Int32" />
+          <Property Name="ItemId" Type="Int32" />
+          <Property Name="ItemWeight" Type="Int32" />
+          <Property Name="ItemQuantity" Type="Int32" />
+          <Property Name="ItemUnit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblAdjustment" Relationship="InventoriesModel.AdjustmentAdjustment" FromRole="tblAdjustmentItem" ToRole="tblAdjustment" />
+          <NavigationProperty Name="tblItem" Relationship="InventoriesModel.AdjustmentItem" FromRole="tblAdjustmentItem" ToRole="tblItem" />
+        </EntityType>
+        <Association Name="AdjustmentAdjustment">
+          <End Type="InventoriesModel.tblAdjustment" Role="tblAdjustment" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblAdjustmentItem" Role="tblAdjustmentItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAdjustment">
+              <PropertyRef Name="AdjustmentId" />
+            </Principal>
+            <Dependent Role="tblAdjustmentItem">
+              <PropertyRef Name="AdjustmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdjustmentWarehouse">
+          <End Type="InventoriesModel.tblWarehouse" Role="tblWarehouse" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblAdjustment" Role="tblAdjustment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblAdjustment">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdjustmentItem">
+          <End Type="InventoriesModel.tblItem" Role="tblItem" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblAdjustmentItem" Role="tblAdjustmentItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblItem">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="tblAdjustmentItem">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -958,6 +1562,7 @@
           <EntitySetMapping Name="tblTempPaths">
             <EntityTypeMapping TypeName="InventoriesModel.tblTempPath">
               <MappingFragment StoreEntitySet="tblTempPath">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="EditDate" ColumnName="EditDate" />
                 <ScalarProperty Name="EditBy" ColumnName="EditBy" />
@@ -972,6 +1577,120 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tblCheckins">
+            <EntityTypeMapping TypeName="InventoriesModel.tblCheckin">
+              <MappingFragment StoreEntitySet="tblCheckin">
+                <ScalarProperty Name="CheckinNumber" ColumnName="CheckinNumber" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="draft" ColumnName="draft" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="CheckinDate" ColumnName="CheckinDate" />
+                <ScalarProperty Name="CheckinId" ColumnName="CheckinId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCheckinItems">
+            <EntityTypeMapping TypeName="InventoriesModel.tblCheckinItem">
+              <MappingFragment StoreEntitySet="tblCheckinItem">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ItemUnit" ColumnName="ItemUnit" />
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+                <ScalarProperty Name="ItemWeight" ColumnName="ItemWeight" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="CheckinId" ColumnName="CheckinId" />
+                <ScalarProperty Name="CheckinItemId" ColumnName="CheckinItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CheckinNumber" FunctionName="InventoriesModel.Store.CheckinNumber" />
+          <EntitySetMapping Name="tblCheckouts">
+            <EntityTypeMapping TypeName="InventoriesModel.tblCheckout">
+              <MappingFragment StoreEntitySet="tblCheckout">
+                <ScalarProperty Name="CheckoutNumber" ColumnName="CheckoutNumber" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="draft" ColumnName="draft" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="CheckoutDate" ColumnName="CheckoutDate" />
+                <ScalarProperty Name="CheckoutId" ColumnName="CheckoutId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCheckoutItems">
+            <EntityTypeMapping TypeName="InventoriesModel.tblCheckoutItem">
+              <MappingFragment StoreEntitySet="tblCheckoutItem">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ItemUnit" ColumnName="ItemUnit" />
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+                <ScalarProperty Name="ItemWeight" ColumnName="ItemWeight" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="CheckoutId" ColumnName="CheckoutId" />
+                <ScalarProperty Name="CheckoutItemId" ColumnName="CheckoutItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CheckoutNumber" FunctionName="InventoriesModel.Store.CheckoutNumber" />
+          <EntitySetMapping Name="tblAdjustments">
+            <EntityTypeMapping TypeName="InventoriesModel.tblAdjustment">
+              <MappingFragment StoreEntitySet="tblAdjustment">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="draft" ColumnName="draft" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="AdjustmentDate" ColumnName="AdjustmentDate" />
+                <ScalarProperty Name="AdjustmentNumber" ColumnName="AdjustmentNumber" />
+                <ScalarProperty Name="AdjustmentId" ColumnName="AdjustmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAdjustmentItems">
+            <EntityTypeMapping TypeName="InventoriesModel.tblAdjustmentItem">
+              <MappingFragment StoreEntitySet="tblAdjustmentItem">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ItemUnit" ColumnName="ItemUnit" />
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+                <ScalarProperty Name="ItemWeight" ColumnName="ItemWeight" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="AdjustmentId" ColumnName="AdjustmentId" />
+                <ScalarProperty Name="AdjustmentItemId" ColumnName="AdjustmentItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AdjustmentNumber" FunctionName="InventoriesModel.Store.AdjustmentNumber" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

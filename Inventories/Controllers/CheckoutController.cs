@@ -8,68 +8,65 @@ using System.Web.Mvc;
 
 namespace Inventories.Controllers
 {
-    public class TransferController : Controller
+    public class CheckoutController : Controller
     {
+        // GET: Checkout
         InventoriesEntities DB = new InventoriesEntities();
-        // GET: Transfer
-        public ActionResult Transfers(string Success, string Update, string Delete)
+        public ActionResult Checkouts(string Success, string Update, string Delete)
         {
-            List<tblTransfer> TransferList = DB.tblTransfers.ToList();
+            List<tblCheckout> CheckoutList = DB.tblCheckouts.ToList();
             ViewBag.Success = Success;
             ViewBag.Update = Update;
             ViewBag.Delete = Delete;
-            return View(TransferList);
+            return View(CheckoutList);
         }
 
-
-        public ActionResult CreateTransfer(int Id = 0)
+        public ActionResult CreateCheckout(int Id = 0)
         {
             ViewBag.Warehouse = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
+            ViewBag.Contact = DB.tblContacts.Where(x => x.isActive == true).ToList();
 
-            tblTransfer Data = new tblTransfer();
-            List<tblTransferItem> Data1 = new List<tblTransferItem>();
+            tblCheckout Data = new tblCheckout();
+            List<tblCheckoutItem> Data1 = new List<tblCheckoutItem>();
             if (Id > 0)
             {
-                Data = DB.tblTransfers.Where(x => x.TransferId == Id).FirstOrDefault();
-                //List<tblTransferItem> Cast = ViewBag.tblTransferItems;
-                // List<int?> CatIds = Cast.Select(s => s.CategoryId).ToList();
-                //ViewBag.CategoryNames = DB.tblCategories.Where(s => CatIds.Contains(s.CategoryID)).Select(s=>s.CategoryName).ToList();
-                ViewBag.TransferNumber = Data.TransferNumber;
-                ViewBag.tblTransferItem = DB.tblTransferItems.Where(x=>x.TransferId==Id).ToList();
+                Data = DB.tblCheckouts.Where(x => x.CheckoutId == Id).FirstOrDefault();
+                ViewBag.CheckoutNumber = Data.CheckoutNumber;
+                ViewBag.tblCheckoutItem = DB.tblCheckoutItems.Where(x => x.CheckoutId == Id).ToList();
             }
             else
             {
-                Data.TransferId = 0;
-                Data.FromWarehouse = 0;
-                Data.ToWarehouse = 0;
-                Data.TransferDate = DateTime.Now;
-                ViewBag.tblTransferItem = null;
-                ViewBag.TransferNumber = DB.TransfrNumber().SingleOrDefault();
+                Data.CheckoutId = 0;
+                Data.Contact = 0;
+                Data.Warehouse = 0;
+                Data.CheckoutDate = DateTime.Now;
+                ViewBag.tblCheckoutItem = null;
+                ViewBag.CheckoutNumber = DB.CheckoutNumber().SingleOrDefault();
             }
             return View(Data);
         }
 
         [HttpPost]
-        public ActionResult CreateTransfer(tblTransfer[] HeadData, List<tblTransferItem> TailData)
+        public ActionResult CreateCheckout(tblCheckout[] HeadData, List<tblCheckoutItem> TailData)
         {
             HttpCookie cookieObj = Request.Cookies["User"];
             int UserId = Int32.Parse(cookieObj["UserId"]);
-            tblTransfer Data = new tblTransfer();
-            string TNumber = HeadData[0].TransferNumber;
-            if (HeadData.FirstOrDefault().TransferId == 0)
+            tblCheckout Data = new tblCheckout();
+            string TNumber = HeadData[0].CheckoutNumber;
+            if (HeadData.FirstOrDefault().CheckoutId == 0)
             {
-                if(DB.tblTransfers.Where(x=>x.TransferNumber== TNumber).FirstOrDefault()==null)
+                if (DB.tblCheckouts.Where(x => x.CheckoutNumber == TNumber).FirstOrDefault() == null)
                 {
-                    Data.TransferNumber = TNumber;
+                    Data.CheckoutNumber = TNumber;
                 }
                 else
                 {
-                    Data.TransferNumber = DB.TransfrNumber().SingleOrDefault();
+                    Data.CheckoutNumber = DB.CheckoutNumber().SingleOrDefault();
                 }
-               
-                Data.TransferDate = HeadData[0].TransferDate;
-                Data.FromWarehouse = HeadData[0].FromWarehouse;
-                Data.ToWarehouse = HeadData[0].ToWarehouse;
+
+                Data.CheckoutDate = HeadData[0].CheckoutDate;
+                Data.Contact = HeadData[0].Contact;
+                Data.Warehouse = HeadData[0].Warehouse;
                 Data.Reference = HeadData[0].Reference;
                 Data.Details = HeadData[0].Details;
                 Data.draft = HeadData[0].draft;
@@ -81,7 +78,7 @@ namespace Inventories.Controllers
                     Data.Attachment = Path.Path;
 
                 }
-                DB.tblTransfers.Add(Data);
+                DB.tblCheckouts.Add(Data);
                 DB.SaveChanges();
 
                 if (Path != null)
@@ -92,19 +89,19 @@ namespace Inventories.Controllers
 
                 if (TailData == null)
                 {
-                    TailData = new List<tblTransferItem>();
+                    TailData = new List<tblCheckoutItem>();
                 }
 
                 bool First = false;
                 //Loop and insert records.
-                foreach (tblTransferItem Item in TailData)
+                foreach (tblCheckoutItem Item in TailData)
                 {
                     if (First)
                     {
-                        Item.TransferId = Data.TransferId;
+                        Item.CheckoutId = Data.CheckoutId;
                         Item.CreatedBy = UserId;
                         Item.CreatedDate = DateTime.Now;
-                        DB.tblTransferItems.Add(Item);
+                        DB.tblCheckoutItems.Add(Item);
                     }
                     else
                     {
@@ -118,13 +115,13 @@ namespace Inventories.Controllers
             }
             else
             {
-                int Id = HeadData.FirstOrDefault().TransferId;
-                Data = DB.tblTransfers.Select(r => r).Where(x => x.TransferId == Id).FirstOrDefault();
+                int Id = HeadData.FirstOrDefault().CheckoutId;
+                Data = DB.tblCheckouts.Select(r => r).Where(x => x.CheckoutId == Id).FirstOrDefault();
 
-                Data.TransferNumber = HeadData[0].TransferNumber;
-                Data.TransferDate = HeadData[0].TransferDate;
-                Data.FromWarehouse = HeadData[0].FromWarehouse;
-                Data.ToWarehouse = HeadData[0].ToWarehouse;
+                Data.CheckoutNumber = HeadData[0].CheckoutNumber;
+                Data.CheckoutDate = HeadData[0].CheckoutDate;
+                Data.Contact = HeadData[0].Contact;
+                Data.Warehouse = HeadData[0].Warehouse;
                 Data.Reference = HeadData[0].Reference;
                 Data.Details = HeadData[0].Details;
                 Data.draft = HeadData[0].draft;
@@ -134,7 +131,7 @@ namespace Inventories.Controllers
                 Data.EditBy = UserId;
 
                 var Path = DB.tblTempPaths.Where(s => s.UserId == UserId).FirstOrDefault();
-                
+
                 if (Path != null)
                 {
                     Data.Attachment = Path.Path;
@@ -150,28 +147,28 @@ namespace Inventories.Controllers
                 }
 
 
-                List<tblTransferItem> TData;
-                int TransferId = Data.TransferId;
-                TData = DB.tblTransferItems.Select(r => r).Where(x => x.TransferId == TransferId).ToList();
+                List<tblCheckoutItem> TData;
+                int CheckoutId = Data.CheckoutId;
+                TData = DB.tblCheckoutItems.Select(r => r).Where(x => x.CheckoutId == CheckoutId).ToList();
 
-                DB.tblTransferItems.RemoveRange(TData);
+                DB.tblCheckoutItems.RemoveRange(TData);
                 DB.SaveChanges();
 
                 if (TailData == null)
                 {
-                    TailData = new List<tblTransferItem>();
+                    TailData = new List<tblCheckoutItem>();
                 }
 
                 bool First = false;
                 //Loop and insert records.
-                foreach (tblTransferItem Item in TailData)
+                foreach (tblCheckoutItem Item in TailData)
                 {
                     if (First)
                     {
-                        Item.TransferId = Data.TransferId;
+                        Item.CheckoutId = Data.CheckoutId;
                         Item.CreatedBy = UserId;
                         Item.CreatedDate = DateTime.Now;
-                        DB.tblTransferItems.Add(Item);
+                        DB.tblCheckoutItems.Add(Item);
                     }
                     else
                     {
@@ -212,7 +209,7 @@ namespace Inventories.Controllers
                 path = Path.Combine("\\Uploading", Path.GetFileName(file.FileName));
 
                 tblTempPath Data = new tblTempPath();
-                //Data.TNumber = TransferNumber;
+                //Data.TNumber = CheckoutNumber;
                 Data.Path = path;
                 Data.UserId = UserId;
                 DB.tblTempPaths.Add(Data);
@@ -229,14 +226,14 @@ namespace Inventories.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteTransfer(int Id)
+        public ActionResult DeleteCheckout(int Id)
         {
-            tblTransfer Data = new tblTransfer();
-            List<tblTransferItem> Data1 = new List<tblTransferItem>();
-            Data = DB.tblTransfers.Where(x => x.TransferId == Id).FirstOrDefault();
-            Data1 = DB.tblTransferItems.Where(x => x.TransferId == Id).ToList();
-            DB.tblTransferItems.RemoveRange(Data1);
-            DB.tblTransfers.Remove(Data);
+            tblCheckout Data = new tblCheckout();
+            List<tblCheckoutItem> Data1 = new List<tblCheckoutItem>();
+            Data = DB.tblCheckouts.Where(x => x.CheckoutId == Id).FirstOrDefault();
+            Data1 = DB.tblCheckoutItems.Where(x => x.CheckoutId == Id).ToList();
+            DB.tblCheckoutItems.RemoveRange(Data1);
+            DB.tblCheckouts.Remove(Data);
             DB.SaveChanges();
 
             return Json(1);
@@ -259,6 +256,5 @@ namespace Inventories.Controllers
 
             return new JsonResult { Data = allsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
-
     }
 }

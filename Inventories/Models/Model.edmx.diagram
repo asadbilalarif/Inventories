@@ -27,6 +27,23 @@
         <AssociationConnector Association="InventoriesModel.TransferToWarehouse" />
         <AssociationConnector Association="InventoriesModel.TransferTransfer" />
         <EntityTypeShape EntityType="InventoriesModel.tblTempPath" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="InventoriesModel.tblCheckin" Width="1.5" PointX="10.625" PointY="1.75" />
+        <EntityTypeShape EntityType="InventoriesModel.tblCheckinItem" Width="1.5" PointX="12.875" PointY="5" />
+        <AssociationConnector Association="InventoriesModel.CheckinCheckin" />
+        <AssociationConnector Association="InventoriesModel.CheckinContact" />
+        <AssociationConnector Association="InventoriesModel.CheckinWarehouse" />
+        <AssociationConnector Association="InventoriesModel.CheckinItem" />
+        <EntityTypeShape EntityType="InventoriesModel.tblCheckout" Width="1.5" PointX="13.625" PointY="0.75" />
+        <EntityTypeShape EntityType="InventoriesModel.tblCheckoutItem" Width="1.5" PointX="15.875" PointY="7" />
+        <AssociationConnector Association="InventoriesModel.CheckoutCheckout" />
+        <AssociationConnector Association="InventoriesModel.CheckoutContact" />
+        <AssociationConnector Association="InventoriesModel.CheckoutWarehouse" />
+        <AssociationConnector Association="InventoriesModel.CheckoutItem" />
+        <EntityTypeShape EntityType="InventoriesModel.tblAdjustment" Width="1.5" PointX="10.625" PointY="13" />
+        <EntityTypeShape EntityType="InventoriesModel.tblAdjustmentItem" Width="1.5" PointX="12.875" PointY="14.25" />
+        <AssociationConnector Association="InventoriesModel.AdjustmentAdjustment" />
+        <AssociationConnector Association="InventoriesModel.AdjustmentWarehouse" />
+        <AssociationConnector Association="InventoriesModel.AdjustmentItem" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

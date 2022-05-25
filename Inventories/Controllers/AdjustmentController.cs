@@ -8,68 +8,64 @@ using System.Web.Mvc;
 
 namespace Inventories.Controllers
 {
-    public class TransferController : Controller
+    public class AdjustmentController : Controller
     {
+        // GET: Adjustment
         InventoriesEntities DB = new InventoriesEntities();
-        // GET: Transfer
-        public ActionResult Transfers(string Success, string Update, string Delete)
+        public ActionResult Adjustments(string Success, string Update, string Delete)
         {
-            List<tblTransfer> TransferList = DB.tblTransfers.ToList();
+            List<tblAdjustment> AdjustmentList = DB.tblAdjustments.ToList();
             ViewBag.Success = Success;
             ViewBag.Update = Update;
             ViewBag.Delete = Delete;
-            return View(TransferList);
+            return View(AdjustmentList);
         }
 
-
-        public ActionResult CreateTransfer(int Id = 0)
+        public ActionResult CreateAdjustment(int Id = 0)
         {
             ViewBag.Warehouse = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
 
-            tblTransfer Data = new tblTransfer();
-            List<tblTransferItem> Data1 = new List<tblTransferItem>();
+            tblAdjustment Data = new tblAdjustment();
+            List<tblAdjustmentItem> Data1 = new List<tblAdjustmentItem>();
             if (Id > 0)
             {
-                Data = DB.tblTransfers.Where(x => x.TransferId == Id).FirstOrDefault();
-                //List<tblTransferItem> Cast = ViewBag.tblTransferItems;
-                // List<int?> CatIds = Cast.Select(s => s.CategoryId).ToList();
-                //ViewBag.CategoryNames = DB.tblCategories.Where(s => CatIds.Contains(s.CategoryID)).Select(s=>s.CategoryName).ToList();
-                ViewBag.TransferNumber = Data.TransferNumber;
-                ViewBag.tblTransferItem = DB.tblTransferItems.Where(x=>x.TransferId==Id).ToList();
+                Data = DB.tblAdjustments.Where(x => x.AdjustmentId == Id).FirstOrDefault();
+                ViewBag.AdjustmentNumber = Data.AdjustmentNumber;
+                ViewBag.tblAdjustmentItem = DB.tblAdjustmentItems.Where(x => x.AdjustmentId == Id).ToList();
             }
             else
             {
-                Data.TransferId = 0;
-                Data.FromWarehouse = 0;
-                Data.ToWarehouse = 0;
-                Data.TransferDate = DateTime.Now;
-                ViewBag.tblTransferItem = null;
-                ViewBag.TransferNumber = DB.TransfrNumber().SingleOrDefault();
+                Data.AdjustmentId = 0;
+                Data.Type = "";
+                Data.Warehouse = 0;
+                Data.AdjustmentDate = DateTime.Now;
+                ViewBag.tblAdjustmentItem = null;
+                ViewBag.AdjustmentNumber = DB.AdjustmentNumber().SingleOrDefault();
             }
             return View(Data);
         }
 
         [HttpPost]
-        public ActionResult CreateTransfer(tblTransfer[] HeadData, List<tblTransferItem> TailData)
+        public ActionResult CreateAdjustment(tblAdjustment[] HeadData, List<tblAdjustmentItem> TailData)
         {
             HttpCookie cookieObj = Request.Cookies["User"];
             int UserId = Int32.Parse(cookieObj["UserId"]);
-            tblTransfer Data = new tblTransfer();
-            string TNumber = HeadData[0].TransferNumber;
-            if (HeadData.FirstOrDefault().TransferId == 0)
+            tblAdjustment Data = new tblAdjustment();
+            string TNumber = HeadData[0].AdjustmentNumber;
+            if (HeadData.FirstOrDefault().AdjustmentId == 0)
             {
-                if(DB.tblTransfers.Where(x=>x.TransferNumber== TNumber).FirstOrDefault()==null)
+                if (DB.tblAdjustments.Where(x => x.AdjustmentNumber == TNumber).FirstOrDefault() == null)
                 {
-                    Data.TransferNumber = TNumber;
+                    Data.AdjustmentNumber = TNumber;
                 }
                 else
                 {
-                    Data.TransferNumber = DB.TransfrNumber().SingleOrDefault();
+                    Data.AdjustmentNumber = DB.AdjustmentNumber().SingleOrDefault();
                 }
-               
-                Data.TransferDate = HeadData[0].TransferDate;
-                Data.FromWarehouse = HeadData[0].FromWarehouse;
-                Data.ToWarehouse = HeadData[0].ToWarehouse;
+
+                Data.AdjustmentDate = HeadData[0].AdjustmentDate;
+                Data.Type = HeadData[0].Type;
+                Data.Warehouse = HeadData[0].Warehouse;
                 Data.Reference = HeadData[0].Reference;
                 Data.Details = HeadData[0].Details;
                 Data.draft = HeadData[0].draft;
@@ -81,7 +77,7 @@ namespace Inventories.Controllers
                     Data.Attachment = Path.Path;
 
                 }
-                DB.tblTransfers.Add(Data);
+                DB.tblAdjustments.Add(Data);
                 DB.SaveChanges();
 
                 if (Path != null)
@@ -92,19 +88,19 @@ namespace Inventories.Controllers
 
                 if (TailData == null)
                 {
-                    TailData = new List<tblTransferItem>();
+                    TailData = new List<tblAdjustmentItem>();
                 }
 
                 bool First = false;
                 //Loop and insert records.
-                foreach (tblTransferItem Item in TailData)
+                foreach (tblAdjustmentItem Item in TailData)
                 {
                     if (First)
                     {
-                        Item.TransferId = Data.TransferId;
+                        Item.AdjustmentId = Data.AdjustmentId;
                         Item.CreatedBy = UserId;
                         Item.CreatedDate = DateTime.Now;
-                        DB.tblTransferItems.Add(Item);
+                        DB.tblAdjustmentItems.Add(Item);
                     }
                     else
                     {
@@ -118,13 +114,13 @@ namespace Inventories.Controllers
             }
             else
             {
-                int Id = HeadData.FirstOrDefault().TransferId;
-                Data = DB.tblTransfers.Select(r => r).Where(x => x.TransferId == Id).FirstOrDefault();
+                int Id = HeadData.FirstOrDefault().AdjustmentId;
+                Data = DB.tblAdjustments.Select(r => r).Where(x => x.AdjustmentId == Id).FirstOrDefault();
 
-                Data.TransferNumber = HeadData[0].TransferNumber;
-                Data.TransferDate = HeadData[0].TransferDate;
-                Data.FromWarehouse = HeadData[0].FromWarehouse;
-                Data.ToWarehouse = HeadData[0].ToWarehouse;
+                Data.AdjustmentNumber = HeadData[0].AdjustmentNumber;
+                Data.AdjustmentDate = HeadData[0].AdjustmentDate;
+                Data.Type = HeadData[0].Type;
+                Data.Warehouse = HeadData[0].Warehouse;
                 Data.Reference = HeadData[0].Reference;
                 Data.Details = HeadData[0].Details;
                 Data.draft = HeadData[0].draft;
@@ -134,7 +130,7 @@ namespace Inventories.Controllers
                 Data.EditBy = UserId;
 
                 var Path = DB.tblTempPaths.Where(s => s.UserId == UserId).FirstOrDefault();
-                
+
                 if (Path != null)
                 {
                     Data.Attachment = Path.Path;
@@ -150,28 +146,28 @@ namespace Inventories.Controllers
                 }
 
 
-                List<tblTransferItem> TData;
-                int TransferId = Data.TransferId;
-                TData = DB.tblTransferItems.Select(r => r).Where(x => x.TransferId == TransferId).ToList();
+                List<tblAdjustmentItem> TData;
+                int AdjustmentId = Data.AdjustmentId;
+                TData = DB.tblAdjustmentItems.Select(r => r).Where(x => x.AdjustmentId == AdjustmentId).ToList();
 
-                DB.tblTransferItems.RemoveRange(TData);
+                DB.tblAdjustmentItems.RemoveRange(TData);
                 DB.SaveChanges();
 
                 if (TailData == null)
                 {
-                    TailData = new List<tblTransferItem>();
+                    TailData = new List<tblAdjustmentItem>();
                 }
 
                 bool First = false;
                 //Loop and insert records.
-                foreach (tblTransferItem Item in TailData)
+                foreach (tblAdjustmentItem Item in TailData)
                 {
                     if (First)
                     {
-                        Item.TransferId = Data.TransferId;
+                        Item.AdjustmentId = Data.AdjustmentId;
                         Item.CreatedBy = UserId;
                         Item.CreatedDate = DateTime.Now;
-                        DB.tblTransferItems.Add(Item);
+                        DB.tblAdjustmentItems.Add(Item);
                     }
                     else
                     {
@@ -212,7 +208,7 @@ namespace Inventories.Controllers
                 path = Path.Combine("\\Uploading", Path.GetFileName(file.FileName));
 
                 tblTempPath Data = new tblTempPath();
-                //Data.TNumber = TransferNumber;
+                //Data.TNumber = AdjustmentNumber;
                 Data.Path = path;
                 Data.UserId = UserId;
                 DB.tblTempPaths.Add(Data);
@@ -229,14 +225,14 @@ namespace Inventories.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteTransfer(int Id)
+        public ActionResult DeleteAdjustment(int Id)
         {
-            tblTransfer Data = new tblTransfer();
-            List<tblTransferItem> Data1 = new List<tblTransferItem>();
-            Data = DB.tblTransfers.Where(x => x.TransferId == Id).FirstOrDefault();
-            Data1 = DB.tblTransferItems.Where(x => x.TransferId == Id).ToList();
-            DB.tblTransferItems.RemoveRange(Data1);
-            DB.tblTransfers.Remove(Data);
+            tblAdjustment Data = new tblAdjustment();
+            List<tblAdjustmentItem> Data1 = new List<tblAdjustmentItem>();
+            Data = DB.tblAdjustments.Where(x => x.AdjustmentId == Id).FirstOrDefault();
+            Data1 = DB.tblAdjustmentItems.Where(x => x.AdjustmentId == Id).ToList();
+            DB.tblAdjustmentItems.RemoveRange(Data1);
+            DB.tblAdjustments.Remove(Data);
             DB.SaveChanges();
 
             return Json(1);
@@ -259,6 +255,5 @@ namespace Inventories.Controllers
 
             return new JsonResult { Data = allsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
-
     }
 }

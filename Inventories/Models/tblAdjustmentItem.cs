@@ -12,19 +12,21 @@ namespace Inventories.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tblTempPath
+    public partial class tblAdjustmentItem
     {
-        public int TempPathId { get; set; }
-        public string TNumber { get; set; }
-        public string CINumber { get; set; }
-        public string CONumber { get; set; }
-        public string ANumber { get; set; }
-        public string Path { get; set; }
+        public int AdjustmentItemId { get; set; }
+        public Nullable<int> AdjustmentId { get; set; }
+        public Nullable<int> ItemId { get; set; }
+        public Nullable<int> ItemWeight { get; set; }
+        public Nullable<int> ItemQuantity { get; set; }
+        public string ItemUnit { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> EditBy { get; set; }
         public Nullable<System.DateTime> EditDate { get; set; }
         public Nullable<bool> isActive { get; set; }
-        public Nullable<int> UserId { get; set; }
+    
+        public virtual tblAdjustment tblAdjustment { get; set; }
+        public virtual tblItem tblItem { get; set; }
     }
 }

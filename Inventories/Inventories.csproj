@@ -129,10 +129,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdjustmentController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CheckinController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TransferController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -159,7 +163,25 @@
     <Compile Include="Models\tblAccessLevel.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblAdjustment.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblAdjustmentItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblCategory.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblCheckin.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblCheckinItem.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblCheckout.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblCheckoutItem.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblContact.cs">
@@ -379,6 +401,13 @@
     <Content Include="Views\Item\CreateItem.cshtml" />
     <Content Include="Views\Transfer\Transfers.cshtml" />
     <Content Include="Views\Transfer\CreateTransfer.cshtml" />
+    <Content Include="Views\Checkin\Checkins.cshtml" />
+    <Content Include="Views\Checkin\CreateCheckin.cshtml" />
+    <Content Include="Views\Checkout\Checkouts.cshtml" />
+    <Content Include="Views\Checkout\CreateCheckout.cshtml" />
+    <Content Include="Views\Adjustment\Adjustments.cshtml" />
+    <Content Include="Views\Adjustment\CreateAdjustment.cshtml" />
+    <Content Include="Views\Report\CheckinReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

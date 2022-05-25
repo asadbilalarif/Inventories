@@ -206,13 +206,13 @@
         $('#ItemTable').DataTable({
             dom: 'Bfrtip',
             buttons: [
-                'pageLength',
+                //'pageLength',
                 {
 
 
                     extend: 'excel',
                     exportOptions: {
-                        columns: [ 1, 2,3,4,5,6,7,8,9,10,11,12,13,14]
+                        columns: [ 1, 2]
                     }
                 }
             ],
@@ -224,8 +224,8 @@
 
         $(".nav li ul li").removeClass("active");
         $('#Items').addClass('active');
-        $('#UM a').addClass('subdrop');
-        $("#UM  ul").first().css('display', 'block');
+        $('#Setup a').addClass('subdrop');
+        $("#Setup  ul").first().css('display', 'block');
 
 
     });

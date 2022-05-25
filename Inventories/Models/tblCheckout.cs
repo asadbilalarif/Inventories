@@ -12,29 +12,32 @@ namespace Inventories.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tblContact
+    public partial class tblCheckout
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblContact()
+        public tblCheckout()
         {
-            this.tblCheckins = new HashSet<tblCheckin>();
-            this.tblCheckouts = new HashSet<tblCheckout>();
+            this.tblCheckoutItems = new HashSet<tblCheckoutItem>();
         }
     
-        public int ContactId { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public int CheckoutId { get; set; }
+        public System.DateTime CheckoutDate { get; set; }
+        public string Reference { get; set; }
+        public Nullable<int> Contact { get; set; }
+        public Nullable<int> Warehouse { get; set; }
+        public string Attachment { get; set; }
         public string Details { get; set; }
+        public Nullable<bool> draft { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> EditBy { get; set; }
         public Nullable<System.DateTime> EditDate { get; set; }
         public Nullable<bool> isActive { get; set; }
+        public string CheckoutNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCheckin> tblCheckins { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblCheckout> tblCheckouts { get; set; }
+        public virtual ICollection<tblCheckoutItem> tblCheckoutItems { get; set; }
+        public virtual tblContact tblContact { get; set; }
+        public virtual tblWarehouse tblWarehouse { get; set; }
     }
 }

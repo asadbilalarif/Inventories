@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Inventories.Models.tblCategory>
+﻿@model IEnumerable<Inventories.Models.tblCheckin>
 
 @{
-    ViewData["Title"] = "Categories";
+    ViewData["Title"] = "Checkins";
     string Succ = @ViewBag.Success;
     string Update = @ViewBag.Update;
     string Delete = @ViewBag.Delete;
@@ -38,10 +38,10 @@
                             <div class="container-fluid">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">Categories List</h5>
+                                        <h5 class="breadcrumb-title">Checkin List</h5>
                                     </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateCategoryB">
-                                        <a href="@Url.Action("CreateCategory","Category")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> Create New Category</a>
+                                    <div class="col-md-6 col-6 text-right" id="CreateCheckinB">
+                                        <a href="@Url.Action("CreateCheckin","Checkin")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> Create New Checkin</a>
                                     </div>
                                 </div>
                             </div>
@@ -61,30 +61,34 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="table-responsive">
-                            <table class="cell-border table table-hover table-center  mb-0 " id="CategoryTable">
+                            <table class="cell-border table table-hover table-center  mb-0 " id="CheckinTable">
                                 <thead>
                                     <tr>
-                                        <th style="display:none;">Category ID</th>
-                                        <th>Name</th>
-                                        <th>Code</th>
-
+                                        <th style="display:none;">Checkin ID</th>
+                                        <th>Checkin Date</th>
+                                        <th>Contact</th>
+                                        <th>Warehouse</th>
+                                        <th>Reference</th>
+                                        <th>Details</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Inventories.Models.tblCategory Category in Model)
+                                    @foreach (Inventories.Models.tblCheckin Checkin in Model)
                                     {
                                         <tr>
-                                            <td style="display:none;">@Category.CategoryId</td>
-                                            <td>@Category.Name</td>
-                                            <td>@Category.Code</td>
-
+                                            <td style="display:none;">@Checkin.CheckinId</td>
+                                            <td>@Checkin.CheckinDate.ToString("dd-MM-yyyy")</td>
+                                            <td>@Checkin.tblContact.Name</td>
+                                            <td>@Checkin.tblWarehouse.Name</td>
+                                            <td>@Checkin.Reference</td>
+                                            <td>@Checkin.Details</td>
                                             <td class="text-end">
                                                 <div class="actions">
-                                                    <a href="@Url.Action("CreateCategory","Category",new {id=Category.CategoryId })" id="EditCategory" class="text-black">
+                                                    <a href="@Url.Action("CreateCheckin","Checkin",new {id=Checkin.CheckinId })" id="EditCheckin" class="text-black">
                                                         <i class="fa fa-edit"></i> Edit
                                                     </a>
-                                                    <a class="text-danger" href="#" data-toggle="modal" data-target="#CategoryDelete" id="DeleteCategory">
+                                                    <a class="text-danger" href="#" data-toggle="modal" data-target="#CheckinDelete" id="DeleteCheckin">
                                                         <i class="fa fa-trash"></i> Delete
                                                     </a>
                                                 </div>
@@ -103,17 +107,17 @@
 </div>
 
 
-<div id="CategoryDelete" class="modal fade delete-modal" role="dialog">
+<div id="CheckinDelete" class="modal fade delete-modal" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body text-center">
                 <img src="~/Content/assets/img/sent.png" alt="" width="50" height="46">
-                <input class="form-control" type="text" id="DeleteCategoryID" style="display:none;">
-                <h5>Are you sure want to delete this Category information?</h5>
+                <input class="form-control" type="text" id="DeleteCheckinID" style="display:none;">
+                <h5>Are you sure want to delete this Checkin information?</h5>
                 <div class="m-t-20">
                     <p id="ConfigDerror" style="color:red;"></p>
                     <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                    <input type="button" class="btn btn-danger" id="CDeleteCategory" value="Delete">
+                    <input type="button" class="btn btn-danger" id="CDeleteCheckin" value="Delete">
                 </div>
             </div>
         </div>
@@ -130,23 +134,23 @@
 <script>
 
 
-    $("body").on("click", "#DeleteCategory", function () {
+    $("body").on("click", "#DeleteCheckin", function () {
         $("#ConfigDerror").text("");
-        $("#CDeleteCategory").attr("disabled", false);
+        $("#CDeleteCheckin").attr("disabled", false);
         var currentRow = $(this).closest("tr");
-        $("#DeleteCategoryID").val(currentRow.find("td:eq(0)").text());
+        $("#DeleteCheckinID").val(currentRow.find("td:eq(0)").text());
         //alert($("#DeleteDeviceInfoID").val());
     });
 
-    $("#CDeleteCategory").on("click", function () {
+    $("#CDeleteCheckin").on("click", function () {
 
 
-        $("#CDeleteCategory").attr("disabled", true);
+        $("#CDeleteCheckin").attr("disabled", true);
 
-        var ID = $("#DeleteCategoryID").val();
+        var ID = $("#DeleteCheckinID").val();
 
         var model = {
-            CategoryId: ID,
+            Id: ID,
         };
         console.log(model);
 
@@ -154,7 +158,7 @@
         //Send the JSON array to Controller using AJAX.
         $.ajax({
             type: "POST",
-            url: "/Category/DeleteCategory",
+            url: "/Checkin/DeleteCheckin",
             data: JSON.stringify(model),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -162,7 +166,7 @@
                 if (r == 1) {
 
                     var url = window.location.origin;
-                    url += '/Category/Categories?Delete=Category has been delete successfully.';
+                    url += '/Checkin/Checkins?Delete=Checkin has been delete successfully.';
                     window.location.href = url;
                 }
                 //alert(r + " record(s) inserted.");
@@ -198,7 +202,7 @@
             $('#DeleteAlert').fadeOut();
         }
 
-        $('#CategoryTable').DataTable({
+        $('#CheckinTable').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 //'pageLength',
@@ -207,20 +211,20 @@
 
                     extend: 'excel',
                     exportOptions: {
-                        columns: [ 1, 2]
+                        columns: [ 1, 2,3,4,5]
                     }
                 }
             ],
-            @*"lengthMenu": [@Retrieves],*@
+
             searching: true, paging: true
         });
 
 
 
         $(".nav li ul li").removeClass("active");
-        $('#Categories').addClass('active');
-        $('#Setup a').addClass('subdrop');
-        $("#Setup  ul").first().css('display', 'block');
+        $('#Checkins').addClass('active');
+        $('#Checkin a').addClass('subdrop');
+        $("#Checkin  ul").first().css('display', 'block');
 
 
     });

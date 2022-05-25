@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Inventories.Models.tblCategory>
+﻿@model IEnumerable<Inventories.Models.tblCheckout>
 
 @{
-    ViewData["Title"] = "Categories";
+    ViewData["Title"] = "Checkouts";
     string Succ = @ViewBag.Success;
     string Update = @ViewBag.Update;
     string Delete = @ViewBag.Delete;
@@ -38,10 +38,10 @@
                             <div class="container-fluid">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">Categories List</h5>
+                                        <h5 class="breadcrumb-title">Checkout List</h5>
                                     </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateCategoryB">
-                                        <a href="@Url.Action("CreateCategory","Category")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> Create New Category</a>
+                                    <div class="col-md-6 col-6 text-right" id="CreateCheckoutB">
+                                        <a href="@Url.Action("CreateCheckout","Checkout")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> Create New Checkout</a>
                                     </div>
                                 </div>
                             </div>
@@ -61,30 +61,34 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="table-responsive">
-                            <table class="cell-border table table-hover table-center  mb-0 " id="CategoryTable">
+                            <table class="cell-border table table-hover table-center  mb-0 " id="CheckoutTable">
                                 <thead>
                                     <tr>
-                                        <th style="display:none;">Category ID</th>
-                                        <th>Name</th>
-                                        <th>Code</th>
-
+                                        <th style="display:none;">Checkout ID</th>
+                                        <th>Checkout Date</th>
+                                        <th>Contact</th>
+                                        <th>Warehouse</th>
+                                        <th>Reference</th>
+                                        <th>Details</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Inventories.Models.tblCategory Category in Model)
+                                    @foreach (Inventories.Models.tblCheckout Checkout in Model)
                                     {
                                         <tr>
-                                            <td style="display:none;">@Category.CategoryId</td>
-                                            <td>@Category.Name</td>
-                                            <td>@Category.Code</td>
-
+                                            <td style="display:none;">@Checkout.CheckoutId</td>
+                                            <td>@Checkout.CheckoutDate.ToString("dd-MM-yyyy")</td>
+                                            <td>@Checkout.tblContact.Name</td>
+                                            <td>@Checkout.tblWarehouse.Name</td>
+                                            <td>@Checkout.Reference</td>
+                                            <td>@Checkout.Details</td>
                                             <td class="text-end">
                                                 <div class="actions">
-                                                    <a href="@Url.Action("CreateCategory","Category",new {id=Category.CategoryId })" id="EditCategory" class="text-black">
+                                                    <a href="@Url.Action("CreateCheckout","Checkout",new {id=Checkout.CheckoutId })" id="EditCheckout" class="text-black">
                                                         <i class="fa fa-edit"></i> Edit
                                                     </a>
-                                                    <a class="text-danger" href="#" data-toggle="modal" data-target="#CategoryDelete" id="DeleteCategory">
+                                                    <a class="text-danger" href="#" data-toggle="modal" data-target="#CheckoutDelete" id="DeleteCheckout">
                                                         <i class="fa fa-trash"></i> Delete
                                                     </a>
                                                 </div>
@@ -103,17 +107,17 @@
 </div>
 
 
-<div id="CategoryDelete" class="modal fade delete-modal" role="dialog">
+<div id="CheckoutDelete" class="modal fade delete-modal" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body text-center">
                 <img src="~/Content/assets/img/sent.png" alt="" width="50" height="46">
-                <input class="form-control" type="text" id="DeleteCategoryID" style="display:none;">
-                <h5>Are you sure want to delete this Category information?</h5>
+                <input class="form-control" type="text" id="DeleteCheckoutID" style="display:none;">
+                <h5>Are you sure want to delete this Checkout information?</h5>
                 <div class="m-t-20">
                     <p id="ConfigDerror" style="color:red;"></p>
                     <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                    <input type="button" class="btn btn-danger" id="CDeleteCategory" value="Delete">
+                    <input type="button" class="btn btn-danger" id="CDeleteCheckout" value="Delete">
                 </div>
             </div>
         </div>
@@ -130,23 +134,23 @@
 <script>
 
 
-    $("body").on("click", "#DeleteCategory", function () {
+    $("body").on("click", "#DeleteCheckout", function () {
         $("#ConfigDerror").text("");
-        $("#CDeleteCategory").attr("disabled", false);
+        $("#CDeleteCheckout").attr("disabled", false);
         var currentRow = $(this).closest("tr");
-        $("#DeleteCategoryID").val(currentRow.find("td:eq(0)").text());
+        $("#DeleteCheckoutID").val(currentRow.find("td:eq(0)").text());
         //alert($("#DeleteDeviceInfoID").val());
     });
 
-    $("#CDeleteCategory").on("click", function () {
+    $("#CDeleteCheckout").on("click", function () {
 
 
-        $("#CDeleteCategory").attr("disabled", true);
+        $("#CDeleteCheckout").attr("disabled", true);
 
-        var ID = $("#DeleteCategoryID").val();
+        var ID = $("#DeleteCheckoutID").val();
 
         var model = {
-            CategoryId: ID,
+            Id: ID,
         };
         console.log(model);
 
@@ -154,7 +158,7 @@
         //Send the JSON array to Controller using AJAX.
         $.ajax({
             type: "POST",
-            url: "/Category/DeleteCategory",
+            url: "/Checkout/DeleteCheckout",
             data: JSON.stringify(model),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -162,7 +166,7 @@
                 if (r == 1) {
 
                     var url = window.location.origin;
-                    url += '/Category/Categories?Delete=Category has been delete successfully.';
+                    url += '/Checkout/Checkouts?Delete=Checkout has been delete successfully.';
                     window.location.href = url;
                 }
                 //alert(r + " record(s) inserted.");
@@ -198,7 +202,7 @@
             $('#DeleteAlert').fadeOut();
         }
 
-        $('#CategoryTable').DataTable({
+        $('#CheckoutTable').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 //'pageLength',
@@ -207,20 +211,20 @@
 
                     extend: 'excel',
                     exportOptions: {
-                        columns: [ 1, 2]
+                        columns: [ 1, 2,3,4,5]
                     }
                 }
             ],
-            @*"lengthMenu": [@Retrieves],*@
+
             searching: true, paging: true
         });
 
 
 
         $(".nav li ul li").removeClass("active");
-        $('#Categories').addClass('active');
-        $('#Setup a').addClass('subdrop');
-        $("#Setup  ul").first().css('display', 'block');
+        $('#Checkouts').addClass('active');
+        $('#Checkout a').addClass('subdrop');
+        $("#Checkout  ul").first().css('display', 'block');
 
 
     });

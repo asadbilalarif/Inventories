@@ -20,6 +20,9 @@ namespace Inventories.Models
             this.tblUsers = new HashSet<tblUser>();
             this.tblTransfers = new HashSet<tblTransfer>();
             this.tblTransfers1 = new HashSet<tblTransfer>();
+            this.tblCheckins = new HashSet<tblCheckin>();
+            this.tblCheckouts = new HashSet<tblCheckout>();
+            this.tblAdjustments = new HashSet<tblAdjustment>();
         }
     
         public int WarehouseId { get; set; }
@@ -41,5 +44,11 @@ namespace Inventories.Models
         public virtual ICollection<tblTransfer> tblTransfers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblTransfer> tblTransfers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCheckin> tblCheckins { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblCheckout> tblCheckouts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblAdjustment> tblAdjustments { get; set; }
     }
 }

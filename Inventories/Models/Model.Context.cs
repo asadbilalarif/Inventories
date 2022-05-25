@@ -39,10 +39,31 @@ namespace Inventories.Models
         public virtual DbSet<tblTransfer> tblTransfers { get; set; }
         public virtual DbSet<tblTransferItem> tblTransferItems { get; set; }
         public virtual DbSet<tblTempPath> tblTempPaths { get; set; }
+        public virtual DbSet<tblCheckin> tblCheckins { get; set; }
+        public virtual DbSet<tblCheckinItem> tblCheckinItems { get; set; }
+        public virtual DbSet<tblCheckout> tblCheckouts { get; set; }
+        public virtual DbSet<tblCheckoutItem> tblCheckoutItems { get; set; }
+        public virtual DbSet<tblAdjustment> tblAdjustments { get; set; }
+        public virtual DbSet<tblAdjustmentItem> tblAdjustmentItems { get; set; }
     
         public virtual ObjectResult<string> TransfrNumber()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("TransfrNumber");
+        }
+    
+        public virtual ObjectResult<string> CheckinNumber()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CheckinNumber");
+        }
+    
+        public virtual ObjectResult<string> CheckoutNumber()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CheckoutNumber");
+        }
+    
+        public virtual ObjectResult<string> AdjustmentNumber()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("AdjustmentNumber");
         }
     }
 }
