@@ -1,0 +1,317 @@
+﻿@using Inventories.Models;
+@{
+    ViewData["Title"] = "Checkouts";
+
+    int Items = (int)ViewBag.Items;
+    int Contacts = (int)ViewBag.Contacts;
+    int Categories = (int)ViewBag.Categories;
+    int Warehouses = (int)ViewBag.Warehouses;
+    int Checkins = (int)ViewBag.Checkins;
+    int Checkouts = (int)ViewBag.Checkouts;
+    int Transfers = (int)ViewBag.Transfers;
+    int Adjustments = (int)ViewBag.Adjustments;
+    int Units = (int)ViewBag.Units;
+    int Users = (int)ViewBag.Users;
+    int Roles = (int)ViewBag.Roles;
+
+
+}
+
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">Total Records</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active">Please review the total records below</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="row" >
+        <div class="col-xl-3 col-sm-6 col-12" >
+            <div class="card" style="border-radius: 25px;" >
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        @*<span class="dash-widget-icon text-primary border-primary">
+                                <i class="fe fe-users"></i>
+                            </span>*@
+                        <div class="">
+                            <h3>@Items</h3>
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+                        <h6 class="text-muted">Items</h6>
+                        @*<div class="progress progress-sm">
+                                <div class="progress-bar bg-primary w-50"></div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" style="border-radius: 25px;">
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        @*<span class="dash-widget-icon text-success">
+                                <i class="fe fe-credit-card"></i>
+                            </span>*@
+                        <div class="">
+                            <h3>@Contacts</h3>
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+
+                        <h6 class="text-muted">Contacts</h6>
+                        @*<div class="progress progress-sm">
+                                <div class="progress-bar bg-success w-50"></div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" style="border-radius: 25px;">
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        @*<span class="dash-widget-icon text-danger border-danger">
+                                <i class="fe fe-money"></i>
+                            </span>*@
+                        <div class="">
+                            <h3>@Categories</h3>
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+
+                        <h6 class="text-muted">Categories</h6>
+                        @*<div class="progress progress-sm">
+                                <div class="progress-bar bg-danger w-50"></div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" style="border-radius: 25px;">
+                <div class="card-body">
+                    <div class="dash-widget-header ">
+                        @*<span class="dash-widget-icon text-warning border-warning">
+                                <i class="fe fe-folder"></i>
+                            </span>*@
+                        <div class="">
+                            <h3>@Warehouses</h3>
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+
+                        <h6 class="text-muted">Warehouses</h6>
+                        @*<div class="progress progress-sm">
+                                <div class="progress-bar bg-warning w-50"></div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" style="border-radius: 25px;">
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        @*<span class="dash-widget-icon text-primary border-primary">
+                                <i class="fe fe-users"></i>
+                            </span>*@
+                        <div class="">
+                            <h3>@Checkins</h3>
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+                        <h6 class="text-muted">Checkins</h6>
+                        @*<div class="progress progress-sm">
+                                <div class="progress-bar bg-primary w-50"></div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" style="border-radius: 25px;">
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        @*<span class="dash-widget-icon text-success">
+                                <i class="fe fe-credit-card"></i>
+                            </span>*@
+                        <div class="">
+                            <h3>@Checkouts</h3>
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+
+                        <h6 class="text-muted">Checkouts</h6>
+                        @*<div class="progress progress-sm">
+                                <div class="progress-bar bg-success w-50"></div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" style="border-radius: 25px;">
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        @*<span class="dash-widget-icon text-danger border-danger">
+                                <i class="fe fe-money"></i>
+                            </span>*@
+                        <div class="">
+                            <h3>@Transfers</h3>
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+
+                        <h6 class="text-muted">Transfers</h6>
+                        @*<div class="progress progress-sm">
+                                <div class="progress-bar bg-danger w-50"></div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" style="border-radius: 25px;">
+                <div class="card-body">
+                    <div class="dash-widget-header ">
+                        @*<span class="dash-widget-icon text-warning border-warning">
+                                <i class="fe fe-folder"></i>
+                            </span>*@
+                        <div class="">
+                            <h3>@Adjustments</h3>
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+
+                        <h6 class="text-muted">Adjustments</h6>
+                        @*<div class="progress progress-sm">
+                                <div class="progress-bar bg-warning w-50"></div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" style="border-radius: 25px;">
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        @*<span class="dash-widget-icon text-primary border-primary">
+                                <i class="fe fe-users"></i>
+                            </span>*@
+                        <div class="">
+                            <h3>@Units</h3>
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+                        <h6 class="text-muted">Units</h6>
+                        @*<div class="progress progress-sm">
+                                <div class="progress-bar bg-primary w-50"></div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" style="border-radius: 25px;">
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        @*<span class="dash-widget-icon text-success">
+                                <i class="fe fe-credit-card"></i>
+                            </span>*@
+                        <div class="">
+                            <h3>@Users</h3>
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+
+                        <h6 class="text-muted">Users</h6>
+                        @*<div class="progress progress-sm">
+                                <div class="progress-bar bg-success w-50"></div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" style="border-radius: 25px;">
+                <div class="card-body">
+                    <div class="dash-widget-header">
+                        @*<span class="dash-widget-icon text-danger border-danger">
+                                <i class="fe fe-money"></i>
+                            </span>*@
+                        <div class="">
+                            <h3>@Roles</h3>
+                        </div>
+                    </div>
+                    <div class="dash-widget-info">
+
+                        <h6 class="text-muted">Roles</h6>
+                        @*<div class="progress progress-sm">
+                                <div class="progress-bar bg-danger w-50"></div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">Report Links</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active">Please click to see the report</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" >
+        <div class="col-xl-3 col-sm-6 col-12" >
+            <div class="card" >
+                <div class="card-body" style="background-color:#374151;color:white;border-radius: 25px;">
+                    <a href="@Url.Action("CheckinReport")" style="background-color:#374151;color:white;">Checkin Report</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" >
+                <div class="card-body" style="background-color:#374151;color:white;border-radius: 25px;">
+                    <a href="@Url.Action("CheckoutReport")" style="background-color:#374151;color:white;">Checkout Report</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" >
+                <div class="card-body" style="background-color:#374151;color:white;border-radius: 25px;">
+                    <a href="@Url.Action("TransferReport")" style="background-color:#374151;color:white;">Transfer Report</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card" >
+                <div class="card-body" style="background-color:#374151;color:white;border-radius: 25px;">
+                    <a href="@Url.Action("AdjustmentReport")" style="background-color:#374151;color:white;">Adjustment Report</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+
+</div>
+<script src="/Content/assets/js/jquery-3.2.1.min.js"></script>

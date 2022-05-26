@@ -144,6 +144,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdjustmentReportData_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckinReportData_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckinReportData_Result1.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckinReportData_Result2.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckoutReportData_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MenuAccess.cs" />
     <Compile Include="Models\Model.Context.cs">
       <AutoGen>True</AutoGen>
@@ -212,6 +227,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblWarehouse.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransferReportData_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WarehouseModel.cs" />
@@ -408,6 +426,10 @@
     <Content Include="Views\Adjustment\Adjustments.cshtml" />
     <Content Include="Views\Adjustment\CreateAdjustment.cshtml" />
     <Content Include="Views\Report\CheckinReport.cshtml" />
+    <Content Include="Views\Report\CheckoutReport.cshtml" />
+    <Content Include="Views\Report\TransferReport.cshtml" />
+    <Content Include="Views\Report\AdjustmentReport.cshtml" />
+    <Content Include="Views\Report\TotalRecord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

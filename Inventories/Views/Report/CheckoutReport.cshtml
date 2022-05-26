@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Inventories.Models.CheckinReportData_Result2>
+﻿@model IEnumerable<Inventories.Models.CheckoutReportData_Result>
 @using Inventories.Models;
 @{
-    ViewData["Title"] = "Checkins";
+    ViewData["Title"] = "Checkouts";
 
 
 
@@ -21,7 +21,7 @@
     List<tblUser> Users = (List<tblUser>)ViewBag.Users;
     int Category = ViewBag.Category;
     List<tblCategory> Categories = (List<tblCategory>)ViewBag.Categories;
-    bool draft= ViewBag.draft;
+    bool draft = ViewBag.draft;
 
 
 
@@ -49,11 +49,11 @@
     <!-- Page Header -->
     <!-- /Page Header -->
 
-    <div class="row" style="display:none;"  id="DivFilters">
+    <div class="row" style="display:none;" id="DivFilters">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @using (Html.BeginForm("CheckinReport", "Report", FormMethod.Post))
+                    @using (Html.BeginForm("CheckoutReport", "Report", FormMethod.Post))
                     {
                         <form>
                             <div class="row">
@@ -168,7 +168,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <button class="btn btn-primary" style="float:right;">Search</button>
-                                    <a href="@Url.Action("CheckinReport")"><button type="button" class="btn btn-danger" style="margin-right:1%;float:right;">Reset</button></a>
+                                    <a href="@Url.Action("CheckoutReport")"><button type="button" class="btn btn-danger" style="margin-right:1%;float:right;">Reset</button></a>
                                 </div>
                             </div>
 
@@ -176,7 +176,7 @@
                         </form>
                     }
 
-                    
+
                 </div>
             </div>
         </div>
@@ -192,9 +192,9 @@
                             <div class="container-fluid">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">Checkin Report</h5>
+                                        <h5 class="breadcrumb-title">Checkout Report</h5>
                                     </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateCheckinB">
+                                    <div class="col-md-6 col-6 text-right" id="CreateCheckoutB">
                                         <button class="btn btn-primary" id="ShowFilters" style="float:right"><i class="fas fa-toggle-off" id="IShowFilters"> Toggle Form</i> </button>
                                     </div>
                                 </div>
@@ -206,11 +206,11 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="table-responsive">
-                            <table class="cell-border table table-hover table-center  mb-0 " id="CheckinTable">
+                            <table class="cell-border table table-hover table-center  mb-0 " id="CheckoutTable">
                                 <thead>
                                     <tr>
-                                        <th style="display:none;">Checkin ID</th>
-                                        <th>Checkin Date</th>
+                                        <th style="display:none;">Checkout ID</th>
+                                        <th>Checkout Date</th>
                                         <th>Contact</th>
                                         <th>Warehouse</th>
                                         <th>User</th>
@@ -219,16 +219,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Inventories.Models.CheckinReportData_Result2 Checkin in Model)
+                                    @foreach (Inventories.Models.CheckoutReportData_Result Checkout in Model)
                                     {
                                         <tr>
-                                            <td style="display:none;">@Checkin.CheckinId</td>
-                                            <td>@Checkin.CheckinDate.ToString("dd-MM-yyyy")</td>
-                                            <td>@Checkin.ContactName</td>
-                                            <td>@Checkin.WarehouseName</td>
-                                            <td>@Checkin.UserName</td>
-                                            <td>@Checkin.Reference</td>
-                                            <td>@Checkin.Details</td>
+                                            <td style="display:none;">@Checkout.CheckoutId</td>
+                                            <td>@Checkout.CheckoutDate.ToString("dd-MM-yyyy")</td>
+                                            <td>@Checkout.ContactName</td>
+                                            <td>@Checkout.WarehouseName</td>
+                                            <td>@Checkout.UserName</td>
+                                            <td>@Checkout.Reference</td>
+                                            <td>@Checkout.Details</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -276,7 +276,7 @@
 
 
 
-        //$('#CheckinTable').DataTable({
+        //$('#CheckoutTable').DataTable({
         //    dom: 'Bfrtip',
         //    buttons: [
         //        //'pageLength',
@@ -296,7 +296,7 @@
 
 
         $(".nav li ul li").removeClass("active");
-        $('#CheckinReport').addClass('active');
+        $('#CheckoutReport').addClass('active');
         $('#Reports a').addClass('subdrop');
         $("#Reports  ul").first().css('display', 'block');
 

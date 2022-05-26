@@ -65,5 +65,41 @@ namespace Inventories.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("AdjustmentNumber");
         }
+    
+        public virtual ObjectResult<CheckinReportData_Result2> CheckinReportData(string searchValue)
+        {
+            var searchValueParameter = searchValue != null ?
+                new ObjectParameter("searchValue", searchValue) :
+                new ObjectParameter("searchValue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CheckinReportData_Result2>("CheckinReportData", searchValueParameter);
+        }
+    
+        public virtual ObjectResult<CheckoutReportData_Result> CheckoutReportData(string searchValue)
+        {
+            var searchValueParameter = searchValue != null ?
+                new ObjectParameter("searchValue", searchValue) :
+                new ObjectParameter("searchValue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CheckoutReportData_Result>("CheckoutReportData", searchValueParameter);
+        }
+    
+        public virtual ObjectResult<TransferReportData_Result> TransferReportData(string searchValue)
+        {
+            var searchValueParameter = searchValue != null ?
+                new ObjectParameter("searchValue", searchValue) :
+                new ObjectParameter("searchValue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TransferReportData_Result>("TransferReportData", searchValueParameter);
+        }
+    
+        public virtual ObjectResult<AdjustmentReportData_Result> AdjustmentReportData(string searchValue)
+        {
+            var searchValueParameter = searchValue != null ?
+                new ObjectParameter("searchValue", searchValue) :
+                new ObjectParameter("searchValue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AdjustmentReportData_Result>("AdjustmentReportData", searchValueParameter);
+        }
     }
 }

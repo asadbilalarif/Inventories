@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Inventories.Models.CheckinReportData_Result2>
+﻿@model IEnumerable<Inventories.Models.AdjustmentReportData_Result>
 @using Inventories.Models;
 @{
-    ViewData["Title"] = "Checkins";
+    ViewData["Title"] = "Adjustments";
 
 
 
@@ -13,15 +13,13 @@
     string StartCreatedDate = ViewBag.StartCreatedDate;
     string EndCreatedDate = ViewBag.EndCreatedDate;
     string Reference = ViewBag.Reference;
-    int Contact = ViewBag.Contact;
-    List<tblContact> Contacts = (List<tblContact>)ViewBag.Contacts;
     int Warehouse = ViewBag.Warehouse;
     List<tblWarehouse> Warehouses = (List<tblWarehouse>)ViewBag.Warehouses;
     int User = ViewBag.User;
     List<tblUser> Users = (List<tblUser>)ViewBag.Users;
     int Category = ViewBag.Category;
     List<tblCategory> Categories = (List<tblCategory>)ViewBag.Categories;
-    bool draft= ViewBag.draft;
+    bool draft = ViewBag.draft;
 
 
 
@@ -49,11 +47,11 @@
     <!-- Page Header -->
     <!-- /Page Header -->
 
-    <div class="row" style="display:none;"  id="DivFilters">
+    <div class="row" style="display:none;" id="DivFilters">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @using (Html.BeginForm("CheckinReport", "Report", FormMethod.Post))
+                    @using (Html.BeginForm("AdjustmentReport", "Report", FormMethod.Post))
                     {
                         <form>
                             <div class="row">
@@ -80,23 +78,6 @@
                                 <div class="col-md-3">
                                     <label>Reference</label>
                                     <input class="form-control" type="text" name="Reference" value="@Reference" />
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Contact</label>
-                                    <select class="form-control" name="Contact">
-                                        <option value="">Contact</option>
-                                        @foreach (tblContact item in Contacts)
-                                        {
-                                            if (@Contact == item.ContactId)
-                                            {
-                                                <option value="@item.ContactId" selected>@item.Name</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@item.ContactId">@item.Name</option>
-                                            }
-                                        }
-                                    </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Warehouse</label>
@@ -168,7 +149,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <button class="btn btn-primary" style="float:right;">Search</button>
-                                    <a href="@Url.Action("CheckinReport")"><button type="button" class="btn btn-danger" style="margin-right:1%;float:right;">Reset</button></a>
+                                    <a href="@Url.Action("AdjustmentReport")"><button type="button" class="btn btn-danger" style="margin-right:1%;float:right;">Reset</button></a>
                                 </div>
                             </div>
 
@@ -176,7 +157,7 @@
                         </form>
                     }
 
-                    
+
                 </div>
             </div>
         </div>
@@ -192,9 +173,9 @@
                             <div class="container-fluid">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">Checkin Report</h5>
+                                        <h5 class="breadcrumb-title">Adjustment Report</h5>
                                     </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateCheckinB">
+                                    <div class="col-md-6 col-6 text-right" id="CreateAdjustmentB">
                                         <button class="btn btn-primary" id="ShowFilters" style="float:right"><i class="fas fa-toggle-off" id="IShowFilters"> Toggle Form</i> </button>
                                     </div>
                                 </div>
@@ -206,12 +187,12 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="table-responsive">
-                            <table class="cell-border table table-hover table-center  mb-0 " id="CheckinTable">
+                            <table class="cell-border table table-hover table-center  mb-0 " id="AdjustmentTable">
                                 <thead>
                                     <tr>
-                                        <th style="display:none;">Checkin ID</th>
-                                        <th>Checkin Date</th>
-                                        <th>Contact</th>
+                                        <th style="display:none;">Adjustment ID</th>
+                                        <th>Adjustment Date</th>
+                                        <th>Type</th>
                                         <th>Warehouse</th>
                                         <th>User</th>
                                         <th>Reference</th>
@@ -219,16 +200,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Inventories.Models.CheckinReportData_Result2 Checkin in Model)
+                                    @foreach (Inventories.Models.AdjustmentReportData_Result Adjustment in Model)
                                     {
                                         <tr>
-                                            <td style="display:none;">@Checkin.CheckinId</td>
-                                            <td>@Checkin.CheckinDate.ToString("dd-MM-yyyy")</td>
-                                            <td>@Checkin.ContactName</td>
-                                            <td>@Checkin.WarehouseName</td>
-                                            <td>@Checkin.UserName</td>
-                                            <td>@Checkin.Reference</td>
-                                            <td>@Checkin.Details</td>
+                                            <td style="display:none;">@Adjustment.AdjustmentId</td>
+                                            <td>@Adjustment.AdjustmentDate.ToString("dd-MM-yyyy")</td>
+                                            <td>@Adjustment.Type</td>
+                                            <td>@Adjustment.WarehouseName</td>
+                                            <td>@Adjustment.UserName</td>
+                                            <td>@Adjustment.Reference</td>
+                                            <td>@Adjustment.Details</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -276,7 +257,7 @@
 
 
 
-        //$('#CheckinTable').DataTable({
+        //$('#AdjustmentTable').DataTable({
         //    dom: 'Bfrtip',
         //    buttons: [
         //        //'pageLength',
@@ -296,7 +277,7 @@
 
 
         $(".nav li ul li").removeClass("active");
-        $('#CheckinReport').addClass('active');
+        $('#AdjustmentReport').addClass('active');
         $('#Reports a').addClass('subdrop');
         $("#Reports  ul").first().css('display', 'block');
 
