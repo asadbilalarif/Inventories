@@ -25,6 +25,7 @@ namespace Inventories.Models
         public Nullable<int> EditBy { get; set; }
         public Nullable<System.DateTime> EditDate { get; set; }
         public Nullable<bool> isActive { get; set; }
+        public Nullable<int> CheckinItemId { get; set; }
     
         public virtual tblCheckout tblCheckout { get; set; }
         public virtual tblItem tblItem { get; set; }

@@ -194,7 +194,7 @@
 
                             }
                         <li class="submenu" id="@AccessLevel.tblMenu.ElementId">
-                            <a href="#"><i class="@AccessLevel.tblMenu.FontAwesome"></i> <span>@AccessLevel.tblMenu.Name</span> <span class="menu-arrow"></span></a>
+                            <a href="#"><i class="@AccessLevel.tblMenu.FontAwesome"></i> <span>  @AccessLevel.tblMenu.Name</span> <span class="menu-arrow"></span></a>
 
                             <ul style="display: none;">
                                 @foreach (var AccessLevel1 in @ViewBag.Access)
@@ -202,7 +202,7 @@
                                     if (@AccessLevel1.tblMenu.ParentId == @PID)
                                     {
                                         <li id="@AccessLevel1.tblMenu.ElementId">
-                                            <a href="@Url.Action(@AccessLevel1.tblMenu.ActionName, @AccessLevel1.tblMenu.ControllerName)"> <i class="@AccessLevel1.tblMenu.FontAwesome"></i> <span>@AccessLevel1.tblMenu.Name </span></a>
+                                            <a href="@Url.Action(@AccessLevel1.tblMenu.ActionName, @AccessLevel1.tblMenu.ControllerName)"> <i class="@AccessLevel1.tblMenu.FontAwesome"></i> <span>  @AccessLevel1.tblMenu.Name </span></a>
                                         </li>
                                     }
                                 }

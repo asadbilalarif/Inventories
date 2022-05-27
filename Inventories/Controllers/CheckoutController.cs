@@ -52,6 +52,7 @@ namespace Inventories.Controllers
             HttpCookie cookieObj = Request.Cookies["User"];
             int UserId = Int32.Parse(cookieObj["UserId"]);
             tblCheckout Data = new tblCheckout();
+            tblCheckinItem Update = new tblCheckinItem();
             string TNumber = HeadData[0].CheckoutNumber;
             if (HeadData.FirstOrDefault().CheckoutId == 0)
             {
@@ -98,9 +99,15 @@ namespace Inventories.Controllers
                 {
                     if (First)
                     {
+                        Update = new tblCheckinItem();
                         Item.CheckoutId = Data.CheckoutId;
                         Item.CreatedBy = UserId;
                         Item.CreatedDate = DateTime.Now;
+                        Update = DB.tblCheckinItems.Where(x => x.CheckinItemId == Item.CheckinItemId).FirstOrDefault();
+                        Update.ItemUsedQuantity = Item.ItemQuantity;
+                        Update.ItemNetQuantity = Update.ItemQuantity - Update.ItemUsedQuantity;
+                        DB.Entry(Update);
+                        DB.SaveChanges();
                         DB.tblCheckoutItems.Add(Item);
                     }
                     else
@@ -110,6 +117,9 @@ namespace Inventories.Controllers
 
                 }
                 DB.SaveChanges();
+
+                
+
 
                 return Json(1);
             }
@@ -165,9 +175,15 @@ namespace Inventories.Controllers
                 {
                     if (First)
                     {
+                        Update = new tblCheckinItem();
                         Item.CheckoutId = Data.CheckoutId;
                         Item.CreatedBy = UserId;
                         Item.CreatedDate = DateTime.Now;
+                        Update = DB.tblCheckinItems.Where(x => x.CheckinItemId == Item.CheckinItemId).FirstOrDefault();
+                        Update.ItemUsedQuantity = Item.ItemQuantity;
+                        Update.ItemNetQuantity = Update.ItemQuantity - Update.ItemUsedQuantity;
+                        DB.Entry(Update);
+                        DB.SaveChanges();
                         DB.tblCheckoutItems.Add(Item);
                     }
                     else
@@ -229,9 +245,19 @@ namespace Inventories.Controllers
         public ActionResult DeleteCheckout(int Id)
         {
             tblCheckout Data = new tblCheckout();
+            tblCheckinItem UpdateCheckinQty = new tblCheckinItem();
             List<tblCheckoutItem> Data1 = new List<tblCheckoutItem>();
             Data = DB.tblCheckouts.Where(x => x.CheckoutId == Id).FirstOrDefault();
             Data1 = DB.tblCheckoutItems.Where(x => x.CheckoutId == Id).ToList();
+            foreach (tblCheckoutItem item in Data1)
+            {
+                UpdateCheckinQty = new tblCheckinItem();
+                UpdateCheckinQty = DB.tblCheckinItems.Where(x => x.CheckinItemId == item.CheckinItemId).FirstOrDefault();
+                UpdateCheckinQty.ItemUsedQuantity -= item.ItemQuantity;
+                UpdateCheckinQty.ItemNetQuantity = UpdateCheckinQty.ItemQuantity - UpdateCheckinQty.ItemUsedQuantity;
+                DB.Entry(UpdateCheckinQty);
+                DB.SaveChanges();
+            }
             DB.tblCheckoutItems.RemoveRange(Data1);
             DB.tblCheckouts.Remove(Data);
             DB.SaveChanges();
@@ -246,6 +272,42 @@ namespace Inventories.Controllers
             try
             {
                 allsearch = DB.tblItems.Where(x => x.Name.StartsWith(search)).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
+            }
+
+            return new JsonResult { Data = allsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public JsonResult GetCheckinList(int ItemId,int WarehouseId=0)
+        {
+            List<GetCheckinList_Result> allsearch = null;
+            DB.Configuration.ProxyCreationEnabled = false;
+            try
+            {
+                allsearch = DB.GetCheckinList(ItemId, WarehouseId).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
+            }
+
+            return new JsonResult { Data = allsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public JsonResult GetCheckinItemData(int CheckinItemId=0)
+        {
+            GetCheckinItemData_Result allsearch = null;
+            DB.Configuration.ProxyCreationEnabled = false;
+            try
+            {
+                allsearch = DB.GetCheckinItemData(CheckinItemId).FirstOrDefault();
 
             }
             catch (Exception ex)

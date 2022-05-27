@@ -101,5 +101,27 @@ namespace Inventories.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AdjustmentReportData_Result>("AdjustmentReportData", searchValueParameter);
         }
+    
+        public virtual ObjectResult<GetCheckinList_Result> GetCheckinList(Nullable<int> itemId, Nullable<int> warehouseId)
+        {
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(int));
+    
+            var warehouseIdParameter = warehouseId.HasValue ?
+                new ObjectParameter("WarehouseId", warehouseId) :
+                new ObjectParameter("WarehouseId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckinList_Result>("GetCheckinList", itemIdParameter, warehouseIdParameter);
+        }
+    
+        public virtual ObjectResult<GetCheckinItemData_Result> GetCheckinItemData(Nullable<int> checkinItemItemId)
+        {
+            var checkinItemItemIdParameter = checkinItemItemId.HasValue ?
+                new ObjectParameter("CheckinItemItemId", checkinItemItemId) :
+                new ObjectParameter("CheckinItemItemId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckinItemData_Result>("GetCheckinItemData", checkinItemItemIdParameter);
+        }
     }
 }

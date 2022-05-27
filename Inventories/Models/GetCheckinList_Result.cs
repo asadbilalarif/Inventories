@@ -10,9 +10,8 @@
 namespace Inventories.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tblCheckinItem
+    public partial class GetCheckinList_Result
     {
         public int CheckinItemId { get; set; }
         public Nullable<int> CheckinId { get; set; }
@@ -27,8 +26,6 @@ namespace Inventories.Models
         public Nullable<bool> isActive { get; set; }
         public Nullable<int> ItemUsedQuantity { get; set; }
         public Nullable<int> ItemNetQuantity { get; set; }
-    
-        public virtual tblCheckin tblCheckin { get; set; }
-        public virtual tblItem tblItem { get; set; }
+        public string CheckinNumber { get; set; }
     }
 }

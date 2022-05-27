@@ -101,6 +101,9 @@ namespace Inventories.Controllers
                         Item.CheckinId = Data.CheckinId;
                         Item.CreatedBy = UserId;
                         Item.CreatedDate = DateTime.Now;
+                        Item.ItemUsedQuantity = 0;
+                        Item.ItemNetQuantity = Item.ItemQuantity;
+                        Item.CreatedDate = DateTime.Now;
                         DB.tblCheckinItems.Add(Item);
                     }
                     else
@@ -230,11 +233,30 @@ namespace Inventories.Controllers
         {
             tblCheckin Data = new tblCheckin();
             List<tblCheckinItem> Data1 = new List<tblCheckinItem>();
+            tblCheckoutItem UpdateCheckinQty = new tblCheckoutItem();
             Data = DB.tblCheckins.Where(x => x.CheckinId == Id).FirstOrDefault();
             Data1 = DB.tblCheckinItems.Where(x => x.CheckinId == Id).ToList();
-            DB.tblCheckinItems.RemoveRange(Data1);
-            DB.tblCheckins.Remove(Data);
-            DB.SaveChanges();
+            bool Check = false;
+            foreach (tblCheckinItem item in Data1)
+            {
+                UpdateCheckinQty = new tblCheckoutItem();
+                UpdateCheckinQty = DB.tblCheckoutItems.Where(x => x.CheckinItemId == item.CheckinItemId).FirstOrDefault();
+                if(UpdateCheckinQty!=null)
+                {
+                    Check = true;
+                    break;
+                }
+            }
+            if(Check==false)
+            {
+                DB.tblCheckinItems.RemoveRange(Data1);
+                DB.tblCheckins.Remove(Data);
+                DB.SaveChanges();
+            }
+            else
+            {
+                return Json(2);
+            }
 
             return Json(1);
         }

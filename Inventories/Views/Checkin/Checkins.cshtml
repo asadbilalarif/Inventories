@@ -169,6 +169,11 @@
                     url += '/Checkin/Checkins?Delete=Checkin has been delete successfully.';
                     window.location.href = url;
                 }
+                else {
+                    var url = window.location.origin;
+                    url += '/Checkin/Checkins?Delete=Checkin has been use in Checkout.';
+                    window.location.href = url;
+                }
                 //alert(r + " record(s) inserted.");
             }
         });
