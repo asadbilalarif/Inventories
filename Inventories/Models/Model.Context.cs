@@ -102,7 +102,7 @@ namespace Inventories.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AdjustmentReportData_Result>("AdjustmentReportData", searchValueParameter);
         }
     
-        public virtual ObjectResult<GetCheckinList_Result> GetCheckinList(Nullable<int> itemId, Nullable<int> warehouseId)
+        public virtual ObjectResult<GetCheckinList_Result1> GetCheckinList(Nullable<int> itemId, Nullable<int> warehouseId)
         {
             var itemIdParameter = itemId.HasValue ?
                 new ObjectParameter("ItemId", itemId) :
@@ -112,16 +112,47 @@ namespace Inventories.Models
                 new ObjectParameter("WarehouseId", warehouseId) :
                 new ObjectParameter("WarehouseId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckinList_Result>("GetCheckinList", itemIdParameter, warehouseIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckinList_Result1>("GetCheckinList", itemIdParameter, warehouseIdParameter);
         }
     
-        public virtual ObjectResult<GetCheckinItemData_Result> GetCheckinItemData(Nullable<int> checkinItemItemId)
+        public virtual ObjectResult<GetAdjustmentItemData_Result2> GetAdjustmentItemData(Nullable<int> checkinItemItemId)
         {
             var checkinItemItemIdParameter = checkinItemItemId.HasValue ?
                 new ObjectParameter("CheckinItemItemId", checkinItemItemId) :
                 new ObjectParameter("CheckinItemItemId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckinItemData_Result>("GetCheckinItemData", checkinItemItemIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAdjustmentItemData_Result2>("GetAdjustmentItemData", checkinItemItemIdParameter);
+        }
+    
+        public virtual ObjectResult<GetCheckinItemData_Result3> GetCheckinItemData(Nullable<int> checkinItemItemId)
+        {
+            var checkinItemItemIdParameter = checkinItemItemId.HasValue ?
+                new ObjectParameter("CheckinItemItemId", checkinItemItemId) :
+                new ObjectParameter("CheckinItemItemId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCheckinItemData_Result3>("GetCheckinItemData", checkinItemItemIdParameter);
+        }
+    
+        public virtual ObjectResult<GetTransferItemData_Result3> GetTransferItemData(Nullable<int> transferItemId)
+        {
+            var transferItemIdParameter = transferItemId.HasValue ?
+                new ObjectParameter("TransferItemId", transferItemId) :
+                new ObjectParameter("TransferItemId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTransferItemData_Result3>("GetTransferItemData", transferItemIdParameter);
+        }
+    
+        public virtual ObjectResult<GetTCheckinList_Result> GetTCheckinList(Nullable<int> itemId, Nullable<int> warehouseId)
+        {
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(int));
+    
+            var warehouseIdParameter = warehouseId.HasValue ?
+                new ObjectParameter("WarehouseId", warehouseId) :
+                new ObjectParameter("WarehouseId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTCheckinList_Result>("GetTCheckinList", itemIdParameter, warehouseIdParameter);
         }
     }
 }

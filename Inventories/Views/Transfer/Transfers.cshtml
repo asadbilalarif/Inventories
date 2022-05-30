@@ -169,6 +169,11 @@
                     url += '/Transfer/Transfers?Delete=Transfer has been delete successfully.';
                     window.location.href = url;
                 }
+                else {
+                    var url = window.location.origin;
+                    url += '/Transfer/Transfers?Delete=Transfer has been use.';
+                    window.location.href = url;
+                }
                 //alert(r + " record(s) inserted.");
             }
         });

@@ -47,12 +47,16 @@ namespace Inventories.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateCheckout(tblCheckout[] HeadData, List<tblCheckoutItem> TailData)
+        public ActionResult CreateCheckout(tblCheckout[] HeadData, List<PCheckoutItem> TailData)
         {
             HttpCookie cookieObj = Request.Cookies["User"];
             int UserId = Int32.Parse(cookieObj["UserId"]);
             tblCheckout Data = new tblCheckout();
+            tblCheckoutItem Data2 = new tblCheckoutItem();
             tblCheckinItem Update = new tblCheckinItem();
+            tblTransferItem TUpdate = new tblTransferItem();
+            tblAdjustmentItem AUpdate = new tblAdjustmentItem();
+            tblCheckoutItem Delete = new tblCheckoutItem();
             string TNumber = HeadData[0].CheckoutNumber;
             if (HeadData.FirstOrDefault().CheckoutId == 0)
             {
@@ -90,25 +94,56 @@ namespace Inventories.Controllers
 
                 if (TailData == null)
                 {
-                    TailData = new List<tblCheckoutItem>();
+                    TailData = new List<PCheckoutItem>();
                 }
 
                 bool First = false;
                 //Loop and insert records.
-                foreach (tblCheckoutItem Item in TailData)
+
+
+                foreach (PCheckoutItem Item in TailData)
                 {
                     if (First)
                     {
                         Update = new tblCheckinItem();
-                        Item.CheckoutId = Data.CheckoutId;
-                        Item.CreatedBy = UserId;
-                        Item.CreatedDate = DateTime.Now;
-                        Update = DB.tblCheckinItems.Where(x => x.CheckinItemId == Item.CheckinItemId).FirstOrDefault();
-                        Update.ItemUsedQuantity = Item.ItemQuantity;
-                        Update.ItemNetQuantity = Update.ItemQuantity - Update.ItemUsedQuantity;
-                        DB.Entry(Update);
-                        DB.SaveChanges();
-                        DB.tblCheckoutItems.Add(Item);
+                        TUpdate = new tblTransferItem();
+                        AUpdate = new tblAdjustmentItem();
+                        Data2 = new tblCheckoutItem();
+                        Data2.CheckoutId = Data.CheckoutId;
+                        Data2.CreatedBy = UserId;
+                        Data2.CreatedDate = DateTime.Now;
+                        Data2.ItemId = Item.ItemId;
+                        Data2.ItemWeight = Item.ItemWeight;
+                        Data2.ItemQuantity = Item.ItemQuantity;
+                        Data2.ItemUnit = Item.ItemUnit;
+                        Data2.CheckinItemId = Item.CheckinItemId;
+                        Data2.VNumber = Item.Number;
+                        if(Item.Number[0]=='C')
+                        {
+                            Update = DB.tblCheckinItems.Where(x => x.CheckinItemId == Item.CheckinItemId).FirstOrDefault();
+                            Update.ItemUsedQuantity = Update.ItemUsedQuantity + Item.ItemQuantity;
+                            Update.ItemNetQuantity = Update.ItemQuantity - Update.ItemUsedQuantity;
+                            DB.Entry(Update);
+                            DB.SaveChanges();
+                        }
+                        if(Item.Number[0]=='T')
+                        {
+                            TUpdate = DB.tblTransferItems.Where(x => x.TransferItemId == Item.CheckinItemId).FirstOrDefault();
+                            TUpdate.ItemUsedQuantity = TUpdate.ItemUsedQuantity + Item.ItemQuantity;
+                            TUpdate.ItemNetQuantity = TUpdate.ItemQuantity - TUpdate.ItemUsedQuantity;
+                            DB.Entry(TUpdate);
+                            DB.SaveChanges();
+                        }
+                        if(Item.Number[0]=='A')
+                        {
+                            AUpdate = DB.tblAdjustmentItems.Where(x => x.AdjustmentItemId == Item.CheckinItemId).FirstOrDefault();
+                            AUpdate.ItemUsedQuantity = AUpdate.ItemUsedQuantity + Item.ItemQuantity;
+                            AUpdate.ItemNetQuantity = AUpdate.ItemQuantity - AUpdate.ItemUsedQuantity;
+                            DB.Entry(AUpdate);
+                            DB.SaveChanges();
+                        }
+                        
+                        DB.tblCheckoutItems.Add(Data2);
                     }
                     else
                     {
@@ -157,34 +192,113 @@ namespace Inventories.Controllers
                 }
 
 
-                List<tblCheckoutItem> TData;
-                int CheckoutId = Data.CheckoutId;
-                TData = DB.tblCheckoutItems.Select(r => r).Where(x => x.CheckoutId == CheckoutId).ToList();
+                foreach (var item in TailData)
+                {
+                    if(item.Deleted==true)
+                    {
+                        Update = new tblCheckinItem();
+                        TUpdate = new tblTransferItem();
+                        AUpdate = new tblAdjustmentItem();
+                        Delete = new tblCheckoutItem();
+                        if (item.Number[0] == 'C')
+                        {
+                            Update = DB.tblCheckinItems.Where(x => x.CheckinItemId == item.CheckinItemId).FirstOrDefault();
+                            Update.ItemUsedQuantity = Update.ItemUsedQuantity - item.ItemQuantity;
+                            Update.ItemNetQuantity = Update.ItemQuantity - Update.ItemUsedQuantity;
+                            DB.Entry(Update);
+                            DB.SaveChanges();
+                        }
+                        if (item.Number[0] == 'T')
+                        {
+                            TUpdate = DB.tblTransferItems.Where(x => x.TransferItemId == item.CheckinItemId).FirstOrDefault();
+                            TUpdate.ItemUsedQuantity = TUpdate.ItemUsedQuantity - item.ItemQuantity;
+                            TUpdate.ItemNetQuantity = TUpdate.ItemQuantity - TUpdate.ItemUsedQuantity;
+                            DB.Entry(TUpdate);
+                            DB.SaveChanges();
+                        }
+                        if (item.Number[0] == 'A')
+                        {
+                            AUpdate = DB.tblAdjustmentItems.Where(x => x.AdjustmentItemId == item.CheckinItemId).FirstOrDefault();
+                            AUpdate.ItemUsedQuantity = AUpdate.ItemUsedQuantity - item.ItemQuantity;
+                            AUpdate.ItemNetQuantity = AUpdate.ItemQuantity - AUpdate.ItemUsedQuantity;
+                            DB.Entry(AUpdate);
+                            DB.SaveChanges();
+                        }
+                        DB.Entry(Update);
+                        DB.SaveChanges();
+                        Delete=DB.tblCheckoutItems.Where(x => x.CheckinItemId == item.CheckinItemId).FirstOrDefault();
+                        DB.tblCheckoutItems.Remove(Delete);
+                        DB.SaveChanges();
+                    }
+                }
 
-                DB.tblCheckoutItems.RemoveRange(TData);
-                DB.SaveChanges();
+                //List<tblCheckoutItem> TData;
+                //int CheckoutId = Data.CheckoutId;
+                //TData = DB.tblCheckoutItems.Select(r => r).Where(x => x.CheckoutId == CheckoutId).ToList();
+
+                //DB.tblCheckoutItems.RemoveRange(TData);
+                //DB.SaveChanges();
 
                 if (TailData == null)
                 {
-                    TailData = new List<tblCheckoutItem>();
+                    TailData = new List<PCheckoutItem>();
                 }
 
                 bool First = false;
                 //Loop and insert records.
-                foreach (tblCheckoutItem Item in TailData)
+                foreach (PCheckoutItem Item in TailData)
                 {
                     if (First)
                     {
-                        Update = new tblCheckinItem();
-                        Item.CheckoutId = Data.CheckoutId;
-                        Item.CreatedBy = UserId;
-                        Item.CreatedDate = DateTime.Now;
-                        Update = DB.tblCheckinItems.Where(x => x.CheckinItemId == Item.CheckinItemId).FirstOrDefault();
-                        Update.ItemUsedQuantity = Item.ItemQuantity;
-                        Update.ItemNetQuantity = Update.ItemQuantity - Update.ItemUsedQuantity;
-                        DB.Entry(Update);
-                        DB.SaveChanges();
-                        DB.tblCheckoutItems.Add(Item);
+                        if(Item.Deleted != true)
+                        {
+
+                            var Check = DB.tblCheckoutItems.Where(x => x.CheckinItemId == Item.CheckinItemId).Select(s => s).FirstOrDefault();
+                            if (Check == null)
+                            {
+                                Update = new tblCheckinItem();
+                                TUpdate = new tblTransferItem();
+                                AUpdate = new tblAdjustmentItem();
+                                Data2 = new tblCheckoutItem();
+                                Data2.CheckoutId = Data.CheckoutId;
+                                Data2.CreatedBy = UserId;
+                                Data2.CreatedDate = DateTime.Now;
+                                Data2.ItemId = Item.ItemId;
+                                Data2.ItemWeight = Item.ItemWeight;
+                                Data2.ItemQuantity = Item.ItemQuantity;
+                                Data2.ItemUnit = Item.ItemUnit;
+                                Data2.CheckinItemId = Item.CheckinItemId;
+                                if (Item.Number[0] == 'C')
+                                {
+                                    Update = DB.tblCheckinItems.Where(x => x.CheckinItemId == Item.CheckinItemId).FirstOrDefault();
+                                    Update.ItemUsedQuantity = Update.ItemUsedQuantity + Item.ItemQuantity;
+                                    Update.ItemNetQuantity = Update.ItemQuantity - Update.ItemUsedQuantity;
+                                    DB.Entry(Update);
+                                    DB.SaveChanges();
+                                }
+                                if (Item.Number[0] == 'T')
+                                {
+                                    TUpdate = DB.tblTransferItems.Where(x => x.TransferItemId == Item.CheckinItemId).FirstOrDefault();
+                                    TUpdate.ItemUsedQuantity = TUpdate.ItemUsedQuantity + Item.ItemQuantity;
+                                    TUpdate.ItemNetQuantity = TUpdate.ItemQuantity - TUpdate.ItemUsedQuantity;
+                                    DB.Entry(TUpdate);
+                                    DB.SaveChanges();
+                                }
+                                if (Item.Number[0] == 'A')
+                                {
+                                    AUpdate = DB.tblAdjustmentItems.Where(x => x.AdjustmentItemId == Item.CheckinItemId).FirstOrDefault();
+                                    AUpdate.ItemUsedQuantity = AUpdate.ItemUsedQuantity + Item.ItemQuantity;
+                                    AUpdate.ItemNetQuantity = AUpdate.ItemQuantity - AUpdate.ItemUsedQuantity;
+                                    DB.Entry(AUpdate);
+                                    DB.SaveChanges();
+                                }
+                                DB.Entry(Update);
+                                DB.SaveChanges();
+                                DB.tblCheckoutItems.Add(Data2);
+                            }
+                        }
+                        
+                        
                     }
                     else
                     {
@@ -246,17 +360,41 @@ namespace Inventories.Controllers
         {
             tblCheckout Data = new tblCheckout();
             tblCheckinItem UpdateCheckinQty = new tblCheckinItem();
+            tblTransferItem TUpdateCheckinQty = new tblTransferItem();
+            tblAdjustmentItem AUpdateCheckinQty = new tblAdjustmentItem();
             List<tblCheckoutItem> Data1 = new List<tblCheckoutItem>();
             Data = DB.tblCheckouts.Where(x => x.CheckoutId == Id).FirstOrDefault();
             Data1 = DB.tblCheckoutItems.Where(x => x.CheckoutId == Id).ToList();
             foreach (tblCheckoutItem item in Data1)
             {
                 UpdateCheckinQty = new tblCheckinItem();
-                UpdateCheckinQty = DB.tblCheckinItems.Where(x => x.CheckinItemId == item.CheckinItemId).FirstOrDefault();
-                UpdateCheckinQty.ItemUsedQuantity -= item.ItemQuantity;
-                UpdateCheckinQty.ItemNetQuantity = UpdateCheckinQty.ItemQuantity - UpdateCheckinQty.ItemUsedQuantity;
-                DB.Entry(UpdateCheckinQty);
-                DB.SaveChanges();
+                TUpdateCheckinQty = new tblTransferItem();
+                AUpdateCheckinQty = new tblAdjustmentItem();
+                if(item.VNumber[0]=='C')
+                {
+                    UpdateCheckinQty = DB.tblCheckinItems.Where(x => x.CheckinItemId == item.CheckinItemId).FirstOrDefault();
+                    UpdateCheckinQty.ItemUsedQuantity -= item.ItemQuantity;
+                    UpdateCheckinQty.ItemNetQuantity = UpdateCheckinQty.ItemQuantity - UpdateCheckinQty.ItemUsedQuantity;
+                    DB.Entry(UpdateCheckinQty);
+                    DB.SaveChanges();
+                }
+                if(item.VNumber[0]=='T')
+                {
+                    TUpdateCheckinQty = DB.tblTransferItems.Where(x => x.TransferItemId == item.CheckinItemId).FirstOrDefault();
+                    TUpdateCheckinQty.ItemUsedQuantity -= item.ItemQuantity;
+                    TUpdateCheckinQty.ItemNetQuantity = TUpdateCheckinQty.ItemQuantity - TUpdateCheckinQty.ItemUsedQuantity;
+                    DB.Entry(TUpdateCheckinQty);
+                    DB.SaveChanges();
+                }
+                if(item.VNumber[0]=='A')
+                {
+                    AUpdateCheckinQty = DB.tblAdjustmentItems.Where(x => x.AdjustmentItemId == item.CheckinItemId).FirstOrDefault();
+                    AUpdateCheckinQty.ItemUsedQuantity -= item.ItemQuantity;
+                    AUpdateCheckinQty.ItemNetQuantity = AUpdateCheckinQty.ItemQuantity - AUpdateCheckinQty.ItemUsedQuantity;
+                    DB.Entry(AUpdateCheckinQty);
+                    DB.SaveChanges();
+                }
+                
             }
             DB.tblCheckoutItems.RemoveRange(Data1);
             DB.tblCheckouts.Remove(Data);
@@ -285,7 +423,7 @@ namespace Inventories.Controllers
 
         public JsonResult GetCheckinList(int ItemId,int WarehouseId=0)
         {
-            List<GetCheckinList_Result> allsearch = null;
+            List<GetCheckinList_Result1> allsearch = null;
             DB.Configuration.ProxyCreationEnabled = false;
             try
             {
@@ -301,13 +439,30 @@ namespace Inventories.Controllers
             return new JsonResult { Data = allsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        public JsonResult GetCheckinItemData(int CheckinItemId=0)
+        public JsonResult GetCheckinItemData(int CheckinItemId,string Number)
         {
-            GetCheckinItemData_Result allsearch = null;
+            GetCheckinItemData_Result3 allsearch = null;
+            GetTransferItemData_Result3 Tallsearch = null;
+            GetAdjustmentItemData_Result2 Aallsearch = null;
             DB.Configuration.ProxyCreationEnabled = false;
             try
             {
-                allsearch = DB.GetCheckinItemData(CheckinItemId).FirstOrDefault();
+                if(Number[0]=='T')
+                {
+                    Tallsearch = DB.GetTransferItemData(CheckinItemId).FirstOrDefault();
+                    return new JsonResult { Data = Tallsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+                if(Number[0] == 'C')
+                {
+                    allsearch = DB.GetCheckinItemData(CheckinItemId).FirstOrDefault();
+                    return new JsonResult { Data = allsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+                if(Number[0] == 'A')
+                {
+                    Aallsearch = DB.GetAdjustmentItemData(CheckinItemId).FirstOrDefault();
+                    return new JsonResult { Data = Aallsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                }
+                
 
             }
             catch (Exception ex)

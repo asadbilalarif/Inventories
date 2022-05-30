@@ -10,12 +10,11 @@
 namespace Inventories.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tblCheckoutItem
+    public partial class GetTransferItemData_Result
     {
-        public int CheckoutItemId { get; set; }
-        public Nullable<int> CheckoutId { get; set; }
+        public int TransferItemId { get; set; }
+        public Nullable<int> TransferId { get; set; }
         public Nullable<int> ItemId { get; set; }
         public Nullable<int> ItemWeight { get; set; }
         public Nullable<int> ItemQuantity { get; set; }
@@ -26,9 +25,8 @@ namespace Inventories.Models
         public Nullable<System.DateTime> EditDate { get; set; }
         public Nullable<bool> isActive { get; set; }
         public Nullable<int> CheckinItemId { get; set; }
-        public string VNumber { get; set; }
-    
-        public virtual tblCheckout tblCheckout { get; set; }
-        public virtual tblItem tblItem { get; set; }
+        public Nullable<int> ItemUsedQuantity { get; set; }
+        public Nullable<int> ItemNetQuantity { get; set; }
+        public string Name { get; set; }
     }
 }

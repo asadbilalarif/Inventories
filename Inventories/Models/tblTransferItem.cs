@@ -25,6 +25,10 @@ namespace Inventories.Models
         public Nullable<int> EditBy { get; set; }
         public Nullable<System.DateTime> EditDate { get; set; }
         public Nullable<bool> isActive { get; set; }
+        public Nullable<int> CheckinItemId { get; set; }
+        public Nullable<int> ItemUsedQuantity { get; set; }
+        public Nullable<int> ItemNetQuantity { get; set; }
+        public string VNumber { get; set; }
     
         public virtual tblItem tblItem { get; set; }
         public virtual tblTransfer tblTransfer { get; set; }

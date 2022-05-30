@@ -100,6 +100,8 @@ namespace Inventories.Controllers
                         Item.AdjustmentId = Data.AdjustmentId;
                         Item.CreatedBy = UserId;
                         Item.CreatedDate = DateTime.Now;
+                        Item.ItemUsedQuantity = 0;
+                        Item.ItemNetQuantity = Item.ItemQuantity;
                         DB.tblAdjustmentItems.Add(Item);
                     }
                     else

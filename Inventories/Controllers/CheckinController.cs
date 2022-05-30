@@ -239,13 +239,18 @@ namespace Inventories.Controllers
             bool Check = false;
             foreach (tblCheckinItem item in Data1)
             {
-                UpdateCheckinQty = new tblCheckoutItem();
-                UpdateCheckinQty = DB.tblCheckoutItems.Where(x => x.CheckinItemId == item.CheckinItemId).FirstOrDefault();
-                if(UpdateCheckinQty!=null)
+                //UpdateCheckinQty = new tblCheckoutItem();
+                //UpdateCheckinQty = DB.tblCheckoutItems.Where(x => x.CheckinItemId == item.CheckinItemId).FirstOrDefault();
+                if(item.ItemUsedQuantity>0)
                 {
                     Check = true;
                     break;
                 }
+                //if(UpdateCheckinQty!=null)
+                //{
+                    //Check = true;
+                    //break;
+                //}
             }
             if(Check==false)
             {
