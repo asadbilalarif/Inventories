@@ -400,7 +400,7 @@ a.bg-primary:focus,
 a.bg-primary:hover, 
 button.bg-primary:focus, 
 button.bg-primary:hover {
-    background-color: #19c1dc !important;
+    background-color: #374151 !important;
 }
 .bg-success,
 .badge-success {
@@ -490,13 +490,13 @@ button.bg-danger:hover {
 }
 .btn-primary:hover,
 .btn-primary:focus,
-.btn-primary.active,
+.btn-primary.active,	
 .btn-primary:active,
 .open > .dropdown-toggle.btn-primary {
 	background-color: #374151 ;
 	border: 1px solid #374151 ;
-	/*background-color: #19c1dc;
-	border: 1px solid #19c1dc;*/
+	/*background-color: #374151;
+	border: 1px solid #374151;*/
 }
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #fff;
@@ -511,14 +511,14 @@ button.bg-danger:hover {
 .open > .dropdown-toggle.btn-primary.focus,
 .open > .dropdown-toggle.btn-primary:focus,
 .open > .dropdown-toggle.btn-primary:hover {
-	background-color: #19c1dc;
-	border: 1px solid #19c1dc;
+	background-color: #374151;
+	border: 1px solid #374151;
 }
 .btn-primary.active:not(:disabled):not(.disabled),
 .btn-primary:active:not(:disabled):not(.disabled),
 .show > .btn-primary.dropdown-toggle {
-	background-color: #19c1dc;
-	border-color: #19c1dc;
+	background-color: #374151;
+	border-color: #374151;
 	color: #fff;
 }
 .btn-primary.active:focus:not(:disabled):not(.disabled), 
@@ -527,9 +527,9 @@ button.bg-danger:hover {
 	box-shadow: unset;
 }
 .btn-primary.disabled, .btn-primary:disabled {
-    background-color: #00d0f1;
-    border-color: #00d0f1;
-    color: #fff;
+	background-color: #374151;
+	border-color: #374151;
+	color: #fff;
 }
 .btn-secondary.active:focus:not(:disabled):not(.disabled), 
 .btn-secondary:active:focus:not(:disabled):not(.disabled), 
@@ -1717,12 +1717,12 @@ html.menu-opened body {
 	}
 .sidebar-menu > ul > li > a:hover {
 	background-color: #1d4ed8;
-	/*background-color: #19c1dc;*/
+	/*background-color: #374151;*/
     color: #fff;
 }
 .sidebar-menu > ul > li.active > a:hover {
     background-color: #1d4ed8;
-    /*background-color: #19c1dc;*/
+    /*background-color: #374151;*/
     color: #fff;
 }
 .sidebar-menu li.active a {

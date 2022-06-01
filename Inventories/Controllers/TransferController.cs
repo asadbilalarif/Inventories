@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Inventories.Controllers
 {
+    [Authorize]
     public class TransferController : Controller
     {
         InventoriesEntities DB = new InventoriesEntities();
@@ -28,23 +29,33 @@ namespace Inventories.Controllers
 
             tblTransfer Data = new tblTransfer();
             List<tblTransferItem> Data1 = new List<tblTransferItem>();
-            if (Id > 0)
+            try
             {
-                Data = DB.tblTransfers.Where(x => x.TransferId == Id).FirstOrDefault();
-                //List<tblTransferItem> Cast = ViewBag.tblTransferItems;
-                // List<int?> CatIds = Cast.Select(s => s.CategoryId).ToList();
-                //ViewBag.CategoryNames = DB.tblCategories.Where(s => CatIds.Contains(s.CategoryID)).Select(s=>s.CategoryName).ToList();
-                ViewBag.TransferNumber = Data.TransferNumber;
-                ViewBag.tblTransferItem = DB.tblTransferItems.Where(x=>x.TransferId==Id).ToList();
+                if (Id > 0)
+                {
+                    Data = DB.tblTransfers.Where(x => x.TransferId == Id).FirstOrDefault();
+                    //List<tblTransferItem> Cast = ViewBag.tblTransferItems;
+                    // List<int?> CatIds = Cast.Select(s => s.CategoryId).ToList();
+                    //ViewBag.CategoryNames = DB.tblCategories.Where(s => CatIds.Contains(s.CategoryID)).Select(s=>s.CategoryName).ToList();
+                    ViewBag.TransferNumber = Data.TransferNumber;
+                    ViewBag.tblTransferItem = DB.tblTransferItems.Where(x => x.TransferId == Id).ToList();
+                }
+                else
+                {
+                    Data.TransferId = 0;
+                    Data.FromWarehouse = 0;
+                    Data.ToWarehouse = 0;
+                    Data.TransferDate = DateTime.Now;
+                    ViewBag.tblTransferItem = null;
+                    ViewBag.TransferNumber = DB.TransfrNumber().SingleOrDefault();
+                }
+                return View(Data);
             }
-            else
+            catch (Exception ex)
             {
-                Data.TransferId = 0;
-                Data.FromWarehouse = 0;
-                Data.ToWarehouse = 0;
-                Data.TransferDate = DateTime.Now;
-                ViewBag.tblTransferItem = null;
-                ViewBag.TransferNumber = DB.TransfrNumber().SingleOrDefault();
+
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
             }
             return View(Data);
         }
@@ -57,6 +68,7 @@ namespace Inventories.Controllers
             tblTransfer Data = new tblTransfer();
             tblCheckinItem Update = new tblCheckinItem();
             tblAdjustmentItem AUpdate = new tblAdjustmentItem();
+            
             string TNumber = HeadData[0].TransferNumber;
             if (HeadData.FirstOrDefault().TransferId == 0)
             {

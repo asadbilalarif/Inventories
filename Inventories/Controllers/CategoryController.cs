@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Inventories.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         InventoriesEntities DB = new InventoriesEntities();
@@ -39,7 +40,8 @@ namespace Inventories.Controllers
         [HttpPost]
         public ActionResult CreateCategory(tblCategory Category)
         {
-
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
             tblCategory Data = new tblCategory();
             try
             {
@@ -51,9 +53,9 @@ namespace Inventories.Controllers
 
                         Data = Category;
                         Data.CreatedDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.CreatedBy = 1;
+                        Data.CreatedBy = UserId;
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.EditBy = 1;
+                        Data.EditBy = UserId;
                         Data.isActive = true;
                         DB.tblCategories.Add(Data);
                         DB.SaveChanges();
@@ -73,7 +75,7 @@ namespace Inventories.Controllers
                         Data.Name = Category.Name;
                         Data.Code = Category.Code;
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.EditBy = 1;
+                        Data.EditBy = UserId;
                         DB.Entry(Data);
                         DB.SaveChanges();
                         return RedirectToAction("Categories", new { Update = "Category has been Update successfully." });

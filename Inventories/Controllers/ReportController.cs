@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Inventories.Controllers
 {
+    [Authorize]
     public class ReportController : Controller
     {
         InventoriesEntities DB = new InventoriesEntities();
@@ -42,60 +43,69 @@ namespace Inventories.Controllers
         public ActionResult CheckinReport(DateTime StartDate, DateTime EndDate, DateTime StartCreatedDate, DateTime EndCreatedDate, string Reference, int Contact=0, int Warehouse=0, int User=0, int Category=0, bool draft = false)
         {
             List<CheckinReportData_Result2> CheckinList = new List<CheckinReportData_Result2>();
-            ViewBag.Contacts = DB.tblContacts.ToList();
-            ViewBag.Warehouses = DB.tblWarehouses.Where(x=>x.isActive==true).ToList();
-            ViewBag.Users = DB.tblUsers.ToList();
-            ViewBag.Categories = DB.tblCategories.ToList();
-
-            ViewBag.StartDate = StartDate.ToString("yyyy-MM-dd");
-            ViewBag.EndDate = EndDate.ToString("yyyy-MM-dd");
-            ViewBag.StartCreatedDate = StartCreatedDate.ToString("yyyy-MM-dd");
-            ViewBag.EndCreatedDate = EndCreatedDate.ToString("yyyy-MM-dd");
-            ViewBag.Reference = Reference;
-            ViewBag.Contact = Contact;
-            ViewBag.Warehouse = Warehouse;
-            ViewBag.User = User;
-            ViewBag.Category = Category;
-            ViewBag.draft = draft;
-
-            string References = "";
-            string Contacts = "";
-            string Warehouses = "";
-            string Users = "";
-            string Categories = "";
-
-
-            string Query = "";
-            if(Reference!="")
+            try
             {
-                References = " and CI.Reference ='" + Reference + "' ";
-            }
-            if(Contact!=0)
-            {
-                Contacts = " and CI.Contact =" + Contact + " ";
-            }
-            if(Warehouse!=0)
-            {
-                Warehouses= " and CI.Warehouse =" + Warehouse + " ";
-            }
-            if(User != 0)
-            {
-                Users= " and CI.CreatedBy =" + User + " ";
-            }
-            if(User != 0)
-            {
-                Users= " and CI.CreatedBy =" + User + " ";
-            }
-            if(Category != 0)
-            {
-                Categories = " and I.CategoryId =" + Category + " ";
-            }
-            Query = "where 1=1 and Cast(CI.CheckinDate as date)>=cast('" + StartDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(CI.CheckinDate as date)<=cast('" + EndDate.ToString("MM/dd/yyyy") + "' as date )" +
-                " and  Cast(CI.CreatedDate as date)>=cast('" + StartCreatedDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(CI.CreatedDate as date)<=cast('" + EndCreatedDate.ToString("MM/dd/yyyy") + "' as date ) " + References + " " +
-                " " + Contacts + " " + Warehouses + " " + Users + " " + Categories + " and CI.draft ='" + draft + "'";
+                ViewBag.Contacts = DB.tblContacts.ToList();
+                ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
+                ViewBag.Users = DB.tblUsers.ToList();
+                ViewBag.Categories = DB.tblCategories.ToList();
 
-            CheckinList = DB.CheckinReportData(Query).ToList();
+                ViewBag.StartDate = StartDate.ToString("yyyy-MM-dd");
+                ViewBag.EndDate = EndDate.ToString("yyyy-MM-dd");
+                ViewBag.StartCreatedDate = StartCreatedDate.ToString("yyyy-MM-dd");
+                ViewBag.EndCreatedDate = EndCreatedDate.ToString("yyyy-MM-dd");
+                ViewBag.Reference = Reference;
+                ViewBag.Contact = Contact;
+                ViewBag.Warehouse = Warehouse;
+                ViewBag.User = User;
+                ViewBag.Category = Category;
+                ViewBag.draft = draft;
 
+                string References = "";
+                string Contacts = "";
+                string Warehouses = "";
+                string Users = "";
+                string Categories = "";
+
+
+                string Query = "";
+                if (Reference != "")
+                {
+                    References = " and CI.Reference ='" + Reference + "' ";
+                }
+                if (Contact != 0)
+                {
+                    Contacts = " and CI.Contact =" + Contact + " ";
+                }
+                if (Warehouse != 0)
+                {
+                    Warehouses = " and CI.Warehouse =" + Warehouse + " ";
+                }
+                if (User != 0)
+                {
+                    Users = " and CI.CreatedBy =" + User + " ";
+                }
+                if (User != 0)
+                {
+                    Users = " and CI.CreatedBy =" + User + " ";
+                }
+                if (Category != 0)
+                {
+                    Categories = " and I.CategoryId =" + Category + " ";
+                }
+                Query = "where 1=1 and Cast(CI.CheckinDate as date)>=cast('" + StartDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(CI.CheckinDate as date)<=cast('" + EndDate.ToString("MM/dd/yyyy") + "' as date )" +
+                    " and  Cast(CI.CreatedDate as date)>=cast('" + StartCreatedDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(CI.CreatedDate as date)<=cast('" + EndCreatedDate.ToString("MM/dd/yyyy") + "' as date ) " + References + " " +
+                    " " + Contacts + " " + Warehouses + " " + Users + " " + Categories + " and CI.draft ='" + draft + "'";
+
+                CheckinList = DB.CheckinReportData(Query).ToList();
+
+                return View(CheckinList);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
+            }
             return View(CheckinList);
         }
 
@@ -131,60 +141,69 @@ namespace Inventories.Controllers
         public ActionResult CheckoutReport(DateTime StartDate, DateTime EndDate, DateTime StartCreatedDate, DateTime EndCreatedDate, string Reference, int Contact = 0, int Warehouse = 0, int User = 0, int Category = 0, bool draft = false)
         {
             List<CheckoutReportData_Result> CheckoutList = new List<CheckoutReportData_Result>();
-            ViewBag.Contacts = DB.tblContacts.ToList();
-            ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
-            ViewBag.Users = DB.tblUsers.ToList();
-            ViewBag.Categories = DB.tblCategories.ToList();
-
-            ViewBag.StartDate = StartDate.ToString("yyyy-MM-dd");
-            ViewBag.EndDate = EndDate.ToString("yyyy-MM-dd");
-            ViewBag.StartCreatedDate = StartCreatedDate.ToString("yyyy-MM-dd");
-            ViewBag.EndCreatedDate = EndCreatedDate.ToString("yyyy-MM-dd");
-            ViewBag.Reference = Reference;
-            ViewBag.Contact = Contact;
-            ViewBag.Warehouse = Warehouse;
-            ViewBag.User = User;
-            ViewBag.Category = Category;
-            ViewBag.draft = draft;
-
-            string References = "";
-            string Contacts = "";
-            string Warehouses = "";
-            string Users = "";
-            string Categories = "";
-
-
-            string Query = "";
-            if (Reference != "")
+            try
             {
-                References = " and CO.Reference ='" + Reference + "' ";
-            }
-            if (Contact != 0)
-            {
-                Contacts = " and CO.Contact =" + Contact + " ";
-            }
-            if (Warehouse != 0)
-            {
-                Warehouses = " and CO.Warehouse =" + Warehouse + " ";
-            }
-            if (User != 0)
-            {
-                Users = " and CO.CreatedBy =" + User + " ";
-            }
-            if (User != 0)
-            {
-                Users = " and CO.CreatedBy =" + User + " ";
-            }
-            if (Category != 0)
-            {
-                Categories = " and I.CategoryId =" + Category + " ";
-            }
-            Query = "where 1=1 and Cast(CO.CheckoutDate as date)>=cast('" + StartDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(CO.CheckoutDate as date)<=cast('" + EndDate.ToString("MM/dd/yyyy") + "' as date )" +
-                " and  Cast(CO.CreatedDate as date)>=cast('" + StartCreatedDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(CO.CreatedDate as date)<=cast('" + EndCreatedDate.ToString("MM/dd/yyyy") + "' as date ) " + References + " " +
-                " " + Contacts + " " + Warehouses + " " + Users + " " + Categories + " and CO.draft ='" + draft + "'";
+                ViewBag.Contacts = DB.tblContacts.ToList();
+                ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
+                ViewBag.Users = DB.tblUsers.ToList();
+                ViewBag.Categories = DB.tblCategories.ToList();
 
-            CheckoutList = DB.CheckoutReportData(Query).ToList();
+                ViewBag.StartDate = StartDate.ToString("yyyy-MM-dd");
+                ViewBag.EndDate = EndDate.ToString("yyyy-MM-dd");
+                ViewBag.StartCreatedDate = StartCreatedDate.ToString("yyyy-MM-dd");
+                ViewBag.EndCreatedDate = EndCreatedDate.ToString("yyyy-MM-dd");
+                ViewBag.Reference = Reference;
+                ViewBag.Contact = Contact;
+                ViewBag.Warehouse = Warehouse;
+                ViewBag.User = User;
+                ViewBag.Category = Category;
+                ViewBag.draft = draft;
 
+                string References = "";
+                string Contacts = "";
+                string Warehouses = "";
+                string Users = "";
+                string Categories = "";
+
+
+                string Query = "";
+                if (Reference != "")
+                {
+                    References = " and CO.Reference ='" + Reference + "' ";
+                }
+                if (Contact != 0)
+                {
+                    Contacts = " and CO.Contact =" + Contact + " ";
+                }
+                if (Warehouse != 0)
+                {
+                    Warehouses = " and CO.Warehouse =" + Warehouse + " ";
+                }
+                if (User != 0)
+                {
+                    Users = " and CO.CreatedBy =" + User + " ";
+                }
+                if (User != 0)
+                {
+                    Users = " and CO.CreatedBy =" + User + " ";
+                }
+                if (Category != 0)
+                {
+                    Categories = " and I.CategoryId =" + Category + " ";
+                }
+                Query = "where 1=1 and Cast(CO.CheckoutDate as date)>=cast('" + StartDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(CO.CheckoutDate as date)<=cast('" + EndDate.ToString("MM/dd/yyyy") + "' as date )" +
+                    " and  Cast(CO.CreatedDate as date)>=cast('" + StartCreatedDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(CO.CreatedDate as date)<=cast('" + EndCreatedDate.ToString("MM/dd/yyyy") + "' as date ) " + References + " " +
+                    " " + Contacts + " " + Warehouses + " " + Users + " " + Categories + " and CO.draft ='" + draft + "'";
+
+                CheckoutList = DB.CheckoutReportData(Query).ToList();
+
+                return View(CheckoutList);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
+            }
             return View(CheckoutList);
         }
 
@@ -220,59 +239,68 @@ namespace Inventories.Controllers
         public ActionResult TransferReport(DateTime StartDate, DateTime EndDate, DateTime StartCreatedDate, DateTime EndCreatedDate, string Reference, int FromWarehouse = 0, int ToWarehouse = 0, int User = 0, int Category = 0, bool draft = false)
         {
             List<TransferReportData_Result> TransferList = new List<TransferReportData_Result>();
-            ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
-            ViewBag.Users = DB.tblUsers.ToList();
-            ViewBag.Categories = DB.tblCategories.ToList();
-
-            ViewBag.StartDate = StartDate.ToString("yyyy-MM-dd");
-            ViewBag.EndDate = EndDate.ToString("yyyy-MM-dd");
-            ViewBag.StartCreatedDate = StartCreatedDate.ToString("yyyy-MM-dd");
-            ViewBag.EndCreatedDate = EndCreatedDate.ToString("yyyy-MM-dd");
-            ViewBag.Reference = Reference;
-            ViewBag.FromWarehouse = FromWarehouse;
-            ViewBag.ToWarehouse = ToWarehouse;
-            ViewBag.User = User;
-            ViewBag.Category = Category;
-            ViewBag.draft = draft;
-
-            string References = "";
-            string FromWarehouses = "";
-            string ToWarehouses = "";
-            string Users = "";
-            string Categories = "";
-
-
-            string Query = "";
-            if (Reference != "")
+            try
             {
-                References = " and T.Reference ='" + Reference + "' ";
-            }
-            if (FromWarehouse != 0)
-            {
-                FromWarehouses = " and T.FromWarehouse =" + FromWarehouse + " ";
-            }
-            if (ToWarehouse != 0)
-            {
-                ToWarehouses = " and T.ToWarehouse =" + ToWarehouse + " ";
-            }
-            if (User != 0)
-            {
-                Users = " and T.CreatedBy =" + User + " ";
-            }
-            if (User != 0)
-            {
-                Users = " and T.CreatedBy =" + User + " ";
-            }
-            if (Category != 0)
-            {
-                Categories = " and I.CategoryId =" + Category + " ";
-            }
-            Query = "where 1=1 and Cast(T.TransferDate as date)>=cast('" + StartDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(T.TransferDate as date)<=cast('" + EndDate.ToString("MM/dd/yyyy") + "' as date )" +
-                " and  Cast(T.CreatedDate as date)>=cast('" + StartCreatedDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(T.CreatedDate as date)<=cast('" + EndCreatedDate.ToString("MM/dd/yyyy") + "' as date ) " + References + " " +
-                " " + FromWarehouses + " " + ToWarehouses + " " + Users + " " + Categories + " and T.draft ='" + draft + "'";
+                ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
+                ViewBag.Users = DB.tblUsers.ToList();
+                ViewBag.Categories = DB.tblCategories.ToList();
 
-            TransferList = DB.TransferReportData(Query).ToList();
+                ViewBag.StartDate = StartDate.ToString("yyyy-MM-dd");
+                ViewBag.EndDate = EndDate.ToString("yyyy-MM-dd");
+                ViewBag.StartCreatedDate = StartCreatedDate.ToString("yyyy-MM-dd");
+                ViewBag.EndCreatedDate = EndCreatedDate.ToString("yyyy-MM-dd");
+                ViewBag.Reference = Reference;
+                ViewBag.FromWarehouse = FromWarehouse;
+                ViewBag.ToWarehouse = ToWarehouse;
+                ViewBag.User = User;
+                ViewBag.Category = Category;
+                ViewBag.draft = draft;
 
+                string References = "";
+                string FromWarehouses = "";
+                string ToWarehouses = "";
+                string Users = "";
+                string Categories = "";
+
+
+                string Query = "";
+                if (Reference != "")
+                {
+                    References = " and T.Reference ='" + Reference + "' ";
+                }
+                if (FromWarehouse != 0)
+                {
+                    FromWarehouses = " and T.FromWarehouse =" + FromWarehouse + " ";
+                }
+                if (ToWarehouse != 0)
+                {
+                    ToWarehouses = " and T.ToWarehouse =" + ToWarehouse + " ";
+                }
+                if (User != 0)
+                {
+                    Users = " and T.CreatedBy =" + User + " ";
+                }
+                if (User != 0)
+                {
+                    Users = " and T.CreatedBy =" + User + " ";
+                }
+                if (Category != 0)
+                {
+                    Categories = " and I.CategoryId =" + Category + " ";
+                }
+                Query = "where 1=1 and Cast(T.TransferDate as date)>=cast('" + StartDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(T.TransferDate as date)<=cast('" + EndDate.ToString("MM/dd/yyyy") + "' as date )" +
+                    " and  Cast(T.CreatedDate as date)>=cast('" + StartCreatedDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(T.CreatedDate as date)<=cast('" + EndCreatedDate.ToString("MM/dd/yyyy") + "' as date ) " + References + " " +
+                    " " + FromWarehouses + " " + ToWarehouses + " " + Users + " " + Categories + " and T.draft ='" + draft + "'";
+
+                TransferList = DB.TransferReportData(Query).ToList();
+
+                return View(TransferList);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
+            }
             return View(TransferList);
         }
 
@@ -305,54 +333,63 @@ namespace Inventories.Controllers
         public ActionResult AdjustmentReport(DateTime StartDate, DateTime EndDate, DateTime StartCreatedDate, DateTime EndCreatedDate, string Reference, int Warehouse = 0, int User = 0, int Category = 0, bool draft = false)
         {
             List<AdjustmentReportData_Result> AdjustmentList = new List<AdjustmentReportData_Result>();
-            ViewBag.Contacts = DB.tblContacts.ToList();
-            ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
-            ViewBag.Users = DB.tblUsers.ToList();
-            ViewBag.Categories = DB.tblCategories.ToList();
-
-            ViewBag.StartDate = StartDate.ToString("yyyy-MM-dd");
-            ViewBag.EndDate = EndDate.ToString("yyyy-MM-dd");
-            ViewBag.StartCreatedDate = StartCreatedDate.ToString("yyyy-MM-dd");
-            ViewBag.EndCreatedDate = EndCreatedDate.ToString("yyyy-MM-dd");
-            ViewBag.Reference = Reference;
-            ViewBag.Warehouse = Warehouse;
-            ViewBag.User = User;
-            ViewBag.Category = Category;
-            ViewBag.draft = draft;
-
-            string References = "";
-            string Warehouses = "";
-            string Users = "";
-            string Categories = "";
-
-
-            string Query = "";
-            if (Reference != "")
+            try
             {
-                References = " and A.Reference ='" + Reference + "' ";
-            }
-            if (Warehouse != 0)
-            {
-                Warehouses = " and A.Warehouse =" + Warehouse + " ";
-            }
-            if (User != 0)
-            {
-                Users = " and A.CreatedBy =" + User + " ";
-            }
-            if (User != 0)
-            {
-                Users = " and A.CreatedBy =" + User + " ";
-            }
-            if (Category != 0)
-            {
-                Categories = " and I.CategoryId =" + Category + " ";
-            }
-            Query = "where 1=1 and Cast(A.AdjustmentDate as date)>=cast('" + StartDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(A.AdjustmentDate as date)<=cast('" + EndDate.ToString("MM/dd/yyyy") + "' as date )" +
-                " and  Cast(A.CreatedDate as date)>=cast('" + StartCreatedDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(A.CreatedDate as date)<=cast('" + EndCreatedDate.ToString("MM/dd/yyyy") + "' as date ) " + References + " " +
-                "  " + Warehouses + " " + Users + " " + Categories + " and A.draft ='" + draft + "'";
+                ViewBag.Contacts = DB.tblContacts.ToList();
+                ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
+                ViewBag.Users = DB.tblUsers.ToList();
+                ViewBag.Categories = DB.tblCategories.ToList();
 
-            AdjustmentList = DB.AdjustmentReportData(Query).ToList();
+                ViewBag.StartDate = StartDate.ToString("yyyy-MM-dd");
+                ViewBag.EndDate = EndDate.ToString("yyyy-MM-dd");
+                ViewBag.StartCreatedDate = StartCreatedDate.ToString("yyyy-MM-dd");
+                ViewBag.EndCreatedDate = EndCreatedDate.ToString("yyyy-MM-dd");
+                ViewBag.Reference = Reference;
+                ViewBag.Warehouse = Warehouse;
+                ViewBag.User = User;
+                ViewBag.Category = Category;
+                ViewBag.draft = draft;
 
+                string References = "";
+                string Warehouses = "";
+                string Users = "";
+                string Categories = "";
+
+
+                string Query = "";
+                if (Reference != "")
+                {
+                    References = " and A.Reference ='" + Reference + "' ";
+                }
+                if (Warehouse != 0)
+                {
+                    Warehouses = " and A.Warehouse =" + Warehouse + " ";
+                }
+                if (User != 0)
+                {
+                    Users = " and A.CreatedBy =" + User + " ";
+                }
+                if (User != 0)
+                {
+                    Users = " and A.CreatedBy =" + User + " ";
+                }
+                if (Category != 0)
+                {
+                    Categories = " and I.CategoryId =" + Category + " ";
+                }
+                Query = "where 1=1 and Cast(A.AdjustmentDate as date)>=cast('" + StartDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(A.AdjustmentDate as date)<=cast('" + EndDate.ToString("MM/dd/yyyy") + "' as date )" +
+                    " and  Cast(A.CreatedDate as date)>=cast('" + StartCreatedDate.ToString("MM/dd/yyyy") + "' as date ) and Cast(A.CreatedDate as date)<=cast('" + EndCreatedDate.ToString("MM/dd/yyyy") + "' as date ) " + References + " " +
+                    "  " + Warehouses + " " + Users + " " + Categories + " and A.draft ='" + draft + "'";
+
+                AdjustmentList = DB.AdjustmentReportData(Query).ToList();
+
+                return View(AdjustmentList);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
+            }
             return View(AdjustmentList);
         }
 
@@ -385,72 +422,81 @@ namespace Inventories.Controllers
         public ActionResult ItemStockLedgerReport(int Warehouse = 0, int Item = 0, int Category = 0)
         {
             List<ItemStockLedgerReportData_Result> ItemStockLedger = new List<ItemStockLedgerReportData_Result>();
-            ViewBag.Contacts = DB.tblContacts.ToList();
-            ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
-            ViewBag.Items = DB.tblItems.ToList();
-            ViewBag.Categories = DB.tblCategories.ToList();
-
-            
-            ViewBag.Warehouse = Warehouse;
-            ViewBag.Item = Item;
-            ViewBag.Category = Category;
-
-            string Warehouses = "";
-            string Items = "";
-            string Categories = "";
+            try
+            {
+                ViewBag.Contacts = DB.tblContacts.ToList();
+                ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
+                ViewBag.Items = DB.tblItems.ToList();
+                ViewBag.Categories = DB.tblCategories.ToList();
 
 
-            string Query = "";
-            string TQuery = "";
-            string AQuery = "";
-            if (Warehouse != 0)
-            {
-                Warehouses = " and CI.Warehouse =" + Warehouse + " ";
-            }
-            if (Item != 0)
-            {
-                Items = " and CII.ItemId =" + Item + " ";
-            }
-            if (Category != 0)
-            {
-                Categories = " and I.CategoryId =" + Category + " ";
-            }
-            Query = "where 1=1   "  + Warehouses + " " + Items + " " + Categories +" ";
-             Warehouses = "";
-             Items = "";
-             Categories = "";
-            if (Warehouse != 0)
-            {
-                Warehouses = " and T.ToWarehouse =" + Warehouse + " ";
-            }
-            if (Item != 0)
-            {
-                Items = " and TI.ItemId =" + Item + " ";
-            }
-            if (Category != 0)
-            {
-                Categories = " and I.CategoryId =" + Category + " ";
-            }
-            TQuery = "where 1=1   "  + Warehouses + " " + Items + " " + Categories +" ";
-             Warehouses = "";
-             Items = "";
-             Categories = "";
-            if (Warehouse != 0)
-            {
-                Warehouses = " and A.Warehouse =" + Warehouse + " ";
-            }
-            if (Item != 0)
-            {
-                Items = " and AI.ItemId =" + Item + " ";
-            }
-            if (Category != 0)
-            {
-                Categories = " and I.CategoryId =" + Category + " ";
-            }
-            AQuery = "where 1=1   "  + Warehouses + " " + Items + " " + Categories +"' ";
+                ViewBag.Warehouse = Warehouse;
+                ViewBag.Item = Item;
+                ViewBag.Category = Category;
 
-            ItemStockLedger = DB.ItemStockLedgerReportData(Query,TQuery,AQuery).ToList();
+                string Warehouses = "";
+                string Items = "";
+                string Categories = "";
 
+
+                string Query = "";
+                string TQuery = "";
+                string AQuery = "";
+                if (Warehouse != 0)
+                {
+                    Warehouses = " and CI.Warehouse =" + Warehouse + " ";
+                }
+                if (Item != 0)
+                {
+                    Items = " and CII.ItemId =" + Item + " ";
+                }
+                if (Category != 0)
+                {
+                    Categories = " and I.CategoryId =" + Category + " ";
+                }
+                Query = "where 1=1   " + Warehouses + " " + Items + " " + Categories + " ";
+                Warehouses = "";
+                Items = "";
+                Categories = "";
+                if (Warehouse != 0)
+                {
+                    Warehouses = " and T.ToWarehouse =" + Warehouse + " ";
+                }
+                if (Item != 0)
+                {
+                    Items = " and TI.ItemId =" + Item + " ";
+                }
+                if (Category != 0)
+                {
+                    Categories = " and I.CategoryId =" + Category + " ";
+                }
+                TQuery = "where 1=1   " + Warehouses + " " + Items + " " + Categories + " ";
+                Warehouses = "";
+                Items = "";
+                Categories = "";
+                if (Warehouse != 0)
+                {
+                    Warehouses = " and A.Warehouse =" + Warehouse + " ";
+                }
+                if (Item != 0)
+                {
+                    Items = " and AI.ItemId =" + Item + " ";
+                }
+                if (Category != 0)
+                {
+                    Categories = " and I.CategoryId =" + Category + " ";
+                }
+                AQuery = "where 1=1   " + Warehouses + " " + Items + " " + Categories + "' ";
+
+                ItemStockLedger = DB.ItemStockLedgerReportData(Query, TQuery, AQuery).ToList();
+
+                return View(ItemStockLedger);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
+            }
             return View(ItemStockLedger);
         }
 

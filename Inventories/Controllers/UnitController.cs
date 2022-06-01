@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Inventories.Controllers
 {
+    [Authorize]
     public class UnitController : Controller
     {
         InventoriesEntities DB = new InventoriesEntities();
@@ -23,23 +24,34 @@ namespace Inventories.Controllers
 
         public ActionResult CreateUnit(int? id)
         {
-            tblUnit Unit = null;
-            if (id != null && id != 0)
+                tblUnit Unit = null;
+            try
             {
-                Unit = DB.tblUnits.Where(x => x.UnitId == id).FirstOrDefault();
-                return View(Unit);
+                if (id != null && id != 0)
+                {
+                    Unit = DB.tblUnits.Where(x => x.UnitId == id).FirstOrDefault();
+                    return View(Unit);
+                }
+                else
+                {
+                    return View(Unit);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return View(Unit);
+
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
             }
+            return View(Unit);
         }
 
 
         [HttpPost]
         public ActionResult CreateUnit(tblUnit Unit)
         {
-
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
             tblUnit Data = new tblUnit();
             try
             {
@@ -51,9 +63,9 @@ namespace Inventories.Controllers
 
                         Data = Unit;
                         Data.CreatedDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.CreatedBy = 1;
+                        Data.CreatedBy = UserId;
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.EditBy = 1;
+                        Data.EditBy = UserId;
                         Data.isActive = true;
                         DB.tblUnits.Add(Data);
                         DB.SaveChanges();
@@ -77,7 +89,7 @@ namespace Inventories.Controllers
                         Data.OperationValue = Unit.OperationValue;
                         Data.Formula = Unit.Formula;
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.EditBy = 1;
+                        Data.EditBy = UserId;
                         DB.Entry(Data);
                         DB.SaveChanges();
                         return RedirectToAction("Units", new { Update = "Unit has been Update successfully." });

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Inventories.Controllers
 {
+    [Authorize]
     public class ItemController : Controller
     {
         InventoriesEntities DB = new InventoriesEntities();
@@ -40,7 +41,8 @@ namespace Inventories.Controllers
         [HttpPost]
         public ActionResult CreateItem(tblItem Item, HttpPostedFileBase CLogo)
         {
-
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
             tblItem Data = new tblItem();
             try
             {
@@ -52,9 +54,9 @@ namespace Inventories.Controllers
 
                         Data = Item;
                         Data.CreatedDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.CreatedBy = 1;
+                        Data.CreatedBy = UserId;
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.EditBy = 1;
+                        Data.EditBy = UserId;
                         Data.isActive = true;
                         DB.tblItems.Add(Data);
                         DB.SaveChanges();
@@ -84,7 +86,7 @@ namespace Inventories.Controllers
                         Data.Alertonlowstock = Item.Alertonlowstock;
                         Data.isActive = Item.isActive;
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.EditBy = 1;
+                        Data.EditBy = UserId;
                         DB.Entry(Data);
                         DB.SaveChanges();
                         return RedirectToAction("Items", new { Update = "Item has been Update successfully." });

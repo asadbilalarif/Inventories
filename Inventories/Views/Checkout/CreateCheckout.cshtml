@@ -276,6 +276,7 @@
 
         </div>
 
+
 <script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
@@ -596,6 +597,7 @@
 
     $("body").on('change', '#SetCheckinList', function () {
         //alert($(this).val());
+        var This = $(this);
         var SetCheckinList = document.getElementById("SetCheckinListError");
         SetCheckinList.textContent = "";
         SetCheckinList.style.color = "red";
@@ -607,8 +609,10 @@
 
         $("#ItemTable TBODY TR").each(function () {
             var row = $(this);
-
-            if (check == row.find("input").eq(4).val()) {
+            var DNumber = This.find(":selected").text();
+            var RNumber = row.find("input").eq(6).val();
+            const DArray = DNumber.split(" ");
+            if (check == row.find("input").eq(4).val() && DArray[0] == RNumber) {
                 Dup = 1;
                 var che = row.find("input").eq(5).is(":checked");
                 if (che && Already == 0) {
@@ -650,7 +654,7 @@
             });
         }
         else {
-            SetCheckinList.textContent = "*Checkin Batch Already added!!! ";
+            SetCheckinList.textContent = "*Batch Already added!!! ";
         }
         
 

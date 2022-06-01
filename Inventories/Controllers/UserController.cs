@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Inventories.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         InventoriesEntities DB = new InventoriesEntities();
@@ -25,24 +26,36 @@ namespace Inventories.Controllers
         public ActionResult CreateUser(int? id)
         {
             tblUser User = null;
-            ViewBag.Roles = DB.tblRoles.Where(x => x.isActive == true).ToList();
-            ViewBag.Warehouse = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
-            if (id != null && id != 0)
+            try
             {
-                User = DB.tblUsers.Where(x => x.UserId == id).FirstOrDefault();
-                return View(User);
+                ViewBag.Roles = DB.tblRoles.Where(x => x.isActive == true).ToList();
+                ViewBag.Warehouse = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
+                if (id != null && id != 0)
+                {
+                    User = DB.tblUsers.Where(x => x.UserId == id).FirstOrDefault();
+                    return View(User);
+                }
+                else
+                {
+                    return View(User);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return View(User);
+
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
             }
+
+            return View(User);
         }
 
 
         [HttpPost]
         public ActionResult CreateUser(tblUser User)
         {
-
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
             tblUser Data = new tblUser();
             try
             {
@@ -57,9 +70,9 @@ namespace Inventories.Controllers
                         EncDataBtye = System.Text.Encoding.UTF8.GetBytes(User.Password);
                         Data.Password = Convert.ToBase64String(EncDataBtye);
                         Data.CreatedDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.CreatedBy = 1;
+                        Data.CreatedBy = UserId;
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.EditBy = 1;
+                        Data.EditBy = UserId;
                         Data.isActive = true;
                         DB.tblUsers.Add(Data);
                         DB.SaveChanges();
@@ -90,7 +103,7 @@ namespace Inventories.Controllers
                             Data.Password = Convert.ToBase64String(EncDataBtye);
                         }
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.EditBy= 1;
+                        Data.EditBy= UserId;
                         DB.Entry(Data);
                         DB.SaveChanges();
                         return RedirectToAction("Users", new { Update = "User has been Update successfully." });

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Inventories.Controllers
 {
+    [Authorize]
     public class AdjustmentController : Controller
     {
         // GET: Adjustment

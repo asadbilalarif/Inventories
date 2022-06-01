@@ -515,39 +515,6 @@
         document.getElementById("ItemTable").deleteRow(oButton.parentNode.parentNode.parentNode.rowIndex);
     }
 
-
-
-
-    @*var atComplete = $("#SearchItem").autocomplete({
-        source: function (request, response) {
-            $.ajax({
-                url: '@Url.Action("GetSearchValue", "Transfer")',
-                dataType: "json",
-                data: { search: $("#SearchItem").val() },
-                success: function (data) {
-                    response($.map(data, function (item) {
-                        //alert(item.ItemId);
-                        return { label: item.Name, value: item.Name, id: item.ItemId };
-                    }));
-                },
-                error: function (xhr, status, error) {
-                    alert("Error");
-                }
-            });
-        },
-        select: function (event, ui) {
-            $("#SearchItem").val("");
-            $("#DescriptionInput").val(ui.item.value);
-            $("#DescriptionInputId").val(ui.item.id);
-            $("#WeightInput").val(1);
-            $("#QtyInput").val(1);
-            AddRow();
-            return false;
-        }
-    });*@
-
-
-
     var atComplete = $("#SearchItem").autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -599,8 +566,38 @@
         }
     });
 
+    $("body").on('change', '#FromWarehouse', function () {
+        var FromWarehouseError = document.getElementById("FromWarehouseError");
+        FromWarehouseError.textContent = "";
+        FromWarehouseError.style.color = "red";
+        var FromVal = $(this).find(":selected").val();
+        var ToVal = $("#ToWarehouse").find(":selected").val();
+        if (FromVal == ToVal) {
+            $(this).val("").change();;
+            FromWarehouseError.textContent = "*From Warehouse and To Warehouse value must not be the same!!! ";
+        }
+
+
+    });
+
+    $("body").on('change', '#ToWarehouse', function () {
+        var ToWarehouseError = document.getElementById("ToWarehouseError");
+        ToWarehouseError.textContent = "";
+        ToWarehouseError.style.color = "red";
+        var ToVal = $(this).find(":selected").val();
+        var FromVal = $("#FromWarehouse").find(":selected").val();
+        if (FromVal == ToVal) {
+            $(this).val("").change();;
+            ToWarehouseError.textContent = "*From Warehouse and To Warehouse value must not be the same!!! ";
+        }
+
+
+    });
+
+
     $("body").on('change', '#SetCheckinList', function () {
         //alert($(this).val());
+        var This = $(this);
         var SetCheckinList = document.getElementById("SetCheckinListError");
         SetCheckinList.textContent = "";
         SetCheckinList.style.color = "red";
@@ -612,7 +609,10 @@
 
         $("#ItemTable TBODY TR").each(function () {
             var row = $(this);
-            if (check == row.find("input").eq(4).val()) {
+            var DNumber = This.find(":selected").text();
+            var RNumber = row.find("input").eq(6).val();
+            const DArray = DNumber.split(" ");
+            if (check == row.find("input").eq(4).val() && DArray[0] == RNumber) {
                 Dup = 1;
                 var che = row.find("input").eq(5).is(":checked");
                 if (che && Already == 0) {
@@ -653,7 +653,7 @@
             });
         }
         else {
-            SetCheckinList.textContent = "*Checkin Batch Already added!!! ";
+            SetCheckinList.textContent = "*Batch Already added!!! ";
         }
 
 

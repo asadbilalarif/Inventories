@@ -20,7 +20,8 @@
 
     <style>
         .main-nav > li.active > a {
-            color: #009efb;
+            color: #111827;
+            /*color: #009efb;*/
         }
 
         a {
@@ -28,10 +29,9 @@
         }
 
         .modal-header {
-            background-color: #009efb;
-            color: white;
+            background-color: #111827 !important;
+            color: white !important;
         }
-
 
         .table-striped > tbody > tr:nth-of-type(2n + 1) {
             background-color: rgba(0,0,0,.05) !important;
@@ -45,102 +45,103 @@
 
 @*<section class="section">*@
 <div class="content container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="breadcrumb-bar">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 col-6">
+                                    <h5 class="breadcrumb-title" style="color: #333333;">ROLES & PERMISSIONS</h5>
+                                </div>
 
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="breadcrumb-bar">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <div class="col-md-6 col-6">
-                            <h5 class="breadcrumb-title">ROLES & PERMISSIONS</h5>
+                            </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
-        </div>
-    </div><div style="display:none;" class="alert alert-info alert-dismissible fade show" id="UpdateAlert" role="alert">
-        <strong>Success!</strong> @ViewBag.Update
-    </div><br />
+            </div><div style="display:none;" class="alert alert-info alert-dismissible fade show" id="UpdateAlert" role="alert">
+                <strong>Success!</strong> @ViewBag.Update
+            </div><br />
 
-    @*<div class="row">
+            @*<div class="row">
             <div class="col-sm-8">
                 <h4 class="page-title">Roles & Permissions</h4>
             </div>
         </div>*@
-    <div class="row">
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
-            <a href="add-role.html" class="btn btn-primary btn-block" data-toggle="modal" data-target="#RoleModal" id="CreateRoleB"><i class="fa fa-plus" style="color:white;"> Add Roles</i></a>
-            <div class="roles-menu">
-                <ul>
-                    @foreach (Inventories.Models.tblRole Role in Model)
-                    {
-                        if (Role.RoleId == @ViewBag.roleid)
-                        {
-                            <li class="active">
-                                <input type="text" style="display:none;" name="TblRoleID" value=@Role.RoleId>
-                                @if (Role.isActive == true)
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
+                    <a href="add-role.html" class="btn btn-primary btn-block" data-toggle="modal" data-target="#RoleModal" id="CreateRoleB"><i class="fa fa-plus" style="color:white;"> Add Roles</i></a>
+                    <div class="roles-menu">
+                        <ul>
+                            @foreach (Inventories.Models.tblRole Role in Model)
+                            {
+                                if (Role.RoleId == @ViewBag.roleid)
                                 {
-                                    <input type="checkbox" name="check" value="1" style="display:none;" id="TblRoleStatus" checked>
-                                }
-                                else
-                                {
-                                    <input type="checkbox" name="check" value="0" style="display:none;" id="TblRoleStatus">
-                                }
+                                    <li class="active">
+                                        <input type="text" style="display:none;" name="TblRoleID" value=@Role.RoleId>
+                                        @if (Role.isActive == true)
+                                        {
+                                            <input type="checkbox" name="check" value="1" style="display:none;" id="TblRoleStatus" checked>
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="check" value="0" style="display:none;" id="TblRoleStatus">
+                                        }
 
-                                <a href="@Url.Action("RolesPermission","User",new {id=@Role.RoleId })" id="TblRole">@Role.Role</a>
-                                <span class="role-action">
-                                    <a href="edit-role.html" id="EditRole" data-toggle="modal" data-target="#RoleModal">
-                                        <span class="action-circle large">
-                                            <i class="material-icons">edit</i>
-                                        </span>
-                                    </a>
-                                    @*<a href="#" data-toggle="modal" data-target="#delete_role" id="DeleteRole">
+                                        <a href="@Url.Action("RolesPermission","User",new {id=@Role.RoleId })" id="TblRole">@Role.Role</a>
+                                        <span class="role-action">
+                                            <a href="edit-role.html" id="EditRole" data-toggle="modal" data-target="#RoleModal">
+                                                <span class="action-circle large">
+                                                    <i class="material-icons">edit</i>
+                                                </span>
+                                            </a>
+                                            @*<a href="#" data-toggle="modal" data-target="#delete_role" id="DeleteRole">
                                         <span class="action-circle large delete-btn">
                                             <i class="material-icons">delete</i>
                                         </span>
                                         </a>*@
-                                </span>
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-                                <input type="text" style="display:none;" name="TblRoleID" value=@Role.RoleId>
-                                @if (Role.isActive == true)
-                                {
-                                    <input type="checkbox" name="check" value="1" style="display:none;" id="TblRoleStatus" checked>
+                                        </span>
+                                    </li>
                                 }
                                 else
                                 {
-                                    <input type="checkbox" name="check" value="0" style="display:none;" id="TblRoleStatus">
-                                }
+                                    <li>
+                                        <input type="text" style="display:none;" name="TblRoleID" value=@Role.RoleId>
+                                        @if (Role.isActive == true)
+                                        {
+                                            <input type="checkbox" name="check" value="1" style="display:none;" id="TblRoleStatus" checked>
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="check" value="0" style="display:none;" id="TblRoleStatus">
+                                        }
 
-                                <a href="@Url.Action("RolesPermission","User",new {id=@Role.RoleId })" id="TblRole">@Role.Role</a>
-                                <span class="role-action">
-                                    <a href="edit-role.html" id="EditRole" data-toggle="modal" data-target="#RoleModal">
-                                        <span class="action-circle large">
-                                            <i class="material-icons">edit</i>
-                                        </span>
-                                    </a>
-                                    @*<a href="#" data-toggle="modal" data-target="#delete_role" id="DeleteRole" >
+                                        <a href="@Url.Action("RolesPermission","User",new {id=@Role.RoleId })" id="TblRole">@Role.Role</a>
+                                        <span class="role-action">
+                                            <a href="edit-role.html" id="EditRole" data-toggle="modal" data-target="#RoleModal">
+                                                <span class="action-circle large">
+                                                    <i class="material-icons">edit</i>
+                                                </span>
+                                            </a>
+                                            @*<a href="#" data-toggle="modal" data-target="#delete_role" id="DeleteRole" >
                                             <span class="action-circle large delete-btn">
                                                 <i class="material-icons">delete</i>
                                             </span>
                                         </a>*@
-                                </span>
-                            </li>
-                        }
+                                        </span>
+                                    </li>
+                                }
 
-                    }
-                </ul>
-            </div>
-        </div>
-        <div class="col-sm-8 col-md-8 col-lg-8 col-xl-9">
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-8 col-lg-8 col-xl-9">
 
-            @*<h6 class="card-title m-b-20">Module Access</h6>*@
+                    @*<h6 class="card-title m-b-20">Module Access</h6>*@
 
-            @*   <input type="text" id="MARoleID" style="display:none;">
+                    @*   <input type="text" id="MARoleID" style="display:none;">
                 <input type="text" id="MARole" readonly=""><br /><br />
                 <div class="m-b-30">
                     <ul class="list-group">
@@ -185,115 +186,118 @@
                         </li>
                     </ul>
                 </div>*@
-            @*@using (Html.BeginForm("CreateAccessLevel", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @*@using (Html.BeginForm("CreateAccessLevel", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {@Html.AntiForgeryToken()*@
-            @if (@ViewBag.SelectedRole != null)
-            {
-                <input type="text" id="MARoleID" name="roleid" style="display:none;" value="@ViewBag.SelectedRole.RoleId" required>
-                <input type="text" id="MARole" readonly="" style="display:none;" value="@ViewBag.SelectedRole.Role" required>
-                <h3>@ViewBag.SelectedRole.Role</h3><br />
-            }
-            else
-            {
-                <input type="text" id="MARoleID" name="roleid" style="display:none;">
-                <input type="text" id="MARole" readonly="" style="display:none;"><small id="LblError" style="display:none; color:red;">Role Must be Selected!!!</small><br /><br />
-            }
+                    @if (@ViewBag.SelectedRole != null)
+                    {
+                        <input type="text" id="MARoleID" name="roleid" style="display:none;" value="@ViewBag.SelectedRole.RoleId" required>
+                        <input type="text" id="MARole" readonly="" style="display:none;" value="@ViewBag.SelectedRole.Role" required>
+                        <h3>@ViewBag.SelectedRole.Role</h3><br />
+                    }
+                    else
+                    {
+                        <input type="text" id="MARoleID" name="roleid" style="display:none;">
+                        <input type="text" id="MARole" readonly="" style="display:none;"><small id="LblError" style="display:none; color:red;">Role Must be Selected!!!</small><br /><br />
+                    }
 
-            <div class="table-responsive">
-                <table class="table table-striped custom-table" id="MenuAccessTbl">
-                    <thead>
-                        <tr style="background-color: #1b5a90 !important;color: white !important;">
-                            <th style="display:none;">Manu ID</th>
-                            <th>Module Access & Permission</th>
-                            <th class="text-center">Active</th>
-                            <th class="text-center" >Create</th>
-                            <th class="text-center" >Edit</th>
-                            <th class="text-center" >Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (@ViewBag.SelectedMenuAccess != null)
-                        {
-                            foreach (Inventories.Models.MenuAccess Menu in @ViewBag.SelectedMenuAccess)
-                            {
-                                <tr>
-                                    <td style="display:none;"><input type="text" id="manuid" name="manuid" value="@Menu.menuid"></td>
-                                    <td>@Menu.menu.Name</td>
-                                    <td class="text-center">
-                                        @if (Menu.isactive == true)
-                                        {
-                                            <input type="checkbox" checked name="isactive">
-                                        }
-                                        else
-                                        {
-                                            <input type="checkbox" name="isactive">
-                                        }
-                                    </td>
-                                    <td class="text-center" >
-                                        @if (Menu.accesscreate == true)
-                                        {
-                                            <input type="checkbox" checked name="accesscreate">
-                                        }
-                                        else
-                                        {
+                    <div class="table-responsive">
+                        <table class="table table-striped custom-table" id="MenuAccessTbl">
+                            <thead>
+                                <tr style="background-color: #111827 !important; color: white !important;">
+                                    <th style="display:none;">Manu ID</th>
+                                    <th>Module Access & Permission</th>
+                                    <th class="text-center">Active</th>
+                                    @*<th class="text-center" >Create</th>
+                                <th class="text-center" >Edit</th>
+                                <th class="text-center" >Delete</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (@ViewBag.SelectedMenuAccess != null)
+                                {
+                                    foreach (Inventories.Models.MenuAccess Menu in @ViewBag.SelectedMenuAccess)
+                                    {
+                                        <tr>
+                                            <td style="display:none;"><input type="text" id="manuid" name="manuid" value="@Menu.menuid"></td>
+                                            <td>@Menu.menu.Name</td>
+                                            <td class="text-center">
+                                                @if (Menu.isactive == true)
+                                                {
+                                                    <input type="checkbox" checked name="isactive">
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" name="isactive">
+                                                }
+                                            </td>
+                                            @*<td class="text-center" >
+                                            @if (Menu.accesscreate == true)
+                                            {
+                                                <input type="checkbox" checked name="accesscreate">
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" name="accesscreate">
+                                            }
+                                        </td>
+                                        <td class="text-center" >
+                                            @if (Menu.accessedit == true)
+                                            {
+                                                <input type="checkbox" checked name="accessedit">
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" name="accessedit">
+                                            }
+                                        </td>
+                                        <td class="text-center" >
+                                            @if (Menu.accessdelete == true)
+                                            {
+                                                <input type="checkbox" checked name="accessdelete">
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" name="accessdelete">
+                                            }
+                                        </td>*@
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (Inventories.Models.tblMenu Menu in @ViewBag.MenuList)
+                                    {
+                                        <tr>
+                                            <td style="display:none;"><input type="text" id="manuid" name="manuid" value="@Menu.MenuId"></td>
+                                            <td>@Menu.Name</td>
+                                            <td class="text-center">
+                                                <input type="checkbox" name="isactive">
+                                            </td>
+                                            @*<td class="text-center" >
                                             <input type="checkbox" name="accesscreate">
-                                        }
-                                    </td>
-                                    <td class="text-center" >
-                                        @if (Menu.accessedit == true)
-                                        {
-                                            <input type="checkbox" checked name="accessedit">
-                                        }
-                                        else
-                                        {
+                                        </td>
+                                        <td class="text-center" >
                                             <input type="checkbox" name="accessedit">
-                                        }
-                                    </td>
-                                    <td class="text-center" >
-                                        @if (Menu.accessdelete == true)
-                                        {
-                                            <input type="checkbox" checked name="accessdelete">
-                                        }
-                                        else
-                                        {
+                                        </td>
+                                        <td class="text-center" >
                                             <input type="checkbox" name="accessdelete">
-                                        }
-                                    </td>
-                                </tr>
-                            }
-                        }
-                        else
-                        {
-                            foreach (Inventories.Models.tblMenu Menu in @ViewBag.MenuList)
-                            {
-                                <tr>
-                                    <td style="display:none;"><input type="text" id="manuid" name="manuid" value="@Menu.MenuId"></td>
-                                    <td>@Menu.Name</td>
-                                    <td class="text-center">
-                                        <input type="checkbox" name="isactive">
-                                    </td>
-                                    <td class="text-center" >
-                                        <input type="checkbox" name="accesscreate">
-                                    </td>
-                                    <td class="text-center" >
-                                        <input type="checkbox" name="accessedit">
-                                    </td>
-                                    <td class="text-center" >
-                                        <input type="checkbox" name="accessdelete">
-                                    </td>
-                                </tr>
-                            }
-                        }
+                                        </td>*@
+                                        </tr>
+                                    }
+                                }
 
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
 
-            </div><br />
-            <div id="loading" style="display:none;margin: 0 auto; text-decoration-color:cornflowerblue;"><div class="spinner-border text-success" id="display_loading" style="margin: 0 auto;"></div><div class="spinner-border text-success" id="display_loading" style="display:none;margin: 0 auto;"></div> Loading...</div>
-            <button class="btn btn-primary" type="submit" id="btnSave">Save Changes</button>
-            @*}*@
+                    </div><br />
+                    <div id="loading" style="display:none;margin: 0 auto; text-decoration-color:cornflowerblue;"><div class="spinner-border text-success" id="display_loading" style="margin: 0 auto;"></div><div class="spinner-border text-success" id="display_loading" style="display:none;margin: 0 auto;"></div> Loading...</div>
+                    <button class="btn btn-primary" type="submit" id="btnSave">Save Changes</button>
+                    @*}*@
+                </div>
+            </div>
         </div>
     </div>
+    
 </div>
 
 @*</section>*@

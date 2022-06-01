@@ -113,6 +113,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label></label>
+                                    <span id="SearchItemError"></span>
                                     <input class="form-control" name="SearchItem" id="SearchItem" placeholder="Scan barcode or search items" type="text" value="">
                                 </div>
                             </div>
@@ -439,12 +440,40 @@
             });
         },
         select: function (event, ui) {
+
+            var SearchItem = document.getElementById("SearchItemError");
+            SearchItem.textContent = "";
+            SearchItem.style.color = "red";
             $("#SearchItem").val("");
             $("#DescriptionInput").val(ui.item.value);
             $("#DescriptionInputId").val(ui.item.id);
             $("#WeightInput").val(1);
             $("#QtyInput").val(1);
-            AddRow();
+            var Dup = 0;
+            var Skip = 0;
+
+
+            $("#ItemTable TBODY TR").each(function () {
+                var row = $(this);
+                
+                if (Skip != 0) {
+                    if (ui.item.id == row.find("input").eq(0).val()) {
+                        Dup = 1;
+                    }
+                }
+                else {
+                    Skip = 1;
+                }
+               
+            }); 
+            if (Dup == 0) {
+                AddRow();
+            }
+            else {
+                SearchItem.textContent = "*Item Already added!!! ";
+            }
+
+            
             return false;
         }
     });

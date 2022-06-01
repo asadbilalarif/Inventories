@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Inventories.Controllers
 {
+    [Authorize]
     public class WarehouseController : Controller
     {
         InventoriesEntities DB = new InventoriesEntities();
@@ -25,22 +26,35 @@ namespace Inventories.Controllers
         public ActionResult CreateWarehouse(int? id)
         {
             tblWarehouse Warehouse = null;
-            if (id != null && id != 0)
+
+            try
             {
-                Warehouse = DB.tblWarehouses.Where(x => x.WarehouseId == id).FirstOrDefault();
-                return View(Warehouse);
+                if (id != null && id != 0)
+                {
+                    Warehouse = DB.tblWarehouses.Where(x => x.WarehouseId == id).FirstOrDefault();
+                    return View(Warehouse);
+                }
+                else
+                {
+                    return View(Warehouse);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return View(Warehouse);
+
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
             }
+            
+            return View(Warehouse);
         }
 
 
         [HttpPost]
         public ActionResult CreateWarehouse(tblWarehouse Warehouse,HttpPostedFileBase CLogo)
         {
-
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
             tblWarehouse Data = new tblWarehouse();
             try
             {
@@ -66,9 +80,9 @@ namespace Inventories.Controllers
 
                         Data = Warehouse;
                         Data.CreatedDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.CreatedBy = 1;
+                        Data.CreatedBy = UserId;
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.EditBy = 1;
+                        Data.EditBy = UserId;
                         Data.isActive = true;
                         DB.tblWarehouses.Add(Data);
                         DB.SaveChanges();
@@ -102,7 +116,7 @@ namespace Inventories.Controllers
                         Data.Address = Warehouse.Address;
                         Data.isActive = Warehouse.isActive;
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.EditBy = 1;
+                        Data.EditBy = UserId;
                         DB.Entry(Data);
                         DB.SaveChanges();
                         return RedirectToAction("Warehouses", new { Update = "Warehouse has been Update successfully." });

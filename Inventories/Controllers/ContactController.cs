@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Inventories.Controllers
 {
+    [Authorize]
     public class ContactController : Controller
     {
         InventoriesEntities DB = new InventoriesEntities();
@@ -41,7 +42,8 @@ namespace Inventories.Controllers
         [HttpPost]
         public ActionResult CreateContact(tblContact Contact)
         {
-
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
             tblContact Data = new tblContact();
             try
             {
@@ -53,9 +55,9 @@ namespace Inventories.Controllers
 
                         Data = Contact;
                         Data.CreatedDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.CreatedBy = 1;
+                        Data.CreatedBy = UserId;
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.EditBy = 1;
+                        Data.EditBy = UserId;
                         Data.isActive = true;
                         DB.tblContacts.Add(Data);
                         DB.SaveChanges();
@@ -77,7 +79,7 @@ namespace Inventories.Controllers
                         Data.Email = Contact.Email;
                         Data.Details = Contact.Details;
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));
-                        Data.EditBy = 1;
+                        Data.EditBy = UserId;
                         DB.Entry(Data);
                         DB.SaveChanges();
                         return RedirectToAction("Contacts", new { Update = "Contact has been Update successfully." });
