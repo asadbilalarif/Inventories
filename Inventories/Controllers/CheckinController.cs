@@ -283,6 +283,24 @@ namespace Inventories.Controllers
 
             return new JsonResult { Data = allsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
+
+        public ActionResult ViewCheckin(int Id)
+        {
+            List<CheckinViewData_Result1> allsearch = null;
+            DB.Configuration.ProxyCreationEnabled = false;
+            try
+            {
+                allsearch = DB.CheckinViewData(Id).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
+            }
+
+            return View(allsearch);
+        }
     }
 
 }

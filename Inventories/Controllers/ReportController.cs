@@ -356,6 +356,114 @@ namespace Inventories.Controllers
             return View(AdjustmentList);
         }
 
+        public ActionResult ItemStockLedgerReport()
+        {
+            List<ItemStockLedgerReportData_Result> ItemStockLedger = new List<ItemStockLedgerReportData_Result>();
+            ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
+            ViewBag.Items = DB.tblItems.ToList();
+            ViewBag.Categories = DB.tblCategories.ToList();
+
+            
+            ViewBag.Warehouse = 0;
+            ViewBag.Item = 0;
+            ViewBag.Category = 0;
+            ViewBag.draft = false;
+
+            string Query = "";
+            string TQuery = "";
+            string AQuery = "";
+            Query = "where 1=1 ";
+            TQuery = "where 1=1 ";
+            AQuery = "where 1=1 ";
+
+            ItemStockLedger = DB.ItemStockLedgerReportData(Query,TQuery,AQuery).ToList();
+
+            return View(ItemStockLedger);
+        }
+
+        [HttpPost]
+        public ActionResult ItemStockLedgerReport(int Warehouse = 0, int Item = 0, int Category = 0)
+        {
+            List<ItemStockLedgerReportData_Result> ItemStockLedger = new List<ItemStockLedgerReportData_Result>();
+            ViewBag.Contacts = DB.tblContacts.ToList();
+            ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
+            ViewBag.Items = DB.tblItems.ToList();
+            ViewBag.Categories = DB.tblCategories.ToList();
+
+            
+            ViewBag.Warehouse = Warehouse;
+            ViewBag.Item = Item;
+            ViewBag.Category = Category;
+
+            string Warehouses = "";
+            string Items = "";
+            string Categories = "";
+
+
+            string Query = "";
+            string TQuery = "";
+            string AQuery = "";
+            if (Warehouse != 0)
+            {
+                Warehouses = " and CI.Warehouse =" + Warehouse + " ";
+            }
+            if (Item != 0)
+            {
+                Items = " and CII.ItemId =" + Item + " ";
+            }
+            if (Category != 0)
+            {
+                Categories = " and I.CategoryId =" + Category + " ";
+            }
+            Query = "where 1=1   "  + Warehouses + " " + Items + " " + Categories +" ";
+             Warehouses = "";
+             Items = "";
+             Categories = "";
+            if (Warehouse != 0)
+            {
+                Warehouses = " and T.ToWarehouse =" + Warehouse + " ";
+            }
+            if (Item != 0)
+            {
+                Items = " and TI.ItemId =" + Item + " ";
+            }
+            if (Category != 0)
+            {
+                Categories = " and I.CategoryId =" + Category + " ";
+            }
+            TQuery = "where 1=1   "  + Warehouses + " " + Items + " " + Categories +" ";
+             Warehouses = "";
+             Items = "";
+             Categories = "";
+            if (Warehouse != 0)
+            {
+                Warehouses = " and A.Warehouse =" + Warehouse + " ";
+            }
+            if (Item != 0)
+            {
+                Items = " and AI.ItemId =" + Item + " ";
+            }
+            if (Category != 0)
+            {
+                Categories = " and I.CategoryId =" + Category + " ";
+            }
+            AQuery = "where 1=1   "  + Warehouses + " " + Items + " " + Categories +"' ";
+
+            ItemStockLedger = DB.ItemStockLedgerReportData(Query,TQuery,AQuery).ToList();
+
+            return View(ItemStockLedger);
+        }
+
+
+        public ActionResult ItemStockLedgerDetailReport(int ItemId,int WarehouseId)
+        {
+            List<ItemStockLedgerDetailReportData_Result1> ItemStockLedger = new List<ItemStockLedgerDetailReportData_Result1>();
+
+            ItemStockLedger = DB.ItemStockLedgerDetailReportData(ItemId, WarehouseId).ToList();
+
+            return View(ItemStockLedger);
+        }
+
         public ActionResult TotalRecord()
         {
             List<AdjustmentReportData_Result> AdjustmentList = new List<AdjustmentReportData_Result>();

@@ -1,0 +1,156 @@
+﻿@model IEnumerable<Inventories.Models.ItemStockLedgerDetailReportData_Result1>
+@using Inventories.Models;
+@{
+    ViewData["Title"] = "Adjustments";
+
+
+
+    //string[] StateDepartment = (string[])ViewBag.StateDepartment;
+
+
+   
+
+
+
+}
+
+
+<head>
+
+    <style>
+        .select2-container {
+            width: 100% !important;
+        }
+    </style>
+
+
+
+</head>
+
+
+
+
+<!-- Page Wrapper -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <!-- /Page Header -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="breadcrumb-bar">
+                            <div class="container-fluid">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6 col-6">
+                                        <h5 class="breadcrumb-title">Item Stock Ledger Detail Report</h5>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="table-responsive">
+                            <table class="cell-border table table-hover table-center  mb-0 " id="AdjustmentTable">
+                                <thead>
+                                    <tr>
+                                        <th>Number</th>
+                                        <th>Category Name</th>
+                                        <th>Item Name</th>
+                                        <th>Qty</th>
+                                        <th>Warehouse Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Inventories.Models.ItemStockLedgerDetailReportData_Result1 ItemStockLedger in Model)
+                                    {
+                                        <tr>
+                                            <td>@ItemStockLedger.Number</td>
+                                            <td>@ItemStockLedger.CategoryName</td>
+                                            <td>@ItemStockLedger.ItemName</td>
+                                            <td>@ItemStockLedger.ItemNetQuantity</td>
+                                            <td>@ItemStockLedger.WarehouseName</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<!-- /Page Wrapper -->
+<!-- jQuery -->
+@*<script src="~/Content/assets/js/jquery-3.5.1.js"></script>*@
+
+
+<script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>
+@*<script src="~/Theme/template/admin/assets/js/jquery.min.js"></script>*@
+<script>
+
+
+    $("body").on("click", "#ShowFilters", function () {
+        if (!$('#DivFilters').is(':visible')) {
+            $('#DivFilters').show();
+            //$('#IShowFilters').text(" Hide Filters");
+            $('#IShowFilters').removeClass("fa-toggle-off");
+            $('#IShowFilters').addClass("fa-toggle-on");
+
+        }
+        else {
+            $('#DivFilters').hide();
+            //$('#IShowFilters').text(" Show Filters");
+            $('#IShowFilters').removeClass("fa-toggle-on");
+            $('#IShowFilters').addClass("fa-toggle-off");
+        }
+    });
+
+    $(document).ready(function () {
+
+
+
+
+        //$('#AdjustmentTable').DataTable({
+        //    dom: 'Bfrtip',
+        //    buttons: [
+        //        //'pageLength',
+        //        {
+
+
+        //            extend: 'excel',
+        //            exportOptions: {
+        //                columns: [ 1, 2,3,4,5]
+        //            }
+        //        }
+        //    ],
+
+        //    searching: true, paging: true
+        //});
+
+
+
+        $(".nav li ul li").removeClass("active");
+        $('#ItemStockLedgerReport').addClass('active');
+        $('#Reports a').addClass('subdrop');
+        $("#Reports  ul").first().css('display', 'block');
+
+
+    });
+
+
+
+
+</script>

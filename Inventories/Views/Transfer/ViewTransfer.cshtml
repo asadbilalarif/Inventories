@@ -1,0 +1,83 @@
+﻿@model  List<Inventories.Models.TransferViewData_Result>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+    <title>ViewAdjustment</title>
+    <style>
+        p {
+            margin-top: 0;
+            margin-bottom: 0rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="content container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="border-bottom: 2px solid #dee2e6;">
+                    <div class="col-md-6">
+                        <h3>Invertories</h3>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <p>@Model.FirstOrDefault().FWarehouseName</p>
+                        <p>@Model.FirstOrDefault().FWarehouseAddress</p>
+                        <p>@Model.FirstOrDefault().FWarehousePhone</p>
+                        <p>@Model.FirstOrDefault().FWarehouseEmail</p>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h4 style="margin-top:2%;">TRANSFER</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Date: @Model.FirstOrDefault().TransferDate.ToString("MMM dd,yyyy")</p>
+                        <p>Reference: @Model.FirstOrDefault().Reference</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><b>For:</b></p>
+                        <p>@Model.FirstOrDefault().TWarehouseName</p>
+                        <p>@Model.FirstOrDefault().TWarehousePhone</p>
+                        <p>@Model.FirstOrDefault().TWarehouseEmail</p>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:5%;">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="cell-border table table-hover table-center  mb-0 " id="AdjustmentTable">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th class="text-right">Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Inventories.Models.TransferViewData_Result Transfer in Model)
+                                    {
+                                        <tr>
+                                            <td>@Transfer.ItemName</td>
+                                            <td class="text-right">@Transfer.ItemQuantity</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/Content/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+</body>
+</html>

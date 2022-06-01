@@ -555,13 +555,22 @@
         <Function Name="AdjustmentReportData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="searchValue" Type="varchar(max)" Mode="In" />
         </Function>
+        <Function Name="AdjustmentViewData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="CheckinNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="CheckinReportData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="searchValue" Type="varchar(max)" Mode="In" />
         </Function>
+        <Function Name="CheckinViewData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="CheckoutNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="CheckoutReportData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="searchValue" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="CheckoutViewData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
         <Function Name="GetAdjustmentItemData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CheckinItemItemId" Type="int" Mode="In" />
@@ -580,8 +589,20 @@
         <Function Name="GetTransferItemData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TransferItemId" Type="int" Mode="In" />
         </Function>
+        <Function Name="ItemStockLedgerDetailReportData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ItemId" Type="int" Mode="In" />
+          <Parameter Name="WarehouseId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ItemStockLedgerReportData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchValue" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="TsearchValue" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="AsearchValue" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="TransferReportData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="searchValue" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="TransferViewData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
         <Function Name="TransfrNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="InventoriesModelStoreContainer">
@@ -837,6 +858,27 @@
           <Parameter Name="TransferItemId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetTCheckinList" ReturnType="Collection(InventoriesModel.GetTCheckinList_Result)">
+            <Parameter Name="ItemId" Mode="In" Type="Int32" />
+            <Parameter Name="WarehouseId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AdjustmentViewData" ReturnType="Collection(InventoriesModel.AdjustmentViewData_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CheckinViewData" ReturnType="Collection(InventoriesModel.CheckinViewData_Result1)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CheckoutViewData" ReturnType="Collection(InventoriesModel.CheckoutViewData_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TransferViewData" ReturnType="Collection(InventoriesModel.TransferViewData_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ItemStockLedgerReportData" ReturnType="Collection(InventoriesModel.ItemStockLedgerReportData_Result)">
+            <Parameter Name="searchValue" Mode="In" Type="String" />
+            <Parameter Name="TsearchValue" Mode="In" Type="String" />
+            <Parameter Name="AsearchValue" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ItemStockLedgerDetailReportData" ReturnType="Collection(InventoriesModel.ItemStockLedgerDetailReportData_Result1)">
             <Parameter Name="ItemId" Mode="In" Type="Int32" />
             <Parameter Name="WarehouseId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1662,6 +1704,151 @@
           <Property Type="String" Name="Number" Nullable="true" />
           <Property Type="Int32" Name="ItemNetQuantity" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="AdjustmentViewData_Result">
+          <Property Type="Int32" Name="AdjustmentId" Nullable="false" />
+          <Property Type="String" Name="AdjustmentNumber" Nullable="true" />
+          <Property Type="DateTime" Name="AdjustmentDate" Nullable="false" />
+          <Property Type="String" Name="Reference" Nullable="true" />
+          <Property Type="String" Name="Type" Nullable="true" />
+          <Property Type="Int32" Name="Warehouse" Nullable="true" />
+          <Property Type="String" Name="Attachment" Nullable="true" />
+          <Property Type="String" Name="Details" Nullable="true" />
+          <Property Type="Boolean" Name="draft" Nullable="true" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="EditBy" Nullable="true" />
+          <Property Type="DateTime" Name="EditDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isActive" Nullable="true" />
+          <Property Type="String" Name="WarehouseName" Nullable="true" />
+          <Property Type="String" Name="WarehouseAddress" Nullable="true" />
+          <Property Type="String" Name="WarehouseEmail" Nullable="true" />
+          <Property Type="String" Name="WarehousePhone" Nullable="true" />
+          <Property Type="String" Name="ItemName" Nullable="true" />
+          <Property Type="Int32" Name="ItemQuantity" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CheckinViewData_Result">
+          <Property Type="Int32" Name="CheckinId" Nullable="false" />
+          <Property Type="String" Name="CheckinNumber" Nullable="true" />
+          <Property Type="DateTime" Name="CheckinDate" Nullable="false" />
+          <Property Type="String" Name="Reference" Nullable="true" />
+          <Property Type="Int32" Name="Contact" Nullable="true" />
+          <Property Type="Int32" Name="Warehouse" Nullable="true" />
+          <Property Type="String" Name="Attachment" Nullable="true" />
+          <Property Type="String" Name="Details" Nullable="true" />
+          <Property Type="Boolean" Name="draft" Nullable="true" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="EditBy" Nullable="true" />
+          <Property Type="DateTime" Name="EditDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isActive" Nullable="true" />
+          <Property Type="String" Name="WarehouseName" Nullable="true" />
+          <Property Type="String" Name="WarehouseAddress" Nullable="true" />
+          <Property Type="String" Name="WarehouseEmail" Nullable="true" />
+          <Property Type="String" Name="WarehousePhone" Nullable="true" />
+          <Property Type="String" Name="ItemName" Nullable="true" />
+          <Property Type="Int32" Name="ItemQuantity" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CheckinViewData_Result1">
+          <Property Type="Int32" Name="CheckinId" Nullable="false" />
+          <Property Type="String" Name="CheckinNumber" Nullable="true" />
+          <Property Type="DateTime" Name="CheckinDate" Nullable="false" />
+          <Property Type="String" Name="Reference" Nullable="true" />
+          <Property Type="Int32" Name="Contact" Nullable="true" />
+          <Property Type="Int32" Name="Warehouse" Nullable="true" />
+          <Property Type="String" Name="Attachment" Nullable="true" />
+          <Property Type="String" Name="Details" Nullable="true" />
+          <Property Type="Boolean" Name="draft" Nullable="true" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="EditBy" Nullable="true" />
+          <Property Type="DateTime" Name="EditDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isActive" Nullable="true" />
+          <Property Type="String" Name="WarehouseName" Nullable="true" />
+          <Property Type="String" Name="WarehouseAddress" Nullable="true" />
+          <Property Type="String" Name="WarehouseEmail" Nullable="true" />
+          <Property Type="String" Name="WarehousePhone" Nullable="true" />
+          <Property Type="String" Name="ItemName" Nullable="true" />
+          <Property Type="Int32" Name="ItemQuantity" Nullable="true" />
+          <Property Type="String" Name="ContactName" Nullable="true" />
+          <Property Type="String" Name="ContactEmail" Nullable="true" />
+          <Property Type="String" Name="ContactPhone" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CheckoutViewData_Result">
+          <Property Type="Int32" Name="CheckoutId" Nullable="false" />
+          <Property Type="String" Name="CheckoutNumber" Nullable="true" />
+          <Property Type="DateTime" Name="CheckoutDate" Nullable="false" />
+          <Property Type="String" Name="Reference" Nullable="true" />
+          <Property Type="Int32" Name="Contact" Nullable="true" />
+          <Property Type="Int32" Name="Warehouse" Nullable="true" />
+          <Property Type="String" Name="Attachment" Nullable="true" />
+          <Property Type="String" Name="Details" Nullable="true" />
+          <Property Type="Boolean" Name="draft" Nullable="true" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="EditBy" Nullable="true" />
+          <Property Type="DateTime" Name="EditDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isActive" Nullable="true" />
+          <Property Type="String" Name="WarehouseName" Nullable="true" />
+          <Property Type="String" Name="WarehouseAddress" Nullable="true" />
+          <Property Type="String" Name="WarehouseEmail" Nullable="true" />
+          <Property Type="String" Name="WarehousePhone" Nullable="true" />
+          <Property Type="String" Name="ItemName" Nullable="true" />
+          <Property Type="Int32" Name="ItemQuantity" Nullable="true" />
+          <Property Type="String" Name="ContactName" Nullable="true" />
+          <Property Type="String" Name="ContactEmail" Nullable="true" />
+          <Property Type="String" Name="ContactPhone" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="TransferViewData_Result">
+          <Property Type="Int32" Name="TransferId" Nullable="false" />
+          <Property Type="String" Name="TransferNumber" Nullable="true" />
+          <Property Type="DateTime" Name="TransferDate" Nullable="false" />
+          <Property Type="String" Name="Reference" Nullable="true" />
+          <Property Type="Int32" Name="FromWarehouse" Nullable="true" />
+          <Property Type="Int32" Name="ToWarehouse" Nullable="true" />
+          <Property Type="String" Name="Attachment" Nullable="true" />
+          <Property Type="String" Name="Details" Nullable="true" />
+          <Property Type="Boolean" Name="draft" Nullable="true" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="EditBy" Nullable="true" />
+          <Property Type="DateTime" Name="EditDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isActive" Nullable="true" />
+          <Property Type="String" Name="FWarehouseName" Nullable="true" />
+          <Property Type="String" Name="FWarehouseAddress" Nullable="true" />
+          <Property Type="String" Name="FWarehouseEmail" Nullable="true" />
+          <Property Type="String" Name="FWarehousePhone" Nullable="true" />
+          <Property Type="String" Name="TWarehouseName" Nullable="true" />
+          <Property Type="String" Name="TWarehouseAddress" Nullable="true" />
+          <Property Type="String" Name="TWarehouseEmail" Nullable="true" />
+          <Property Type="String" Name="TWarehousePhone" Nullable="true" />
+          <Property Type="String" Name="ItemName" Nullable="true" />
+          <Property Type="Int32" Name="ItemQuantity" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ItemStockLedgerReportData_Result">
+          <Property Type="Int32" Name="ItemId" Nullable="false" />
+          <Property Type="Int32" Name="WarehouseId" Nullable="false" />
+          <Property Type="String" Name="CategoryName" Nullable="true" />
+          <Property Type="String" Name="ItemName" Nullable="true" />
+          <Property Type="Int32" Name="TQty" Nullable="true" />
+          <Property Type="String" Name="WarehouseName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ItemStockLedgerDetailReportData_Result">
+          <Property Type="Int32" Name="ItemId" Nullable="false" />
+          <Property Type="Int32" Name="WarehouseId" Nullable="false" />
+          <Property Type="String" Name="CategoryName" Nullable="true" />
+          <Property Type="String" Name="ItemName" Nullable="true" />
+          <Property Type="Int32" Name="ItemNetQuantity" Nullable="true" />
+          <Property Type="String" Name="WarehouseName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ItemStockLedgerDetailReportData_Result1">
+          <Property Type="String" Name="Number" Nullable="true" />
+          <Property Type="Int32" Name="ItemId" Nullable="false" />
+          <Property Type="Int32" Name="WarehouseId" Nullable="false" />
+          <Property Type="String" Name="CategoryName" Nullable="true" />
+          <Property Type="String" Name="ItemName" Nullable="true" />
+          <Property Type="Int32" Name="ItemNetQuantity" Nullable="true" />
+          <Property Type="String" Name="WarehouseName" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2148,6 +2335,145 @@
                 <ScalarProperty Name="FTailId" ColumnName="FTailId" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="ItemNetQuantity" ColumnName="ItemNetQuantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AdjustmentViewData" FunctionName="InventoriesModel.Store.AdjustmentViewData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoriesModel.AdjustmentViewData_Result">
+                <ScalarProperty Name="AdjustmentId" ColumnName="AdjustmentId" />
+                <ScalarProperty Name="AdjustmentNumber" ColumnName="AdjustmentNumber" />
+                <ScalarProperty Name="AdjustmentDate" ColumnName="AdjustmentDate" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="draft" ColumnName="draft" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+                <ScalarProperty Name="WarehouseAddress" ColumnName="WarehouseAddress" />
+                <ScalarProperty Name="WarehouseEmail" ColumnName="WarehouseEmail" />
+                <ScalarProperty Name="WarehousePhone" ColumnName="WarehousePhone" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CheckinViewData" FunctionName="InventoriesModel.Store.CheckinViewData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoriesModel.CheckinViewData_Result1">
+                <ScalarProperty Name="CheckinId" ColumnName="CheckinId" />
+                <ScalarProperty Name="CheckinNumber" ColumnName="CheckinNumber" />
+                <ScalarProperty Name="CheckinDate" ColumnName="CheckinDate" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="draft" ColumnName="draft" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+                <ScalarProperty Name="WarehouseAddress" ColumnName="WarehouseAddress" />
+                <ScalarProperty Name="WarehouseEmail" ColumnName="WarehouseEmail" />
+                <ScalarProperty Name="WarehousePhone" ColumnName="WarehousePhone" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CheckoutViewData" FunctionName="InventoriesModel.Store.CheckoutViewData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoriesModel.CheckoutViewData_Result">
+                <ScalarProperty Name="CheckoutId" ColumnName="CheckoutId" />
+                <ScalarProperty Name="CheckoutNumber" ColumnName="CheckoutNumber" />
+                <ScalarProperty Name="CheckoutDate" ColumnName="CheckoutDate" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="draft" ColumnName="draft" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+                <ScalarProperty Name="WarehouseAddress" ColumnName="WarehouseAddress" />
+                <ScalarProperty Name="WarehouseEmail" ColumnName="WarehouseEmail" />
+                <ScalarProperty Name="WarehousePhone" ColumnName="WarehousePhone" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TransferViewData" FunctionName="InventoriesModel.Store.TransferViewData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoriesModel.TransferViewData_Result">
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="TransferNumber" ColumnName="TransferNumber" />
+                <ScalarProperty Name="TransferDate" ColumnName="TransferDate" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="FromWarehouse" ColumnName="FromWarehouse" />
+                <ScalarProperty Name="ToWarehouse" ColumnName="ToWarehouse" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="draft" ColumnName="draft" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="FWarehouseName" ColumnName="FWarehouseName" />
+                <ScalarProperty Name="FWarehouseAddress" ColumnName="FWarehouseAddress" />
+                <ScalarProperty Name="FWarehouseEmail" ColumnName="FWarehouseEmail" />
+                <ScalarProperty Name="FWarehousePhone" ColumnName="FWarehousePhone" />
+                <ScalarProperty Name="TWarehouseName" ColumnName="TWarehouseName" />
+                <ScalarProperty Name="TWarehouseAddress" ColumnName="TWarehouseAddress" />
+                <ScalarProperty Name="TWarehouseEmail" ColumnName="TWarehouseEmail" />
+                <ScalarProperty Name="TWarehousePhone" ColumnName="TWarehousePhone" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ItemStockLedgerReportData" FunctionName="InventoriesModel.Store.ItemStockLedgerReportData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoriesModel.ItemStockLedgerReportData_Result">
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="TQty" ColumnName="TQty" />
+                <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ItemStockLedgerDetailReportData" FunctionName="InventoriesModel.Store.ItemStockLedgerDetailReportData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoriesModel.ItemStockLedgerDetailReportData_Result1">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemNetQuantity" ColumnName="ItemNetQuantity" />
+                <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

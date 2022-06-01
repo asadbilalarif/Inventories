@@ -149,7 +149,7 @@
                                         }
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                @*<div class="col-md-3">
                                     <br />
                                     @if (@draft == true)
                                     {
@@ -161,7 +161,7 @@
                                     }
 
                                     <label>Only draft records</label>
-                                </div>
+                                </div>*@
 
 
                             </div><br />
@@ -211,6 +211,7 @@
                                     <tr>
                                         <th style="display:none;">Checkin ID</th>
                                         <th>Checkin Date</th>
+                                        <th>Checkin Number</th>
                                         <th>Contact</th>
                                         <th>Warehouse</th>
                                         <th>User</th>
@@ -224,6 +225,7 @@
                                         <tr>
                                             <td style="display:none;">@Checkin.CheckinId</td>
                                             <td>@Checkin.CheckinDate.ToString("dd-MM-yyyy")</td>
+                                            <td><a href="@Url.Action("ViewCheckin","Checkin",new {Id=Checkin.CheckinId })" target="_blank">@Checkin.CheckinNumber</a></td>
                                             <td>@Checkin.ContactName</td>
                                             <td>@Checkin.WarehouseName</td>
                                             <td>@Checkin.UserName</td>

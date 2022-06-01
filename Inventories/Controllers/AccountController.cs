@@ -40,6 +40,7 @@ namespace Inventories.Controllers
 
                     cookie["Email"] = User.Email;
                     cookie["UserId"] = User.UserId.ToString();
+                    cookie["Role"] = User.tblRole.Role;
 
                     //Session["User"] = DB.tblUsers.Select(r => r).Where(x => x.Email == Email).FirstOrDefault();
                     Session["access"] = DB.tblAccessLevels.Select(r => r).Where(x => x.RoleId == User.RoleId && x.isActive == true).ToList();

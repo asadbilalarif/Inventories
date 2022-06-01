@@ -25,213 +25,217 @@
             <h4 class="page-title">Adjustment</h4>
         </div>
         <div class="col-sm-7 col-8 text-right m-b-30">
-            <a href="@Url.Action("Adjustments","Adjustment")" class="btn btn-primary btn-rounded"><i class="fa fa-eye m-r-5"></i> Adjustments</a>
+            <a href="@Url.Action("Adjustments","Adjustment")" class="btn btn-primary "><i class="fa fa-eye m-r-5"></i> Adjustments</a>
         </div>
     </div>
     @using (Html.BeginForm("CreateInv", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {@Html.AntiForgeryToken()
     <div class="row">
         <div class="col-md-12">
-            <form>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Adjustment Number</label>
-                        <input class="form-control" readonly="" name="AdjustmentNumber" id="AdjustmentNumber" type="text" value="@ViewBag.AdjustmentNumber">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Date</label>
-                            <input class="form-control" name="AdjustmentId" id="AdjustmentId" readonly="" hidden type="text" value="@Model.AdjustmentId">
-                            <input class="form-control" name="AdjustmentDate" id="AdjustmentDate" type="date" value="@Model.AdjustmentDate.ToString("yyyy-MM-dd")">
+            <div class="card">
+                <div class="card-body"> 
+                    <form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Adjustment Number</label>
+                                <input class="form-control" readonly="" name="AdjustmentNumber" id="AdjustmentNumber" type="text" value="@ViewBag.AdjustmentNumber">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Type</label>
-                            <span id="TypeError"></span>
-                            <select class="form-control" name="Type" id="Type">
-                                <option value="">Type</option>
-                                    @if (Model.Type == "Damage")
-                                    {
-                                        <option value="Damage" selected>Damage</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="Damage">Damage</option>
-                                    }
-                                    @if (Model.Type == "Addition")
-                                    {
-                                        <option value="Addition" selected>Addition</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="Addition">Addition</option>
-                                    }
-                                    @if (Model.Type == "Subtraction")
-                                    {
-                                        <option value="Subtraction" selected>Subtraction</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="Subtraction">Subtraction</option>
-                                    }
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Reference</label>
-                            <span id="ReferenceError"></span>
-                            <input class="form-control" name="Reference" id="Reference" type="text" value="@Model.Reference">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Warehouse</label>
-                            <span id="WarehouseError"></span>
-                            <select class="form-control" name="Warehouse" id="Warehouse">
-                                <option value="">Warehouse</option>
-                                @foreach (Inventories.Models.tblWarehouse item in @ViewBag.Warehouse)
-                                {
-                                    if (Model.Warehouse == item.WarehouseId)
-                                    {
-                                        <option value="@item.WarehouseId" selected>@item.Name</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@item.WarehouseId">@item.Name</option>
-                                    }
-
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label></label>
-                            <input class="form-control" name="SearchItem" id="SearchItem" placeholder="Scan barcode or search items" type="text" value="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <span id="error"></span>
-                    <div class="col-md-12 col-sm-12">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-white" id="ItemTable">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 20px"></th>
-                                        <th class="col-md-6" hidden>Description</th>
-                                        <th class="col-md-6">Items</th>
-                                        <th style="width:200px;">Weight</th>
-                                        <th style="width:200px;">Quantity</th>
-                                        <th>Unit</th>
-                                        <th> </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td></td>
-                                        <td hidden>
-                                            <input class="" type="text" hidden id="DescriptionInputId" style="min-width:0px">
-                                        </td>
-                                        <td>
-                                            <input class="form-control" hidden type="text" id="DescriptionInput" readonly="" style="min-width:150px">
-                                        </td>
-                                        <td>
-                                            <input class="form-control" hidden type="number" id="WeightInput" readonly="" style="width:200px;">
-                                        </td>
-                                        <td>
-                                            <input class="form-control" hidden id="QtyInput" readonly="" style="width:200px;" type="number">
-                                        </td>
-                                        <td>
-                                            <select class="form-control" hidden id="UnitInput" readonly="" style="width:200px;" type="text">
-                                                <option value="Piece">Piece</option>
-                                                <option value="Dozen">Dozen</option>
-                                            </select>
-                                        </td>
-                                        <td><a href="javascript:void(0)" hidden class="text-success font-18" title="Add"><i class="fa fa-plus" onclick="AddRow()"></i></a></td>
-                                    </tr>
-                                    @if (@ViewBag.tblAdjustmentItem != null)
-                                    {
-                                        foreach (Inventories.Models.tblAdjustmentItem item in @ViewBag.tblAdjustmentItem)
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input class="form-control" name="AdjustmentId" id="AdjustmentId" readonly="" hidden type="text" value="@Model.AdjustmentId">
+                                    <input class="form-control" name="AdjustmentDate" id="AdjustmentDate" type="date" value="@Model.AdjustmentDate.ToString("yyyy-MM-dd")">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <span id="TypeError"></span>
+                                    <select class="form-control" name="Type" id="Type">
+                                        <option value="">Type</option>
+                                        @if (Model.Type == "Damage")
                                         {
+                                            <option value="Damage" selected>Damage</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="Damage">Damage</option>
+                                        }
+                                        @if (Model.Type == "Addition")
+                                        {
+                                            <option value="Addition" selected>Addition</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="Addition">Addition</option>
+                                        }
+                                        @if (Model.Type == "Subtraction")
+                                        {
+                                            <option value="Subtraction" selected>Subtraction</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="Subtraction">Subtraction</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Reference</label>
+                                    <span id="ReferenceError"></span>
+                                    <input class="form-control" name="Reference" id="Reference" type="text" value="@Model.Reference">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Warehouse</label>
+                                    <span id="WarehouseError"></span>
+                                    <select class="form-control" name="Warehouse" id="Warehouse">
+                                        <option value="">Warehouse</option>
+                                        @foreach (Inventories.Models.tblWarehouse item in @ViewBag.Warehouse)
+                                        {
+                                            if (Model.Warehouse == item.WarehouseId)
+                                            {
+                                                <option value="@item.WarehouseId" selected>@item.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.WarehouseId">@item.Name</option>
+                                            }
+
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label></label>
+                                    <input class="form-control" name="SearchItem" id="SearchItem" placeholder="Scan barcode or search items" type="text" value="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <span id="error"></span>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-white" id="ItemTable">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 20px"></th>
+                                                <th class="col-md-6" hidden>Description</th>
+                                                <th class="col-md-6">Items</th>
+                                                <th style="width:200px;">Weight</th>
+                                                <th style="width:200px;">Quantity</th>
+                                                <th>Unit</th>
+                                                <th> </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
                                             <tr>
                                                 <td></td>
                                                 <td hidden>
-                                                    <input class="" type="text" hidden id="FDescriptionInputId" value="@item.ItemId" style="min-width:0px">
+                                                    <input class="" type="text" hidden id="DescriptionInputId" style="min-width:0px">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="FDescriptionInput" readonly="" style="min-width:150px" value="@item.tblItem.Name">
+                                                    <input class="form-control" hidden type="text" id="DescriptionInput" readonly="" style="min-width:150px">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="number" id="FWeightInput" style="width:200px;" value="@item.ItemWeight">
+                                                    <input class="form-control" hidden type="number" id="WeightInput" readonly="" style="width:200px;">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="number" id="FQtyInput" style="width:200px;" value="@item.ItemQuantity">
+                                                    <input class="form-control" hidden id="QtyInput" readonly="" style="width:200px;" type="number">
                                                 </td>
                                                 <td>
-                                                    <select class="form-control" id="FUnitInput" style="width:200px;" type="text">
-                                                        @if (@item.ItemUnit == "Piece")
-                                                        {
-                                                            <option value="Piece" selected>Piece</option>
-                                                        }
-                                                        else
-                                                        {
-                                                            <option value="Piece">Piece</option>
-                                                        }
-                                                        @if (@item.ItemUnit == "Dozen")
-                                                        {
-                                                            <option value="Dozen" selected>Dozen</option>
-                                                        }
-                                                        else
-                                                        {
-                                                            <option value="Dozen">Dozen</option>
-                                                        }
+                                                    <select class="form-control" hidden id="UnitInput" readonly="" style="width:200px;" type="text">
+                                                        <option value="Piece">Piece</option>
+                                                        <option value="Dozen">Dozen</option>
                                                     </select>
                                                 </td>
-                                                <td><a href="javascript:void(0)" class="text-danger font-18" title="Remove"><i class="fa fa-trash-o" onclick="DeleteRow(this)"></i></a></td>
+                                                <td><a href="javascript:void(0)" hidden class="text-success font-18" title="Add"><i class="fa fa-plus" onclick="AddRow()"></i></a></td>
                                             </tr>
-                                        }
-                                    }
+                                            @if (@ViewBag.tblAdjustmentItem != null)
+                                            {
+                                                foreach (Inventories.Models.tblAdjustmentItem item in @ViewBag.tblAdjustmentItem)
+                                                {
 
-                                </tbody>
-                            </table>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td hidden>
+                                                            <input class="" type="text" hidden id="FDescriptionInputId" value="@item.ItemId" style="min-width:0px">
+                                                        </td>
+                                                        <td>
+                                                            <input class="form-control" type="text" id="FDescriptionInput" readonly="" style="min-width:150px" value="@item.tblItem.Name">
+                                                        </td>
+                                                        <td>
+                                                            <input class="form-control" type="number" id="FWeightInput" style="width:200px;" value="@item.ItemWeight">
+                                                        </td>
+                                                        <td>
+                                                            <input class="form-control" type="number" id="FQtyInput" style="width:200px;" value="@item.ItemQuantity">
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-control" id="FUnitInput" style="width:200px;" type="text">
+                                                                @if (@item.ItemUnit == "Piece")
+                                                                {
+                                                                    <option value="Piece" selected>Piece</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option value="Piece">Piece</option>
+                                                                }
+                                                                @if (@item.ItemUnit == "Dozen")
+                                                                {
+                                                                    <option value="Dozen" selected>Dozen</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option value="Dozen">Dozen</option>
+                                                                }
+                                                            </select>
+                                                        </td>
+                                                        <td><a href="javascript:void(0)" class="text-danger font-18" title="Remove"><i class="fa fa-trash-o" onclick="DeleteRow(this)"></i></a></td>
+                                                    </tr>
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
                         </div>
-
-                    </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input class="form-control" type="file" name="FAttachment" id="FAttachment" value="" />
+                            </div><br /><br /><br />
+                            <div class="col-md-12">
+                                <textarea class="form-control" name="Details" id="Details">@Model.Details</textarea>
+                            </div><br /><br /><br />
+                            @*<div class="col-md-12">
+                                @if (Model.draft == true)
+                                {
+                                    <input type="checkbox" id="draft" name="draft" value="true" checked />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" id="draft" name="draft" value="true" />
+                                }
+                                <label>This record is draft</label>
+                            </div>*@
+                        </div>
+                        <div class="text-center m-t-20">
+                            <div id="loading" style="display:none;margin: 0 auto; text-decoration-color:cornflowerblue;"><div class="spinner-border text-success" id="display_loading" style="margin: 0 auto;"></div><div class="spinner-border text-success" id="display_loading" style="display:none;margin: 0 auto;"></div> Loading...</div>
+                            <input type="button" class="btn btn-primary submit-btn" id="btnSave" value="Save">
+                        </div>
+                    </form>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <input class="form-control" type="file" name="FAttachment" id="FAttachment" value="" />
-                    </div><br /><br /><br />
-                    <div class="col-md-12">
-                        <textarea class="form-control" name="Details" id="Details">@Model.Details</textarea>
-                    </div><br /><br /><br />
-                    <div class="col-md-12">
-                        @if (Model.draft == true)
-                        {
-                            <input type="checkbox" id="draft" name="draft" value="true" checked />
-                        }
-                        else
-                        {
-                            <input type="checkbox" id="draft" name="draft" value="true" />
-                        }
-                        <label>This record is draft</label>
-                    </div>
-                </div>
-                <div class="text-center m-t-20">
-                    <div id="loading" style="display:none;margin: 0 auto; text-decoration-color:cornflowerblue;"><div class="spinner-border text-success" id="display_loading" style="margin: 0 auto;"></div><div class="spinner-border text-success" id="display_loading" style="display:none;margin: 0 auto;"></div> Loading...</div>
-                    <input type="button" class="btn btn-primary submit-btn" id="btnSave" value="Save">
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 }
@@ -411,8 +415,7 @@
                 Head.Reference = $("#Reference").val();
                 Head.Attachment = $("#Attachment").val();
                 Head.Details = $("#Details").val();
-                //Head.draft = $("#draft").val();
-                Head.draft = $('#draft').is(':checked');
+                //Head.draft = $('#draft').is(':checked');
                 Heads.push(Head);
                 console.log(Heads);
 

@@ -483,16 +483,20 @@ button.bg-danger:hover {
     border-color: #00d0f1!important;
 }
 .btn-primary {
-	background-color: #00d0f1;
-    border: 1px solid #00d0f1;
+	background-color: #111827;
+	border: 1px solid #111827;
+	/*background-color: #00d0f1;*/
+	/*border: 1px solid #00d0f1;*/
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary.active,
 .btn-primary:active,
 .open > .dropdown-toggle.btn-primary {
-	background-color: #19c1dc;
-	border: 1px solid #19c1dc;
+	background-color: #374151 ;
+	border: 1px solid #374151 ;
+	/*background-color: #19c1dc;
+	border: 1px solid #19c1dc;*/
 }
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #fff;
@@ -1705,19 +1709,25 @@ html.menu-opened body {
 	height: auto;
 	padding: 0 20px;
 }
-.sidebar-menu li a:hover {
-    color: #5ae8ff;
-}
+	.sidebar-menu li a:hover {
+		background-color: #1d4ed8;
+		color: #fff;
+		/*color: #1d4ed8;*/
+		/*color: #5ae8ff;*/
+	}
 .sidebar-menu > ul > li > a:hover {
-	background-color: #19c1dc;
+	background-color: #1d4ed8;
+	/*background-color: #19c1dc;*/
     color: #fff;
 }
 .sidebar-menu > ul > li.active > a:hover {
-    background-color: #19c1dc;
+    background-color: #1d4ed8;
+    /*background-color: #19c1dc;*/
     color: #fff;
 }
 .sidebar-menu li.active a {
-    background-color: #00d0f1;
+    background-color: #1d4ed8;
+    /*background-color: #00d0f1;*/
     color: #fff;
 }
 .menu-title {

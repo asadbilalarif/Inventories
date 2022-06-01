@@ -154,5 +154,71 @@ namespace Inventories.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTCheckinList_Result>("GetTCheckinList", itemIdParameter, warehouseIdParameter);
         }
+    
+        public virtual ObjectResult<AdjustmentViewData_Result> AdjustmentViewData(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AdjustmentViewData_Result>("AdjustmentViewData", idParameter);
+        }
+    
+        public virtual ObjectResult<CheckinViewData_Result1> CheckinViewData(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CheckinViewData_Result1>("CheckinViewData", idParameter);
+        }
+    
+        public virtual ObjectResult<CheckoutViewData_Result> CheckoutViewData(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CheckoutViewData_Result>("CheckoutViewData", idParameter);
+        }
+    
+        public virtual ObjectResult<TransferViewData_Result> TransferViewData(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TransferViewData_Result>("TransferViewData", idParameter);
+        }
+    
+        public virtual ObjectResult<ItemStockLedgerReportData_Result> ItemStockLedgerReportData(string searchValue, string tsearchValue, string asearchValue)
+        {
+            var searchValueParameter = searchValue != null ?
+                new ObjectParameter("searchValue", searchValue) :
+                new ObjectParameter("searchValue", typeof(string));
+    
+            var tsearchValueParameter = tsearchValue != null ?
+                new ObjectParameter("TsearchValue", tsearchValue) :
+                new ObjectParameter("TsearchValue", typeof(string));
+    
+            var asearchValueParameter = asearchValue != null ?
+                new ObjectParameter("AsearchValue", asearchValue) :
+                new ObjectParameter("AsearchValue", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ItemStockLedgerReportData_Result>("ItemStockLedgerReportData", searchValueParameter, tsearchValueParameter, asearchValueParameter);
+        }
+    
+        public virtual ObjectResult<ItemStockLedgerDetailReportData_Result1> ItemStockLedgerDetailReportData(Nullable<int> itemId, Nullable<int> warehouseId)
+        {
+            var itemIdParameter = itemId.HasValue ?
+                new ObjectParameter("ItemId", itemId) :
+                new ObjectParameter("ItemId", typeof(int));
+    
+            var warehouseIdParameter = warehouseId.HasValue ?
+                new ObjectParameter("WarehouseId", warehouseId) :
+                new ObjectParameter("WarehouseId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ItemStockLedgerDetailReportData_Result1>("ItemStockLedgerDetailReportData", itemIdParameter, warehouseIdParameter);
+        }
     }
 }

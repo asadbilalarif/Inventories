@@ -34,243 +34,247 @@
             <h4 class="page-title">Checkout</h4>
         </div>
         <div class="col-sm-7 col-8 text-right m-b-30">
-            <a href="@Url.Action("Checkouts","Checkout")" class="btn btn-primary btn-rounded"><i class="fa fa-eye m-r-5"></i> Checkouts</a>
+            <a href="@Url.Action("Checkouts","Checkout")" class="btn btn-primary"><i class="fa fa-eye m-r-5"></i> Checkouts</a>
         </div>
     </div>
     @using (Html.BeginForm("CreateInv", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {@Html.AntiForgeryToken()
     <div class="row">
         <div class="col-md-12">
-            <form>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Checkout Number</label>
-                        <input class="form-control" readonly="" name="CheckoutNumber" id="CheckoutNumber" type="text" value="@ViewBag.CheckoutNumber">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Date</label>
-                            <input class="form-control" name="CheckoutId" id="CheckoutId" readonly="" hidden type="text" value="@Model.CheckoutId">
-                            <input class="form-control" name="CheckoutDate" id="CheckoutDate" type="date" value="@Model.CheckoutDate.ToString("yyyy-MM-dd")">
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Checkout Number</label>
+                                <input class="form-control" readonly="" name="CheckoutNumber" id="CheckoutNumber" type="text" value="@ViewBag.CheckoutNumber">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Contact</label>
-                            <span id="ContactError"></span>
-                            <select class="form-control" name="Contact" id="Contact">
-                                <option value="">Contact</option>
-                                @foreach (Inventories.Models.tblContact item in @ViewBag.Contact)
-                                {
-                                    if (Model.Contact == item.ContactId)
-                                    {
-                                        <option value="@item.ContactId" selected>@item.Name</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@item.ContactId">@item.Name</option>
-                                    }
-
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Reference</label>
-                            <span id="ReferenceError"></span>
-                            <input class="form-control" name="Reference" id="Reference" type="text" value="@Model.Reference">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Warehouse</label>
-                            <span id="WarehouseError"></span>
-                            <select class="form-control" name="Warehouse" id="Warehouse">
-                                <option value="">Warehouse</option>
-                                @foreach (Inventories.Models.tblWarehouse item in @ViewBag.Warehouse)
-                                {
-                                    if (Model.Warehouse == item.WarehouseId)
-                                    {
-                                        <option value="@item.WarehouseId" selected>@item.Name</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@item.WarehouseId">@item.Name</option>
-                                    }
-
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label></label>
-                            <input class="form-control" name="SearchItem" id="SearchItem" placeholder="Scan barcode or search items" type="text" value="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label id="CheckinBatchLabel">Checkin Batch</label>
-                            <span id="SetCheckinListError"></span>
-                            <select class="form-control" id="SetCheckinList">
-                                <option value="">Select Checkin Batch</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <span id="error"></span>
-                    <div class="col-md-12 col-sm-12">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-white" id="ItemTable">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 20px"></th>
-                                        <th class="col-md-6" hidden>Description</th>
-                                        <th class="col-md-6">Items</th>
-                                        @*@if (@ViewBag.tblCheckoutItem == null)
-                                        {*@
-                                            <th style="width:200px;">Available Quantity</th>
-                                        @*}*@
-                                        <th style="width:200px;">Quantity</th>
-                                        @*<th>Unit</th>*@
-                                        <th> </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td></td>
-                                        <td hidden>
-                                            <input class="" type="text" hidden id="DescriptionInputId" style="min-width:0px">
-                                        </td>
-                                        <td>
-                                            <input class="form-control" hidden type="text" id="DescriptionInput" readonly="" style="min-width:150px">
-                                        </td>
-                                        <td>
-                                            <input class="form-control" hidden type="number" id="ItemNetQuantityInput" readonly="" style="width:200px;">
-                                        </td>
-                                        <td>
-                                            <input class="form-control" hidden id="QtyInput" readonly="" style="width:200px;" type="number">
-                                        </td>
-                                        <td>
-                                            <input class="form-control" hidden id="CheckinItemId" readonly="" style="width:200px;" type="number">
-                                        </td>
-                                        @*<td>
-                                            <select class="form-control" hidden id="UnitInput" readonly="" style="width:200px;" type="text">
-                                                <option value="Piece">Piece</option>
-                                                <option value="Dozen">Dozen</option>
-                                            </select>
-                                        </td>*@
-                                        <td><a href="javascript:void(0)" hidden class="text-success font-18" title="Add"><i class="fa fa-plus" onclick="AddRow()"></i></a></td>
-                                        
-                                        <td>
-                                            <input class="form-control" hidden id="FNumber" readonly="" style="width:200px;" type="text">
-                                        </td>
-                                    </tr>
-                                    @if (@ViewBag.tblCheckoutItem != null)
-                                    {
-                                        foreach (Inventories.Models.tblCheckoutItem item in @ViewBag.tblCheckoutItem)
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input class="form-control" name="CheckoutId" id="CheckoutId" readonly="" hidden type="text" value="@Model.CheckoutId">
+                                    <input class="form-control" name="CheckoutDate" id="CheckoutDate" type="date" value="@Model.CheckoutDate.ToString("yyyy-MM-dd")">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Contact</label>
+                                    <span id="ContactError"></span>
+                                    <select class="form-control" name="Contact" id="Contact">
+                                        <option value="">Contact</option>
+                                        @foreach (Inventories.Models.tblContact item in @ViewBag.Contact)
                                         {
+                                            if (Model.Contact == item.ContactId)
+                                            {
+                                                <option value="@item.ContactId" selected>@item.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.ContactId">@item.Name</option>
+                                            }
+
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Reference</label>
+                                    <span id="ReferenceError"></span>
+                                    <input class="form-control" name="Reference" id="Reference" type="text" value="@Model.Reference">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Warehouse</label>
+                                    <span id="WarehouseError"></span>
+                                    <select class="form-control" name="Warehouse" id="Warehouse">
+                                        <option value="">Warehouse</option>
+                                        @foreach (Inventories.Models.tblWarehouse item in @ViewBag.Warehouse)
+                                        {
+                                            if (Model.Warehouse == item.WarehouseId)
+                                            {
+                                                <option value="@item.WarehouseId" selected>@item.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.WarehouseId">@item.Name</option>
+                                            }
+
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label></label>
+                                    <input class="form-control" name="SearchItem" id="SearchItem" placeholder="Scan barcode or search items" type="text" value="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label id="CheckinBatchLabel">Checkin Batch</label>
+                                    <span id="SetCheckinListError"></span>
+                                    <select class="form-control" id="SetCheckinList">
+                                        <option value="">Select Checkin Batch</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <span id="error"></span>
+                            <div class="col-md-12 col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-white" id="ItemTable">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 20px"></th>
+                                                <th class="col-md-6" hidden>Description</th>
+                                                <th class="col-md-6">Items</th>
+                                                @*@if (@ViewBag.tblCheckoutItem == null)
+                                            {*@
+                                                <th style="width:200px;">Available Quantity</th>
+                                                @*}*@
+                                                <th style="width:200px;">Quantity</th>
+                                                @*<th>Unit</th>*@
+                                                <th> </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
                                             <tr>
                                                 <td></td>
                                                 <td hidden>
-                                                    <input class="" type="text" hidden id="FDescriptionInputId" value="@item.ItemId" style="min-width:0px">
+                                                    <input class="" type="text" hidden id="DescriptionInputId" style="min-width:0px">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="text" id="FDescriptionInput" readonly="" style="min-width:150px" value="@item.tblItem.Name">
+                                                    <input class="form-control" hidden type="text" id="DescriptionInput" readonly="" style="min-width:150px">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="number" id="FItemNetQuantityInput" style="width:200px;" value="0" readonly="">
+                                                    <input class="form-control" hidden type="number" id="ItemNetQuantityInput" readonly="" style="width:200px;">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="number" id="FQtyInput" readonly="" style="width:200px;" value="@item.ItemQuantity">
+                                                    <input class="form-control" hidden id="QtyInput" readonly="" style="width:200px;" type="number">
                                                 </td>
-                                                <td style="display: none;">
-                                                    <input class="form-control" id="FCheckinItemId" readonly="" style="width:1px;" type="number" value="@item.CheckinItemId">
+                                                <td>
+                                                    <input class="form-control" hidden id="CheckinItemId" readonly="" style="width:200px;" type="number">
                                                 </td>
                                                 @*<td>
-                                                    <select class="form-control" id="FUnitInput" style="width:200px;" type="text">
-                                                        @if (@item.ItemUnit == "Piece")
-                                                        {
-                                                            <option value="Piece" selected>Piece</option>
-                                                        }
-                                                        else
-                                                        {
-                                                            <option value="Piece">Piece</option>
-                                                        }
-                                                        @if (@item.ItemUnit == "Dozen")
-                                                        {
-                                                            <option value="Dozen" selected>Dozen</option>
-                                                        }
-                                                        else
-                                                        {
-                                                            <option value="Dozen">Dozen</option>
-                                                        }
-                                                    </select>
-                                                </td>*@
+                                                <select class="form-control" hidden id="UnitInput" readonly="" style="width:200px;" type="text">
+                                                    <option value="Piece">Piece</option>
+                                                    <option value="Dozen">Dozen</option>
+                                                </select>
+                                            </td>*@
+                                                <td><a href="javascript:void(0)" hidden class="text-success font-18" title="Add"><i class="fa fa-plus" onclick="AddRow()"></i></a></td>
+
                                                 <td>
-                                                    <a href="javascript:void(0)" class="text-danger font-18" title="Remove"><i class="fa fa-trash" onclick="DeleteRowFlag(this)"></i></a>
-                                                    <input type="checkbox" name="Deleted" id="Deleted" value="true" hidden />
+                                                    <input class="form-control" hidden id="FNumber" readonly="" style="width:200px;" type="text">
                                                 </td>
-                                                <td>
-                                                    <input class="form-control" hidden id="FNumber" readonly="" style="width:200px;" type="text" value="@item.VNumber">
-                                                </td>
-                                                @*<td><a href="javascript:void(0)" class="text-danger font-18" title="Remove"><i class="fa fa-trash-o" onclick="DeleteRow(this)"></i></a></td>*@
                                             </tr>
-                                        }
-                                    }
+                                            @if (@ViewBag.tblCheckoutItem != null)
+                                            {
+                                                foreach (Inventories.Models.tblCheckoutItem item in @ViewBag.tblCheckoutItem)
+                                                {
 
-                                </tbody>
-                            </table>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td hidden>
+                                                            <input class="" type="text" hidden id="FDescriptionInputId" value="@item.ItemId" style="min-width:0px">
+                                                        </td>
+                                                        <td>
+                                                            <input class="form-control" type="text" id="FDescriptionInput" readonly="" style="min-width:150px" value="@item.tblItem.Name">
+                                                        </td>
+                                                        <td>
+                                                            <input class="form-control" type="number" id="FItemNetQuantityInput" style="width:200px;" value="0" readonly="">
+                                                        </td>
+                                                        <td>
+                                                            <input class="form-control" type="number" id="FQtyInput" readonly="" style="width:200px;" value="@item.ItemQuantity">
+                                                        </td>
+                                                        <td style="display: none;">
+                                                            <input class="form-control" id="FCheckinItemId" readonly="" style="width:1px;" type="number" value="@item.CheckinItemId">
+                                                        </td>
+                                                        @*<td>
+                                                        <select class="form-control" id="FUnitInput" style="width:200px;" type="text">
+                                                            @if (@item.ItemUnit == "Piece")
+                                                            {
+                                                                <option value="Piece" selected>Piece</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="Piece">Piece</option>
+                                                            }
+                                                            @if (@item.ItemUnit == "Dozen")
+                                                            {
+                                                                <option value="Dozen" selected>Dozen</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="Dozen">Dozen</option>
+                                                            }
+                                                        </select>
+                                                    </td>*@
+                                                        <td>
+                                                            <a href="javascript:void(0)" class="text-danger font-18" title="Remove"><i class="fa fa-trash" onclick="DeleteRowFlag(this)"></i></a>
+                                                            <input type="checkbox" name="Deleted" id="Deleted" value="true" hidden />
+                                                        </td>
+                                                        <td>
+                                                            <input class="form-control" hidden id="FNumber" readonly="" style="width:200px;" type="text" value="@item.VNumber">
+                                                        </td>
+                                                        @*<td><a href="javascript:void(0)" class="text-danger font-18" title="Remove"><i class="fa fa-trash-o" onclick="DeleteRow(this)"></i></a></td>*@
+                                                    </tr>
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input class="form-control" type="file" name="FAttachment" id="FAttachment" value="" />
+                            </div><br /><br /><br />
+                            <div class="col-md-12">
+                                <label>Details</label>
+                                <textarea class="form-control" name="Details" id="Details">@Model.Details</textarea>
+                            </div><br /><br /><br />
+                            @*<div class="col-md-12">
+                            @if (Model.draft == true)
+                            {
+                                <input type="checkbox" id="draft" name="draft" value="true" checked />
+                            }
+                            else
+                            {
+                                <input type="checkbox" id="draft" name="draft" value="true" />
+                            }
+                            <label>This record is draft</label>
+                        </div>*@
+                        </div>
+                        <div class="text-center m-t-20">
+                            @*@if (@ViewBag.tblCheckoutItem == null)
+                        {*@
+                            <div id="loading" style="display:none;margin: 0 auto; text-decoration-color:cornflowerblue;"><div class="spinner-border text-success" id="display_loading" style="margin: 0 auto;"></div><div class="spinner-border text-success" id="display_loading" style="display:none;margin: 0 auto;"></div> Loading...</div>
+                            <input type="button" class="btn btn-primary submit-btn" id="btnSave" value="Save">
+                            @*}*@
 
-                    </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <input class="form-control" type="file" name="FAttachment" id="FAttachment" value="" />
-                    </div><br /><br /><br />
-                    <div class="col-md-12">
-                        <label>Details</label>
-                        <textarea class="form-control" name="Details" id="Details">@Model.Details</textarea>
-                    </div><br /><br /><br />
-                    @*<div class="col-md-12">
-                        @if (Model.draft == true)
-                        {
-                            <input type="checkbox" id="draft" name="draft" value="true" checked />
-                        }
-                        else
-                        {
-                            <input type="checkbox" id="draft" name="draft" value="true" />
-                        }
-                        <label>This record is draft</label>
-                    </div>*@
-                </div>
-                <div class="text-center m-t-20">
-                    @*@if (@ViewBag.tblCheckoutItem == null)
-                    {*@
-                        <div id="loading" style="display:none;margin: 0 auto; text-decoration-color:cornflowerblue;"><div class="spinner-border text-success" id="display_loading" style="margin: 0 auto;"></div><div class="spinner-border text-success" id="display_loading" style="display:none;margin: 0 auto;"></div> Loading...</div>
-                        <input type="button" class="btn btn-primary submit-btn" id="btnSave" value="Save">
-                    @*}*@
-
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-}
+     </div>
+            }
 
-</div>
+        </div>
 
 <script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" />

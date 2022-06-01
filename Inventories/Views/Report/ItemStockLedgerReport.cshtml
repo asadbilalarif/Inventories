@@ -1,27 +1,19 @@
-﻿@model IEnumerable<Inventories.Models.CheckoutReportData_Result>
+﻿@model IEnumerable<Inventories.Models.ItemStockLedgerReportData_Result>
 @using Inventories.Models;
 @{
-    ViewData["Title"] = "Checkouts";
+    ViewData["Title"] = "Adjustments";
 
 
 
     //string[] StateDepartment = (string[])ViewBag.StateDepartment;
 
-    string StartDate = ViewBag.StartDate;
-    string EndDate = ViewBag.EndDate;
-
-    string StartCreatedDate = ViewBag.StartCreatedDate;
-    string EndCreatedDate = ViewBag.EndCreatedDate;
-    string Reference = ViewBag.Reference;
-    int Contact = ViewBag.Contact;
-    List<tblContact> Contacts = (List<tblContact>)ViewBag.Contacts;
+    
     int Warehouse = ViewBag.Warehouse;
     List<tblWarehouse> Warehouses = (List<tblWarehouse>)ViewBag.Warehouses;
-    int User = ViewBag.User;
-    List<tblUser> Users = (List<tblUser>)ViewBag.Users;
+    int Item = ViewBag.Item;
+    List<tblItem> Items = (List<tblItem>)ViewBag.Items;
     int Category = ViewBag.Category;
     List<tblCategory> Categories = (List<tblCategory>)ViewBag.Categories;
-    bool draft = ViewBag.draft;
 
 
 
@@ -53,51 +45,10 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    @using (Html.BeginForm("CheckoutReport", "Report", FormMethod.Post))
+                    @using (Html.BeginForm("ItemStockLedgerReport", "Report", FormMethod.Post))
                     {
                         <form>
                             <div class="row">
-                                <div class="col-md-3">
-                                    <label>Start Date</label>
-                                    <input class="form-control" type="date" name="StartDate" value="@StartDate" />
-                                </div>
-                                <div class="col-md-3">
-                                    <label>End Date</label>
-                                    <input class="form-control" type="date" name="EndDate" value="@EndDate" />
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Start Created At</label>
-                                    <input class="form-control" type="date" name="StartCreatedDate" value="@StartCreatedDate" />
-                                </div>
-                                <div class="col-md-3">
-                                    <label>End Created At</label>
-                                    <input class="form-control" type="date" name="EndCreatedDate" value="@EndCreatedDate" />
-                                </div>
-
-
-                            </div><br />
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label>Reference</label>
-                                    <input class="form-control" type="text" name="Reference" value="@Reference" />
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Contact</label>
-                                    <select class="form-control" name="Contact">
-                                        <option value="">Contact</option>
-                                        @foreach (tblContact item in Contacts)
-                                        {
-                                            if (@Contact == item.ContactId)
-                                            {
-                                                <option value="@item.ContactId" selected>@item.Name</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@item.ContactId">@item.Name</option>
-                                            }
-                                        }
-                                    </select>
-                                </div>
                                 <div class="col-md-3">
                                     <label>Warehouse</label>
                                     <select class="form-control" name="Warehouse">
@@ -116,18 +67,18 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label>User</label>
-                                    <select class="form-control" name="User">
-                                        <option value="">User</option>
-                                        @foreach (tblUser item in Users)
+                                    <label>Item</label>
+                                    <select class="form-control" name="Item">
+                                        <option value="">Item</option>
+                                        @foreach (tblItem item in Items)
                                         {
-                                            if (@User == item.UserId)
+                                            if (@Item == item.ItemId)
                                             {
-                                                <option value="@item.UserId" selected>@item.Name</option>
+                                                <option value="@item.ItemId" selected>@item.Name</option>
                                             }
                                             else
                                             {
-                                                <option value="@item.UserId">@item.Name</option>
+                                                <option value="@item.ItemId">@item.Name</option>
                                             }
                                         }
                                     </select>
@@ -150,25 +101,25 @@
                                     </select>
                                 </div>
                                 @*<div class="col-md-3">
-                                    <br />
-                                    @if (@draft == true)
-                                    {
-                                        <input type="checkbox" name="draft" value="true" checked />
-                                    }
-                                    else
-                                    {
-                                        <input type="checkbox" name="draft" value="true" />
-                                    }
+                                        <br />
+                                        @if (@draft == true)
+                                        {
+                                            <input type="checkbox" name="draft" value="true" checked />
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="draft" value="true" />
+                                        }
 
-                                    <label>Only draft records</label>
-                                </div>*@
+                                        <label>Only draft records</label>
+                                    </div>*@
 
 
                             </div><br />
                             <div class="row">
                                 <div class="col-md-12">
                                     <button class="btn btn-primary" style="float:right;">Search</button>
-                                    <a href="@Url.Action("CheckoutReport")"><button type="button" class="btn btn-danger" style="margin-right:1%;float:right;">Reset</button></a>
+                                    <a href="@Url.Action("ItemStockLedgerReport")"><button type="button" class="btn btn-danger" style="margin-right:1%;float:right;">Reset</button></a>
                                 </div>
                             </div>
 
@@ -192,9 +143,9 @@
                             <div class="container-fluid">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">Checkout Report</h5>
+                                        <h5 class="breadcrumb-title">Item Stock Ledger Report</h5>
                                     </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateCheckoutB">
+                                    <div class="col-md-6 col-6 text-right" id="CreateAdjustmentB">
                                         <button class="btn btn-primary" id="ShowFilters" style="float:right"><i class="fas fa-toggle-off" id="IShowFilters"> Toggle Form</i> </button>
                                     </div>
                                 </div>
@@ -206,31 +157,23 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="table-responsive">
-                            <table class="cell-border table table-hover table-center  mb-0 " id="CheckoutTable">
+                            <table class="cell-border table table-hover table-center  mb-0 " id="AdjustmentTable">
                                 <thead>
                                     <tr>
-                                        <th style="display:none;">Checkout ID</th>
-                                        <th>Checkout Date</th>
-                                        <th>Checkout Number</th>
-                                        <th>Contact</th>
-                                        <th>Warehouse</th>
-                                        <th>User</th>
-                                        <th>Reference</th>
-                                        <th>Details</th>
+                                        <th>Category Name</th>
+                                        <th>Item Name</th>
+                                        <th>Qty</th>
+                                        <th>Warehouse Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Inventories.Models.CheckoutReportData_Result Checkout in Model)
+                                    @foreach (Inventories.Models.ItemStockLedgerReportData_Result ItemStockLedger in Model)
                                     {
                                         <tr>
-                                            <td style="display:none;">@Checkout.CheckoutId</td>
-                                            <td>@Checkout.CheckoutDate.ToString("dd-MM-yyyy")</td>
-                                            <td><a href="@Url.Action("ViewCheckout","Checkout",new {Id=Checkout.CheckoutId })" target="_blank">@Checkout.CheckoutNumber</a></td>
-                                            <td>@Checkout.ContactName</td>
-                                            <td>@Checkout.WarehouseName</td>
-                                            <td>@Checkout.UserName</td>
-                                            <td>@Checkout.Reference</td>
-                                            <td>@Checkout.Details</td>
+                                            <td>@ItemStockLedger.CategoryName</td>
+                                            <td><a href="@Url.Action("ItemStockLedgerDetailReport","Report",new {ItemId=ItemStockLedger.ItemId,WarehouseId=ItemStockLedger.WarehouseId })">@ItemStockLedger.ItemName</a></td>
+                                            <td>@ItemStockLedger.TQty</td>
+                                            <td>@ItemStockLedger.WarehouseName</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -278,7 +221,7 @@
 
 
 
-        //$('#CheckoutTable').DataTable({
+        //$('#AdjustmentTable').DataTable({
         //    dom: 'Bfrtip',
         //    buttons: [
         //        //'pageLength',
@@ -298,7 +241,7 @@
 
 
         $(".nav li ul li").removeClass("active");
-        $('#CheckoutReport').addClass('active');
+        $('#ItemStockLedgerReport').addClass('active');
         $('#Reports a').addClass('subdrop');
         $("#Reports  ul").first().css('display', 'block');
 
