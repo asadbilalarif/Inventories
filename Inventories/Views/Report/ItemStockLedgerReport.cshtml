@@ -67,23 +67,6 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Item</label>
-                                    <select class="form-control" name="Item">
-                                        <option value="">Item</option>
-                                        @foreach (tblItem item in Items)
-                                        {
-                                            if (@Item == item.ItemId)
-                                            {
-                                                <option value="@item.ItemId" selected>@item.Name</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@item.ItemId">@item.Name</option>
-                                            }
-                                        }
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
                                     <label>Category</label>
                                     <select class="form-control" name="Category">
                                         <option value="">Category</option>
@@ -100,19 +83,25 @@
                                         }
                                     </select>
                                 </div>
-                                @*<div class="col-md-3">
-                                        <br />
-                                        @if (@draft == true)
+                                <div class="col-md-3">
+                                    <label>Item</label>
+                                    <select class="form-control" name="Item">
+                                        <option value="">Item</option>
+                                        @foreach (tblItem item in Items)
                                         {
-                                            <input type="checkbox" name="draft" value="true" checked />
+                                            if (@Item == item.ItemId)
+                                            {
+                                                <option value="@item.ItemId" selected>@item.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.ItemId">@item.Name</option>
+                                            }
                                         }
-                                        else
-                                        {
-                                            <input type="checkbox" name="draft" value="true" />
-                                        }
+                                    </select>
+                                </div>
 
-                                        <label>Only draft records</label>
-                                    </div>*@
+                                
 
 
                             </div><br />
