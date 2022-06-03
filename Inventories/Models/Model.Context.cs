@@ -45,6 +45,9 @@ namespace Inventories.Models
         public virtual DbSet<tblCheckoutItem> tblCheckoutItems { get; set; }
         public virtual DbSet<tblAdjustment> tblAdjustments { get; set; }
         public virtual DbSet<tblAdjustmentItem> tblAdjustmentItems { get; set; }
+        public virtual DbSet<tblEmailSetting> tblEmailSettings { get; set; }
+        public virtual DbSet<tblSetting> tblSettings { get; set; }
+        public virtual DbSet<tblUserWarehouse> tblUserWarehouses { get; set; }
     
         public virtual ObjectResult<string> TransfrNumber()
         {

@@ -42,6 +42,13 @@ namespace Inventories.Controllers
                     cookie["UserId"] = User.UserId.ToString();
                     cookie["Role"] = User.tblRole.Role;
 
+
+                    HttpCookie Settingcookie = new HttpCookie("Setting");
+                    tblSetting Setting = DB.tblSettings.FirstOrDefault();
+                    Settingcookie["Name"] = Setting.Name;
+                    Settingcookie["Color"] = Setting.Color;
+                    Settingcookie["HoverColor"] = Setting.HoverColor;
+
                     //Session["User"] = DB.tblUsers.Select(r => r).Where(x => x.Email == Email).FirstOrDefault();
                     Session["access"] = DB.tblAccessLevels.Select(r => r).Where(x => x.RoleId == User.RoleId && x.isActive == true).ToList();
                     // This cookie will remain  for one month.
@@ -49,6 +56,7 @@ namespace Inventories.Controllers
 
                     // Add it to the current web response.
                     Response.Cookies.Add(cookie);
+                    Response.Cookies.Add(Settingcookie);
 
                     FormsAuthentication.SetAuthCookie(Email, false);
 
@@ -91,10 +99,17 @@ namespace Inventories.Controllers
             {
                 if (DB.tblUsers.Where(x => x.Email == Email).FirstOrDefault() != null)
                 {
-                    string SenderEmail = System.Configuration.ConfigurationManager.AppSettings["SenderEmail"].ToString();
-                    string SenderPassword = System.Configuration.ConfigurationManager.AppSettings["SenderPassword"].ToString();
-                    SmtpClient Client = new SmtpClient("smtp.gmail.com", 587);
-                    Client.EnableSsl = true;
+
+                    tblEmailSetting setting = DB.tblEmailSettings.Find(1);
+                    string SenderEmail = setting.Email;//System.Configuration.ConfigurationManager.AppSettings["SenderEmail"].ToString();
+                    string SenderPassword = setting.Password;//System.Configuration.ConfigurationManager.AppSettings["SenderPassword"].ToString();
+                    SmtpClient Client = new SmtpClient(setting.SMTP, Convert.ToInt32(setting.Port));
+                    Client.EnableSsl = Convert.ToBoolean(setting.isActive);
+
+                    //string SenderEmail = System.Configuration.ConfigurationManager.AppSettings["SenderEmail"].ToString();
+                    //string SenderPassword = System.Configuration.ConfigurationManager.AppSettings["SenderPassword"].ToString();
+                    //SmtpClient Client = new SmtpClient("smtp.gmail.com", 587);
+                    //Client.EnableSsl = true;
                     Client.Timeout = 100000;
                     Client.DeliveryMethod = SmtpDeliveryMethod.Network;
                     Client.UseDefaultCredentials = false;

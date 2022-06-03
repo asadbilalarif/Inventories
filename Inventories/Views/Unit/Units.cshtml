@@ -41,7 +41,10 @@
                                         <h5 class="breadcrumb-title">Unit List</h5>
                                     </div>
                                     <div class="col-md-6 col-6 text-right" id="CreateUnitB">
-                                        <a href="@Url.Action("CreateUnit","Unit")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> Create New Unit</a>
+                                        @if (ViewBag.CreateAccess == true)
+                                        {
+                                            <a href="@Url.Action("CreateUnit","Unit")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> Create New Unit</a>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -86,12 +89,18 @@
 
                                             <td class="text-end">
                                                 <div class="actions">
-                                                    <a href="@Url.Action("CreateUnit","Unit",new {id=Unit.UnitId })" id="EditUnit" class="text-black">
-                                                        <i class="fa fa-edit"></i> Edit
-                                                    </a>
-                                                    <a class="text-danger" href="#" data-toggle="modal" data-target="#UnitDelete" id="DeleteUnit">
-                                                        <i class="fa fa-trash"></i> Delete
-                                                    </a>
+                                                    @if (ViewBag.EditAccess == true)
+                                                    {
+                                                        <a href="@Url.Action("CreateUnit","Unit",new {id=Unit.UnitId })" id="EditUnit" class="text-black">
+                                                            <i class="fa fa-edit"></i> Edit
+                                                        </a>
+                                                    }
+                                                    @if (ViewBag.DeleteAccess == true)
+                                                    {
+                                                        <a class="text-danger" href="#" data-toggle="modal" data-target="#UnitDelete" id="DeleteUnit">
+                                                            <i class="fa fa-trash"></i> Delete
+                                                         </a>
+                                                    }
                                                 </div>
                                             </td>
                                         </tr>

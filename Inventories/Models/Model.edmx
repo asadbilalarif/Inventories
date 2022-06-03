@@ -162,6 +162,19 @@
           <Property Name="EditDate" Type="datetime" />
           <Property Name="isActive" Type="bit" />
         </EntityType>
+        <EntityType Name="tblEmailSetting">
+          <Key>
+            <PropertyRef Name="EmailSettingId" />
+          </Key>
+          <Property Name="EmailSettingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="SMTP" Type="nvarchar(max)" />
+          <Property Name="Port" Type="nvarchar(max)" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="tblItem">
           <Key>
             <PropertyRef Name="ItemId" />
@@ -214,6 +227,20 @@
           <Property Name="EditBy" Type="int" />
           <Property Name="EditDate" Type="datetime" />
           <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblSetting">
+          <Key>
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Name="SettingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Logo" Type="image" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Color" Type="nvarchar(max)" />
+          <Property Name="HoverColor" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
         </EntityType>
         <EntityType Name="tblTempPath">
           <Key>
@@ -305,6 +332,14 @@
           <Property Name="EditBy" Type="int" />
           <Property Name="EditDate" Type="datetime" />
           <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblUserWarehouse">
+          <Key>
+            <PropertyRef Name="UserWarehouseId" />
+          </Key>
+          <Property Name="UserWarehouseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="WarehouseId" Type="int" />
         </EntityType>
         <EntityType Name="tblWarehouse">
           <Key>
@@ -467,6 +502,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tblEmailSetting_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblEmailSetting" Type="Self.tblEmailSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblEmailSetting">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblUser_tblRole">
           <End Role="tblRole" Type="Self.tblRole" Multiplicity="0..1" />
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
@@ -488,6 +535,30 @@
             </Principal>
             <Dependent Role="tblUser">
               <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserWarehouse_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblUserWarehouse" Type="Self.tblUserWarehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUserWarehouse">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserWarehouse_tblWarehouse">
+          <End Role="tblWarehouse" Type="Self.tblWarehouse" Multiplicity="0..1" />
+          <End Role="tblUserWarehouse" Type="Self.tblUserWarehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblUserWarehouse">
+              <PropertyRef Name="WarehouseId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -615,14 +686,17 @@
           <EntitySet Name="tblCheckout" EntityType="Self.tblCheckout" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCheckoutItem" EntityType="Self.tblCheckoutItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblContact" EntityType="Self.tblContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmailSetting" EntityType="Self.tblEmailSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblItem" EntityType="Self.tblItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblMenu" EntityType="Self.tblMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblRole" EntityType="Self.tblRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSetting" EntityType="Self.tblSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTempPath" EntityType="Self.tblTempPath" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTransfer" EntityType="Self.tblTransfer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTransferItem" EntityType="Self.tblTransferItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUnit" EntityType="Self.tblUnit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserWarehouse" EntityType="Self.tblUserWarehouse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblWarehouse" EntityType="Self.tblWarehouse" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="AdjustmentAdjustment" Association="Self.AdjustmentAdjustment">
             <End Role="tblAdjustment" EntitySet="tblAdjustment" />
@@ -672,6 +746,10 @@
             <End Role="tblMenu" EntitySet="tblMenu" />
             <End Role="tblAccessLevel" EntitySet="tblAccessLevel" />
           </AssociationSet>
+          <AssociationSet Name="FK_tblEmailSetting_tblUser" Association="Self.FK_tblEmailSetting_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblEmailSetting" EntitySet="tblEmailSetting" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblUser_tblRole" Association="Self.FK_tblUser_tblRole">
             <End Role="tblRole" EntitySet="tblRole" />
             <End Role="tblUser" EntitySet="tblUser" />
@@ -679,6 +757,14 @@
           <AssociationSet Name="FK_tblUser_tblWarehouse" Association="Self.FK_tblUser_tblWarehouse">
             <End Role="tblWarehouse" EntitySet="tblWarehouse" />
             <End Role="tblUser" EntitySet="tblUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserWarehouse_tblUser" Association="Self.FK_tblUserWarehouse_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblUserWarehouse" EntitySet="tblUserWarehouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserWarehouse_tblWarehouse" Association="Self.FK_tblUserWarehouse_tblWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouse" />
+            <End Role="tblUserWarehouse" EntitySet="tblUserWarehouse" />
           </AssociationSet>
           <AssociationSet Name="ItemCategory" Association="Self.ItemCategory">
             <End Role="tblCategory" EntitySet="tblCategory" />
@@ -724,6 +810,8 @@
           <Property Name="isActive" Type="Boolean" />
           <NavigationProperty Name="tblRole" Relationship="InventoriesModel.FK_tblUser_tblRole" FromRole="tblUser" ToRole="tblRole" />
           <NavigationProperty Name="tblWarehouse" Relationship="InventoriesModel.FK_tblUser_tblWarehouse" FromRole="tblUser" ToRole="tblWarehouse" />
+          <NavigationProperty Name="tblEmailSettings" Relationship="InventoriesModel.FK_tblEmailSetting_tblUser" FromRole="tblUser" ToRole="tblEmailSetting" />
+          <NavigationProperty Name="tblUserWarehouses" Relationship="InventoriesModel.FK_tblUserWarehouse_tblUser" FromRole="tblUser" ToRole="tblUserWarehouse" />
         </EntityType>
         <EntityContainer Name="InventoriesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
@@ -882,6 +970,21 @@
             <Parameter Name="ItemId" Mode="In" Type="Int32" />
             <Parameter Name="WarehouseId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="tblEmailSettings" EntityType="InventoriesModel.tblEmailSetting" />
+          <AssociationSet Name="FK_tblEmailSetting_tblUser" Association="InventoriesModel.FK_tblEmailSetting_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblEmailSetting" EntitySet="tblEmailSettings" />
+          </AssociationSet>
+          <EntitySet Name="tblSettings" EntityType="InventoriesModel.tblSetting" />
+          <EntitySet Name="tblUserWarehouses" EntityType="InventoriesModel.tblUserWarehouse" />
+          <AssociationSet Name="FK_tblUserWarehouse_tblUser" Association="InventoriesModel.FK_tblUserWarehouse_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblUserWarehouse" EntitySet="tblUserWarehouses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserWarehouse_tblWarehouse" Association="InventoriesModel.FK_tblUserWarehouse_tblWarehouse">
+            <End Role="tblWarehouse" EntitySet="tblWarehouses" />
+            <End Role="tblUserWarehouse" EntitySet="tblUserWarehouses" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tblAccessLevel">
           <Key>
@@ -1058,6 +1161,7 @@
           <NavigationProperty Name="tblCheckins" Relationship="InventoriesModel.CheckinWarehouse" FromRole="tblWarehouse" ToRole="tblCheckin" />
           <NavigationProperty Name="tblCheckouts" Relationship="InventoriesModel.CheckoutWarehouse" FromRole="tblWarehouse" ToRole="tblCheckout" />
           <NavigationProperty Name="tblAdjustments" Relationship="InventoriesModel.AdjustmentWarehouse" FromRole="tblWarehouse" ToRole="tblAdjustment" />
+          <NavigationProperty Name="tblUserWarehouses" Relationship="InventoriesModel.FK_tblUserWarehouse_tblWarehouse" FromRole="tblWarehouse" ToRole="tblUserWarehouse" />
         </EntityType>
         <Association Name="FK_tblUser_tblWarehouse">
           <End Type="InventoriesModel.tblWarehouse" Role="tblWarehouse" Multiplicity="0..1" />
@@ -1849,6 +1953,80 @@
           <Property Type="Int32" Name="ItemNetQuantity" Nullable="true" />
           <Property Type="String" Name="WarehouseName" Nullable="true" />
         </ComplexType>
+        <EntityType Name="tblEmailSetting">
+          <Key>
+            <PropertyRef Name="EmailSettingId" />
+          </Key>
+          <Property Name="EmailSettingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SMTP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Port" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblUser" Relationship="InventoriesModel.FK_tblEmailSetting_tblUser" FromRole="tblEmailSetting" ToRole="tblUser" />
+        </EntityType>
+        <Association Name="FK_tblEmailSetting_tblUser">
+          <End Type="InventoriesModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblEmailSetting" Role="tblEmailSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblEmailSetting">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblSetting">
+          <Key>
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Name="SettingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="HoverColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tblUserWarehouse">
+          <Key>
+            <PropertyRef Name="UserWarehouseId" />
+          </Key>
+          <Property Name="UserWarehouseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="WarehouseId" Type="Int32" />
+          <NavigationProperty Name="tblUser" Relationship="InventoriesModel.FK_tblUserWarehouse_tblUser" FromRole="tblUserWarehouse" ToRole="tblUser" />
+          <NavigationProperty Name="tblWarehouse" Relationship="InventoriesModel.FK_tblUserWarehouse_tblWarehouse" FromRole="tblUserWarehouse" ToRole="tblWarehouse" />
+        </EntityType>
+        <Association Name="FK_tblUserWarehouse_tblUser">
+          <End Type="InventoriesModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblUserWarehouse" Role="tblUserWarehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUserWarehouse">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserWarehouse_tblWarehouse">
+          <End Type="InventoriesModel.tblWarehouse" Role="tblWarehouse" Multiplicity="0..1" />
+          <End Type="InventoriesModel.tblUserWarehouse" Role="tblUserWarehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="tblUserWarehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2477,6 +2655,44 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tblEmailSettings">
+            <EntityTypeMapping TypeName="InventoriesModel.tblEmailSetting">
+              <MappingFragment StoreEntitySet="tblEmailSetting">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="SMTP" ColumnName="SMTP" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailSettingId" ColumnName="EmailSettingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSettings">
+            <EntityTypeMapping TypeName="InventoriesModel.tblSetting">
+              <MappingFragment StoreEntitySet="tblSetting">
+                <ScalarProperty Name="HoverColor" ColumnName="HoverColor" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUserWarehouses">
+            <EntityTypeMapping TypeName="InventoriesModel.tblUserWarehouse">
+              <MappingFragment StoreEntitySet="tblUserWarehouse">
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserWarehouseId" ColumnName="UserWarehouseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

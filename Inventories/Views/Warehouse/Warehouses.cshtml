@@ -41,7 +41,10 @@
                                         <h5 class="breadcrumb-title">Warehouse List</h5>
                                     </div>
                                     <div class="col-md-6 col-6 text-right" id="CreateWarehouseB">
-                                        <a href="@Url.Action("CreateWarehouse","Warehouse")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> Create New Warehouse</a>
+                                        @if (ViewBag.CreateAccess == true)
+                                        {
+                                            <a href="@Url.Action("CreateWarehouse","Warehouse")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> Create New Warehouse</a>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -100,12 +103,18 @@
                                         }
                                         <td class="text-end">
                                             <div class="actions">
-                                                <a href="@Url.Action("CreateWarehouse","Warehouse",new {id=Warehouse.WarehouseId })" id="EditWarehouse" class="text-black">
-                                                    <i class="fa fa-edit"></i> Edit
-                                                </a>
-                                                <a class="text-danger" href="#" data-toggle="modal" data-target="#WarehouseDelete" id="DeleteWarehouse">
-                                                    <i class="fa fa-trash"></i> Delete
-                                                </a>
+                                                @if (ViewBag.EditAccess == true)
+                                                {
+                                                    <a href="@Url.Action("CreateWarehouse","Warehouse",new {id=Warehouse.WarehouseId })" id="EditWarehouse" class="text-black">
+                                                        <i class="fa fa-edit"></i> Edit
+                                                    </a>
+                                                }
+                                                @if (ViewBag.DeleteAccess == true)
+                                                {
+                                                    <a class="text-danger" href="#" data-toggle="modal" data-target="#WarehouseDelete" id="DeleteWarehouse">
+                                                        <i class="fa fa-trash"></i> Delete
+                                                    </a>
+                                                }
                                             </div>
                                         </td>
                                     </tr>

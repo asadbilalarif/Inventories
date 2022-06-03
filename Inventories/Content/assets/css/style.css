@@ -1500,7 +1500,8 @@ button.bg-danger:hover {
 }
 .user-menu .dropdown-menu .dropdown-item:hover {
 	color: #fff;
-    background: #00d0f1;
+    background: #1d4ed8;
+    /*background: #00d0f1;*/
 }
 .header .dropdown-menu > li > a:focus,
 .header .dropdown-menu > li > a:hover {
@@ -2038,7 +2039,8 @@ html.menu-opened body {
 }
 .login-wrapper .loginbox .login-left {
     align-items: center;
-    background: linear-gradient(180deg, #1b5a90, #00d0f1);
+    background: linear-gradient(180deg, #374151, #111827);
+    /*background: linear-gradient(180deg, #1b5a90, #00d0f1);*/
     border-radius: 6px 0 0 6px;
     flex-direction: column;
     justify-content: center;

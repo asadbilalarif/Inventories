@@ -1,0 +1,105 @@
+﻿@model  Inventories.Models.tblEmailSetting
+
+@{
+    ViewBag.Title = "EmailSetting";
+
+    int EmailSettingId = Model.EmailSettingId;
+    string Email = Model.Email;
+    string Password = Model.Password;
+    string SMTP = Model.SMTP;
+    string Port = Model.Port;
+
+    bool? isActive = Model.isActive;
+
+    string Update = @ViewBag.Error;
+}
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+                    @using (Html.BeginForm("CreateEmailSetting", "Setting", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {@Html.AntiForgeryToken()
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="breadcrumb-bar">
+                                    <div class="container-fluid">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-6 col-6">
+                                                @if (Model == null)
+                                                {
+                                                <h5 class="breadcrumb-title">Create Email Setting</h5>
+                                                }
+                                                else
+                                                {
+                                                    <h5 class="breadcrumb-title">Edit Email Setting</h5>
+                                                }
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:none;" class="alert alert-info alert-dismissible fade show" id="UpdateAlert" role="alert">
+                            <strong>Success!</strong> @ViewBag.Error
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Email</label>
+                                    <input type="text" class="form-control" style="display:none;" name="EmailSettingId" value="@EmailSettingId" required>
+                                    <input type="email" class="form-control" id="" name="Email" value="@Email" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" id="" name="Password" value="@Password" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>SMTP</label>
+                                    <input type="text" class="form-control" id="" name="SMTP" value="@SMTP" required>
+                                </div>
+                                <div class="col-md-1">
+                                    <label>Port</label>
+                                    <input type="text" class="form-control" id="" name="Port" value="@Port" required>
+                                </div>
+                                <div class="col-md-2 ">
+                                    <label>Enable SSL</label>
+                                    @if (@isActive == true)
+                                    {
+                                        <input type="checkbox" class="form-control" id="" name="isActive" value="true" checked>
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" class="form-control" id="" name="isActive" value="true">
+                                    }
+
+                                </div>
+                                <div class="col-md-12 text-right">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit" id="SaveChanges" style="margin-top: 5%; margin-right: 5%;">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+            
+        </div>
+    </div>
+            
+</div>
+
+<script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>
+
+<script>
+     if ("@Update" != "") {
+                    $('#UpdateAlert').fadeIn();
+                    $('#UpdateAlert').fadeOut(6000);
+                }
+                else {
+                    $('#UpdateAlert').fadeOut();
+                }
+</script>

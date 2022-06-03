@@ -14,6 +14,13 @@ namespace Inventories.Models
     
     public partial class tblUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblUser()
+        {
+            this.tblEmailSettings = new HashSet<tblEmailSetting>();
+            this.tblUserWarehouses = new HashSet<tblUserWarehouse>();
+        }
+    
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Username { get; set; }
@@ -30,5 +37,9 @@ namespace Inventories.Models
     
         public virtual tblRole tblRole { get; set; }
         public virtual tblWarehouse tblWarehouse { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblEmailSetting> tblEmailSettings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblUserWarehouse> tblUserWarehouses { get; set; }
     }
 }

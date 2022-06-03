@@ -3,7 +3,7 @@
     int UserId = 0;
     string username = "";
     string Name = "";
-    string Phone= "";
+    string Phone = "";
     string Email = "";
     int? RoleId = 0;
     int? WarehouseId = 0;
@@ -19,11 +19,14 @@
         WarehouseId = Model.Warehouse;
     }
 
-
+    
 
 }
 <head>
     @*<link href="~/Theme/template/admin/assets/css/select2.min.css" rel="stylesheet" />*@
+
+    @*<link rel="stylesheet" href="~/assets/vendor/select2/css/select2.min.css">*@
+    
 
 </head>
 
@@ -80,7 +83,7 @@
                                 <input type="text" class="form-control" id="Name" name="Name" value="@Name" required>
                             </div>
                         </div>
-                        
+
 
                     </div>
 
@@ -97,9 +100,9 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Warehouse<span style="color:red;">*</span> <small id="LblWarehouseError" style="display:none; color:red;">Warehouse Must be selected!!!</small></label><br />
-                                <select class="form-control" id="Warehouse" name="Warehouse" required>
-                                    <option value="">Select Warehouse</option>
-                                   @foreach (Inventories.Models.tblWarehouse Warehouse in @ViewBag.Warehouse)
+                                <select class="form-control select" id="WarehouseId" name="WarehouseId"  multiple required>
+                                    @*<option value="">Select Warehouse</option>*@
+                                    @*@foreach (Inventories.Models.tblWarehouse Warehouse in @ViewBag.Warehouse)
                                     {
                                         if (@Warehouse.WarehouseId == WarehouseId)
                                         {
@@ -109,11 +112,59 @@
                                         {
                                             <option value="@Warehouse.WarehouseId">@Warehouse.Name</option>
                                         }
+                                    }*@
+
+                                    @foreach (var item in ViewBag.Warehouse)
+                            {
+                                    int Check = 0;
+                                if (ViewBag.UserWarehouse.Count > 0)
+                                {
+                                    foreach (var Inneritem in ViewBag.UserWarehouse)
+                                    {
+                                        if (Inneritem.WarehouseId == @item.WarehouseId)
+                                        {
+                                            <option value="@item.WarehouseId" selected>@item.Name</option>
+                                            {
+                                                Check = 1;
+                                            }
+                                            
+                                        }
+
+                                    }
+                                    if (Check == 0)
+                                    {
+                                        <option value="@item.WarehouseId" >@item.Name</option>
+                                    }
+
+                                }
+                            else
+                            {
+                            <option value="@item.WarehouseId">@item.Name</option>
+                            }
+
+                            }
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Role<span style="color:red;">*</span> <small id="LblRoleError" style="display:none; color:red;">Role Must be selected!!!</small></label><br />
+                                <select class="form-control" id="Role" name="RoleId" required>
+                                    @foreach (Inventories.Models.tblRole Role in @ViewBag.Roles)
+                                    {
+                                        if (@Role.RoleId == RoleId)
+                                        {
+                                            <option value="@Role.RoleId" selected>@Role.Role</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Role.RoleId">@Role.Role</option>
+                                        }
                                     }
                                 </select>
                             </div>
                         </div>
-
                     </div>
                     <div class="row">
 
@@ -138,24 +189,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Role<span style="color:red;">*</span> <small id="LblRoleError" style="display:none; color:red;">Role Must be selected!!!</small></label><br />
-                                <select class="form-control" id="Role" name="RoleId" required>
-                                    @foreach (Inventories.Models.tblRole Role in @ViewBag.Roles)
-                                    {
-                                        if (@Role.RoleId == RoleId)
-                                        {
-                                            <option value="@Role.RoleId" selected>@Role.Role</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@Role.RoleId">@Role.Role</option>
-                                        }
-                                    }
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label></label>
@@ -180,4 +214,13 @@
 
 <!-- /Page Wrapper -->
 @*<script src="~/Theme/template/admin/assets/js/jquery-3.2.1.min.js"></script>*@
-<script src="~/Content/assets/js/jquery-3.5.1.js"></script>
+@*<script src="~/Content/assets/js/jquery-3.5.1.js"></script>*@
+<script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>*@
+
+
+
+<script>
+    //$('.js-example-basic-multiple').select2();
+    //$('select[multiple]').multiselect();
+</script>

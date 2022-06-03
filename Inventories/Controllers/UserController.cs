@@ -5,10 +5,12 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static Inventories.FilterConfig;
 
 namespace Inventories.Controllers
 {
     [Authorize]
+    [AuthorizeAction1FilterAttribute]
     public class UserController : Controller
     {
         InventoriesEntities DB = new InventoriesEntities();
@@ -19,6 +21,19 @@ namespace Inventories.Controllers
             ViewBag.Success = Success;
             ViewBag.Update = Update;
             ViewBag.Delete = Delete;
+
+            ViewBag.Access = Session["Access"];
+            List<tblAccessLevel> AccessLevel = (List<tblAccessLevel>)ViewBag.Access;
+            foreach (var item in AccessLevel)
+            {
+                if (item.MenuId == 4)
+                {
+                    ViewBag.CreateAccess = item.CreateAccess;
+                    ViewBag.EditAccess = item.EditAccess;
+                    ViewBag.DeleteAccess = item.DeleteAccess;
+                }
+            }
+
             return View(UserList);
         }
 
@@ -33,10 +48,12 @@ namespace Inventories.Controllers
                 if (id != null && id != 0)
                 {
                     User = DB.tblUsers.Where(x => x.UserId == id).FirstOrDefault();
+                    ViewBag.UserWarehouse = DB.tblUserWarehouses.Where(x => x.UserId == id).ToList();
                     return View(User);
                 }
                 else
                 {
+                    ViewBag.UserWarehouse = DB.tblUserWarehouses.Where(x => x.UserId == 0).ToList();
                     return View(User);
                 }
             }
@@ -52,7 +69,7 @@ namespace Inventories.Controllers
 
 
         [HttpPost]
-        public ActionResult CreateUser(tblUser User)
+        public ActionResult CreateUser(tblUser User , int[] WarehouseId)
         {
             HttpCookie cookieObj = Request.Cookies["User"];
             int UserId = Int32.Parse(cookieObj["UserId"]);
@@ -76,6 +93,17 @@ namespace Inventories.Controllers
                         Data.isActive = true;
                         DB.tblUsers.Add(Data);
                         DB.SaveChanges();
+
+                        var ID = Data.UserId;
+                        foreach (var item in WarehouseId)
+                        {
+                            tblUserWarehouse Data1 = new tblUserWarehouse();
+                            Data1.UserId = ID;
+                            Data1.WarehouseId = item;
+                            DB.tblUserWarehouses.Add(Data1);
+                        }
+                        DB.SaveChanges();
+
                         return RedirectToAction("Users", new { Success = "User has been add successfully." });
                     }
                     else
@@ -106,6 +134,23 @@ namespace Inventories.Controllers
                         Data.EditBy= UserId;
                         DB.Entry(Data);
                         DB.SaveChanges();
+
+                        List<tblUserWarehouse> Data2 = new List<tblUserWarehouse>();
+                        var ID = Data.UserId;
+                        Data2 = DB.tblUserWarehouses.Select(r => r).Where(x => x.UserId == ID).ToList();
+                        DB.tblUserWarehouses.RemoveRange(Data2);
+
+
+                        foreach (var item in WarehouseId)
+                        {
+                            tblUserWarehouse Data3 = new tblUserWarehouse();
+                            Data3.UserId = ID;
+                            Data3.WarehouseId = item;
+                            DB.tblUserWarehouses.Add(Data3);
+                        }
+                        DB.SaveChanges();
+
+
                         return RedirectToAction("Users", new { Update = "User has been Update successfully." });
                     }
                     else

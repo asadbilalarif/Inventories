@@ -137,6 +137,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\TransferController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -266,6 +267,9 @@
     <Compile Include="Models\tblContact.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblEmailSetting.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblItem.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -273,6 +277,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblRole.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblSetting.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblTempPath.cs">
@@ -288,6 +295,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblUser.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblUserWarehouse.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblWarehouse.cs">
@@ -306,6 +316,7 @@
     <Content Include="Content\assets\css\bootstrap.min.css" />
     <Content Include="Content\assets\css\feathericon.min.css" />
     <Content Include="Content\assets\css\font-awesome.min.css" />
+    <Content Include="Content\assets\css\nice-select.css" />
     <Content Include="Content\assets\css\RolesPermission.css" />
     <Content Include="Content\assets\css\select2.min.css" />
     <Content Include="Content\assets\css\style.css" />
@@ -374,9 +385,12 @@
     <Content Include="Content\assets\js\jquery-3.5.1.js" />
     <Content Include="Content\assets\js\jquery.maskedinput.min.js" />
     <Content Include="Content\assets\js\jquery.mcautocomplete.js" />
+    <Content Include="Content\assets\js\jquery.nice-select.min.js" />
     <Content Include="Content\assets\js\mask.js" />
     <Content Include="Content\assets\js\popper.min.js" />
     <Content Include="Content\assets\js\script.js" />
+    <Content Include="Content\assets\js\select2-init.js" />
+    <Content Include="Content\assets\js\select2.full.min.js" />
     <Content Include="Content\assets\js\select2.min.js" />
     <Content Include="Content\assets\plugins\datatables\datatables.min.css" />
     <Content Include="Content\assets\plugins\datatables\datatables.min.js" />
@@ -503,6 +517,8 @@
     <Content Include="Views\Transfer\ViewTransfer.cshtml" />
     <Content Include="Views\Report\ItemStockLedgerReport.cshtml" />
     <Content Include="Views\Report\ItemStockLedgerDetailReport.cshtml" />
+    <Content Include="Views\Setting\EmailSetting.cshtml" />
+    <Content Include="Views\Setting\Setting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

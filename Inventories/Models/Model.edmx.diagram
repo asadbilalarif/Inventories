@@ -44,6 +44,12 @@
         <AssociationConnector Association="InventoriesModel.AdjustmentAdjustment" />
         <AssociationConnector Association="InventoriesModel.AdjustmentWarehouse" />
         <AssociationConnector Association="InventoriesModel.AdjustmentItem" />
+        <EntityTypeShape EntityType="InventoriesModel.tblEmailSetting" Width="1.5" PointX="3" PointY="10.375" />
+        <AssociationConnector Association="InventoriesModel.FK_tblEmailSetting_tblUser" />
+        <EntityTypeShape EntityType="InventoriesModel.tblSetting" Width="1.5" PointX="0.75" PointY="15" />
+        <EntityTypeShape EntityType="InventoriesModel.tblUserWarehouse" Width="1.5" PointX="10.625" PointY="0.75" />
+        <AssociationConnector Association="InventoriesModel.FK_tblUserWarehouse_tblUser" />
+        <AssociationConnector Association="InventoriesModel.FK_tblUserWarehouse_tblWarehouse" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

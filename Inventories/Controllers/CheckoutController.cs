@@ -5,10 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static Inventories.FilterConfig;
 
 namespace Inventories.Controllers
 {
     [Authorize]
+    [AuthorizeAction1FilterAttribute]
     public class CheckoutController : Controller
     {
         // GET: Checkout
@@ -19,6 +21,19 @@ namespace Inventories.Controllers
             ViewBag.Success = Success;
             ViewBag.Update = Update;
             ViewBag.Delete = Delete;
+
+            ViewBag.Access = Session["Access"];
+            List<tblAccessLevel> AccessLevel = (List<tblAccessLevel>)ViewBag.Access;
+            foreach (var item in AccessLevel)
+            {
+                if (item.MenuId == 16)
+                {
+                    ViewBag.CreateAccess = item.CreateAccess;
+                    ViewBag.EditAccess = item.EditAccess;
+                    ViewBag.DeleteAccess = item.DeleteAccess;
+                }
+            }
+
             return View(CheckoutList);
         }
 

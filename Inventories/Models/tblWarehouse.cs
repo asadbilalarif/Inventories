@@ -23,6 +23,7 @@ namespace Inventories.Models
             this.tblCheckins = new HashSet<tblCheckin>();
             this.tblCheckouts = new HashSet<tblCheckout>();
             this.tblAdjustments = new HashSet<tblAdjustment>();
+            this.tblUserWarehouses = new HashSet<tblUserWarehouse>();
         }
     
         public int WarehouseId { get; set; }
@@ -50,5 +51,7 @@ namespace Inventories.Models
         public virtual ICollection<tblCheckout> tblCheckouts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblAdjustment> tblAdjustments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblUserWarehouse> tblUserWarehouses { get; set; }
     }
 }

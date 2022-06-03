@@ -1,0 +1,91 @@
+﻿@model  Inventories.Models.tblSetting
+
+@{
+    ViewBag.Title = "EmailSetting";
+
+    int SettingId = Model.SettingId;
+    string Name = Model.Name;
+    string Color = Model.Color;
+    string HoverColor = Model.HoverColor;
+
+    string Update = @ViewBag.Error;
+}
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("CreateSetting", "Setting", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {@Html.AntiForgeryToken()
+            <div class="card">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="breadcrumb-bar">
+                            <div class="container-fluid">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6 col-6">
+                                        @if (Model == null)
+                                        {
+                                            <h5 class="breadcrumb-title">Create Setting</h5>
+                                        }
+                                        else
+                                        {
+                                            <h5 class="breadcrumb-title">Edit Setting</h5>
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:none;" class="alert alert-info alert-dismissible fade show" id="UpdateAlert" role="alert">
+                    <strong>Success!</strong> @ViewBag.Error
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Logo</label>
+                            <input type="text" class="form-control" style="display:none;" name="SettingId" value="@SettingId" >
+                            <input type="file" class="form-control" id="" name="CLogo"  >
+                            <img src="/Home/RetrieveImage/@SettingId" alt="your image" style="width:50%;height:50%;" />
+                        </div>
+                        <div class="col-md-3">
+                            <label>Name</label>
+                            <input type="text" class="form-control" id="" name="Name" value="@Name" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Normal Color</label>
+                            <input type="text" class="form-control" id="" name="Normal Color" value="@Color" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Hover Color</label>
+                            <input type="text" class="form-control" id="" name="HoverColor" value="@HoverColor" required>
+                        </div>
+                        <div class="col-md-12 text-right">
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit" id="SaveChanges" style="margin-top: 5%; margin-right: 5%;">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+
+        </div>
+    </div>
+
+</div>
+
+<script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>
+
+<script>
+     if ("@Update" != "") {
+                    $('#UpdateAlert').fadeIn();
+                    $('#UpdateAlert').fadeOut(6000);
+                }
+                else {
+                    $('#UpdateAlert').fadeOut();
+                }
+</script>

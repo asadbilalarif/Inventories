@@ -6,6 +6,11 @@
     HttpCookie cookieObj = Request.Cookies["User"];
     string Email = cookieObj["Email"];
     string Role = cookieObj["Role"];
+
+    HttpCookie Scookie = Request.Cookies["Setting"];
+    string Color = Scookie["Color"];
+    string HoverColor = Scookie["HoverColor"];
+    string Name = Scookie["Name"];
 }
 
 
@@ -23,6 +28,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+
+    <link href="~/Content/assets/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/nice-select.css" rel="stylesheet" />
 
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="~/Content/assets/css/font-awesome.min.css">
@@ -42,11 +50,55 @@
 
     <style>
         .buttons-excel {
-            background-color: #111827;
+            background-color: @Color;
             color: #fff;
         }
         .buttons-excel:hover {
-            background-color: #374151;
+            background-color: @HoverColor;
+        }
+        .btn-primary {
+            background-color: @Color;
+            border: 1px solid @Color;
+            /*background-color: #00d0f1;*/
+            /*border: 1px solid #00d0f1;*/
+        }
+
+            .btn-primary:hover,
+            .btn-primary:focus,
+            .btn-primary.active,
+            .btn-primary:active,
+            .open > .dropdown-toggle.btn-primary {
+                background-color: @HoverColor;
+                border: 1px solid @HoverColor;
+                /*background-color: #374151;
+	border: 1px solid #374151;*/
+            }
+
+        .btn-primary.active:not(:disabled):not(.disabled),
+        .btn-primary:active:not(:disabled):not(.disabled),
+        .show > .btn-primary.dropdown-toggle {
+            background-color: @HoverColor;
+            border-color: @HoverColor;
+            color: #fff;
+        }
+
+
+        .btn-primary.disabled, .btn-primary:disabled {
+            background-color: @HoverColor;
+            border-color: @HoverColor;
+            color: #fff;
+        }
+
+        #sidebar{
+            background-color: @Color;
+        }
+
+        .Li {
+            background-color: @Color;
+        }
+
+        .LiSub{
+            background-color: @HoverColor;
         }
     </style>
 </head>
@@ -61,7 +113,7 @@
             <!-- Logo -->
             <div class="header-left">
                 <a href="#" class="logo" style="color: #1f2937 !important; ">
-                    <h1 class="text-2xl font-bold">Invertories</h1>
+                    <h1 class="text-2xl font-bold">@Name</h1>
                     @*<img src="~/Content/assets/img/logo.png" alt="Logo">*@
                 </a>
                 <a href="index.html" class="logo logo-small">
@@ -75,11 +127,11 @@
             </a>
 
             @*<div class="top-nav-search">
-                <form>
-                    <input type="text" class="form-control" placeholder="Search here">
-                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
-                </form>
-            </div>*@
+                    <form>
+                        <input type="text" class="form-control" placeholder="Search here">
+                        <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>*@
 
             <!-- Mobile Menu Toggle -->
             <a class="mobile_btn" id="mobile_btn">
@@ -91,75 +143,75 @@
 
                 <!-- Notifications -->
                 @*<li class="nav-item dropdown noti-dropdown">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <i class="fe fe-bell"></i> <span class="badge badge-pill">3</span>
-                    </a>
-                    <div class="dropdown-menu notifications">
-                        <div class="topnav-dropdown-header">
-                            <span class="notification-title">Notifications</span>
-                            <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <i class="fe fe-bell"></i> <span class="badge badge-pill">3</span>
+                        </a>
+                        <div class="dropdown-menu notifications">
+                            <div class="topnav-dropdown-header">
+                                <span class="notification-title">Notifications</span>
+                                <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                            </div>
+                            <div class="noti-content">
+                                <ul class="notification-list">
+                                    <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                    <img class="avatar-img rounded-circle" alt="User Image" src="~/Content/assets/img/doctors/doctor-thumb-01.jpg">
+                                                </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Dr. Ruby Perrin</span> Schedule <span class="noti-title">her appointment</span></p>
+                                                    <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                    <img class="avatar-img rounded-circle" alt="User Image" src="~/Content/assets/img/patients/patient1.jpg">
+                                                </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>
+                                                    <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                    <img class="avatar-img rounded-circle" alt="User Image" src="~/Content/assets/img/patients/patient2.jpg">
+                                                </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Travis Trimble</span> sent a amount of $210 for his <span class="noti-title">appointment</span></p>
+                                                    <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="notification-message">
+                                        <a href="#">
+                                            <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                    <img class="avatar-img rounded-circle" alt="User Image" src="~/Content/assets/img/patients/patient3.jpg">
+                                                </span>
+                                                <div class="media-body">
+                                                    <p class="noti-details"><span class="noti-title">Carl Kelly</span> send a message <span class="noti-title"> to his doctor</span></p>
+                                                    <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="topnav-dropdown-footer">
+                                <a href="#">View all Notifications</a>
+                            </div>
                         </div>
-                        <div class="noti-content">
-                            <ul class="notification-list">
-                                <li class="notification-message">
-                                    <a href="#">
-                                        <div class="media">
-                                            <span class="avatar avatar-sm">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="~/Content/assets/img/doctors/doctor-thumb-01.jpg">
-                                            </span>
-                                            <div class="media-body">
-                                                <p class="noti-details"><span class="noti-title">Dr. Ruby Perrin</span> Schedule <span class="noti-title">her appointment</span></p>
-                                                <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="#">
-                                        <div class="media">
-                                            <span class="avatar avatar-sm">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="~/Content/assets/img/patients/patient1.jpg">
-                                            </span>
-                                            <div class="media-body">
-                                                <p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>
-                                                <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="#">
-                                        <div class="media">
-                                            <span class="avatar avatar-sm">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="~/Content/assets/img/patients/patient2.jpg">
-                                            </span>
-                                            <div class="media-body">
-                                                <p class="noti-details"><span class="noti-title">Travis Trimble</span> sent a amount of $210 for his <span class="noti-title">appointment</span></p>
-                                                <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-message">
-                                    <a href="#">
-                                        <div class="media">
-                                            <span class="avatar avatar-sm">
-                                                <img class="avatar-img rounded-circle" alt="User Image" src="~/Content/assets/img/patients/patient3.jpg">
-                                            </span>
-                                            <div class="media-body">
-                                                <p class="noti-details"><span class="noti-title">Carl Kelly</span> send a message <span class="noti-title"> to his doctor</span></p>
-                                                <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="topnav-dropdown-footer">
-                            <a href="#">View all Notifications</a>
-                        </div>
-                    </div>
-                </li>*@
+                    </li>*@
                 <!-- /Notifications -->
                 <!-- User Menu -->
                 <li class="nav-item dropdown has-arrow">
@@ -169,15 +221,16 @@
                     <div class="dropdown-menu">
                         <div class="user-header">
                             @*<div class="avatar avatar-sm">
-                                <img src="~/Content/assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
-                            </div>*@
+                                    <img src="~/Content/assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+                                </div>*@
                             <div class="user-text">
                                 <h6>@Email</h6>
                                 <p class="text-muted mb-0">@Role</p>
                             </div>
                         </div>
-                        @*<a class="dropdown-item" href="profile.html">My Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>*@
+                        @*<a class="dropdown-item" href="profile.html">My Profile</a>*@
+                        <a class="dropdown-item" href="@Url.Action("Setting","Setting")">Settings</a>
+                        <a class="dropdown-item" href="@Url.Action("EmailSetting","Setting")">Email Settings</a>
                         <a class="dropdown-item" href="@Url.Action("Login","Account")">Logout</a>
                     </div>
                 </li>
@@ -189,7 +242,7 @@
         </div>
         <!-- /Header -->
         <!-- Sidebar -->
-        <div class="sidebar" id="sidebar" style="background-color: #1f2937;">
+        <div class="sidebar" id="sidebar" @*style="background-color: #1f2937;"*@>
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu" style="padding: 0px;">
                     <ul>
@@ -200,54 +253,54 @@
                         {
 
 
-                        if (@AccessLevel.tblMenu.isParent == true)
-                        {
+                            if (@AccessLevel.tblMenu.isParent == true)
                             {
+                                {
 
-                            PID = @AccessLevel.tblMenu.MenuId;
+                                    PID = @AccessLevel.tblMenu.MenuId;
 
+
+                                }
+                                <li class="submenu " id="@AccessLevel.tblMenu.ElementId">
+                                    <a href="#"><i class="@AccessLevel.tblMenu.FontAwesome" aria-hidden="true" style="font-size:18px;">    </i> <span>  @AccessLevel.tblMenu.Name</span> <span class="menu-arrow"></span></a>
+
+                                    <ul style="display: none;">
+                                        @foreach (var AccessLevel1 in @ViewBag.Access)
+                                        {
+                                            if (@AccessLevel1.tblMenu.ParentId == @PID)
+                                            {
+                                                <li class="LiSub" id="@AccessLevel1.tblMenu.ElementId" @*style="background-color: #111827;"*@>
+                                                    <a href="@Url.Action(@AccessLevel1.tblMenu.ActionName, @AccessLevel1.tblMenu.ControllerName)"><i class="@AccessLevel1.tblMenu.FontAwesome" aria-hidden="true" style="font-size:15px;">      </i> <span>  @AccessLevel1.tblMenu.Name </span></a>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                if (@AccessLevel.tblMenu.ParentId == 0)
+                                {
+                                    <li class="Li" id="@AccessLevel.tblMenu.ElementId">
+                                        <a href="@Url.Action(@AccessLevel.tblMenu.ActionName, @AccessLevel.tblMenu.ControllerName)"><i class="@AccessLevel.tblMenu.FontAwesome" aria-hidden="true" style="font-size:30px;">   </i> <span>   @AccessLevel.tblMenu.Name</span> </a>
+                                    </li>
+                                }
 
                             }
-                        <li class="submenu" id="@AccessLevel.tblMenu.ElementId" >
-                            <a href="#"><i class="@AccessLevel.tblMenu.FontAwesome" aria-hidden="true" style="font-size:18px;">    </i> <span>  @AccessLevel.tblMenu.Name</span> <span class="menu-arrow"></span></a>
-
-                            <ul style="display: none;">
-                                @foreach (var AccessLevel1 in @ViewBag.Access)
-                                {
-                                    if (@AccessLevel1.tblMenu.ParentId == @PID)
-                                    {
-                                        <li id="@AccessLevel1.tblMenu.ElementId" style="background-color: #111827;">
-                                            <a href="@Url.Action(@AccessLevel1.tblMenu.ActionName, @AccessLevel1.tblMenu.ControllerName)"><i class="@AccessLevel1.tblMenu.FontAwesome" aria-hidden="true" style="font-size:15px;">      </i> <span>  @AccessLevel1.tblMenu.Name </span></a>
-                                        </li>
-                                    }
-                                }
-                            </ul>
-                        </li>
-                        }
-                        else
-                        {
-                        if (@AccessLevel.tblMenu.ParentId == 0)
-                        {
-                        <li class="" id="@AccessLevel.tblMenu.ElementId">
-                            <a href="@Url.Action(@AccessLevel.tblMenu.ActionName, @AccessLevel.tblMenu.ControllerName)"><i class="@AccessLevel.tblMenu.FontAwesome" aria-hidden="true" style="font-size:30px;">   </i> <span>   @AccessLevel.tblMenu.Name</span> </a>
-                        </li>
-                        }
-
-                        }
 
                         }
 
                         @*
-        <li class="active">
-            <a href="@Url.Action("Index","Home")"><i class="fe fe-home"></i> <span>Dashboard</span></a>
-        </li>
-        <li class="submenu">
-            <a href="#"><i class="fa fa-users"></i> <span>User Management</span> <span class="menu-arrow"></span></a>
-            <ul style="display: none;">
-                <li><a href="@Url.Action("Users","User")">Users</a></li>
-                <li><a href="@Url.Action("RolesPermission","User")">Permissions</a></li>
-            </ul>
-        </li>*@
+                            <li class="active">
+                                <a href="@Url.Action("Index","Home")"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+                            </li>
+                            <li class="submenu">
+                                <a href="#"><i class="fa fa-users"></i> <span>User Management</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li><a href="@Url.Action("Users","User")">Users</a></li>
+                                    <li><a href="@Url.Action("RolesPermission","User")">Permissions</a></li>
+                                </ul>
+                            </li>*@
                     </ul>
                 </div>
             </div>
@@ -263,6 +316,11 @@
     <!-- jQuery -->
     @*<script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>*@
     <script src="/Content/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/assets/js/jquery.nice-select.min.js"></script>
+
+
+    <script src="~/Content/assets/js/select2.full.min.js"></script>
+    <script src="~/Content/assets/js/select2-init.js"></script>
     <!-- Bootstrap Core JS -->
     <script src="~/Content/assets/js/popper.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>
