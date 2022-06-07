@@ -16,6 +16,9 @@ namespace Inventories.Controllers
         // GET: Report
         public ActionResult CheckinReport()
         {
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
+            string Role = cookieObj["Role"];
             List<CheckinReportData_Result2> CheckinList = new List<CheckinReportData_Result2>();
             ViewBag.Contacts = DB.tblContacts.ToList();
             ViewBag.Warehouses = DB.tblWarehouses.Where(x=>x.isActive==true).ToList();
@@ -32,9 +35,14 @@ namespace Inventories.Controllers
             ViewBag.User = 0;
             ViewBag.Category = 0;
             ViewBag.draft = false;
+            string Users = "";
+            if (Role.ToLower()!="admin")
+            {
+                Users = " and CI.CreatedBy =" + UserId + " ";
+            }
 
             string Query = "";
-            Query = "where 1=1 ";
+            Query = "where 1=1 "+Users+" ";
 
             CheckinList = DB.CheckinReportData(Query).ToList();
 
@@ -87,10 +95,6 @@ namespace Inventories.Controllers
                 {
                     Users = " and CI.CreatedBy =" + User + " ";
                 }
-                if (User != 0)
-                {
-                    Users = " and CI.CreatedBy =" + User + " ";
-                }
                 if (Category != 0)
                 {
                     Categories = " and I.CategoryId =" + Category + " ";
@@ -114,6 +118,10 @@ namespace Inventories.Controllers
 
         public ActionResult CheckoutReport()
         {
+
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
+            string Role = cookieObj["Role"];
             List<CheckoutReportData_Result> CheckoutList = new List<CheckoutReportData_Result>();
             ViewBag.Contacts = DB.tblContacts.ToList();
             ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
@@ -130,9 +138,14 @@ namespace Inventories.Controllers
             ViewBag.User = 0;
             ViewBag.Category = 0;
             ViewBag.draft = false;
+            string Users = "";
+            if (Role.ToLower() != "admin")
+            {
+                Users = " and CO.CreatedBy =" + UserId + " ";
+            }
 
             string Query = "";
-            Query = "where 1=1 ";
+            Query = "where 1=1 " + Users + " ";
 
             CheckoutList = DB.CheckoutReportData(Query).ToList();
 
@@ -212,6 +225,9 @@ namespace Inventories.Controllers
 
         public ActionResult TransferReport()
         {
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
+            string Role = cookieObj["Role"];
             List<TransferReportData_Result> TransferList = new List<TransferReportData_Result>();
             ViewBag.Contacts = DB.tblContacts.ToList();
             ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
@@ -228,9 +244,14 @@ namespace Inventories.Controllers
             ViewBag.User = 0;
             ViewBag.Category = 0;
             ViewBag.draft = false;
+            string Users = "";
+            if (Role.ToLower() != "admin")
+            {
+                Users = " and T.CreatedBy =" + UserId + " ";
+            }
 
             string Query = "";
-            Query = "where 1=1 ";
+            Query = "where 1=1 " + Users + " ";
 
             TransferList = DB.TransferReportData(Query).ToList();
 
@@ -308,6 +329,9 @@ namespace Inventories.Controllers
 
         public ActionResult AdjustmentReport()
         {
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
+            string Role = cookieObj["Role"];
             List<AdjustmentReportData_Result> AdjustmentList = new List<AdjustmentReportData_Result>();
             ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
             ViewBag.Users = DB.tblUsers.ToList();
@@ -322,9 +346,14 @@ namespace Inventories.Controllers
             ViewBag.User = 0;
             ViewBag.Category = 0;
             ViewBag.draft = false;
+            string Users = "";
+            if (Role.ToLower() != "admin")
+            {
+                Users = " and A.CreatedBy =" + UserId + " ";
+            }
 
             string Query = "";
-            Query = "where 1=1 ";
+            Query = "where 1=1 " + Users + " ";
 
             AdjustmentList = DB.AdjustmentReportData(Query).ToList();
 
@@ -397,6 +426,9 @@ namespace Inventories.Controllers
 
         public ActionResult ItemStockLedgerReport()
         {
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
+            string Role = cookieObj["Role"];
             List<ItemStockLedgerReportData_Result> ItemStockLedger = new List<ItemStockLedgerReportData_Result>();
             ViewBag.Warehouses = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
             ViewBag.Items = DB.tblItems.ToList();
@@ -411,9 +443,19 @@ namespace Inventories.Controllers
             string Query = "";
             string TQuery = "";
             string AQuery = "";
-            Query = "where 1=1 ";
-            TQuery = "where 1=1 ";
-            AQuery = "where 1=1 ";
+            if(Role.ToLower()=="admin")
+            {
+                Query = "where 1=1 ";
+                TQuery = "where 1=1 ";
+                AQuery = "where 1=1 ";
+            }
+            else
+            {
+                Query = "where 1=1 and CI.CreatedBy =" + UserId + "";
+                TQuery = "where 1=1 and T.CreatedBy =" + UserId + "";
+                AQuery = "where 1=1 and A.CreatedBy =" + UserId + "";
+            }
+            
 
             ItemStockLedger = DB.ItemStockLedgerReportData(Query,TQuery,AQuery).ToList();
 
@@ -423,6 +465,9 @@ namespace Inventories.Controllers
         [HttpPost]
         public ActionResult ItemStockLedgerReport(int Warehouse = 0, int Item = 0, int Category = 0)
         {
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
+            string Role = cookieObj["Role"];
             List<ItemStockLedgerReportData_Result> ItemStockLedger = new List<ItemStockLedgerReportData_Result>();
             try
             {
@@ -444,6 +489,9 @@ namespace Inventories.Controllers
                 string Query = "";
                 string TQuery = "";
                 string AQuery = "";
+
+
+                
                 if (Warehouse != 0)
                 {
                     Warehouses = " and CI.Warehouse =" + Warehouse + " ";
@@ -488,7 +536,14 @@ namespace Inventories.Controllers
                 {
                     Categories = " and I.CategoryId =" + Category + " ";
                 }
-                AQuery = "where 1=1   " + Warehouses + " " + Items + " " + Categories + "' ";
+                AQuery = "where 1=1   " + Warehouses + " " + Items + " " + Categories + " ";
+
+                if (Role.ToLower() != "admin")
+                {
+                    Query += " and CI.CreatedBy =" + UserId + "";
+                    TQuery += " and T.CreatedBy =" + UserId + "";
+                    AQuery += " and A.CreatedBy =" + UserId + "";
+                }
 
                 ItemStockLedger = DB.ItemStockLedgerReportData(Query, TQuery, AQuery).ToList();
 

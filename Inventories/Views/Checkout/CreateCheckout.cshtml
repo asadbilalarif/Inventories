@@ -91,8 +91,8 @@
                                     <label>Warehouse</label>
                                     <span id="WarehouseError"></span>
                                     <select class="form-control" name="Warehouse" id="Warehouse">
-                                        <option value="">Warehouse</option>
-                                        @foreach (Inventories.Models.tblWarehouse item in @ViewBag.Warehouse)
+                                        <option value="">From Warehouse</option>
+                                        @foreach (Inventories.Models.WarehouseAccess_Result item in @ViewBag.Warehouse)
                                         {
                                             if (Model.Warehouse == item.WarehouseId)
                                             {
@@ -120,10 +120,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label id="CheckinBatchLabel">Checkin Batch</label>
+                                    <label id="CheckinBatchLabel">Batch</label>
                                     <span id="SetCheckinListError"></span>
                                     <select class="form-control" id="SetCheckinList">
-                                        <option value="">Select Checkin Batch</option>
+                                        <option value="">Select Batch</option>
                                     </select>
                                 </div>
                             </div>
@@ -466,7 +466,7 @@
             $("#DescriptionInputId").val(ui.item.id);
             $("#ItemNetQuantityInput").val(1);
             $("#QtyInput").val(1);
-
+            
             var model = {
                 ItemId: ui.item.id,
                 WarehouseId: $("#Warehouse").find(":selected").val(),
@@ -483,6 +483,8 @@
                 dataType: "json",
                 success: function (Data) {
                     //alert(Data);
+                    $("#SetCheckinList").empty();
+                    $("#SetCheckinList").append($("<option     />").val("").text("Select Batch"));
                     $.each(Data, function () {
                         $("#SetCheckinList").append($("<option     />").val(this.FTailId).text(this.Number + " ("+this.ItemNetQuantity+")"));
                     });

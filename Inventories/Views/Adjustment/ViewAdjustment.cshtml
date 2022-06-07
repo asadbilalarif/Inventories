@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="row" style="border-bottom: 2px solid #dee2e6;">
                     <div class="col-md-6">
-                        <h3>Invertories</h3>
+                        <h3>Inventories</h3>
                     </div>
                     <div class="col-md-6 text-right">
                         <p>@Model.FirstOrDefault().WarehouseName</p>
@@ -52,7 +52,9 @@
                                 <thead>
                                     <tr>
                                         <th>Item</th>
-                                        <th class="text-right">Quantity</th>
+                                        <th>Item Category</th>
+                                        <th>Item Unit</th>
+                                        <th>Quantity</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -60,7 +62,9 @@
                                     {
                                         <tr>
                                             <td>@Adjustment.ItemName</td>
-                                            <td class="text-right">@Adjustment.ItemQuantity</td>
+                                            <td>@Adjustment.ItemCategory</td>
+                                            <td>@Adjustment.ItemUnit</td>
+                                            <td>@Adjustment.ItemQuantity</td>
                                         </tr>
                                     }
                                 </tbody>

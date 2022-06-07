@@ -50,6 +50,8 @@
         <EntityTypeShape EntityType="InventoriesModel.tblUserWarehouse" Width="1.5" PointX="10.625" PointY="0.75" />
         <AssociationConnector Association="InventoriesModel.FK_tblUserWarehouse_tblUser" />
         <AssociationConnector Association="InventoriesModel.FK_tblUserWarehouse_tblWarehouse" />
+        <EntityTypeShape EntityType="InventoriesModel.tblAlertQty" Width="1.5" PointX="9.875" PointY="19" />
+        <AssociationConnector Association="InventoriesModel.FK_tblAlertQty_tblItem" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

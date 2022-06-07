@@ -32,6 +32,8 @@ namespace Inventories.Models
         public string WarehouseEmail { get; set; }
         public string WarehousePhone { get; set; }
         public string ItemName { get; set; }
+        public string ItemUnit { get; set; }
+        public string ItemCategory { get; set; }
         public Nullable<int> ItemQuantity { get; set; }
     }
 }

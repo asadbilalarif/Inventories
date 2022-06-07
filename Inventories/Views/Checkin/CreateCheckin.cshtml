@@ -93,7 +93,7 @@
                                     <span id="WarehouseError"></span>
                                     <select class="form-control" name="Warehouse" id="Warehouse">
                                         <option value="">Warehouse</option>
-                                        @foreach (Inventories.Models.tblWarehouse item in @ViewBag.Warehouse)
+                                        @foreach (Inventories.Models.WarehouseAccess_Result item in @ViewBag.Warehouse)
                                         {
                                             if (Model.Warehouse == item.WarehouseId)
                                             {

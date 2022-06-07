@@ -166,6 +166,9 @@
     <Compile Include="Models\CheckinViewData_Result1.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CheckinViewData_Result2.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CheckoutReportData_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -249,6 +252,9 @@
     <Compile Include="Models\tblAdjustmentItem.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblAlertQty.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblCategory.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -307,6 +313,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TransferViewData_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WarehouseAccess_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WarehouseModel.cs" />

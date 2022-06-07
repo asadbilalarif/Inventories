@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="row" style="border-bottom: 2px solid #dee2e6;">
                     <div class="col-md-6">
-                        <h3>Invertories</h3>
+                        <h3>Inventories</h3>
                     </div>
                     <div class="col-md-6 text-right">
                         <p>@Model.FirstOrDefault().FWarehouseName</p>
@@ -57,7 +57,9 @@
                                 <thead>
                                     <tr>
                                         <th>Item</th>
-                                        <th class="text-right">Quantity</th>
+                                        <th>Item Category</th>
+                                        <th>Item Unit</th>
+                                        <th>Quantity</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -65,7 +67,9 @@
                                     {
                                         <tr>
                                             <td>@Transfer.ItemName</td>
-                                            <td class="text-right">@Transfer.ItemQuantity</td>
+                                            <td>@Transfer.ItemCategory</td>
+                                            <td>@Transfer.ItemUnit</td>
+                                            <td>@Transfer.ItemQuantity</td>
                                         </tr>
                                     }
                                 </tbody>

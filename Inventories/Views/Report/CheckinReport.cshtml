@@ -23,6 +23,10 @@
     List<tblCategory> Categories = (List<tblCategory>)ViewBag.Categories;
     bool draft= ViewBag.draft;
 
+    HttpCookie cookieObj = Request.Cookies["User"];
+    int UserId = Int32.Parse(cookieObj["UserId"]);
+    string Role = cookieObj["Role"];
+
 
 
 }
@@ -116,21 +120,41 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label>User</label>
-                                    <select class="form-control" name="User">
-                                        <option value="">User</option>
-                                        @foreach (tblUser item in Users)
-                                        {
-                                            if (@User == item.UserId)
+                                    @if (Role.ToLower() == "admin")
+                                    {
+                                        <label>User</label>
+                                        <select class="form-control" name="User">
+                                            <option value="">User</option>
+                                            @foreach (tblUser item in Users)
                                             {
-                                                <option value="@item.UserId" selected>@item.Name</option>
+                                                if (@User == item.UserId)
+                                                {
+                                                    <option value="@item.UserId" selected>@item.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.UserId">@item.Name</option>
+                                                }
                                             }
-                                            else
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select class="form-control" name="User" hidden>
+                                            <option value="">User</option>
+                                            @foreach (tblUser item in Users)
                                             {
-                                                <option value="@item.UserId">@item.Name</option>
+                                                if (@UserId == item.UserId)
+                                                {
+                                                    <option value="@item.UserId" selected>@item.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.UserId">@item.Name</option>
+                                                }
                                             }
-                                        }
-                                    </select>
+                                        </select>
+                                    }
                                 </div>
                                 <div class="col-md-3">
                                     <label>Category</label>

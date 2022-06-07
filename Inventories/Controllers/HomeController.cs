@@ -15,6 +15,8 @@ namespace Inventories.Controllers
         InventoriesEntities DB = new InventoriesEntities();
         public ActionResult Index()
         {
+            ViewBag.Alert= DB.tblAlertQties.Where(x => x.Notify == true).ToList();
+            ViewBag.AlertCount=DB.tblAlertQties.Where(x => x.Notify == true).Count();
             return View();
         }
 

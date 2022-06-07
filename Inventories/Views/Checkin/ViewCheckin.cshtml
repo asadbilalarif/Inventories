@@ -1,4 +1,4 @@
-﻿@model  List<Inventories.Models.CheckinViewData_Result1>
+﻿@model  List<Inventories.Models.CheckinViewData_Result2>
 @{
 //Layout = null;
 }
@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="row" style="border-bottom: 2px solid #dee2e6;">
                     <div class="col-md-6">
-                        <h3>Invertories</h3>
+                        <h3>Inventories</h3>
                     </div>
                     <div class="col-md-6 text-right">
                         <p>@Model.FirstOrDefault().WarehouseName</p>
@@ -57,15 +57,19 @@
                                 <thead>
                                     <tr>
                                         <th>Item</th>
-                                        <th class="text-right">Quantity</th>
+                                        <th>Item Category</th>
+                                        <th>Item Unit</th>
+                                        <th >Quantity</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Inventories.Models.CheckinViewData_Result1 Checkin in Model)
+                                    @foreach (Inventories.Models.CheckinViewData_Result2 Checkin in Model)
                                     {
                                         <tr>
                                             <td>@Checkin.ItemName</td>
-                                            <td class="text-right">@Checkin.ItemQuantity</td>
+                                            <td>@Checkin.ItemCategory</td>
+                                            <td>@Checkin.ItemUnit</td>
+                                            <td >@Checkin.ItemQuantity</td>
                                         </tr>
                                     }
                                 </tbody>

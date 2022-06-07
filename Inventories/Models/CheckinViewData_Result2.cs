@@ -11,11 +11,11 @@ namespace Inventories.Models
 {
     using System;
     
-    public partial class CheckoutViewData_Result
+    public partial class CheckinViewData_Result2
     {
-        public int CheckoutId { get; set; }
-        public string CheckoutNumber { get; set; }
-        public System.DateTime CheckoutDate { get; set; }
+        public int CheckinId { get; set; }
+        public string CheckinNumber { get; set; }
+        public System.DateTime CheckinDate { get; set; }
         public string Reference { get; set; }
         public Nullable<int> Contact { get; set; }
         public Nullable<int> Warehouse { get; set; }

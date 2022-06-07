@@ -39,8 +39,29 @@ namespace Inventories.Controllers
 
         public ActionResult CreateCheckin(int Id = 0)
         {
-            ViewBag.Warehouse = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
             ViewBag.Contact = DB.tblContacts.Where(x => x.isActive == true).ToList();
+
+            List<int?> WarehouseIds= DB.tblUserWarehouses.Where(x => x.UserId == UserId).Select(s => s.WarehouseId).ToList();
+            int j = 1;
+            string Ids = "  and WarehouseId in(";
+            foreach (int item in WarehouseIds)
+            {
+                Ids += "'" + item + "' ";
+                if(j==WarehouseIds.Count)
+                {
+
+                }
+                else
+                {
+                    Ids += ",";
+                    j += 1;
+                }
+            }
+            Ids += ")";
+
+            ViewBag.Warehouse = DB.WarehouseAccess(Ids).ToList();
 
             tblCheckin Data = new tblCheckin();
             List<tblCheckinItem> Data1 = new List<tblCheckinItem>();
@@ -302,7 +323,7 @@ namespace Inventories.Controllers
 
         public ActionResult ViewCheckin(int Id)
         {
-            List<CheckinViewData_Result1> allsearch = null;
+            List<CheckinViewData_Result2> allsearch = null;
             DB.Configuration.ProxyCreationEnabled = false;
             try
             {

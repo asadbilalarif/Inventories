@@ -42,6 +42,30 @@ namespace Inventories.Controllers
         {
             ViewBag.Warehouse = DB.tblWarehouses.Where(x => x.isActive == true).ToList();
 
+            HttpCookie cookieObj = Request.Cookies["User"];
+            int UserId = Int32.Parse(cookieObj["UserId"]);
+
+            List<int?> WarehouseIds = DB.tblUserWarehouses.Where(x => x.UserId == UserId).Select(s => s.WarehouseId).ToList();
+
+            int j = 1;
+            string Ids = "  and WarehouseId in(";
+            foreach (int item in WarehouseIds)
+            {
+                Ids += "'" + item + "' ";
+                if (j == WarehouseIds.Count)
+                {
+
+                }
+                else
+                {
+                    Ids += ",";
+                    j += 1;
+                }
+            }
+            Ids += ")";
+
+            ViewBag.FromWarehouse = DB.WarehouseAccess(Ids).ToList();
+
             tblTransfer Data = new tblTransfer();
             List<tblTransferItem> Data1 = new List<tblTransferItem>();
             try
