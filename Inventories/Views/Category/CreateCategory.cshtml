@@ -39,11 +39,11 @@
                                     <div class="col-md-6 col-6">
                                         @if (Model == null)
                                         {
-                                            <h5 class="breadcrumb-title">Create Category</h5>
+                                           <h5 class="breadcrumb-title">@Resource.Create_Category</h5>
                                         }
                                         else
                                         {
-                                            <h5 class="breadcrumb-title">Edit Category</h5>
+                                           <h5 class="breadcrumb-title">@Resource.Edit @Resource.Category</h5>
                                         }
                                     </div>
                                     <div class="col-md-6 col-6 text-right" id="CreateCategoryB">
@@ -62,13 +62,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <input type="text" class="form-control" style="display:none;" name="CategoryId" value="@CategoryId" required>
-                                <label>Name<span style="color:red;">*</span></label>
+                                <label>@Resource.Name<span style="color:red;">*</span></label>
                                 <input type="text" class="form-control" id="Name" name="Name" value="@Name" required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Code</label>
+                                <label>@Resource.Code</label>
                                 <input type="text" class="form-control" id="Code" name="Code" value="@Code">
                             </div>
                         </div>
@@ -78,9 +78,9 @@
                         <div class="col-md-12 text-right">
                             <div class="form-group">
                                 <label></label>
-                                <button class="btn btn-primary" type="submit" id="SaveChanges">Save</button>
-                                <a href="@Url.Action("CreateCategory","Category",new { id=0})"> <input class="btn btn-danger" type="button" value="Cancel"></a>
-                                <a href="@Url.Action("Categories","Category")" class="btn btn-secondary"><i class="fa fa-list"></i> List</a>
+                                <button class="btn btn-primary" type="submit" id="SaveChanges">@Resource.Save</button>
+                                <a href="@Url.Action("CreateCategory","Category",new { id=0})"> <input class="btn btn-danger" type="button" value="@Resource.Cancel"></a>
+                                <a href="@Url.Action("Categories","Category")" class="btn btn-secondary"><i class="fa fa-list"></i> @Resource.List</a>
                             </div>
                         </div>
 

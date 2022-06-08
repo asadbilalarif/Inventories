@@ -35,7 +35,7 @@
             <h4 class="page-title">Checkin</h4>
         </div>
         <div class="col-sm-7 col-8 text-right m-b-30">
-            <a href="@Url.Action("Checkins","Checkin")" class="btn btn-primary"><i class="fa fa-eye m-r-5"></i> Checkins</a>
+            <a href="@Url.Action("Checkins","Checkin")" class="btn btn-primary"><i class="fa fa-eye m-r-5"></i> @Resource.Checkins</a>
         </div>
     </div>
     @using (Html.BeginForm("CreateInv", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -47,24 +47,24 @@
                     <form>
                         <div class="row">
                             <div class="col-md-12">
-                                <label>Checkin Number</label>
+                                <label>@Resource.Checkin_Number</label>
                                 <input class="form-control" readonly="" name="CheckinNumber" id="CheckinNumber" type="text" value="@ViewBag.CheckinNumber">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Date</label>
+                                    <label>@Resource.Date</label>
                                     <input class="form-control" name="CheckinId" id="CheckinId" readonly="" hidden type="text" value="@Model.CheckinId">
                                     <input class="form-control" name="CheckinDate" id="CheckinDate" type="date" value="@Model.CheckinDate.ToString("yyyy-MM-dd")">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Contact</label>
+                                    <label>@Resource.Contact</label>
                                     <span id="ContactError"></span>
                                     <select class="form-control" name="Contact" id="Contact">
-                                        <option value="">Contact</option>
+                                        <option value="">@Resource.Contact</option>
                                         @foreach (Inventories.Models.tblContact item in @ViewBag.Contact)
                                         {
                                             if (Model.Contact == item.ContactId)
@@ -82,17 +82,17 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Reference</label>
+                                    <label>@Resource.Reference</label>
                                     <span id="ReferenceError"></span>
                                     <input class="form-control" name="Reference" id="Reference" type="text" value="@Model.Reference">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Warehouse</label>
+                                    <label>@Resource.Warehouse</label>
                                     <span id="WarehouseError"></span>
                                     <select class="form-control" name="Warehouse" id="Warehouse">
-                                        <option value="">Warehouse</option>
+                                        <option value="">@Resource.Warehouse</option>
                                         @foreach (Inventories.Models.WarehouseAccess_Result item in @ViewBag.Warehouse)
                                         {
                                             if (Model.Warehouse == item.WarehouseId)
@@ -114,7 +114,7 @@
                                 <div class="form-group">
                                     <label></label>
                                     <span id="SearchItemError"></span>
-                                    <input class="form-control" name="SearchItem" id="SearchItem" placeholder="Scan barcode or search items" type="text" value="">
+                                    <input class="form-control" name="SearchItem" id="SearchItem" placeholder="@Resource.Scan_barcode_or_search_items" type="text" value="">
                                 </div>
                             </div>
                         </div>
@@ -128,10 +128,10 @@
                                             <tr>
                                                 <th style="width: 20px"></th>
                                                 <th class="col-md-6" hidden>Description</th>
-                                                <th class="col-md-6">Items</th>
-                                                <th style="width:200px;">Weight</th>
-                                                <th style="width:200px;">Quantity</th>
-                                                <th>Unit</th>
+                                                <th class="col-md-6">@Resource.items</th>
+                                                <th style="width:200px;">@Resource.Weight</th>
+                                                <th style="width:200px;">@Resource.Quantity</th>
+                                                <th>@Resource.Unit</th>
                                                 <th> </th>
                                             </tr>
                                         </thead>
@@ -153,8 +153,8 @@
                                                 </td>
                                                 <td>
                                                     <select class="form-control" hidden id="UnitInput" readonly="" style="width:200px;" type="text">
-                                                        <option value="Piece">Piece</option>
-                                                        <option value="Dozen">Dozen</option>
+                                                        <option value="Piece">@Resource.Piece</option>
+                                                        <option value="Dozen">@Resource.Dozen</option>
                                                     </select>
                                                 </td>
                                                 <td><a href="javascript:void(0)" hidden class="text-success font-18" title="Add"><i class="fa fa-plus" onclick="AddRow()"></i></a></td>
@@ -200,19 +200,19 @@
                                                                 <select class="form-control" id="FUnitInput" style="width:200px;" type="text" disabled>
                                                                     @if (@item.ItemUnit == "Piece")
                                                                     {
-                                                                        <option value="Piece" selected>Piece</option>
+                                                                    <option value="Piece" selected>@Resource.Piece</option>
                                                                     }
                                                                     else
                                                                     {
-                                                                        <option value="Piece">Piece</option>
+                                                                        <option value="Piece">@Resource.Piece</option>
                                                                     }
                                                                     @if (@item.ItemUnit == "Dozen")
                                                                     {
-                                                                        <option value="Dozen" selected>Dozen</option>
+                                                                        <option value="Dozen" selected>@Resource.Dozen</option>
                                                                     }
                                                                     else
                                                                     {
-                                                                        <option value="Dozen">Dozen</option>
+                                                                        <option value="Dozen">@Resource.Dozen</option>
                                                                     }
                                                                 </select>
                                                             }
@@ -221,19 +221,19 @@
                                                                 <select class="form-control" id="FUnitInput" style="width:200px;" type="text">
                                                                     @if (@item.ItemUnit == "Piece")
                                                                     {
-                                                                        <option value="Piece" selected>Piece</option>
+                                                                        <option value="Piece" selected>@Resource.Piece</option>
                                                                     }
                                                                     else
                                                                     {
-                                                                        <option value="Piece">Piece</option>
+                                                                        <option value="Piece">@Resource.Piece</option>
                                                                     }
                                                                     @if (@item.ItemUnit == "Dozen")
                                                                     {
-                                                                        <option value="Dozen" selected>Dozen</option>
+                                                                        <option value="Dozen" selected>@Resource.Dozen</option>
                                                                     }
                                                                     else
                                                                     {
-                                                                        <option value="Dozen">Dozen</option>
+                                                                        <option value="Dozen">@Resource.Dozen</option>
                                                                     }
                                                                 </select>
                                                             }
@@ -263,7 +263,7 @@
                                 <input class="form-control" type="file" name="FAttachment" id="FAttachment" value="" />
                             </div><br /><br /><br />
                             <div class="col-md-12">
-                                <label>Details</label>
+                                <label>@Resource.Details</label>
                                 <textarea class="form-control" name="Details" id="Details">@Model.Details</textarea>
                             </div><br /><br /><br />
                             @*<div class="col-md-12">
@@ -282,7 +282,7 @@
                             @if (Edit == 0)
                             {
                                 <div id="loading" style="display:none;margin: 0 auto; text-decoration-color:cornflowerblue;"><div class="spinner-border text-success" id="display_loading" style="margin: 0 auto;"></div><div class="spinner-border text-success" id="display_loading" style="display:none;margin: 0 auto;"></div> Loading...</div>
-                                <input type="button" class="btn btn-primary submit-btn" id="btnSave" value="Save">
+                                <input type="button" class="btn btn-primary submit-btn" id="btnSave" value="@Resource.Save">
                             }
 
                         </div>

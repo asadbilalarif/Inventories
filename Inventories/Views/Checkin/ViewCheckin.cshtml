@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="row" style="border-bottom: 2px solid #dee2e6;">
                     <div class="col-md-6">
-                        <h3>Inventories</h3>
+                        <h3>@Resource.Inventories</h3>
                     </div>
                     <div class="col-md-6 text-right">
                         <p>@Model.FirstOrDefault().WarehouseName</p>
@@ -35,16 +35,16 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h4 style="margin-top:2%;">CHECKIN</h4>
+                        <h4 style="margin-top: 2%; text-transform: uppercase; ">@Resource.Checkin</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <p>Date: @Model.FirstOrDefault().CheckinDate.ToString("MMM dd,yyyy")</p>
-                        <p>Reference: @Model.FirstOrDefault().Reference</p>
+                        <p>@Resource.Date: @Model.FirstOrDefault().CheckinDate.ToString("MMM dd,yyyy")</p>
+                        <p>@Resource.Reference: @Model.FirstOrDefault().Reference</p>
                     </div>
                     <div class="col-md-6">
-                        <p><b>For:</b></p>
+                        <p><b>@Resource.For:</b></p>
                         <p>@Model.FirstOrDefault().ContactName</p>
                         <p>@Model.FirstOrDefault().ContactPhone</p>
                         <p>@Model.FirstOrDefault().ContactEmail</p>
@@ -56,10 +56,10 @@
                             <table class="cell-border table table-hover table-center  mb-0 " id="AdjustmentTable">
                                 <thead>
                                     <tr>
-                                        <th>Item</th>
-                                        <th>Item Category</th>
-                                        <th>Item Unit</th>
-                                        <th >Quantity</th>
+                                        <th>@Resource.Item</th>
+                                        <th>@Resource.Item_Category</th>
+                                        <th>@Resource.Item_Unit</th>
+                                        <th>@Resource.Quantity</th>
                                     </tr>
                                 </thead>
                                 <tbody>

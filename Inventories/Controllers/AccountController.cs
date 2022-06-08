@@ -238,5 +238,11 @@ namespace Inventories.Controllers
             return View();
         }
 
+        public ActionResult ChangeLanguage(string lang)
+        {
+            Session["lang"] = lang;
+            return RedirectToAction("Index", "Account", new { language = lang });
+        }
+
     }
 }

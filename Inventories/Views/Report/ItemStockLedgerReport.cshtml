@@ -50,9 +50,9 @@
                         <form>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label>Warehouse</label>
+                                    <label>@Resource.Warehouse</label>
                                     <select class="form-control" name="Warehouse">
-                                        <option value="">Warehouse</option>
+                                        <option value="">@Resource.Warehouse</option>
                                         @foreach (tblWarehouse item in Warehouses)
                                         {
                                             if (@Warehouse == item.WarehouseId)
@@ -67,9 +67,9 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Category</label>
+                                    <label>@Resource.Category</label>
                                     <select class="form-control" name="Category">
-                                        <option value="">Category</option>
+                                        <option value="">@Resource.Category</option>
                                         @foreach (tblCategory item in Categories)
                                         {
                                             if (@Category == item.CategoryId)
@@ -84,9 +84,9 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Item</label>
+                                    <label>@Resource.Item</label>
                                     <select class="form-control" name="Item">
-                                        <option value="">Item</option>
+                                        <option value="">@Resource.Item</option>
                                         @foreach (tblItem item in Items)
                                         {
                                             if (@Item == item.ItemId)
@@ -107,8 +107,8 @@
                             </div><br />
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary" style="float:right;">Search</button>
-                                    <a href="@Url.Action("ItemStockLedgerReport")"><button type="button" class="btn btn-danger" style="margin-right:1%;float:right;">Reset</button></a>
+                                    <button class="btn btn-primary" style="float:right;text-transform:capitalize;">@Resource.search</button>
+                                    <a href="@Url.Action("ItemStockLedgerReport")"><button type="button" class="btn btn-danger" style="margin-right: 1%; float: right; text-transform: capitalize;">@Resource.reset</button></a>
                                 </div>
                             </div>
 
@@ -132,10 +132,10 @@
                             <div class="container-fluid">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">Item Stock Ledger Report</h5>
+                                        <h5 class="breadcrumb-title">@Resource.Item_Stock_Ledger_Report</h5>
                                     </div>
                                     <div class="col-md-6 col-6 text-right" id="CreateAdjustmentB">
-                                        <button class="btn btn-primary" id="ShowFilters" style="float:right"><i class="fas fa-toggle-off" id="IShowFilters"> Toggle Form</i> </button>
+                                        <button class="btn btn-primary" id="ShowFilters" style="float:right"><i class="fas fa-toggle-off" id="IShowFilters"> @Resource.Toggle_Form</i> </button>
                                     </div>
                                 </div>
                             </div>
@@ -149,10 +149,10 @@
                             <table class="cell-border table table-hover table-center  mb-0 " id="AdjustmentTable">
                                 <thead>
                                     <tr>
-                                        <th>Category Name</th>
-                                        <th>Item Name</th>
-                                        <th>Qty</th>
-                                        <th>Warehouse Name</th>
+                                        <th>@Resource.Category_Name</th>
+                                        <th>@Resource.Item_Name</th>
+                                        <th>@Resource.Qty</th>
+                                        <th>@Resource.Warehouse_Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>

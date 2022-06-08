@@ -38,12 +38,12 @@
                             <div class="container-fluid">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">Categories List</h5>
+                                        <h5 class="breadcrumb-title">@Resource.Categories_List</h5>
                                     </div>
                                     <div class="col-md-6 col-6 text-right" id="CreateCategoryB">
                                         @if (ViewBag.CreateAccess == true)
                                         {
-                                            <a href="@Url.Action("CreateCategory","Category")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> Create New Category</a>
+                                        <a href="@Url.Action("CreateCategory","Category")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> @Resource.Create_New_Category</a>
                                         }
                                     </div>
                                 </div>
@@ -68,10 +68,10 @@
                                 <thead>
                                     <tr>
                                         <th style="display:none;">Category ID</th>
-                                        <th>Name</th>
-                                        <th>Code</th>
+                                        <th>@Resource.Name</th>
+                                        <th>@Resource.Code</th>
 
-                                        <th>Action</th>
+                                        <th>@Resource.Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,13 +87,13 @@
                                                     @if (ViewBag.EditAccess == true)
                                                     {
                                                         <a href="@Url.Action("CreateCategory","Category",new {id=Category.CategoryId })" id="EditCategory" class="text-black">
-                                                            <i class="fa fa-edit"></i> Edit
+                                                            <i class="fa fa-edit"></i> @Resource.Edit
                                                         </a>
                                                     }
                                                     @if (ViewBag.DeleteAccess == true)
                                                     {
                                                         <a class="text-danger" href="#" data-toggle="modal" data-target="#CategoryDelete" id="DeleteCategory">
-                                                            <i class="fa fa-trash"></i> Delete
+                                                            <i class="fa fa-trash"></i> @Resource.Delete
                                                         </a>
                                                     }
                                                 </div>
@@ -118,11 +118,11 @@
             <div class="modal-body text-center">
                 <img src="~/Content/assets/img/sent.png" alt="" width="50" height="46">
                 <input class="form-control" type="text" id="DeleteCategoryID" style="display:none;">
-                <h5>Are you sure want to delete this Category information?</h5>
+                <h5>@Resource.Are_you_sure_want_to_delete_this @Resource.Category information?</h5>
                 <div class="m-t-20">
                     <p id="ConfigDerror" style="color:red;"></p>
-                    <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                    <input type="button" class="btn btn-danger" id="CDeleteCategory" value="Delete">
+                    <a href="#" class="btn btn-white" data-dismiss="modal">@Resource.Close</a>
+                    <input type="button" class="btn btn-danger" id="CDeleteCategory" value="@Resource.Delete">
                 </div>
             </div>
         </div>

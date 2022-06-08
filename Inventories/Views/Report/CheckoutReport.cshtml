@@ -61,19 +61,19 @@
                         <form>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label>Start Date</label>
+                                    <label>@Resource.Start_Date</label>
                                     <input class="form-control" type="date" name="StartDate" value="@StartDate" />
                                 </div>
                                 <div class="col-md-3">
-                                    <label>End Date</label>
+                                    <label>@Resource.End_Date</label>
                                     <input class="form-control" type="date" name="EndDate" value="@EndDate" />
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Start Created At</label>
+                                    <label>@Resource.Start_Created_At</label>
                                     <input class="form-control" type="date" name="StartCreatedDate" value="@StartCreatedDate" />
                                 </div>
                                 <div class="col-md-3">
-                                    <label>End Created At</label>
+                                    <label>@Resource.End_Created_At</label>
                                     <input class="form-control" type="date" name="EndCreatedDate" value="@EndCreatedDate" />
                                 </div>
 
@@ -81,13 +81,13 @@
                             </div><br />
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label>Reference</label>
+                                    <label>@Resource.Reference</label>
                                     <input class="form-control" type="text" name="Reference" value="@Reference" />
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Contact</label>
+                                    <label>@Resource.Contact</label>
                                     <select class="form-control" name="Contact">
-                                        <option value="">Contact</option>
+                                        <option value="">@Resource.Contact</option>
                                         @foreach (tblContact item in Contacts)
                                         {
                                             if (@Contact == item.ContactId)
@@ -102,9 +102,9 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Warehouse</label>
+                                    <label>@Resource.Warehouse</label>
                                     <select class="form-control" name="Warehouse">
-                                        <option value="">Warehouse</option>
+                                        <option value="">@Resource.Warehouse</option>
                                         @foreach (tblWarehouse item in Warehouses)
                                         {
                                             if (@Warehouse == item.WarehouseId)
@@ -121,9 +121,9 @@
                                 <div class="col-md-3">
                                     @if (Role.ToLower() == "admin")
                                     {
-                                        <label>User</label>
+                                    <label>@Resource.User</label>
                                         <select class="form-control" name="User">
-                                            <option value="">User</option>
+                                            <option value="">@Resource.User</option>
                                             @foreach (tblUser item in Users)
                                             {
                                                 if (@User == item.UserId)
@@ -140,7 +140,7 @@
                                     else
                                     {
                                         <select class="form-control" name="User" hidden>
-                                            <option value="">User</option>
+                                            <option value="">@Resource.User</option>
                                             @foreach (tblUser item in Users)
                                             {
                                                 if (@UserId == item.UserId)
@@ -156,9 +156,9 @@
                                     }
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Category</label>
+                                    <label>@Resource.Category</label>
                                     <select class="form-control" name="Category">
-                                        <option value="">Category</option>
+                                        <option value="">@Resource.Category</option>
                                         @foreach (tblCategory item in Categories)
                                         {
                                             if (@Category == item.CategoryId)
@@ -190,8 +190,8 @@
                             </div><br />
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary" style="float:right;">Search</button>
-                                    <a href="@Url.Action("CheckoutReport")"><button type="button" class="btn btn-danger" style="margin-right:1%;float:right;">Reset</button></a>
+                                    <button class="btn btn-primary" style="float:right;text-transform:capitalize;">@Resource.search</button>
+                                    <a href="@Url.Action("CheckoutReport")"><button type="button" class="btn btn-danger" style="margin-right: 1%; float: right; text-transform: capitalize;">@Resource.reset</button></a>
                                 </div>
                             </div>
 
@@ -215,10 +215,10 @@
                             <div class="container-fluid">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">Checkout Report</h5>
+                                        <h5 class="breadcrumb-title">@Resource.Checkout_Report</h5>
                                     </div>
                                     <div class="col-md-6 col-6 text-right" id="CreateCheckoutB">
-                                        <button class="btn btn-primary" id="ShowFilters" style="float:right"><i class="fas fa-toggle-off" id="IShowFilters"> Toggle Form</i> </button>
+                                        <button class="btn btn-primary" id="ShowFilters" style="float:right"><i class="fas fa-toggle-off" id="IShowFilters"> @Resource.Toggle_Form</i> </button>
                                     </div>
                                 </div>
                             </div>
@@ -233,13 +233,13 @@
                                 <thead>
                                     <tr>
                                         <th style="display:none;">Checkout ID</th>
-                                        <th>Checkout Date</th>
-                                        <th>Checkout Number</th>
-                                        <th>Contact</th>
-                                        <th>Warehouse</th>
-                                        <th>User</th>
-                                        <th>Reference</th>
-                                        <th>Details</th>
+                                        <th>@Resource.Checkout_Date</th>
+                                        <th>@Resource.Checkout_Number</th>
+                                        <th>@Resource.Contact</th>
+                                        <th>@Resource.Warehouse</th>
+                                        <th>@Resource.User</th>
+                                        <th>@Resource.Reference</th>
+                                        <th>@Resource.Details</th>
                                     </tr>
                                 </thead>
                                 <tbody>

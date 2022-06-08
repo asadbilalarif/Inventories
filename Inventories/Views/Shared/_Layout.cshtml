@@ -150,7 +150,7 @@
                         </a>
                         <div class="dropdown-menu notifications">
                             <div class="topnav-dropdown-header">
-                                <span class="notification-title">Notifications</span>
+                                <span class="notification-title">@Resource.Notifications</span>
                                 @*<a href="javascript:void(0)" class="clear-noti"> Clear All </a>*@
                             </div>
                             <div class="noti-content">
@@ -164,7 +164,7 @@
                                                         <img class="avatar-img rounded-circle" alt="User Image" src="~/Content/assets/img/doctors/doctor-thumb-01.jpg">
                                                     </span>*@
                                                     <div class="media-body">
-                                                        <p class="noti-details"><span class="noti-title">@item.tblItem.Name</span>  <span class="noti-title">has less Quanity than @item.tblItem.Alertonlowstock</span></p>
+                                                        <p class="noti-details"><span class="noti-title">@item.tblItem.Name</span>  <span class="noti-title">@Resource.has_less_Quantity_than  @item.tblItem.Alertonlowstock</span></p>
                                                         @*<p class="noti-time"><span class="notification-time">4 mins ago</span></p>*@
                                                     </div>
                                                 </div>
@@ -227,7 +227,7 @@
                         </a>
                         <div class="dropdown-menu notifications">
                             <div class="topnav-dropdown-header">
-                                <span class="notification-title">Notifications</span>
+                                <span class="notification-title">@Resource.Notifications</span>
                                 @*<a href="javascript:void(0)" class="clear-noti"> Clear All </a>*@
                             </div>
                             <div class="noti-content">
@@ -310,9 +310,9 @@
                             </div>
                         </div>
                         @*<a class="dropdown-item" href="profile.html">My Profile</a>*@
-                        <a class="dropdown-item" href="@Url.Action("Setting","Setting")">Settings</a>
-                        <a class="dropdown-item" href="@Url.Action("EmailSetting","Setting")">Email Settings</a>
-                        <a class="dropdown-item" href="@Url.Action("Login","Account")">Logout</a>
+                    <a class="dropdown-item" href="@Url.Action("Setting","Setting")">@Resource.Settings</a>
+                    <a class="dropdown-item" href="@Url.Action("EmailSetting","Setting")">@Resource.Email_Settings</a>
+                    <a class="dropdown-item" href="@Url.Action("Login","Account")">@Resource.Logout</a>
                     </div>
                 </li>
                 <!-- /User Menu -->
@@ -328,7 +328,7 @@
                 <div id="sidebar-menu" class="sidebar-menu" style="padding: 0px;">
                     <ul>
                         <li class="menu-title">
-                            <span>Main</span>
+                            <span>@Resource.Main</span>
                         </li>
                         @foreach (var AccessLevel in @ViewBag.Access)
                         {

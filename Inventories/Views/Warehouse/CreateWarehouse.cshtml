@@ -49,11 +49,11 @@
                                     <div class="col-md-6 col-6">
                                         @if (Model == null)
                                         {
-                                            <h5 class="breadcrumb-title">Create Warehouse</h5>
+                                            <h5 class="breadcrumb-title">@Resource.Create_Warehouse</h5>
                                         }
                                         else
                                         {
-                                            <h5 class="breadcrumb-title">Edit Warehouse</h5>
+                                            <h5 class="breadcrumb-title">@Resource.Edit @Resource.Warehouse</h5>
                                         }
                                     </div>
                                     <div class="col-md-6 col-6 text-right" id="CreateWarehouseB">
@@ -72,31 +72,31 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <input type="text" class="form-control" style="display:none;" name="WarehouseId" value="@WarehouseId" required>
-                                <label>Name<span style="color:red;">*</span></label>
+                                <label>@Resource.Name<span style="color:red;">*</span></label>
                                 <input type="text" class="form-control" id="Name" name="Name" value="@Name" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Code<span style="color:red;">*</span></label>
+                                <label>@Resource.Code<span style="color:red;">*</span></label>
                                 <input type="text" class="form-control" id="Code" name="Code" value="@Code" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Phone<span style="color:red;">*</span></label>
+                                <label>@Resource.Phone<span style="color:red;">*</span></label>
                                 <input type="text" class="form-control" id="Phone" name="Phone" value="@Phone" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Email<span style="color:red;">*</span></label>
+                                <label>@Resource.Email<span style="color:red;">*</span></label>
                                 <input type="text" class="form-control" id="Email" name="Email" value="@Email" required>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Logo<span style="color:red;"></span></label>
+                                <label>@Resource.Logo<span style="color:red;"></span></label>
                                 <input type="file" class="form-control" id="CLogo" name="CLogo">
                                 @if (@Logo != "")
                                 {
@@ -107,7 +107,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Address<span style="color:red;">*</span></label>
+                                <label>@Resource.Address<span style="color:red;">*</span></label>
                                 <textarea class="form-control" id="Address" name="Address" required>@Address</textarea>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                                 {
                                     <input type="checkbox"  id="isActive" name="isActive" value="true" />
                                 }
-                                <label>Active</label>
+                            <label>@Resource.Active</label>
                             </div>
                         </div>
                     </div>
@@ -131,9 +131,9 @@
                         <div class="col-md-12 text-right">
                             <div class="form-group">
                                 <label></label>
-                                <button class="btn btn-primary" type="submit" id="SaveChanges">Save</button>
-                                <a href="@Url.Action("CreateWarehouse","Warehouse",new { id=0})"> <input class="btn btn-danger" type="button" value="Cancel"></a>
-                                <a href="@Url.Action("Warehouses","Warehouse")" class="btn btn-secondary"><i class="fa fa-list"></i> List</a>
+                                <button class="btn btn-primary" type="submit" id="SaveChanges">@Resource.Save</button>
+                                <a href="@Url.Action("CreateWarehouse","Warehouse",new { id=0})"> <input class="btn btn-danger" type="button" value="@Resource.Cancel"></a>
+                                <a href="@Url.Action("Warehouses","Warehouse")" class="btn btn-secondary"><i class="fa fa-list"></i> @Resource.List</a>
                             </div>
                         </div>
 

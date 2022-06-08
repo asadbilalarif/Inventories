@@ -53,7 +53,7 @@
                         <div class="container-fluid">
                             <div class="row align-items-center">
                                 <div class="col-md-6 col-6">
-                                    <h5 class="breadcrumb-title" style="color: #333333;">ROLES & PERMISSIONS</h5>
+                                    <h5 class="breadcrumb-title" style="color: #333333;">@Resource.ROLES & @Resource.PERMISSIONS</h5>
                                 </div>
 
                             </div>
@@ -71,7 +71,7 @@
         </div>*@
             <div class="row">
                 <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
-                    <a href="add-role.html" class="btn btn-primary btn-block" data-toggle="modal" data-target="#RoleModal" id="CreateRoleB"><i class="fa fa-plus" style="color:white;"> Add Roles</i></a>
+                    <a href="add-role.html" class="btn btn-primary btn-block" data-toggle="modal" data-target="#RoleModal" id="CreateRoleB"><i class="fa fa-plus" style="color:white;"> @Resource.Add_Roles</i></a>
                     <div class="roles-menu">
                         <ul>
                             @foreach (Inventories.Models.tblRole Role in Model)
@@ -205,11 +205,11 @@
                             <thead>
                                 <tr style="background-color: #111827 !important; color: white !important;">
                                     <th style="display:none;">Manu ID</th>
-                                    <th>Module Access & Permission</th>
-                                    <th class="text-center">Active</th>
-                                    <th class="text-center" >Create</th>
-                                <th class="text-center" >Edit</th>
-                                <th class="text-center" >Delete</th>
+                                    <th>@Resource.Module @Resource.Access & @Resource.Permission</th>
+                                    <th class="text-center">@Resource.Active</th>
+                                    <th class="text-center">@Resource.Create</th>
+                                    <th class="text-center">@Resource.Edit</th>
+                                    <th class="text-center">@Resource.Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -291,7 +291,7 @@
 
                     </div><br />
                     <div id="loading" style="display:none;margin: 0 auto; text-decoration-color:cornflowerblue;"><div class="spinner-border text-success" id="display_loading" style="margin: 0 auto;"></div><div class="spinner-border text-success" id="display_loading" style="display:none;margin: 0 auto;"></div> Loading...</div>
-                    <button class="btn btn-primary" type="submit" id="btnSave">Save Changes</button>
+                    <button class="btn btn-primary" type="submit" id="btnSave">@Resource.Save_Changes</button>
                     @*}*@
                 </div>
             </div>
@@ -309,8 +309,8 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" style="display:none;color:white;" id="CRHeading">Add Role</h4>
-                <h4 class="modal-title" style="display:none;color:white;" id="ERHeading">Edit Role</h4>
+                <h4 class="modal-title" style="display:none;color:white;" id="CRHeading">@Resource.Add @Resource.Role</h4>
+                <h4 class="modal-title" style="display:none;color:white;" id="ERHeading">@Resource.Edit @Resource.Role</h4>
                 @*<button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>*@
 
             </div>
@@ -322,7 +322,7 @@
                             <span id="Roleerror"></span>
                             <div class="form-group">
                                 <input class="form-control" style="display:none;" type="text" id="RoleID">
-                                <label>Role Name <span class="text-danger">*</span></label>
+                                <label>@Resource.Role @Resource.Name <span class="text-danger">*</span></label>
                                 <input class="form-control" type="text" id="RoleName">
                             </div>
                             <div class="form-group" style="display:none;">
@@ -330,7 +330,7 @@
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="status" id="RoleActive" value="1" checked>
                                     <label class="form-check-label" for="role_active">
-                                        Active
+                                        @Resource.Active
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -345,9 +345,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">@Resource.Close</button>
                 <div id="Roleloading" style="display:none;margin: 0 auto; text-decoration-color:cornflowerblue;"><div class="spinner-border text-success" id="display_loading" style="margin: 0 auto;"></div><div class="spinner-border text-success" id="display_loading" style="display:none;margin: 0 auto;"></div> Loading...</div>
-                <input type="button" class="btn btn-primary" id="RoleSubmit" value="Save">
+                <input type="button" class="btn btn-primary" id="RoleSubmit" value="@Resource.Save">
             </div>
         </div>
 
@@ -360,11 +360,11 @@
         <div class="modal-content">
             <div class="modal-body text-center">
                 <img src="~/Content/assets/img/sent.png" alt="" width="50" height="46">
-                <h3>Are you sure want to delete this Role?</h3>
+                <h3>@Resource.Are_you_sure_want_to_delete_this @Resource.Role?</h3>
                 <input type="text" id="DeleteRoleID" style="display:none;">
                 <div class="m-t-20">
-                    <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                    <button type="submit" class="btn btn-danger" id="CDeleteRole">Delete</button>
+                    <a href="#" class="btn btn-white" data-dismiss="modal">@Resource.Close</a>
+                    <button type="submit" class="btn btn-danger" id="CDeleteRole">@Resource.Delete</button>
                 </div>
             </div>
         </div>

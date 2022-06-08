@@ -38,12 +38,12 @@
                             <div class="container-fluid">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">Warehouse List</h5>
+                                        <h5 class="breadcrumb-title">@Resource.Warehouse_List</h5>
                                     </div>
                                     <div class="col-md-6 col-6 text-right" id="CreateWarehouseB">
                                         @if (ViewBag.CreateAccess == true)
                                         {
-                                            <a href="@Url.Action("CreateWarehouse","Warehouse")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> Create New Warehouse</a>
+                                            <a href="@Url.Action("CreateWarehouse","Warehouse")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> @Resource.Create_New_Warehouse</a>
                                         }
                                     </div>
                                 </div>
@@ -68,14 +68,14 @@
                                 <thead>
                                     <tr>
                                         <th style="display:none;">Warehouse ID</th>
-                                        <th>Name</th>
-                                        <th>Code</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
-                                        <th>Address</th>
-                                        <th>Active</th>
+                                        <th>@Resource.Name</th>
+                                        <th>@Resource.Code</th>
+                                        <th>@Resource.Phone</th>
+                                        <th>@Resource.Email</th>
+                                        <th>@Resource.Address</th>
+                                        <th>@Resource.Active</th>
 
-                                        <th>Action</th>
+                                        <th>@Resource.Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -106,13 +106,13 @@
                                                 @if (ViewBag.EditAccess == true)
                                                 {
                                                     <a href="@Url.Action("CreateWarehouse","Warehouse",new {id=Warehouse.WarehouseId })" id="EditWarehouse" class="text-black">
-                                                        <i class="fa fa-edit"></i> Edit
+                                                        <i class="fa fa-edit"></i> @Resource.Edit
                                                     </a>
                                                 }
                                                 @if (ViewBag.DeleteAccess == true)
                                                 {
                                                     <a class="text-danger" href="#" data-toggle="modal" data-target="#WarehouseDelete" id="DeleteWarehouse">
-                                                        <i class="fa fa-trash"></i> Delete
+                                                        <i class="fa fa-trash"></i> @Resource.Delete
                                                     </a>
                                                 }
                                             </div>
@@ -137,11 +137,11 @@
             <div class="modal-body text-center">
                 <img src="~/Content/assets/img/sent.png" alt="" width="50" height="46">
                 <input class="form-control" type="text" id="DeleteWarehouseID" style="display:none;">
-                <h5>Are you sure want to delete this Warehouse information?</h5>
+                <h5>@Resource.Are_you_sure_want_to_delete_this @Resource.Warehouse information?</h5>
                 <div class="m-t-20">
                     <p id="ConfigDerror" style="color:red;"></p>
-                    <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                    <input type="button" class="btn btn-danger" id="CDeleteWarehouse" value="Delete">
+                    <a href="#" class="btn btn-white" data-dismiss="modal">@Resource.Close</a>
+                    <input type="button" class="btn btn-danger" id="CDeleteWarehouse" value="@Resource.Delete">
                 </div>
             </div>
         </div>

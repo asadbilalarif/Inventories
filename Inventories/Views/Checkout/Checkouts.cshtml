@@ -38,12 +38,12 @@
                             <div class="container-fluid">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">Checkout List</h5>
+                                        <h5 class="breadcrumb-title">@Resource.Checkout_List</h5>
                                     </div>
                                     <div class="col-md-6 col-6 text-right" id="CreateCheckoutB">
                                         @if (ViewBag.CreateAccess == true)
                                         {
-                                            <a href="@Url.Action("CreateCheckout","Checkout")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> Create New Checkout</a>
+                                            <a href="@Url.Action("CreateCheckout","Checkout")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> @Resource.Create_New_Checkout</a>
                                         }
                                     </div>
                                 </div>
@@ -68,12 +68,12 @@
                                 <thead>
                                     <tr>
                                         <th style="display:none;">Checkout ID</th>
-                                        <th>Checkout Date</th>
-                                        <th>Contact</th>
-                                        <th>Warehouse</th>
-                                        <th>Reference</th>
-                                        <th>Details</th>
-                                        <th>Action</th>
+                                        <th>@Resource.Checkout_Date</th>
+                                        <th>@Resource.Contact</th>
+                                        <th>@Resource.Warehouse</th>
+                                        <th>@Resource.Reference</th>
+                                        <th>@Resource.Details</th>
+                                        <th>@Resource.Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -91,13 +91,13 @@
                                                     @if (ViewBag.EditAccess == true)
                                                     {
                                                         <a href="@Url.Action("CreateCheckout","Checkout",new {id=Checkout.CheckoutId })" id="EditCheckout" class="text-black">
-                                                            <i class="fa fa-edit"></i> Edit
+                                                            <i class="fa fa-edit"></i> @Resource.Edit
                                                         </a>
                                                     }
                                                     @if (ViewBag.DeleteAccess == true)
                                                     {
                                                         <a class="text-danger" href="#" data-toggle="modal" data-target="#CheckoutDelete" id="DeleteCheckout">
-                                                            <i class="fa fa-trash"></i> Delete
+                                                            <i class="fa fa-trash"></i> @Resource.Delete
                                                         </a>
                                                     }
                                                 </div>
@@ -122,11 +122,11 @@
             <div class="modal-body text-center">
                 <img src="~/Content/assets/img/sent.png" alt="" width="50" height="46">
                 <input class="form-control" type="text" id="DeleteCheckoutID" style="display:none;">
-                <h5>Are you sure want to delete this Checkout information?</h5>
+                <h5>@Resource.Are_you_sure_want_to_delete_this @Resource.Checkout information?</h5>
                 <div class="m-t-20">
                     <p id="ConfigDerror" style="color:red;"></p>
-                    <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                    <input type="button" class="btn btn-danger" id="CDeleteCheckout" value="Delete">
+                    <a href="#" class="btn btn-white" data-dismiss="modal">@Resource.Close</a>
+                    <input type="button" class="btn btn-danger" id="CDeleteCheckout" value="@Resource.Delete">
                 </div>
             </div>
         </div>
