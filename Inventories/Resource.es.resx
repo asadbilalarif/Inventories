@@ -118,466 +118,468 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="a" xml:space="preserve">
-    <value>a</value>
+    <value>uno</value>
   </data>
   <data name="Access" xml:space="preserve">
-    <value>Access</value>
+    <value>Acceso</value>
   </data>
   <data name="Access_to_our_dashboard" xml:space="preserve">
-    <value>Access to our dashboard</value>
+    <value>Accede a nuestro panel de control</value>
   </data>
   <data name="Action" xml:space="preserve">
-    <value>Action</value>
+    <value>Acción</value>
   </data>
   <data name="Active" xml:space="preserve">
-    <value>Active</value>
+    <value>Activo(masculine)
+Activo(masculine)
+Activo</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>Add</value>
+    <value>Agregar</value>
   </data>
   <data name="Addition" xml:space="preserve">
-    <value>Addition</value>
+    <value>Suma</value>
   </data>
   <data name="Address" xml:space="preserve">
-    <value>Address</value>
+    <value>Dirección</value>
   </data>
   <data name="Add_Roles" xml:space="preserve">
-    <value>Add Roles</value>
+    <value>Agregar funciones</value>
   </data>
   <data name="Adjustment" xml:space="preserve">
-    <value>Adjustment</value>
+    <value>Ajustamiento</value>
   </data>
   <data name="Adjustments" xml:space="preserve">
-    <value>Adjustments</value>
+    <value>Ajustes</value>
   </data>
   <data name="Adjustment_Date" xml:space="preserve">
-    <value>Adjustment Date</value>
+    <value>Fecha de ajuste</value>
   </data>
   <data name="Adjustment_List" xml:space="preserve">
-    <value>Adjustment List</value>
+    <value>Lista de ajustes</value>
   </data>
   <data name="Adjustment_Number" xml:space="preserve">
-    <value>Adjustment Number</value>
+    <value>Número de ajuste</value>
   </data>
   <data name="Adjustment_Report" xml:space="preserve">
-    <value>Adjustment Report</value>
+    <value>Informe de ajuste</value>
   </data>
   <data name="Admin" xml:space="preserve">
-    <value>Admin</value>
+    <value>Administrador</value>
   </data>
   <data name="Alert" xml:space="preserve">
-    <value>Alert</value>
+    <value>Alerta</value>
   </data>
   <data name="Alert_on_Low_Stock" xml:space="preserve">
-    <value>Alert on Low Stock</value>
+    <value>Alerta de stock bajo</value>
   </data>
   <data name="Are_you_sure_want_to_delete_this" xml:space="preserve">
-    <value>Are you sure want to delete this</value>
+    <value>¿Estás seguro de que quieres eliminar esto?</value>
   </data>
   <data name="Available_Quantity" xml:space="preserve">
-    <value>Available Quantity</value>
+    <value>Cantidad disponible</value>
   </data>
   <data name="barcode" xml:space="preserve">
-    <value>barcode</value>
+    <value>código de barras</value>
   </data>
   <data name="Barcode_Symbology" xml:space="preserve">
-    <value>Barcode Symbology</value>
+    <value>Simbología de código de barras</value>
   </data>
   <data name="Base" xml:space="preserve">
     <value>Base</value>
   </data>
   <data name="Base_Unit" xml:space="preserve">
-    <value>Base Unit</value>
+    <value>Unidad base</value>
   </data>
   <data name="Batch" xml:space="preserve">
-    <value>Batch</value>
+    <value>Lote</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancelar</value>
   </data>
   <data name="Categories" xml:space="preserve">
-    <value>Categories</value>
+    <value>Categorías</value>
   </data>
   <data name="Categories_List" xml:space="preserve">
-    <value>Categories List</value>
+    <value>Lista de categorías</value>
   </data>
   <data name="Category" xml:space="preserve">
-    <value>Category</value>
+    <value>Categoría</value>
   </data>
   <data name="Category_Name" xml:space="preserve">
-    <value>Category Name</value>
+    <value>Nombre de la categoría</value>
   </data>
   <data name="Change" xml:space="preserve">
-    <value>Change</value>
+    <value>Cambio</value>
   </data>
   <data name="Changes" xml:space="preserve">
-    <value>Changes</value>
+    <value>Cambios</value>
   </data>
   <data name="Checkin" xml:space="preserve">
-    <value>Checkin</value>
+    <value>Registrarse</value>
   </data>
   <data name="Checkins" xml:space="preserve">
-    <value>Checkins</value>
+    <value>Registros</value>
   </data>
   <data name="Checkin_Date" xml:space="preserve">
-    <value>Checkin Date</value>
+    <value>Comprobar en la fecha</value>
   </data>
   <data name="Checkin_List" xml:space="preserve">
-    <value>Checkin List</value>
+    <value>Lista de registro</value>
   </data>
   <data name="Checkin_Number" xml:space="preserve">
-    <value>Checkin Number</value>
+    <value>Número de registro</value>
   </data>
   <data name="Checkin_Report" xml:space="preserve">
-    <value>Checkin Report</value>
+    <value>Informe de registro</value>
   </data>
   <data name="Checkout" xml:space="preserve">
-    <value>Checkout</value>
+    <value>Verificar</value>
   </data>
   <data name="Checkouts" xml:space="preserve">
-    <value>Checkouts</value>
+    <value>Cajas</value>
   </data>
   <data name="Checkout_Date" xml:space="preserve">
-    <value>Checkout Date</value>
+    <value>Echa un vistazo a la fecha</value>
   </data>
   <data name="Checkout_List" xml:space="preserve">
-    <value>Checkout List</value>
+    <value>Lista de pagos</value>
   </data>
   <data name="Checkout_Number" xml:space="preserve">
-    <value>Checkout Number</value>
+    <value>Número de pago</value>
   </data>
   <data name="Checkout_Report" xml:space="preserve">
-    <value>Checkout Report</value>
+    <value>Informe de pago</value>
   </data>
   <data name="click" xml:space="preserve">
-    <value>click</value>
+    <value>hacer clic</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Cerca</value>
   </data>
   <data name="Code" xml:space="preserve">
-    <value>Code</value>
+    <value>Código</value>
   </data>
   <data name="Confirm" xml:space="preserve">
-    <value>Confirm</value>
+    <value>Confirmar</value>
   </data>
   <data name="Contact" xml:space="preserve">
-    <value>Contact</value>
+    <value>Contacto</value>
   </data>
   <data name="Contact1" xml:space="preserve">
-    <value>Contact</value>
+    <value>Contacto</value>
   </data>
   <data name="Contacts" xml:space="preserve">
-    <value>Contacts</value>
+    <value>Contactos</value>
   </data>
   <data name="Contact_List" xml:space="preserve">
-    <value>Contact List</value>
+    <value>Lista de contactos</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Create</value>
+    <value>Crear</value>
   </data>
   <data name="Create_Adjustment" xml:space="preserve">
-    <value>Create Adjustment</value>
+    <value>Crear ajuste</value>
   </data>
   <data name="Create_Category" xml:space="preserve">
-    <value>Create Category</value>
+    <value>Crear categoría</value>
   </data>
   <data name="Create_Checkin" xml:space="preserve">
-    <value>Create Checkin</value>
+    <value>Crear registro</value>
   </data>
   <data name="Create_Checkout" xml:space="preserve">
-    <value>Create Checkout</value>
+    <value>Crear pago</value>
   </data>
   <data name="Create_Contact" xml:space="preserve">
-    <value>Create Contact</value>
+    <value>Crear contacto</value>
   </data>
   <data name="Create_Item" xml:space="preserve">
-    <value>Create Item</value>
+    <value>Crear elemento</value>
   </data>
   <data name="Create_New_Adjustment" xml:space="preserve">
-    <value>Create New Adjustment</value>
+    <value>Crear nuevo ajuste</value>
   </data>
   <data name="Create_New_Category" xml:space="preserve">
-    <value>Create New Category</value>
+    <value>Crear nueva categoría</value>
   </data>
   <data name="Create_New_Checkin" xml:space="preserve">
-    <value>Create New Checkin</value>
+    <value>Crear nuevo registro</value>
   </data>
   <data name="Create_New_Checkout" xml:space="preserve">
-    <value>Create New Checkout</value>
+    <value>Crear nuevo pago</value>
   </data>
   <data name="Create_New_Contact" xml:space="preserve">
-    <value>Create New Contact</value>
+    <value>Crear nuevo contacto</value>
   </data>
   <data name="Create_New_Item" xml:space="preserve">
-    <value>Create New Item</value>
+    <value>Crear nuevo elemento</value>
   </data>
   <data name="Create_New_Transfer" xml:space="preserve">
-    <value>Create New Transfer</value>
+    <value>Crear nuevo elemento</value>
   </data>
   <data name="Create_New_Unit" xml:space="preserve">
-    <value>Create New Unit</value>
+    <value>Crear nueva unidad</value>
   </data>
   <data name="Create_New_User" xml:space="preserve">
-    <value>Create New User</value>
+    <value>Crear nuevo usuario</value>
   </data>
   <data name="Create_New_Warehouse" xml:space="preserve">
-    <value>Create New Warehouse</value>
+    <value>Crear nuevo almacén</value>
   </data>
   <data name="Create_Transfer" xml:space="preserve">
-    <value>Create Transfer</value>
+    <value>Crear transferencia</value>
   </data>
   <data name="Create_Unit" xml:space="preserve">
-    <value>Create Unit</value>
+    <value>Crear Unidad</value>
   </data>
   <data name="Create_User" xml:space="preserve">
-    <value>Create User</value>
+    <value>Crear usuario</value>
   </data>
   <data name="Create_Warehouse" xml:space="preserve">
-    <value>Create Warehouse</value>
+    <value>Crear Almacén</value>
   </data>
   <data name="Damage" xml:space="preserve">
-    <value>Damage</value>
+    <value>Daño</value>
   </data>
   <data name="Dashboard" xml:space="preserve">
-    <value>Dashboard</value>
+    <value>Tablero</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Date</value>
+    <value>Fecha</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Borrar</value>
   </data>
   <data name="Details" xml:space="preserve">
-    <value>Details</value>
+    <value>Detalles</value>
   </data>
   <data name="Divide" xml:space="preserve">
-    <value>Divide</value>
+    <value>Dividir</value>
   </data>
   <data name="Dozen" xml:space="preserve">
-    <value>Dozen</value>
+    <value>Docena</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Editar</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>Correo electrónico</value>
   </data>
   <data name="Email_Settings" xml:space="preserve">
-    <value>Email Settings</value>
+    <value>Ajustes del correo electrónico</value>
   </data>
   <data name="End_Created_At" xml:space="preserve">
-    <value>End Created At</value>
+    <value>Fin creado en</value>
   </data>
   <data name="End_Date" xml:space="preserve">
-    <value>End Date</value>
+    <value>Fecha final</value>
   </data>
   <data name="Enter" xml:space="preserve">
-    <value>Enter</value>
+    <value>Ingresar</value>
   </data>
   <data name="Enter_your_email_to_get_a_password_reset_link" xml:space="preserve">
-    <value>Enter your email to get a password reset link</value>
+    <value>Ingrese su correo electrónico para obtener un enlace de restablecimiento de contraseña</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="Excel" xml:space="preserve">
-    <value>Excel</value>
+    <value>Sobresalir</value>
   </data>
   <data name="For" xml:space="preserve">
-    <value>For</value>
+    <value>Para</value>
   </data>
   <data name="Forgot" xml:space="preserve">
-    <value>Forgot</value>
+    <value>Olvidó</value>
   </data>
   <data name="Forgot_Password" xml:space="preserve">
-    <value>Forgot Password</value>
+    <value>Has olvidado tu contraseña</value>
   </data>
   <data name="Formula" xml:space="preserve">
-    <value>Formula</value>
+    <value>Fórmula</value>
   </data>
   <data name="From_Warehouse" xml:space="preserve">
-    <value>From Warehouse</value>
+    <value>Desde Almacén</value>
   </data>
   <data name="get" xml:space="preserve">
-    <value>get</value>
+    <value>obtener</value>
   </data>
   <data name="has" xml:space="preserve">
-    <value>has</value>
+    <value>posee</value>
   </data>
   <data name="has_less_Quantity_than" xml:space="preserve">
-    <value>has less Quantity than</value>
+    <value>tiene menos cantidad que</value>
   </data>
   <data name="Inventories" xml:space="preserve">
-    <value>Inventories</value>
+    <value>Inventarios</value>
   </data>
   <data name="Item" xml:space="preserve">
-    <value>Item</value>
+    <value>Artículo</value>
   </data>
   <data name="items" xml:space="preserve">
-    <value>Items</value>
+    <value>Elementos</value>
   </data>
   <data name="Item_Category" xml:space="preserve">
-    <value>Item Category</value>
+    <value>Categoría de artículo</value>
   </data>
   <data name="Item_List" xml:space="preserve">
-    <value>Item List</value>
+    <value>Lista de articulos</value>
   </data>
   <data name="Item_Name" xml:space="preserve">
-    <value>Item Name</value>
+    <value>Nombre del árticulo</value>
   </data>
   <data name="Item_Stock_Ledger_Detail_Report" xml:space="preserve">
-    <value>Item Stock Ledger Detail Report</value>
+    <value>Informe detallado del libro mayor de existencias de artículos</value>
   </data>
   <data name="Item_Stock_Ledger_Report" xml:space="preserve">
-    <value>Item Stock Ledger Report</value>
+    <value>Informe del libro mayor de existencias de artículos</value>
   </data>
   <data name="Item_Unit" xml:space="preserve">
-    <value>Item Unit</value>
+    <value>Unidad de artículo</value>
   </data>
   <data name="Kilogram" xml:space="preserve">
-    <value>Kilogram</value>
+    <value>Kilogramo</value>
   </data>
   <data name="Ledger" xml:space="preserve">
-    <value>Ledger</value>
+    <value>Libro mayor</value>
   </data>
   <data name="less" xml:space="preserve">
-    <value>less</value>
+    <value>menos</value>
   </data>
   <data name="link" xml:space="preserve">
-    <value>link</value>
+    <value>Enlace</value>
   </data>
   <data name="Links" xml:space="preserve">
-    <value>Links</value>
+    <value>Enlaces</value>
   </data>
   <data name="List" xml:space="preserve">
-    <value>List</value>
+    <value>Lista</value>
   </data>
   <data name="Location" xml:space="preserve">
-    <value>Location</value>
+    <value>Ubicación</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Acceso</value>
   </data>
   <data name="Logo" xml:space="preserve">
     <value>Logo</value>
   </data>
   <data name="Logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>Cerrar sesión</value>
   </data>
   <data name="Low" xml:space="preserve">
-    <value>Low</value>
+    <value>Bajo</value>
   </data>
   <data name="Main" xml:space="preserve">
-    <value>Main</value>
+    <value>Principal</value>
   </data>
   <data name="Meter" xml:space="preserve">
-    <value>Meter</value>
+    <value>Metro</value>
   </data>
   <data name="Minus" xml:space="preserve">
-    <value>Minus</value>
+    <value>Menos</value>
   </data>
   <data name="Module" xml:space="preserve">
-    <value>Module</value>
+    <value>Módulo</value>
   </data>
   <data name="Multiply" xml:space="preserve">
-    <value>Multiply</value>
+    <value>Multiplicar</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Nombre</value>
   </data>
   <data name="New" xml:space="preserve">
-    <value>New</value>
+    <value>Nuevo</value>
   </data>
   <data name="New_Password_and_Confirm_Password_not_Matched" xml:space="preserve">
-    <value>New Password and Confirm Password not Matched</value>
+    <value>Nueva contraseña y Confirmar contraseña no coinciden</value>
   </data>
   <data name="Notifications" xml:space="preserve">
-    <value>Notifications</value>
+    <value>Notificaciones</value>
   </data>
   <data name="Number" xml:space="preserve">
-    <value>Number</value>
+    <value>Número</value>
   </data>
   <data name="on" xml:space="preserve">
-    <value>on</value>
+    <value>en</value>
   </data>
   <data name="Operation" xml:space="preserve">
-    <value>Operation</value>
+    <value>Operación</value>
   </data>
   <data name="Operation_Value" xml:space="preserve">
-    <value>Operation Value</value>
+    <value>Valor de operación</value>
   </data>
   <data name="Operator" xml:space="preserve">
-    <value>Operator</value>
+    <value>Operador</value>
   </data>
   <data name="or" xml:space="preserve">
-    <value>or</value>
+    <value>o</value>
   </data>
   <data name="Our" xml:space="preserve">
-    <value>Our</value>
+    <value>Nuestro</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Clave</value>
   </data>
   <data name="Permission" xml:space="preserve">
-    <value>Permission</value>
+    <value>Permiso</value>
   </data>
   <data name="PERMISSIONS" xml:space="preserve">
-    <value>PERMISSIONS</value>
+    <value>PERMISOS</value>
   </data>
   <data name="Phone" xml:space="preserve">
-    <value>Phone</value>
+    <value>Teléfono</value>
   </data>
   <data name="Phone_Number" xml:space="preserve">
-    <value>Phone Number</value>
+    <value>Número de teléfono</value>
   </data>
   <data name="Piece" xml:space="preserve">
-    <value>Piece</value>
+    <value>Pieza</value>
   </data>
   <data name="Please" xml:space="preserve">
-    <value>Please</value>
+    <value>Por favor</value>
   </data>
   <data name="Please_click_to_see_the_report" xml:space="preserve">
-    <value>Please click to see the report</value>
+    <value>Por favor haga clic para ver el informe</value>
   </data>
   <data name="Please_review_the_total_records_below" xml:space="preserve">
-    <value>Please review the total records below</value>
+    <value>Revise los registros totales a continuación</value>
   </data>
   <data name="Plus" xml:space="preserve">
-    <value>Plus</value>
+    <value>Más</value>
   </data>
   <data name="Qty" xml:space="preserve">
-    <value>Qty</value>
+    <value>Cantidad</value>
   </data>
   <data name="Quantity" xml:space="preserve">
-    <value>Quantity</value>
+    <value>Cantidad</value>
   </data>
   <data name="Rack" xml:space="preserve">
-    <value>Rack</value>
+    <value>Estante</value>
   </data>
   <data name="Rack_Location" xml:space="preserve">
-    <value>Rack Location</value>
+    <value>Ubicación del estante</value>
   </data>
   <data name="Reference" xml:space="preserve">
-    <value>Reference</value>
+    <value>Referencia</value>
   </data>
   <data name="Remember" xml:space="preserve">
-    <value>Remember</value>
+    <value>Recuerda</value>
   </data>
   <data name="Remember_your_password" xml:space="preserve">
-    <value>Remember your password</value>
+    <value>Recuerda tu contraseña</value>
   </data>
   <data name="Report" xml:space="preserve">
-    <value>Report</value>
+    <value>Reporte</value>
   </data>
   <data name="Report_Links" xml:space="preserve">
-    <value>Report Links</value>
+    <value>Informe de enlaces</value>
   </data>
   <data name="reset" xml:space="preserve">
-    <value>reset</value>
+    <value>Reiniciar</value>
   </data>
   <data name="Reset_Password" xml:space="preserve">
-    <value>Reset Password</value>
+    <value>Restablecer la contraseña</value>
   </data>
   <data name="Role" xml:space="preserve">
     <value>Role</value>
@@ -586,141 +588,141 @@
     <value>Roles</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Ahorrar</value>
   </data>
   <data name="Save_Changes" xml:space="preserve">
-    <value>Save Changes</value>
+    <value>Guardar cambios</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Scan</value>
+    <value>Escanear</value>
   </data>
   <data name="Scan_barcode_or_search_items" xml:space="preserve">
-    <value>Scan barcode or search items</value>
+    <value>Escanear código de barras o buscar elementos</value>
   </data>
   <data name="search" xml:space="preserve">
-    <value>search</value>
+    <value>búsqueda</value>
   </data>
   <data name="see" xml:space="preserve">
-    <value>see</value>
+    <value>ver</value>
   </data>
   <data name="Select" xml:space="preserve">
-    <value>Select</value>
+    <value>Seleccione</value>
   </data>
   <data name="Select_Batch" xml:space="preserve">
-    <value>Select Batch</value>
+    <value>Seleccionar lote</value>
   </data>
   <data name="Select_language" xml:space="preserve">
-    <value>Select language</value>
+    <value>Seleccione el idioma</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Ajustes</value>
   </data>
   <data name="Start_Created_At" xml:space="preserve">
-    <value>Start Created At</value>
+    <value>Comenzar creado en</value>
   </data>
   <data name="Start_Date" xml:space="preserve">
-    <value>Start Date</value>
+    <value>Fecha de inicio</value>
   </data>
   <data name="Stock" xml:space="preserve">
-    <value>Stock</value>
+    <value>Valores</value>
   </data>
   <data name="Subtraction" xml:space="preserve">
-    <value>Subtraction</value>
+    <value>Sustracción</value>
   </data>
   <data name="than" xml:space="preserve">
-    <value>than</value>
+    <value>que</value>
   </data>
   <data name="the" xml:space="preserve">
-    <value>the</value>
+    <value>el</value>
   </data>
   <data name="to" xml:space="preserve">
-    <value>to</value>
+    <value>a</value>
   </data>
   <data name="Toggle_Form" xml:space="preserve">
-    <value>Toggle Form</value>
+    <value>Alternar formulario</value>
   </data>
   <data name="Total_Records" xml:space="preserve">
-    <value>Total Records</value>
+    <value>Registros totales</value>
   </data>
   <data name="To_Warehouse" xml:space="preserve">
-    <value>To Warehouse</value>
+    <value>Al Almacén</value>
   </data>
   <data name="Track" xml:space="preserve">
-    <value>Track</value>
+    <value>Pista</value>
   </data>
   <data name="Track_Quantity" xml:space="preserve">
-    <value>Track Quantity</value>
+    <value>Cantidad de pistas</value>
   </data>
   <data name="Transfer" xml:space="preserve">
-    <value>Transfer</value>
+    <value>Transferir</value>
   </data>
   <data name="Transfers" xml:space="preserve">
-    <value>Transfers</value>
+    <value>Transferencias</value>
   </data>
   <data name="Transfer_Date" xml:space="preserve">
-    <value>Transfer Date</value>
+    <value>Fecha de transferencia</value>
   </data>
   <data name="Transfer_List" xml:space="preserve">
-    <value>Transfer List</value>
+    <value>Lista de transferencia</value>
   </data>
   <data name="Transfer_Number" xml:space="preserve">
-    <value>Transfer Number</value>
+    <value>Número de transferencia</value>
   </data>
   <data name="Transfer_Report" xml:space="preserve">
-    <value>Transfer Report</value>
+    <value>Informe de transferencia</value>
   </data>
   <data name="Type" xml:space="preserve">
-    <value>Type</value>
+    <value>Escribe</value>
   </data>
   <data name="Unit" xml:space="preserve">
-    <value>Unit</value>
+    <value>Unidad</value>
   </data>
   <data name="Units" xml:space="preserve">
-    <value>Units</value>
+    <value>Unidades</value>
   </data>
   <data name="Unit_List" xml:space="preserve">
-    <value>Unit List</value>
+    <value>Lista de unidades</value>
   </data>
   <data name="User" xml:space="preserve">
-    <value>User</value>
+    <value>Usuario</value>
   </data>
   <data name="Username" xml:space="preserve">
-    <value>Username</value>
+    <value>Nombre de usuario</value>
   </data>
   <data name="Users" xml:space="preserve">
-    <value>Users</value>
+    <value>Usuarios</value>
   </data>
   <data name="User_List" xml:space="preserve">
-    <value>User List</value>
+    <value>Lista de usuarios</value>
   </data>
   <data name="User_Name" xml:space="preserve">
-    <value>User Name</value>
+    <value>Nombre de usuario</value>
   </data>
   <data name="Value" xml:space="preserve">
-    <value>Value</value>
+    <value>Valor</value>
   </data>
   <data name="Voucher_Number" xml:space="preserve">
-    <value>Voucher Number</value>
+    <value>Número de Vales</value>
   </data>
   <data name="Warehouse" xml:space="preserve">
-    <value>Warehouse</value>
+    <value>Depósito</value>
   </data>
   <data name="Warehouses" xml:space="preserve">
-    <value>Warehouses</value>
+    <value>Almacenes</value>
   </data>
   <data name="Warehouse_List" xml:space="preserve">
-    <value>Warehouse List</value>
+    <value>Lista de almacenes</value>
   </data>
   <data name="Warehouse_Name" xml:space="preserve">
-    <value>Warehouse Name</value>
+    <value>Nombre del almacén</value>
   </data>
   <data name="Weight" xml:space="preserve">
-    <value>Weight</value>
+    <value>Peso</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Welcome</value>
+    <value>Bienvenidos</value>
   </data>
   <data name="your" xml:space="preserve">
-    <value>your</value>
+    <value>su</value>
   </data>
 </root>

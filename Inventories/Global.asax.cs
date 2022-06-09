@@ -28,6 +28,10 @@ namespace Inventories
             {
                 languageSession = context.Session["lang"] != null ? context.Session["lang"].ToString() : "en";
             }
+            if(context.Session["CurrentCulture"] ==null)
+            {
+                Session["CurrentCulture"] = 0.ToString();
+            }
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(languageSession);
             Thread.CurrentThread.CurrentCulture = new CultureInfo(languageSession);
         }

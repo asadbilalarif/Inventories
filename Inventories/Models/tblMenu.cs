@@ -36,6 +36,7 @@ namespace Inventories.Models
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public Nullable<bool> isActive { get; set; }
         public string ElementId { get; set; }
+        public string NameES { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblAccessLevel> tblAccessLevels { get; set; }

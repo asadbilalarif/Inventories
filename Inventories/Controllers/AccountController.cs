@@ -241,7 +241,15 @@ namespace Inventories.Controllers
         public ActionResult ChangeLanguage(string lang)
         {
             Session["lang"] = lang;
-            return RedirectToAction("Index", "Account", new { language = lang });
+            if(lang=="es")
+            {
+                Session["CurrentCulture"] = 2.ToString();
+            }
+            else
+            {
+                Session["CurrentCulture"] = 0.ToString();
+            }
+            return RedirectToAction("Index", "Home", new { language = lang });
         }
 
     }

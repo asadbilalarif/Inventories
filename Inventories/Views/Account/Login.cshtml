@@ -8,6 +8,8 @@
     string Color = Scookie["Color"];
     string HoverColor = Scookie["HoverColor"];
     string Name = Scookie["Name"];
+
+    int culture = int.Parse(Session["CurrentCulture"].ToString());
 }
 
 <!DOCTYPE html>
@@ -35,6 +37,8 @@
         <script src="~/Content/assets/js/html5shiv.min.js"></script>
         <script src="~/Content/assets/js/respond.min.js"></script>
     <![endif]-->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css" rel="stylesheet" />
 
     <style>
         .login-wrapper .loginbox .login-left {
@@ -112,18 +116,63 @@
                             <!-- /Form -->
 
                             <div class="text-center forgotpass"><a href="@Url.Action("ForgetPassword","Account")">@Resource.Forgot_Password?</a></div>
-                            @*<div class="login-or">
-            <span class="or-line"></span>
-            <span class="span-or">or</span>
-        </div>*@
 
-                            <!-- Social Login -->
-                            @*<div class="social-login">
-            <span>Login with</span>
-            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google"></i></a>
-        </div>*@
-                            <!-- /Social Login -->
-                            @*<div class="text-center dont-have">Don’t have an account? <a href="register.html">Register</a></div>*@
+                            <ul class="nav user-menu">
+
+                                <li class="nav-item dropdown has-arrow">
+                                    <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-toggle="dropdown" style="background-color:white !important">
+                                        @if (culture == 0)
+                                        {
+                                            <span class=" btn btn-outline-light flag-icon flag-icon-us flag-icon-squared"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class=" btn btn-outline-light flag-icon flag-icon-es flag-icon-squared"></span>}
+
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="user-header">
+                                            <div class="user-text">
+                                                <h6>@Resource.Select_language</h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="media me-2 " style="background-color:white !important">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <span class="btn btn-outline-light flag-icon flag-icon-us flag-icon-squared"></span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h6 class="mb-1">  <a href="@Url.Action("ChangeLanguage","Account",new { lang="en"})" style="color:black;">English </a></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="media me-2" style="background-color:white !important">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <span class=" btn btn-outline-light flag-icon flag-icon-es flag-icon-squared"></span>
+                                                </div>
+                                                <div class="col-6">
+                                                    <h6 class="mb-1"> <a href="@Url.Action("ChangeLanguage","Account",new { lang="es"})" style="color:black;">Spanish </a></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </ul>
+                                @*<div class="login-or">
+                <span class="or-line"></span>
+                <span class="span-or">or</span>
+            </div>*@
+
+                                <!-- Social Login -->
+                                @*<div class="social-login">
+                <span>Login with</span>
+                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a><a href="#" class="google"><i class="fa fa-google"></i></a>
+            </div>*@
+                                <!-- /Social Login -->
+                                @*<div class="text-center dont-have">Don’t have an account? <a href="register.html">Register</a></div>*@
                         </div>
                     </div>
                 </div>

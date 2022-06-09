@@ -91,7 +91,7 @@ namespace Inventories.Models
         public string Create_Unit { get; set; }
         public string Create_Category { get; set; }
         public string Create_Contact { get; set; }
-        public string _Create_New_Unit { get; set; }
+        public string Create_New_Unit { get; set; }
         public string Transfer_List { get; set; }
         public string Create_New_Transfer { get; set; }
         public string Transfer_Date { get; set; }
@@ -213,6 +213,7 @@ namespace Inventories.Models
         public string Confirm { get; set; }
         public string Error { get; set; }
         public string Change { get; set; }
+        public string Select_language { get; set; }
         
     }
 }

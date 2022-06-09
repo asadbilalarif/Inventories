@@ -61,15 +61,6 @@ namespace Inventories {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  Create New Unit.
-        /// </summary>
-        public static string _Create_New_Unit {
-            get {
-                return ResourceManager.GetString("_Create_New_Unit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to a.
         /// </summary>
         public static string a {
@@ -660,6 +651,15 @@ namespace Inventories {
         public static string Create_New_Transfer {
             get {
                 return ResourceManager.GetString("Create_New_Transfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create New Unit.
+        /// </summary>
+        public static string Create_New_Unit {
+            get {
+                return ResourceManager.GetString("Create_New_Unit", resourceCulture);
             }
         }
         
@@ -1533,6 +1533,15 @@ namespace Inventories {
         public static string Select_Batch {
             get {
                 return ResourceManager.GetString("Select_Batch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select language.
+        /// </summary>
+        public static string Select_language {
+            get {
+                return ResourceManager.GetString("Select_language", resourceCulture);
             }
         }
         

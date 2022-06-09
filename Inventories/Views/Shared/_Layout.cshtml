@@ -11,6 +11,8 @@
     string Color = Scookie["Color"];
     string HoverColor = Scookie["HoverColor"];
     string Name = Scookie["Name"];
+
+    int culture = int.Parse(Session["CurrentCulture"].ToString());
 }
 
 
@@ -47,6 +49,8 @@
         <script src="~/Content/assets/js/html5shiv.min.js"></script>
         <script src="~/Content/assets/js/respond.min.js"></script>
     <![endif]-->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css" rel="stylesheet" />
 
     <style>
         .buttons-excel {
@@ -136,11 +140,52 @@
             <!-- Mobile Menu Toggle -->
             <a class="mobile_btn" id="mobile_btn">
                 <i class="fa fa-bars"></i>
+                
             </a>
             <!-- /Mobile Menu Toggle -->
             <!-- Header Right Menu -->
             <ul class="nav user-menu">
+                <li class="nav-item dropdown has-arrow">
+                    <a  href="javascript:void(0);" class="dropdown-toggle nav-link" data-toggle="dropdown" style="background-color:white !important">
+                        @if (culture == 0)
+                        {
+                            <span class=" btn btn-outline-light flag-icon flag-icon-us flag-icon-squared"></span>
+                        }
+                        else
+                        {
+                            <span class=" btn btn-outline-light flag-icon flag-icon-es flag-icon-squared"></span>}
 
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="user-header">
+                            <div class="user-text">
+                                <h6>@Resource.Select_language</h6>
+                            </div>
+                        </div>
+
+                        <div class="media me-2 " style="background-color:white !important">
+                            <div class="row">
+                                <div class="col-3">
+                                    <span class="btn btn-outline-light flag-icon flag-icon-us flag-icon-squared"></span>
+                                </div>
+                                <div class="col-6">
+                                    <h6 class="mb-1">  <a href="@Url.Action("ChangeLanguage","Account",new { lang="en"})" style="color:black;">English </a></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media me-2" style="background-color:white !important">
+                            <div class="row">
+                                <div class="col-3">
+                                    <span class=" btn btn-outline-light flag-icon flag-icon-es flag-icon-squared"></span>
+                                </div>
+                                <div class="col-6">
+                                    <h6 class="mb-1"> <a href="@Url.Action("ChangeLanguage","Account",new { lang="es"})" style="color:black;">Spanish </a></h6>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </li>   
                 <!-- Notifications -->
                 @if (@ViewBag.Alert != null)
                 {
@@ -161,8 +206,8 @@
                                             <a href="#">
                                                 <div class="media">
                                                     @*<span class="avatar avatar-sm">
-                                                        <img class="avatar-img rounded-circle" alt="User Image" src="~/Content/assets/img/doctors/doctor-thumb-01.jpg">
-                                                    </span>*@
+                                                <img class="avatar-img rounded-circle" alt="User Image" src="~/Content/assets/img/doctors/doctor-thumb-01.jpg">
+                                            </span>*@
                                                     <div class="media-body">
                                                         <p class="noti-details"><span class="noti-title">@item.tblItem.Name</span>  <span class="noti-title">@Resource.has_less_Quantity_than  @item.tblItem.Alertonlowstock</span></p>
                                                         @*<p class="noti-time"><span class="notification-time">4 mins ago</span></p>*@
@@ -171,8 +216,8 @@
                                             </a>
                                         </li>
                                     }
-                                    
-                                  @* <li class="notification-message">
+
+                                    @* <li class="notification-message">
                                 <a href="#">
                                     <div class="media">
                                         <span class="avatar avatar-sm">
@@ -310,9 +355,9 @@
                             </div>
                         </div>
                         @*<a class="dropdown-item" href="profile.html">My Profile</a>*@
-                    <a class="dropdown-item" href="@Url.Action("Setting","Setting")">@Resource.Settings</a>
-                    <a class="dropdown-item" href="@Url.Action("EmailSetting","Setting")">@Resource.Email_Settings</a>
-                    <a class="dropdown-item" href="@Url.Action("Login","Account")">@Resource.Logout</a>
+                        <a class="dropdown-item" href="@Url.Action("Setting","Setting")">@Resource.Settings</a>
+                        <a class="dropdown-item" href="@Url.Action("EmailSetting","Setting")">@Resource.Email_Settings</a>
+                        <a class="dropdown-item" href="@Url.Action("Login","Account")">@Resource.Logout</a>
                     </div>
                 </li>
                 <!-- /User Menu -->
@@ -330,58 +375,105 @@
                         <li class="menu-title">
                             <span>@Resource.Main</span>
                         </li>
-                        @foreach (var AccessLevel in @ViewBag.Access)
+                        @if (culture == 0)
                         {
-
-
-                            if (@AccessLevel.tblMenu.isParent == true)
+                            foreach (var AccessLevel in @ViewBag.Access)
                             {
+
+
+                                if (@AccessLevel.tblMenu.isParent == true)
                                 {
+                                    {
 
-                                    PID = @AccessLevel.tblMenu.MenuId;
+                                        PID = @AccessLevel.tblMenu.MenuId;
 
 
-                                }
-                                <li class="submenu " id="@AccessLevel.tblMenu.ElementId">
-                                    <a href="#"><i class="@AccessLevel.tblMenu.FontAwesome" aria-hidden="true" style="font-size:18px;">    </i> <span>  @AccessLevel.tblMenu.Name</span> <span class="menu-arrow"></span></a>
+                                    }
+                                    <li class="submenu " id="@AccessLevel.tblMenu.ElementId">
+                                        <a href="#"><i class="@AccessLevel.tblMenu.FontAwesome" aria-hidden="true" style="font-size:18px;">    </i> <span>  @AccessLevel.tblMenu.Name</span> <span class="menu-arrow"></span></a>
 
-                                    <ul style="display: none;">
-                                        @foreach (var AccessLevel1 in @ViewBag.Access)
-                                        {
-                                            if (@AccessLevel1.tblMenu.ParentId == @PID)
+                                        <ul style="display: none;">
+                                            @foreach (var AccessLevel1 in @ViewBag.Access)
                                             {
-                                                <li class="LiSub" id="@AccessLevel1.tblMenu.ElementId" @*style="background-color: #111827;"*@>
-                                                    <a href="@Url.Action(@AccessLevel1.tblMenu.ActionName, @AccessLevel1.tblMenu.ControllerName)"><i class="@AccessLevel1.tblMenu.FontAwesome" aria-hidden="true" style="font-size:15px;">      </i> <span>  @AccessLevel1.tblMenu.Name </span></a>
-                                                </li>
+                                                if (@AccessLevel1.tblMenu.ParentId == @PID)
+                                                {
+                                                    <li class="LiSub" id="@AccessLevel1.tblMenu.ElementId" @*style="background-color: #111827;"*@>
+                                                        <a href="@Url.Action(@AccessLevel1.tblMenu.ActionName, @AccessLevel1.tblMenu.ControllerName)"><i class="@AccessLevel1.tblMenu.FontAwesome" aria-hidden="true" style="font-size:15px;">      </i> <span>  @AccessLevel1.tblMenu.Name </span></a>
+                                                    </li>
+                                                }
                                             }
-                                        }
-                                    </ul>
-                                </li>
-                            }
-                            else
-                            {
-                                if (@AccessLevel.tblMenu.ParentId == 0)
-                                {
-                                    <li class="Li" id="@AccessLevel.tblMenu.ElementId">
-                                        <a href="@Url.Action(@AccessLevel.tblMenu.ActionName, @AccessLevel.tblMenu.ControllerName)"><i class="@AccessLevel.tblMenu.FontAwesome" aria-hidden="true" style="font-size:30px;">   </i> <span>   @AccessLevel.tblMenu.Name</span> </a>
+                                        </ul>
                                     </li>
                                 }
+                                else
+                                {
+                                    if (@AccessLevel.tblMenu.ParentId == 0)
+                                    {
+                                        <li class="Li" id="@AccessLevel.tblMenu.ElementId">
+                                            <a href="@Url.Action(@AccessLevel.tblMenu.ActionName, @AccessLevel.tblMenu.ControllerName)"><i class="@AccessLevel.tblMenu.FontAwesome" aria-hidden="true" style="font-size:30px;">   </i> <span>   @AccessLevel.tblMenu.Name</span> </a>
+                                        </li>
+                                    }
+
+                                }
 
                             }
+                        }
+                        else
+                        {
+                            foreach (var AccessLevel in ViewBag.Access)
+                            {
 
+
+                                if (@AccessLevel.tblMenu.isParent == true)
+                                {
+                                    {
+
+                                        PID = @AccessLevel.tblMenu.MenuId;
+
+
+                                    }
+                                    <li class="submenu " id="@AccessLevel.tblMenu.ElementId">
+                                        <a href="#"><i class="@AccessLevel.tblMenu.FontAwesome" aria-hidden="true" style="font-size:18px;">    </i> <span>  @AccessLevel.tblMenu.NameES</span> <span class="menu-arrow"></span></a>
+
+                                        <ul style="display: none;">
+                                            @foreach (var AccessLevel1 in ViewBag.Access)
+                                            {
+                                                if (@AccessLevel1.tblMenu.ParentId == @PID)
+                                                {
+                                                    <li class="LiSub" id="@AccessLevel1.tblMenu.ElementId" @*style="background-color: #111827;"*@>
+                                                        <a href="@Url.Action(@AccessLevel1.tblMenu.ActionName, @AccessLevel1.tblMenu.ControllerName)"><i class="@AccessLevel1.tblMenu.FontAwesome" aria-hidden="true" style="font-size:15px;">      </i> <span>  @AccessLevel1.tblMenu.NameES </span></a>
+                                                    </li>
+                                                }
+                                            }
+                                        </ul>
+                                    </li>
+                                }
+                                else
+                                {
+                                    if (@AccessLevel.tblMenu.ParentId == 0)
+                                    {
+                                        <li class="Li" id="@AccessLevel.tblMenu.ElementId">
+                                            <a href="@Url.Action(@AccessLevel.tblMenu.ActionName, @AccessLevel.tblMenu.ControllerName)"><i class="@AccessLevel.tblMenu.FontAwesome" aria-hidden="true" style="font-size:30px;">   </i> <span>   @AccessLevel.tblMenu.NameES</span> </a>
+                                        </li>
+                                    }
+
+                                }
+
+                            }
                         }
 
+
                         @*
-                            <li class="active">
-                                <a href="@Url.Action("Index","Home")"><i class="fe fe-home"></i> <span>Dashboard</span></a>
-                            </li>
-                            <li class="submenu">
-                                <a href="#"><i class="fa fa-users"></i> <span>User Management</span> <span class="menu-arrow"></span></a>
-                                <ul style="display: none;">
-                                    <li><a href="@Url.Action("Users","User")">Users</a></li>
-                                    <li><a href="@Url.Action("RolesPermission","User")">Permissions</a></li>
-                                </ul>
-                            </li>*@
+        <li class="active">
+            <a href="@Url.Action("Index","Home")"><i class="fe fe-home"></i> <span>Dashboard</span></a>
+        </li>
+        <li class="submenu">
+            <a href="#"><i class="fa fa-users"></i> <span>User Management</span> <span class="menu-arrow"></span></a>
+            <ul style="display: none;">
+                <li><a href="@Url.Action("Users","User")">Users</a></li>
+                <li><a href="@Url.Action("RolesPermission","User")">Permissions</a></li>
+            </ul>
+        </li>*@
                     </ul>
                 </div>
             </div>

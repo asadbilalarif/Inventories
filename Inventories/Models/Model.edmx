@@ -211,6 +211,7 @@
           </Key>
           <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="NameES" Type="nvarchar(max)" />
           <Property Name="ControllerName" Type="nvarchar" MaxLength="50" />
           <Property Name="ActionName" Type="nvarchar" MaxLength="50" />
           <Property Name="isParent" Type="bit" />
@@ -1020,7 +1021,7 @@
           <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TransferViewData" ReturnType="Collection(InventoriesModel.TransferViewData_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="tblAccessLevel">
@@ -1065,6 +1066,7 @@
           <NavigationProperty Name="tblMenu1" Relationship="InventoriesModel.FK_MenuTable" FromRole="tblMenu" ToRole="tblMenu1" />
           <NavigationProperty Name="tblMenu2" Relationship="InventoriesModel.FK_MenuTable" FromRole="tblMenu1" ToRole="tblMenu" />
           <Property Name="ElementId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NameES" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblRole">
           <Key>
@@ -2181,6 +2183,7 @@
           <EntitySetMapping Name="tblMenus">
             <EntityTypeMapping TypeName="InventoriesModel.tblMenu">
               <MappingFragment StoreEntitySet="tblMenu">
+                <ScalarProperty Name="NameES" ColumnName="NameES" />
                 <ScalarProperty Name="ElementId" ColumnName="ElementId" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
