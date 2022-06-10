@@ -808,6 +808,15 @@ namespace Inventories {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable.
+        /// </summary>
+        public static string Enable {
+            get {
+                return ResourceManager.GetString("Enable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End Created At.
         /// </summary>
         public static string End_Created_At {
@@ -930,6 +939,15 @@ namespace Inventories {
         public static string has_less_Quantity_than {
             get {
                 return ResourceManager.GetString("has_less_Quantity_than", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hover Color.
+        /// </summary>
+        public static string Hover_Color {
+            get {
+                return ResourceManager.GetString("Hover_Color", resourceCulture);
             }
         }
         
@@ -1186,6 +1204,15 @@ namespace Inventories {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Normal Color.
+        /// </summary>
+        public static string Normal_Color {
+            get {
+                return ResourceManager.GetString("Normal_Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notifications.
         /// </summary>
         public static string Notifications {
@@ -1344,6 +1371,15 @@ namespace Inventories {
         public static string Plus {
             get {
                 return ResourceManager.GetString("Plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Port.
+        /// </summary>
+        public static string Port {
+            get {
+                return ResourceManager.GetString("Port", resourceCulture);
             }
         }
         

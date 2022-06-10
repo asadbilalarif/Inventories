@@ -24,11 +24,11 @@
                                     <div class="col-md-6 col-6">
                                         @if (Model == null)
                                         {
-                                            <h5 class="breadcrumb-title">Create Setting</h5>
+                                        <h5 class="breadcrumb-title">@Resource.Create @Resource.Settings</h5>
                                         }
                                         else
                                         {
-                                            <h5 class="breadcrumb-title">Edit Setting</h5>
+                                    <h5 class="breadcrumb-title">@Resource.Edit @Resource.Settings</h5>
                                         }
                                     </div>
 
@@ -44,26 +44,26 @@
 
                     <div class="row">
                         <div class="col-md-3">
-                            <label>Logo</label>
+                            <label>@Resource.Logo</label>
                             <input type="text" class="form-control" style="display:none;" name="SettingId" value="@SettingId" >
                             <input type="file" class="form-control" id="" name="CLogo"  >
                             <img src="/Home/RetrieveImage/@SettingId" alt="your image" style="width:50%;height:50%;" />
                         </div>
                         <div class="col-md-3">
-                            <label>Name</label>
+                            <label>@Resource.Name</label>
                             <input type="text" class="form-control" id="" name="Name" value="@Name" required>
                         </div>
                         <div class="col-md-3">
-                            <label>Normal Color</label>
-                            <input type="text" class="form-control" id="" name="Normal Color" value="@Color" required>
+                            <label>@Resource.Normal_Color</label>
+                            <input type="color" class="form-control" id="" name="Normal Color" value="@Color" required>
                         </div>
                         <div class="col-md-3">
-                            <label>Hover Color</label>
-                            <input type="text" class="form-control" id="" name="HoverColor" value="@HoverColor" required>
+                            <label>@Resource.Hover_Color</label>
+                            <input type="color" class="form-control" id="" name="HoverColor" value="@HoverColor" required>
                         </div>
                         <div class="col-md-12 text-right">
                             <div class="form-group">
-                                <button class="btn btn-primary" type="submit" id="SaveChanges" style="margin-top: 5%; margin-right: 5%;">Save</button>
+                                <button class="btn btn-primary" type="submit" id="SaveChanges" style="margin-top: 5%; margin-right: 5%;">@Resource.Save</button>
                             </div>
                         </div>
                     </div>

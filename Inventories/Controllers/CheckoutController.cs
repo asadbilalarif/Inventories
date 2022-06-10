@@ -1,4 +1,5 @@
-﻿using Inventories.Models;
+﻿using Inventories.Hubs;
+using Inventories.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -191,7 +192,7 @@ namespace Inventories.Controllers
 
                 }
                 DB.SaveChanges();
-
+                NotificationHub.BroadcastData();
                 return Json(1);
             }
             else
@@ -343,6 +344,7 @@ namespace Inventories.Controllers
 
                 }
                 DB.SaveChanges();
+                NotificationHub.BroadcastData();
                 return Json(2);
             }
         }
@@ -435,7 +437,7 @@ namespace Inventories.Controllers
             DB.tblCheckoutItems.RemoveRange(Data1);
             DB.tblCheckouts.Remove(Data);
             DB.SaveChanges();
-
+            NotificationHub.BroadcastData();
             return Json(1);
         }
 

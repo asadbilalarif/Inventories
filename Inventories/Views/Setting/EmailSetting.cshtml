@@ -27,11 +27,11 @@
                                             <div class="col-md-6 col-6">
                                                 @if (Model == null)
                                                 {
-                                                <h5 class="breadcrumb-title">Create Email Setting</h5>
+                                                <h5 class="breadcrumb-title">@Resource.Create @Resource.Email @Resource.Settings</h5>
                                                 }
                                                 else
                                                 {
-                                                    <h5 class="breadcrumb-title">Edit Email Setting</h5>
+                                            <h5 class="breadcrumb-title">@Resource.Edit @Resource.Email @Resource.Settings</h5>
                                                 }
                                             </div>
 
@@ -47,12 +47,12 @@
 
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label>Email</label>
+                                    <label>@Resource.Email</label>
                                     <input type="text" class="form-control" style="display:none;" name="EmailSettingId" value="@EmailSettingId" required>
                                     <input type="email" class="form-control" id="" name="Email" value="@Email" required>
                                 </div>
                                 <div class="col-md-3">
-                                    <label>Password</label>
+                                    <label>@Resource.Password</label>
                                     <input type="password" class="form-control" id="" name="Password" value="@Password" required>
                                 </div>
                                 <div class="col-md-3">
@@ -60,11 +60,11 @@
                                     <input type="text" class="form-control" id="" name="SMTP" value="@SMTP" required>
                                 </div>
                                 <div class="col-md-1">
-                                    <label>Port</label>
+                                    <label>@Resource.Port</label>
                                     <input type="text" class="form-control" id="" name="Port" value="@Port" required>
                                 </div>
                                 <div class="col-md-2 ">
-                                    <label>Enable SSL</label>
+                                    <label>@Resource.Enable SSL</label>
                                     @if (@isActive == true)
                                     {
                                         <input type="checkbox" class="form-control" id="" name="isActive" value="true" checked>
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="col-md-12 text-right">
                                     <div class="form-group">
-                                        <button class="btn btn-primary" type="submit" id="SaveChanges" style="margin-top: 5%; margin-right: 5%;">Save</button>
+                                        <button class="btn btn-primary" type="submit" id="SaveChanges" style="margin-top: 5%; margin-right: 5%;">@Resource.Save</button>
                                     </div>
                                 </div>
                             </div>

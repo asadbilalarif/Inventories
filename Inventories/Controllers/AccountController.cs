@@ -121,11 +121,14 @@ namespace Inventories.Controllers
                     byte[] b = System.Text.ASCIIEncoding.ASCII.GetBytes(Email);
                     string encrypted = Convert.ToBase64String(b);
 
+                    byte[] t = System.Text.ASCIIEncoding.ASCII.GetBytes(DateTime.Now.ToString());
+                    string encryptedTime = Convert.ToBase64String(t);
+
 
                     string body1 = "";
                     body1 += "Welcome to Invertories!";
                     body1 += "<br />To Change your password, please click on the button below: ";
-                    body1 += "<br /> <button style='padding: 10px 28px 11px 28px;color: #fff;background:rgba(40, 58, 90, 0.9);'><a style='color:white !important' href = '" + link + "?Email=" + encrypted + "'>Change Account Password</a></button>";
+                    body1 += "<br /> <button style='padding: 10px 28px 11px 28px;color: #fff;background:rgba(40, 58, 90, 0.9);'><a style='color:white !important' href = '" + link + "?Email=" + encrypted + "&&Expire="+ encryptedTime + "'>Change Account Password</a></button>";
                     body1 += "<br /><br />Yours,<br />The WSA Team";
 
                     string body = "";

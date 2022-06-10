@@ -165,6 +165,7 @@
           <Property Name="Email" Type="nvarchar(max)" />
           <Property Name="Phone" Type="nvarchar(max)" />
           <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="ContactType" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="EditBy" Type="int" />
@@ -1146,6 +1147,7 @@
           <Property Name="isActive" Type="Boolean" />
           <NavigationProperty Name="tblCheckins" Relationship="InventoriesModel.CheckinContact" FromRole="tblContact" ToRole="tblCheckin" />
           <NavigationProperty Name="tblCheckouts" Relationship="InventoriesModel.CheckoutContact" FromRole="tblContact" ToRole="tblCheckout" />
+          <Property Name="ContactType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblCategory">
           <Key>
@@ -2218,6 +2220,7 @@
           <EntitySetMapping Name="tblContacts">
             <EntityTypeMapping TypeName="InventoriesModel.tblContact">
               <MappingFragment StoreEntitySet="tblContact">
+                <ScalarProperty Name="ContactType" ColumnName="ContactType" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="EditDate" ColumnName="EditDate" />
                 <ScalarProperty Name="EditBy" ColumnName="EditBy" />

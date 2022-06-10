@@ -214,6 +214,10 @@ namespace Inventories.Models
         public string Error { get; set; }
         public string Change { get; set; }
         public string Select_language { get; set; }
+        public string Normal_Color { get; set; }
+        public string Hover_Color { get; set; }
+        public string Port { get; set; }
+        public string Enable { get; set; }
         
     }
 }

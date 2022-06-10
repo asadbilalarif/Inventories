@@ -91,6 +91,7 @@ namespace Inventories.Controllers
                         Data = DB.tblContacts.Select(r => r).Where(x => x.ContactId == Contact.ContactId).FirstOrDefault();
                         Data.Name = Contact.Name;
                         Data.Phone = Contact.Phone;
+                        Data.ContactType = Contact.ContactType;
                         Data.Email = Contact.Email;
                         Data.Details = Contact.Details;
                         Data.EditDate = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd"));

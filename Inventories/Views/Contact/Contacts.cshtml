@@ -71,6 +71,7 @@
                                         <th>@Resource.Name</th>
                                         <th>@Resource.Email</th>
                                         <th>@Resource.Phone</th>
+                                        <th>@Resource.Contact @Resource.Type</th>
                                         <th>@Resource.Details</th>
 
                                         <th>@Resource.Action</th>
@@ -84,6 +85,7 @@
                                             <td>@Contact.Name</td>
                                             <td>@Contact.Email</td>
                                             <td>@Contact.Phone</td>
+                                            <td>@Contact.ContactType</td>
 
                                             <td>@Contact.Details</td>
                                             
@@ -221,11 +223,12 @@
 
                     extend: 'excel',
                     exportOptions: {
-                        columns: [ 1, 2,3,4]
+                        columns: [ 1, 2,3,4,5]
                     }
                 }
             ],
             @*"lengthMenu": [@Retrieves],*@
+            order: [[0, 'desc']],
             searching: true, paging: true
         });
 

@@ -366,6 +366,9 @@
   <data name="Email_Settings" xml:space="preserve">
     <value>Email Settings</value>
   </data>
+  <data name="Enable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
   <data name="End_Created_At" xml:space="preserve">
     <value>End Created At</value>
   </data>
@@ -407,6 +410,9 @@
   </data>
   <data name="has_less_Quantity_than" xml:space="preserve">
     <value>has less Quantity than</value>
+  </data>
+  <data name="Hover_Color" xml:space="preserve">
+    <value>Hover Color</value>
   </data>
   <data name="Inventories" xml:space="preserve">
     <value>Inventories</value>
@@ -492,6 +498,9 @@
   <data name="New_Password_and_Confirm_Password_not_Matched" xml:space="preserve">
     <value>New Password and Confirm Password not Matched</value>
   </data>
+  <data name="Normal_Color" xml:space="preserve">
+    <value>Normal Color</value>
+  </data>
   <data name="Notifications" xml:space="preserve">
     <value>Notifications</value>
   </data>
@@ -545,6 +554,9 @@
   </data>
   <data name="Plus" xml:space="preserve">
     <value>Plus</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>Port</value>
   </data>
   <data name="Qty" xml:space="preserve">
     <value>Qty</value>

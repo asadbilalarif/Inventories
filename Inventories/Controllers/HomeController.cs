@@ -20,6 +20,14 @@ namespace Inventories.Controllers
             return View();
         }
 
+
+        public ActionResult GetAlertData()
+        {
+            List<tblAlertQty> Alert = DB.tblAlertQties.Where(x => x.Notify == true).ToList();
+            ViewBag.AlertCount = DB.tblAlertQties.Where(x => x.Notify == true).Count();
+            return PartialView("AlertView", Alert);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

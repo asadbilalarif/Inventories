@@ -3,6 +3,7 @@
     int ContactId = 0;
     string Name = "";
     string Phone = "";
+    string ContactType = "";
     string Email = "";
     string Details = "";
 
@@ -11,6 +12,7 @@
         ContactId = Model.ContactId;
         Name = Model.Name;
         Phone = Model.Phone;
+        ContactType = Model.ContactType;
         Email = Model.Email;
         Details = Model.Details;
     }
@@ -63,23 +65,29 @@
                     <span style="color:red;">@ViewBag.Error</span>
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <input type="text" class="form-control" style="display:none;" name="ContactId" value="@ContactId" required>
                                 <label>@Resource.Name<span style="color:red;">*</span></label>
                                 <input type="text" class="form-control" id="Name" name="Name" value="@Name" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>@Resource.Email<span style="color:red;">*</span></label>
                                 <input type="text" class="form-control" id="Email" name="Email" value="@Email" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>@Resource.Phone</label>
                                 <input type="text" class="form-control" id="Phone" name="Phone" value="@Phone">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>@Resource.Contact @Resource.Type</label>
+                                <input type="text" class="form-control" id="ContactType" name="ContactType" value="@ContactType">
                             </div>
                         </div>
 
