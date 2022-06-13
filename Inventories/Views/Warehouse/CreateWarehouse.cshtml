@@ -34,37 +34,37 @@
 
     <!-- Page Header -->
     <!-- /Page Header -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            @if (Model == null)
+                            {
+                                <h5 class="breadcrumb-title">@Resource.Create_Warehouse</h5>
+                            }
+                            else
+                            {
+                                <h5 class="breadcrumb-title">@Resource.Edit @Resource.Warehouse</h5>
+                            }
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateWarehouseB">
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="row">
         <div class="col-md-12">
 
             @using (Html.BeginForm("CreateWarehouse", "Warehouse", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {@Html.AntiForgeryToken()
             <div class="card">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="breadcrumb-bar">
-                            <div class="container-fluid">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 col-6">
-                                        @if (Model == null)
-                                        {
-                                            <h5 class="breadcrumb-title">@Resource.Create_Warehouse</h5>
-                                        }
-                                        else
-                                        {
-                                            <h5 class="breadcrumb-title">@Resource.Edit @Resource.Warehouse</h5>
-                                        }
-                                    </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateWarehouseB">
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
                 <div class="card-body">
                     <span style="color:red;">@ViewBag.Error</span>
 
@@ -115,18 +115,18 @@
                             <div class="form-group">
                                 @if (isActive == true)
                                 {
-                                    <input type="checkbox"  id="isActive" name="isActive" value="true" checked />
+                                    <input type="checkbox" id="isActive" name="isActive" value="true" checked />
                                 }
                                 else
                                 {
-                                    <input type="checkbox"  id="isActive" name="isActive" value="true" />
+                                    <input type="checkbox" id="isActive" name="isActive" value="true" />
                                 }
-                            <label>@Resource.Active</label>
+                                <label>@Resource.Active</label>
                             </div>
                         </div>
                     </div>
 
-                    
+
                     <div class="row">
                         <div class="col-md-12 text-right">
                             <div class="form-group">

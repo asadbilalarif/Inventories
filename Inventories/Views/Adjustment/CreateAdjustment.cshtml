@@ -19,21 +19,31 @@
     }
 </style>
 
-<div class="content">
+<div class="content container-fluid">   
     <div class="row">
-        <div class="col-sm-5 col-4">
-            <h4 class="page-title">Adjustment</h4>
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            <h5 class="breadcrumb-title">@Resource.Adjustments</h5>
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateAdjustmentB" style="margin-bottom:1%;">
+                            <a href="@Url.Action("Adjustments","Adjustment")" class="btn btn-primary "><i class="fa fa-eye m-r-5"></i> @Resource.Adjustments</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-7 col-8 text-right m-b-30">
-            <a href="@Url.Action("Adjustments","Adjustment")" class="btn btn-primary "><i class="fa fa-eye m-r-5"></i> @Resource.Adjustments</a>
-        </div>
+
     </div>
+
     @using (Html.BeginForm("CreateInv", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {@Html.AntiForgeryToken()
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-body"> 
+                <div class="card-body">
                     <form>
                         <div class="row">
                             <div class="col-md-12">
@@ -219,16 +229,16 @@
                                 <textarea class="form-control" name="Details" id="Details">@Model.Details</textarea>
                             </div><br /><br /><br />
                             @*<div class="col-md-12">
-                                @if (Model.draft == true)
-                                {
-                                    <input type="checkbox" id="draft" name="draft" value="true" checked />
-                                }
-                                else
-                                {
-                                    <input type="checkbox" id="draft" name="draft" value="true" />
-                                }
-                                <label>This record is draft</label>
-                            </div>*@
+                                    @if (Model.draft == true)
+                                    {
+                                        <input type="checkbox" id="draft" name="draft" value="true" checked />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="draft" name="draft" value="true" />
+                                    }
+                                    <label>This record is draft</label>
+                                </div>*@
                         </div>
                         <div class="text-center m-t-20">
                             <div id="loading" style="display:none;margin: 0 auto; text-decoration-color:cornflowerblue;"><div class="spinner-border text-success" id="display_loading" style="margin: 0 auto;"></div><div class="spinner-border text-success" id="display_loading" style="display:none;margin: 0 auto;"></div> Loading...</div>

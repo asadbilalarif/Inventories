@@ -34,26 +34,29 @@
 <div class="content container-fluid">
 
     <!-- Page Header -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            <h5 class="breadcrumb-title">@Resource.Item_Stock_Ledger_Detail_Report</h5>
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="" style="margin-bottom:1%;">
+                            <a href="@Url.Action("PrintItemStockLedgerViewDataToPdf","PDF",new { ItemId=@Model.FirstOrDefault().ItemId,WarehouseId=@Model.FirstOrDefault().WarehouseId })" class="btn btn-primary" style="float:right"><i class="fa fa-file"> PDF</i> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <!-- /Page Header -->
 
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="breadcrumb-bar">
-                            <div class="container-fluid">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">@Resource.Item_Stock_Ledger_Detail_Report</h5>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="table-responsive">

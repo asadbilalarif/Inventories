@@ -28,30 +28,30 @@
 
     <!-- Page Header -->
     <!-- /Page Header -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            <h5 class="breadcrumb-title">@Resource.Warehouse_List</h5>
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateWarehouseB" style="margin-bottom:1%;">
+                            @if (ViewBag.CreateAccess == true)
+                            {
+                                <a href="@Url.Action("CreateWarehouse","Warehouse")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> @Resource.Create_New_Warehouse</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="breadcrumb-bar">
-                            <div class="container-fluid">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">@Resource.Warehouse_List</h5>
-                                    </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateWarehouseB">
-                                        @if (ViewBag.CreateAccess == true)
-                                        {
-                                            <a href="@Url.Action("CreateWarehouse","Warehouse")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> @Resource.Create_New_Warehouse</a>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
                 <div style="display:none;" class="alert alert-success alert-dismissible fade show" id="SuccessAlert" role="alert">
                     <strong>Success!</strong> @ViewBag.Success
                 </div>
@@ -81,43 +81,43 @@
                                 <tbody>
                                     @foreach (Inventories.Models.tblWarehouse Warehouse in Model)
                                     {
-                                    <tr>
-                                        <td style="display:none;">@Warehouse.WarehouseId</td>
-                                        <td>@Warehouse.Name</td>
-                                        <td>@Warehouse.Code</td>
-                                        <td>@Warehouse.Phone</td>
-                                        <td>@Warehouse.Email</td>
-                                        <td>@Warehouse.Address</td>
-                                        @if (Warehouse.isActive == true)
-                                        {
-                                            <td>
-                                                <span class="badge badge-primary">Active</span>
-                                            </td>
+                                        <tr>
+                                            <td style="display:none;">@Warehouse.WarehouseId</td>
+                                            <td>@Warehouse.Name</td>
+                                            <td>@Warehouse.Code</td>
+                                            <td>@Warehouse.Phone</td>
+                                            <td>@Warehouse.Email</td>
+                                            <td>@Warehouse.Address</td>
+                                            @if (Warehouse.isActive == true)
+                                            {
+                                                <td>
+                                                    <span class="badge badge-primary">Active</span>
+                                                </td>
 
-                                        }
-                                        else
-                                        {
-                                            <td>
-                                                <span class="badge badge-danger">In-Active</span>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <span class="badge badge-danger">In-Active</span>
+                                                </td>
+                                            }
+                                            <td class="text-end">
+                                                <div class="actions">
+                                                    @if (ViewBag.EditAccess == true)
+                                                    {
+                                                        <a href="@Url.Action("CreateWarehouse","Warehouse",new {id=Warehouse.WarehouseId })" id="EditWarehouse" class="text-black">
+                                                            <i class="fa fa-edit"></i> @Resource.Edit
+                                                        </a>
+                                                    }
+                                                    @if (ViewBag.DeleteAccess == true)
+                                                    {
+                                                        <a class="text-danger" href="#" data-toggle="modal" data-target="#WarehouseDelete" id="DeleteWarehouse">
+                                                            <i class="fa fa-trash"></i> @Resource.Delete
+                                                        </a>
+                                                    }
+                                                </div>
                                             </td>
-                                        }
-                                        <td class="text-end">
-                                            <div class="actions">
-                                                @if (ViewBag.EditAccess == true)
-                                                {
-                                                    <a href="@Url.Action("CreateWarehouse","Warehouse",new {id=Warehouse.WarehouseId })" id="EditWarehouse" class="text-black">
-                                                        <i class="fa fa-edit"></i> @Resource.Edit
-                                                    </a>
-                                                }
-                                                @if (ViewBag.DeleteAccess == true)
-                                                {
-                                                    <a class="text-danger" href="#" data-toggle="modal" data-target="#WarehouseDelete" id="DeleteWarehouse">
-                                                        <i class="fa fa-trash"></i> @Resource.Delete
-                                                    </a>
-                                                }
-                                            </div>
-                                        </td>
-                                    </tr>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>

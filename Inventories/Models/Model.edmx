@@ -67,6 +67,7 @@
           <Property Name="AlertQtyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ItemId" Type="int" />
           <Property Name="Notify" Type="bit" />
+          <Property Name="TotalQty" Type="int" />
           <Property Name="NotifyDate" Type="datetime" />
         </EntityType>
         <EntityType Name="tblCategory">
@@ -2019,6 +2020,7 @@
           <Property Name="Notify" Type="Boolean" />
           <Property Name="NotifyDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tblItem" Relationship="InventoriesModel.FK_tblAlertQty_tblItem" FromRole="tblAlertQty" ToRole="tblItem" />
+          <Property Name="TotalQty" Type="Int32" />
         </EntityType>
         <Association Name="FK_tblAlertQty_tblItem">
           <End Type="InventoriesModel.tblItem" Role="tblItem" Multiplicity="0..1" />
@@ -2713,6 +2715,7 @@
           <EntitySetMapping Name="tblAlertQties">
             <EntityTypeMapping TypeName="InventoriesModel.tblAlertQty">
               <MappingFragment StoreEntitySet="tblAlertQty">
+                <ScalarProperty Name="TotalQty" ColumnName="TotalQty" />
                 <ScalarProperty Name="NotifyDate" ColumnName="NotifyDate" />
                 <ScalarProperty Name="Notify" ColumnName="Notify" />
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />

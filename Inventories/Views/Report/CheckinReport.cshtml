@@ -51,9 +51,26 @@
 <div class="content container-fluid">
 
     <!-- Page Header -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            <h5 class="breadcrumb-title">@Resource.Checkin_Report</h5>
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateCheckinB" style="margin-bottom:1%;">
+                            <button class="btn btn-primary" id="ShowFilters" style="float:right"><i class="fas fa-toggle-off" id="IShowFilters"> @Resource.Toggle_Form</i> </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <!-- /Page Header -->
 
-    <div class="row" style="display:none;"  id="DivFilters">
+    <div class="row" style="display:none;" id="DivFilters">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -122,7 +139,7 @@
                                 <div class="col-md-3">
                                     @if (Role.ToLower() == "admin")
                                     {
-                                    <label>@Resource.User</label>
+                                        <label>@Resource.User</label>
                                         <select class="form-control" name="User">
                                             <option value="">@Resource.User</option>
                                             @foreach (tblUser item in Users)
@@ -174,18 +191,18 @@
                                     </select>
                                 </div>
                                 @*<div class="col-md-3">
-                                    <br />
-                                    @if (@draft == true)
-                                    {
-                                        <input type="checkbox" name="draft" value="true" checked />
-                                    }
-                                    else
-                                    {
-                                        <input type="checkbox" name="draft" value="true" />
-                                    }
+                                        <br />
+                                        @if (@draft == true)
+                                        {
+                                            <input type="checkbox" name="draft" value="true" checked />
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" name="draft" value="true" />
+                                        }
 
-                                    <label>Only draft records</label>
-                                </div>*@
+                                        <label>Only draft records</label>
+                                    </div>*@
 
 
                             </div><br />
@@ -200,7 +217,7 @@
                         </form>
                     }
 
-                    
+
                 </div>
             </div>
         </div>
@@ -210,23 +227,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="breadcrumb-bar">
-                            <div class="container-fluid">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">@Resource.Checkin_Report</h5>
-                                    </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateCheckinB">
-                                        <button class="btn btn-primary" id="ShowFilters" style="float:right"><i class="fas fa-toggle-off" id="IShowFilters"> @Resource.Toggle_Form</i> </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="table-responsive">

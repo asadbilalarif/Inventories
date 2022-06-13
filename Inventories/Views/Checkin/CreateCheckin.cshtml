@@ -28,16 +28,26 @@
     }
 </style>
 
-<div class="content">
+<div class="content container-fluid">
+    
     <div class="row">
-        
-        <div class="col-sm-5 col-4">
-            <h4 class="page-title">Checkin</h4>
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            <h5 class="breadcrumb-title">@Resource.Checkins</h5>
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateCheckinB" style="margin-bottom:1%;">
+                            <a href="@Url.Action("Checkins","Checkin")" class="btn btn-primary"><i class="fa fa-eye m-r-5"></i> @Resource.Checkins</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-7 col-8 text-right m-b-30">
-            <a href="@Url.Action("Checkins","Checkin")" class="btn btn-primary"><i class="fa fa-eye m-r-5"></i> @Resource.Checkins</a>
-        </div>
+
     </div>
+
     @using (Html.BeginForm("CreateInv", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {@Html.AntiForgeryToken()
     <div class="row">
@@ -200,7 +210,7 @@
                                                                 <select class="form-control" id="FUnitInput" style="width:200px;" type="text" disabled>
                                                                     @if (@item.ItemUnit == "Piece")
                                                                     {
-                                                                    <option value="Piece" selected>@Resource.Piece</option>
+                                                                        <option value="Piece" selected>@Resource.Piece</option>
                                                                     }
                                                                     else
                                                                     {
@@ -267,16 +277,16 @@
                                 <textarea class="form-control" name="Details" id="Details">@Model.Details</textarea>
                             </div><br /><br /><br />
                             @*<div class="col-md-12">
-                    @if (Model.draft == true)
-                    {
-                        <input type="checkbox" id="draft" name="draft" value="true" checked />
-                    }
-                    else
-                    {
-                        <input type="checkbox" id="draft" name="draft" value="true" />
-                    }
-                    <label>This record is draft</label>
-                </div>*@
+                                    @if (Model.draft == true)
+                                    {
+                                        <input type="checkbox" id="draft" name="draft" value="true" checked />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="draft" name="draft" value="true" />
+                                    }
+                                    <label>This record is draft</label>
+                                </div>*@
                         </div>
                         <div class="text-center m-t-20">
                             @if (Edit == 0)
@@ -289,7 +299,7 @@
                     </form>
                 </div>
             </div>
-            
+
         </div>
     </div>
 }

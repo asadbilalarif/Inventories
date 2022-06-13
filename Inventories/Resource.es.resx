@@ -173,6 +173,9 @@ Activo</value>
   <data name="Alert_on_Low_Stock" xml:space="preserve">
     <value>Alerta de stock bajo</value>
   </data>
+  <data name="and_current_Qty_is" xml:space="preserve">
+    <value>y la cantidad actual es</value>
+  </data>
   <data name="Are_you_sure_want_to_delete_this" xml:space="preserve">
     <value>¿Estás seguro de que quieres eliminar esto?</value>
   </data>

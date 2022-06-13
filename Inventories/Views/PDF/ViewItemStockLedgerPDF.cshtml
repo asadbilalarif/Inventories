@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Inventories.Models.ItemStockLedgerDetailReportData_Result1>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewItemStockLedgerPDF</title>
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+
+            <!-- Page Header -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="breadcrumb-bar">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 col-6">
+                                    <h5 class="breadcrumb-title">@Resource.Item_Stock_Ledger_Detail_Report</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /Page Header -->
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="table-responsive">
+                                    <table class="cell-border table table-hover table-center  mb-0 " id="AdjustmentTable">
+                                        <thead>
+                                            <tr>
+                                                <th>@Resource.Voucher_Number</th>
+                                                <th>@Resource.Category_Name</th>
+                                                <th>@Resource.Item_Name</th>
+                                                <th>@Resource.Qty</th>
+                                                <th>@Resource.Warehouse_Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (Inventories.Models.ItemStockLedgerDetailReportData_Result1 ItemStockLedger in Model)
+                                            {
+                                                <tr>
+                                                    <td>@ItemStockLedger.Number</td>
+                                                    <td>@ItemStockLedger.CategoryName</td>
+                                                    <td>@ItemStockLedger.ItemName</td>
+                                                    <td>@ItemStockLedger.ItemNetQuantity</td>
+                                                    <td>@ItemStockLedger.WarehouseName</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="/Content/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+</body>
+</html>

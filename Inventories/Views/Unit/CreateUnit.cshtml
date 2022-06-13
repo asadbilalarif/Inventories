@@ -32,37 +32,37 @@
 
     <!-- Page Header -->
     <!-- /Page Header -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            @if (Model == null)
+                            {
+                                <h5 class="breadcrumb-title">@Resource.Create_Unit</h5>
+                            }
+                            else
+                            {
+                                <h5 class="breadcrumb-title">@Resource.Edit @Resource.Unit</h5>
+                            }
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateUnitB">
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="row">
         <div class="col-md-12">
 
             @using (Html.BeginForm("CreateUnit", "Unit", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {@Html.AntiForgeryToken()
             <div class="card">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="breadcrumb-bar">
-                            <div class="container-fluid">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 col-6">
-                                        @if (Model == null)
-                                        {
-                                        <h5 class="breadcrumb-title">@Resource.Create_Unit</h5>
-                                        }
-                                        else
-                                        {
-                                    <h5 class="breadcrumb-title">@Resource.Edit @Resource.Unit</h5>
-                                        }
-                                    </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateUnitB">
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
                 <div class="card-body">
                     <span style="color:red;">@ViewBag.Error</span>
 
@@ -91,11 +91,11 @@
                                     }
                                     else
                                     {
-                                         <option value="Meter (m)">@Resource.Meter</option>
+                                        <option value="Meter (m)">@Resource.Meter</option>
                                     }
                                     @if (@BaseUnit == "Piece (pc)")
                                     {
-                                         <option value="Piece (pc)" selected>@Resource.Piece</option>
+                                        <option value="Piece (pc)" selected>@Resource.Piece</option>
                                     }
                                     else
                                     {

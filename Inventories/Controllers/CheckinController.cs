@@ -1,5 +1,6 @@
 ﻿using Inventories.Hubs;
 using Inventories.Models;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -324,6 +325,7 @@ namespace Inventories.Controllers
             return new JsonResult { Data = allsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+        
         public ActionResult ViewCheckin(int Id)
         {
             List<CheckinViewData_Result2> allsearch = null;
@@ -340,6 +342,31 @@ namespace Inventories.Controllers
             }
 
             return View(allsearch);
+        }
+
+        public ActionResult ViewCheckinPDF(int Id)
+        {
+            List<CheckinViewData_Result2> allsearch = null;
+            DB.Configuration.ProxyCreationEnabled = false;
+            try
+            {
+                allsearch = DB.CheckinViewData(Id).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                Console.WriteLine("Error" + ex.Message);
+            }
+
+            return View(allsearch);
+        }
+        public ActionResult PrintCheckinViewDataToPdf(int Id)
+        {
+            return new ActionAsPdf("ViewCheckinPDF", new { Id = Id })
+            {
+                FileName = "Checkin_Pdf.pdf"
+            };
         }
     }
 

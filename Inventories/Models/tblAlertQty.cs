@@ -18,6 +18,7 @@ namespace Inventories.Models
         public Nullable<int> ItemId { get; set; }
         public Nullable<bool> Notify { get; set; }
         public Nullable<System.DateTime> NotifyDate { get; set; }
+        public Nullable<int> TotalQty { get; set; }
     
         public virtual tblItem tblItem { get; set; }
     }

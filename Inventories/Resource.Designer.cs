@@ -223,6 +223,15 @@ namespace Inventories {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to and current Qty is.
+        /// </summary>
+        public static string and_current_Qty_is {
+            get {
+                return ResourceManager.GetString("and_current_Qty_is", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure want to delete this.
         /// </summary>
         public static string Are_you_sure_want_to_delete_this {

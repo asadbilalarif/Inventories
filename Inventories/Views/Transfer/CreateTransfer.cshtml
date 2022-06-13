@@ -30,15 +30,26 @@
     }
 </style>
 
-<div class="content">
+<div class="content container-fluid">
+    
     <div class="row">
-        <div class="col-sm-5 col-4">
-            <h4 class="page-title">Transfer</h4>
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            <h5 class="breadcrumb-title">@Resource.Transfers</h5>
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateTransferB" style="margin-bottom:1%;">
+                            <a href="@Url.Action("Transfers","Transfer")" class="btn btn-primary"><i class="fa fa-eye m-r-5"></i> @Resource.Transfers</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-7 col-8 text-right m-b-30">
-            <a href="@Url.Action("Transfers","Transfer")" class="btn btn-primary"><i class="fa fa-eye m-r-5"></i> @Resource.Transfers</a>
-        </div>
+
     </div>
+
     @using (Html.BeginForm("CreateInv", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {@Html.AntiForgeryToken()
     <div class="row">
@@ -143,10 +154,10 @@
                                                 <th class="col-md-6" hidden>Description</th>
                                                 <th class="col-md-6">@Resource.items</th>
                                                 @*@if (@ViewBag.tblCheckoutItem == null)
-                                            {*@
+                                                    {*@
                                                 <th style="width:200px;">@Resource.Available_Quantity</th>
                                                 @*}*@
-                                                 <th style="width:200px;">@Resource.Quantity</th>
+                                                <th style="width:200px;">@Resource.Quantity</th>
                                                 @*<th>Unit</th>*@
                                                 <th> </th>
                                             </tr>
@@ -171,11 +182,11 @@
                                                     <input class="form-control" hidden id="CheckinItemId" readonly="" style="width:200px;" type="number">
                                                 </td>
                                                 @*<td>
-                                                <select class="form-control" hidden id="UnitInput" readonly="" style="width:200px;" type="text">
-                                                    <option value="Piece">Piece</option>
-                                                    <option value="Dozen">Dozen</option>
-                                                </select>
-                                            </td>*@
+                                                        <select class="form-control" hidden id="UnitInput" readonly="" style="width:200px;" type="text">
+                                                            <option value="Piece">Piece</option>
+                                                            <option value="Dozen">Dozen</option>
+                                                        </select>
+                                                    </td>*@
                                                 <td><a href="javascript:void(0)" hidden class="text-success font-18" title="Add"><i class="fa fa-plus" onclick="AddRow()"></i></a></td>
                                                 <td>
                                                     <input class="form-control" hidden id="FNumber" readonly="" style="width:200px;" type="text">
@@ -204,25 +215,25 @@
                                                             <input class="form-control" id="FCheckinItemId" readonly="" style="width:1px;" type="number" value="@item.CheckinItemId">
                                                         </td>
                                                         @*<td>
-                                                        <select class="form-control" id="FUnitInput" style="width:200px;" type="text">
-                                                            @if (@item.ItemUnit == "Piece")
-                                                            {
-                                                                <option value="Piece" selected>Piece</option>
-                                                            }
-                                                            else
-                                                            {
-                                                                <option value="Piece">Piece</option>
-                                                            }
-                                                            @if (@item.ItemUnit == "Dozen")
-                                                            {
-                                                                <option value="Dozen" selected>Dozen</option>
-                                                            }
-                                                            else
-                                                            {
-                                                                <option value="Dozen">Dozen</option>
-                                                            }
-                                                        </select>
-                                                    </td>*@
+                                                                <select class="form-control" id="FUnitInput" style="width:200px;" type="text">
+                                                                    @if (@item.ItemUnit == "Piece")
+                                                                    {
+                                                                        <option value="Piece" selected>Piece</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="Piece">Piece</option>
+                                                                    }
+                                                                    @if (@item.ItemUnit == "Dozen")
+                                                                    {
+                                                                        <option value="Dozen" selected>Dozen</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="Dozen">Dozen</option>
+                                                                    }
+                                                                </select>
+                                                            </td>*@
                                                         <td>
                                                             @if (Edit == 1)
                                                             {
@@ -245,87 +256,87 @@
                                         </tbody>
                                     </table>
                                     @*<table class="table table-hover table-white" id="ItemTable">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 20px"></th>
-                                            <th class="col-md-6" hidden>Description</th>
-                                            <th class="col-md-6">Items</th>
-                                            <th style="width:200px;">Weight</th>
-                                            <th style="width:200px;">Quantity</th>
-                                            <th>Unit</th>
-                                            <th> </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <tr>
-                                            <td></td>
-                                            <td hidden>
-                                                <input class="" type="text" hidden id="DescriptionInputId" style="min-width:0px">
-                                            </td>
-                                            <td>
-                                                <input class="form-control" hidden type="text" id="DescriptionInput" readonly="" style="min-width:150px">
-                                            </td>
-                                            <td>
-                                                <input class="form-control" hidden type="number" id="WeightInput" readonly="" style="width:200px;">
-                                            </td>
-                                            <td>
-                                                <input class="form-control" hidden id="QtyInput" readonly="" style="width:200px;" type="number">
-                                            </td>
-                                            <td>
-                                                <select class="form-control" hidden id="UnitInput" readonly="" style="width:200px;" type="text">
-                                                    <option value="Piece">Piece</option>
-                                                    <option value="Dozen">Dozen</option>
-                                                </select>
-                                            </td>
-                                            <td><a href="javascript:void(0)" hidden class="text-success font-18" title="Add"><i class="fa fa-plus" onclick="AddRow()"></i></a></td>
-                                        </tr>
-                                        @if (@ViewBag.tblTransferItem != null)
-                                        {
-                                            foreach (Inventories.Models.tblTransferItem item in @ViewBag.tblTransferItem)
-                                            {
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 20px"></th>
+                                                    <th class="col-md-6" hidden>Description</th>
+                                                    <th class="col-md-6">Items</th>
+                                                    <th style="width:200px;">Weight</th>
+                                                    <th style="width:200px;">Quantity</th>
+                                                    <th>Unit</th>
+                                                    <th> </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
                                                 <tr>
                                                     <td></td>
                                                     <td hidden>
-                                                        <input class="" type="text" hidden id="FDescriptionInputId" value="@item.ItemId" style="min-width:0px">
+                                                        <input class="" type="text" hidden id="DescriptionInputId" style="min-width:0px">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control" type="text" id="FDescriptionInput" readonly="" style="min-width:150px" value="@item.tblItem.Name">
+                                                        <input class="form-control" hidden type="text" id="DescriptionInput" readonly="" style="min-width:150px">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control" type="number" id="FWeightInput" style="width:200px;" value="@item.ItemWeight">
+                                                        <input class="form-control" hidden type="number" id="WeightInput" readonly="" style="width:200px;">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control" type="number" id="FQtyInput" style="width:200px;" value="@item.ItemQuantity">
+                                                        <input class="form-control" hidden id="QtyInput" readonly="" style="width:200px;" type="number">
                                                     </td>
                                                     <td>
-                                                        <select class="form-control" id="FUnitInput" style="width:200px;" type="text">
-                                                            @if (@item.ItemUnit == "Piece")
-                                                            {
-                                                                <option value="Piece" selected>Piece</option>
-                                                            }
-                                                            else
-                                                            {
-                                                                <option value="Piece">Piece</option>
-                                                            }
-                                                            @if (@item.ItemUnit == "Dozen")
-                                                            {
-                                                                <option value="Dozen" selected>Dozen</option>
-                                                            }
-                                                            else
-                                                            {
-                                                                <option value="Dozen">Dozen</option>
-                                                            }
+                                                        <select class="form-control" hidden id="UnitInput" readonly="" style="width:200px;" type="text">
+                                                            <option value="Piece">Piece</option>
+                                                            <option value="Dozen">Dozen</option>
                                                         </select>
                                                     </td>
-                                                    <td><a href="javascript:void(0)" class="text-danger font-18" title="Remove"><i class="fa fa-trash-o" onclick="DeleteRow(this)"></i></a></td>
+                                                    <td><a href="javascript:void(0)" hidden class="text-success font-18" title="Add"><i class="fa fa-plus" onclick="AddRow()"></i></a></td>
                                                 </tr>
-                                            }
-                                        }
+                                                @if (@ViewBag.tblTransferItem != null)
+                                                {
+                                                    foreach (Inventories.Models.tblTransferItem item in @ViewBag.tblTransferItem)
+                                                    {
 
-                                    </tbody>
-                                </table>*@
+                                                        <tr>
+                                                            <td></td>
+                                                            <td hidden>
+                                                                <input class="" type="text" hidden id="FDescriptionInputId" value="@item.ItemId" style="min-width:0px">
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-control" type="text" id="FDescriptionInput" readonly="" style="min-width:150px" value="@item.tblItem.Name">
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-control" type="number" id="FWeightInput" style="width:200px;" value="@item.ItemWeight">
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-control" type="number" id="FQtyInput" style="width:200px;" value="@item.ItemQuantity">
+                                                            </td>
+                                                            <td>
+                                                                <select class="form-control" id="FUnitInput" style="width:200px;" type="text">
+                                                                    @if (@item.ItemUnit == "Piece")
+                                                                    {
+                                                                        <option value="Piece" selected>Piece</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="Piece">Piece</option>
+                                                                    }
+                                                                    @if (@item.ItemUnit == "Dozen")
+                                                                    {
+                                                                        <option value="Dozen" selected>Dozen</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option value="Dozen">Dozen</option>
+                                                                    }
+                                                                </select>
+                                                            </td>
+                                                            <td><a href="javascript:void(0)" class="text-danger font-18" title="Remove"><i class="fa fa-trash-o" onclick="DeleteRow(this)"></i></a></td>
+                                                        </tr>
+                                                    }
+                                                }
+
+                                            </tbody>
+                                        </table>*@
                                 </div>
 
                             </div>
@@ -338,16 +349,16 @@
                                 <textarea class="form-control" name="Details" id="Details">@Model.Details</textarea>
                             </div><br /><br /><br />
                             @*<div class="col-md-12">
-                            @if (Model.draft == true)
-                            {
-                                <input type="checkbox" id="draft" name="draft" value="true" checked />
-                            }
-                            else
-                            {
-                                <input type="checkbox" id="draft" name="draft" value="true" />
-                            }
-                            <label>This record is draft</label>
-                        </div>*@
+                                    @if (Model.draft == true)
+                                    {
+                                        <input type="checkbox" id="draft" name="draft" value="true" checked />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="draft" name="draft" value="true" />
+                                    }
+                                    <label>This record is draft</label>
+                                </div>*@
                         </div>
                         <div class="text-center m-t-20">
                             @if (Edit == 0)
@@ -362,7 +373,7 @@
         </div>
     </div>
 }
-    
+
 </div>
 
 <script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>

@@ -42,37 +42,37 @@
 
     <!-- Page Header -->
     <!-- /Page Header -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            @if (Model == null)
+                            {
+                                <h5 class="breadcrumb-title">@Resource.Create_Item</h5>
+                            }
+                            else
+                            {
+                                <h5 class="breadcrumb-title">@Resource.Edit @Resource.Item</h5>
+                            }
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateItemB">
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="row">
         <div class="col-md-12">
 
             @using (Html.BeginForm("CreateItem", "Item", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {@Html.AntiForgeryToken()
             <div class="card">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="breadcrumb-bar">
-                            <div class="container-fluid">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 col-6">
-                                        @if (Model == null)
-                                        {
-                                            <h5 class="breadcrumb-title">@Resource.Create_Item</h5>
-                                        }
-                                        else
-                                        {
-                                            <h5 class="breadcrumb-title">@Resource.Edit @Resource.Item</h5>
-                                        }
-                                    </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateItemB">
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
                 <div class="card-body">
                     <span style="color:red;">@ViewBag.Error</span>
 
@@ -219,7 +219,7 @@
                                 {
                                     <input type="checkbox" id="TrackQuantity" name="TrackQuantity" value="true" />
                                 }
-                            <label>@Resource.Track_Quantity</label>
+                                <label>@Resource.Track_Quantity</label>
                             </div>
                         </div>
                         <div class="col-md-12">

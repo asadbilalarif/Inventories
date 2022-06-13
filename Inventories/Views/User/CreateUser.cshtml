@@ -35,37 +35,37 @@
 
     <!-- Page Header -->
     <!-- /Page Header -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            @if (Model == null)
+                            {
+                                <h5 class="breadcrumb-title">@Resource.Create_User</h5>
+                            }
+                            else
+                            {
+                                <h5 class="breadcrumb-title">Edit User</h5>
+                            }
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateUserB">
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="row">
         <div class="col-md-12">
 
             @using (Html.BeginForm("CreateUser", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {@Html.AntiForgeryToken()
             <div class="card">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="breadcrumb-bar">
-                            <div class="container-fluid">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 col-6">
-                                        @if (Model == null)
-                                        {
-                                        <h5 class="breadcrumb-title">@Resource.Create_User</h5>
-                                        }
-                                        else
-                                        {
-                                            <h5 class="breadcrumb-title">Edit User</h5>
-                                        }
-                                    </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateUserB">
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
                 <div class="card-body">
                     <span style="color:red;">@ViewBag.Error</span>
 
@@ -100,49 +100,49 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>@Resource.Warehouse<span style="color:red;">*</span> <small id="LblWarehouseError" style="display:none; color:red;">Warehouse Must be selected!!!</small></label><br />
-                                <select class="form-control select" id="WarehouseId" name="WarehouseId"  multiple required>
+                                <select class="form-control select" id="WarehouseId" name="WarehouseId" multiple required>
                                     @*<option value="">Select Warehouse</option>*@
                                     @*@foreach (Inventories.Models.tblWarehouse Warehouse in @ViewBag.Warehouse)
-                                    {
-                                        if (@Warehouse.WarehouseId == WarehouseId)
                                         {
-                                            <option value="@Warehouse.WarehouseId" selected>@Warehouse.Name</option>
+                                            if (@Warehouse.WarehouseId == WarehouseId)
+                                            {
+                                                <option value="@Warehouse.WarehouseId" selected>@Warehouse.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@Warehouse.WarehouseId">@Warehouse.Name</option>
+                                            }
+                                        }*@
+
+                                    @foreach (var item in ViewBag.Warehouse)
+                                    {
+                                        int Check = 0;
+                                        if (ViewBag.UserWarehouse.Count > 0)
+                                        {
+                                            foreach (var Inneritem in ViewBag.UserWarehouse)
+                                            {
+                                                if (Inneritem.WarehouseId == @item.WarehouseId)
+                                                {
+                                                    <option value="@item.WarehouseId" selected>@item.Name</option>
+                                                    {
+                                                        Check = 1;
+                                                    }
+
+                                                }
+
+                                            }
+                                            if (Check == 0)
+                                            {
+                                                <option value="@item.WarehouseId">@item.Name</option>
+                                            }
+
                                         }
                                         else
                                         {
-                                            <option value="@Warehouse.WarehouseId">@Warehouse.Name</option>
-                                        }
-                                    }*@
-
-                                    @foreach (var item in ViewBag.Warehouse)
-                            {
-                                    int Check = 0;
-                                if (ViewBag.UserWarehouse.Count > 0)
-                                {
-                                    foreach (var Inneritem in ViewBag.UserWarehouse)
-                                    {
-                                        if (Inneritem.WarehouseId == @item.WarehouseId)
-                                        {
-                                            <option value="@item.WarehouseId" selected>@item.Name</option>
-                                            {
-                                                Check = 1;
-                                            }
-                                            
+                                            <option value="@item.WarehouseId">@item.Name</option>
                                         }
 
                                     }
-                                    if (Check == 0)
-                                    {
-                                        <option value="@item.WarehouseId" >@item.Name</option>
-                                    }
-
-                                }
-                            else
-                            {
-                            <option value="@item.WarehouseId">@item.Name</option>
-                            }
-
-                            }
 
                                 </select>
                             </div>
@@ -178,12 +178,12 @@
                             <div class="form-group">
                                 @if (Model == null)
                                 {
-                                <label>@Resource.Password<span style="color:red;">*</span></label>
+                                    <label>@Resource.Password<span style="color:red;">*</span></label>
                                     <input type="password" class="form-control" id="Password" name="Password" value="" required>
                                 }
                                 else
                                 {
-                            <label>@Resource.Password</label>
+                                    <label>@Resource.Password</label>
                                     <input type="password" class="form-control" id="Password" name="Password" value="">
                                 }
 

@@ -30,37 +30,37 @@
 
     <!-- Page Header -->
     <!-- /Page Header -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            @if (Model == null)
+                            {
+                                <h5 class="breadcrumb-title">@Resource.Create_Contact</h5>
+                            }
+                            else
+                            {
+                                <h5 class="breadcrumb-title">@Resource.Edit @Resource.Contact</h5>
+                            }
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateContactB">
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="row">
         <div class="col-md-12">
 
             @using (Html.BeginForm("CreateContact", "Contact", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {@Html.AntiForgeryToken()
             <div class="card">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="breadcrumb-bar">
-                            <div class="container-fluid">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 col-6">
-                                        @if (Model == null)
-                                        {
-                                            <h5 class="breadcrumb-title">@Resource.Create_Contact</h5>
-                                        }
-                                        else
-                                        {
-                                            <h5 class="breadcrumb-title">@Resource.Edit @Resource.Contact</h5>
-                                        }
-                                    </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateContactB">
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
                 <div class="card-body">
                     <span style="color:red;">@ViewBag.Error</span>
 
@@ -94,7 +94,7 @@
                     </div>
 
                     <div class="row">
-                        
+
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>@Resource.Details</label>
@@ -108,7 +108,7 @@
                             <div class="form-group">
                                 <label></label>
                                 <button class="btn btn-primary" type="submit" id="SaveChanges">@Resource.Save</button>
-                                <a href="@Url.Action("CreateContact","Contact",new { id=0})"> <input class="btn btn-danger" type="button"  value="@Resource.Cancel"></a>
+                                <a href="@Url.Action("CreateContact","Contact",new { id=0})"> <input class="btn btn-danger" type="button" value="@Resource.Cancel"></a>
                                 <a href="@Url.Action("Contacts","Contact")" class="btn btn-secondary"><i class="fa fa-list"></i> @Resource.List</a>
                             </div>
                         </div>

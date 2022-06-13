@@ -218,6 +218,7 @@ namespace Inventories.Models
         public string Hover_Color { get; set; }
         public string Port { get; set; }
         public string Enable { get; set; }
+        public string and_current_Qty_is { get; set; }
         
     }
 }

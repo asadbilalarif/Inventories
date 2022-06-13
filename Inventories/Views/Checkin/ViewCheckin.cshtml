@@ -3,13 +3,8 @@
 //Layout = null;
 }
 
-<!DOCTYPE html>
-
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
-    <title>ViewAdjustment</title>
+  
     <style>
         p {
             margin-top: 0;
@@ -17,8 +12,24 @@
         }
     </style>
 </head>
-<body>
     <div class="content container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="breadcrumb-bar">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 col-6">
+                                <h5 class="breadcrumb-title">@Resource.Checkin_Report @Resource.Details</h5>
+                            </div>
+                            <div class="col-md-6 col-6 text-right" id="" style="margin-bottom:1%;">
+                                <a href="@Url.Action("PrintCheckinViewDataToPdf","PDF",new { Id=@Model.FirstOrDefault().CheckinId })" class="btn btn-primary"  style="float:right"><i class="fa fa-file" > PDF</i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <div class="card">
             <div class="card-body">
                 <div class="row" style="border-bottom: 2px solid #dee2e6;">
@@ -69,7 +80,7 @@
                                             <td>@Checkin.ItemName</td>
                                             <td>@Checkin.ItemCategory</td>
                                             <td>@Checkin.ItemUnit</td>
-                                            <td >@Checkin.ItemQuantity</td>
+                                            <td>@Checkin.ItemQuantity</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -83,5 +94,4 @@
 
     <script src="/Content/assets/js/jquery-3.2.1.min.js"></script>
     <script src="~/Content/assets/js/bootstrap.min.js"></script>
-</body>
-</html>
+

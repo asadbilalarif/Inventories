@@ -25,7 +25,7 @@
                                         <img class="avatar-img rounded-circle" alt="User Image" src="~/Content/assets/img/doctors/doctor-thumb-01.jpg">
                                     </span>*@
                                 <div class="media-body">
-                                    <p class="noti-details"><span class="noti-title">@item.tblItem.Name</span>  <span class="noti-title">@Resource.has_less_Quantity_than  @item.tblItem.Alertonlowstock</span></p>
+                                    <p class="noti-details"><span class="noti-title">@item.tblItem.Name</span>  <span class="noti-title">@Resource.has_less_Quantity_than  @item.tblItem.Alertonlowstock @Resource.and_current_Qty_is @item.TotalQty</span></p>
                                     @*<p class="noti-time"><span class="notification-time">4 mins ago</span></p>*@
                                 </div>
                             </div>

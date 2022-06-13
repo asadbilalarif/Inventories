@@ -16,6 +16,7 @@ namespace Inventories.Controllers
         public ActionResult Login()
         {
             FormsAuthentication.SignOut();
+            
             return View();
         }
         [HttpPost]
@@ -48,6 +49,7 @@ namespace Inventories.Controllers
                     Settingcookie["Name"] = Setting.Name;
                     Settingcookie["Color"] = Setting.Color;
                     Settingcookie["HoverColor"] = Setting.HoverColor;
+                    Response.Cookies.Add(Settingcookie);
 
                     //Session["User"] = DB.tblUsers.Select(r => r).Where(x => x.Email == Email).FirstOrDefault();
                     Session["access"] = DB.tblAccessLevels.Select(r => r).Where(x => x.RoleId == User.RoleId && x.isActive == true).ToList();
@@ -56,7 +58,7 @@ namespace Inventories.Controllers
 
                     // Add it to the current web response.
                     Response.Cookies.Add(cookie);
-                    Response.Cookies.Add(Settingcookie);
+                    
 
                     FormsAuthentication.SetAuthCookie(Email, false);
 

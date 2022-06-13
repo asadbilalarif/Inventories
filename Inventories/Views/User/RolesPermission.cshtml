@@ -45,30 +45,32 @@
 
 @*<section class="section">*@
 <div class="content container-fluid">
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="breadcrumb-bar">
-                        <div class="container-fluid">
-                            <div class="row align-items-center">
-                                <div class="col-md-6 col-6">
-                                    <h5 class="breadcrumb-title" style="color: #333333;">@Resource.ROLES & @Resource.PERMISSIONS</h5>
-                                </div>
-
-                            </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            <h5 class="breadcrumb-title" style="color: #333333;">@Resource.ROLES & @Resource.PERMISSIONS</h5>
                         </div>
+
                     </div>
                 </div>
-            </div><div style="display:none;" class="alert alert-info alert-dismissible fade show" id="UpdateAlert" role="alert">
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+
+            <div style="display:none;" class="alert alert-info alert-dismissible fade show" id="UpdateAlert" role="alert">
                 <strong>Success!</strong> @ViewBag.Update
             </div><br />
 
             @*<div class="row">
-            <div class="col-sm-8">
-                <h4 class="page-title">Roles & Permissions</h4>
-            </div>
-        </div>*@
+                    <div class="col-sm-8">
+                        <h4 class="page-title">Roles & Permissions</h4>
+                    </div>
+                </div>*@
             <div class="row">
                 <div class="col-sm-4 col-md-4 col-lg-4 col-xl-3">
                     <a href="add-role.html" class="btn btn-primary btn-block" data-toggle="modal" data-target="#RoleModal" id="CreateRoleB"><i class="fa fa-plus" style="color:white;"> @Resource.Add_Roles</i></a>
@@ -97,10 +99,10 @@
                                                 </span>
                                             </a>
                                             @*<a href="#" data-toggle="modal" data-target="#delete_role" id="DeleteRole">
-                                        <span class="action-circle large delete-btn">
-                                            <i class="material-icons">delete</i>
-                                        </span>
-                                        </a>*@
+                                                <span class="action-circle large delete-btn">
+                                                    <i class="material-icons">delete</i>
+                                                </span>
+                                                </a>*@
                                         </span>
                                     </li>
                                 }
@@ -125,10 +127,10 @@
                                                 </span>
                                             </a>
                                             @*<a href="#" data-toggle="modal" data-target="#delete_role" id="DeleteRole" >
-                                            <span class="action-circle large delete-btn">
-                                                <i class="material-icons">delete</i>
-                                            </span>
-                                        </a>*@
+                                                    <span class="action-circle large delete-btn">
+                                                        <i class="material-icons">delete</i>
+                                                    </span>
+                                                </a>*@
                                         </span>
                                     </li>
                                 }
@@ -142,52 +144,52 @@
                     @*<h6 class="card-title m-b-20">Module Access</h6>*@
 
                     @*   <input type="text" id="MARoleID" style="display:none;">
-                <input type="text" id="MARole" readonly=""><br /><br />
-                <div class="m-b-30">
-                    <ul class="list-group">
-                        @foreach (IG_Control_System.Models.tblmenu Menu in @ViewBag.MenuList)
-                        {
-                            <li class="list-group-item">
-                                <input type="text" id="MenuID" style="display:none;" value=@Menu.menuid>
-                                @Menu.name
-                                <div class="material-switch float-right">
-                                    <input id="staff_module" type="checkbox">
-                                    <label for="staff_module" class="badge-success"></label>
-                                </div>
-                            </li>
-                        }
+                        <input type="text" id="MARole" readonly=""><br /><br />
+                        <div class="m-b-30">
+                            <ul class="list-group">
+                                @foreach (IG_Control_System.Models.tblmenu Menu in @ViewBag.MenuList)
+                                {
+                                    <li class="list-group-item">
+                                        <input type="text" id="MenuID" style="display:none;" value=@Menu.menuid>
+                                        @Menu.name
+                                        <div class="material-switch float-right">
+                                            <input id="staff_module" type="checkbox">
+                                            <label for="staff_module" class="badge-success"></label>
+                                        </div>
+                                    </li>
+                                }
+                                        <li class="list-group-item">
+                                    Holidays
+                                    <div class="material-switch float-right">
+                                        <input id="holidays_module" type="checkbox">
+                                        <label for="holidays_module" class="badge-success"></label>
+                                    </div>
+                                </li>
                                 <li class="list-group-item">
-                            Holidays
-                            <div class="material-switch float-right">
-                                <input id="holidays_module" type="checkbox">
-                                <label for="holidays_module" class="badge-success"></label>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            Leave Request
-                            <div class="material-switch float-right">
-                                <input id="leave_module" type="checkbox">
-                                <label for="leave_module" class="badge-success"></label>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            Events
-                            <div class="material-switch float-right">
-                                <input id="events_module" type="checkbox">
-                                <label for="events_module" class="badge-success"></label>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            Chat
-                            <div class="material-switch float-right">
-                                <input id="chat_module" type="checkbox">
-                                <label for="chat_module" class="badge-success"></label>
-                            </div>
-                        </li>
-                    </ul>
-                </div>*@
+                                    Leave Request
+                                    <div class="material-switch float-right">
+                                        <input id="leave_module" type="checkbox">
+                                        <label for="leave_module" class="badge-success"></label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    Events
+                                    <div class="material-switch float-right">
+                                        <input id="events_module" type="checkbox">
+                                        <label for="events_module" class="badge-success"></label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    Chat
+                                    <div class="material-switch float-right">
+                                        <input id="chat_module" type="checkbox">
+                                        <label for="chat_module" class="badge-success"></label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>*@
                     @*@using (Html.BeginForm("CreateAccessLevel", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {@Html.AntiForgeryToken()*@
+                        {@Html.AntiForgeryToken()*@
                     @if (@ViewBag.SelectedRole != null)
                     {
                         <input type="text" id="MARoleID" name="roleid" style="display:none;" value="@ViewBag.SelectedRole.RoleId" required>
@@ -230,36 +232,36 @@
                                                     <input type="checkbox" name="isactive">
                                                 }
                                             </td>
-                                            <td class="text-center" >
-                                            @if (Menu.accesscreate == true)
-                                            {
-                                                <input type="checkbox" checked name="accesscreate">
-                                            }
-                                            else
-                                            {
-                                                <input type="checkbox" name="accesscreate">
-                                            }
-                                        </td>
-                                        <td class="text-center" >
-                                            @if (Menu.accessedit == true)
-                                            {
-                                                <input type="checkbox" checked name="accessedit">
-                                            }
-                                            else
-                                            {
-                                                <input type="checkbox" name="accessedit">
-                                            }
-                                        </td>
-                                        <td class="text-center" >
-                                            @if (Menu.accessdelete == true)
-                                            {
-                                                <input type="checkbox" checked name="accessdelete">
-                                            }
-                                            else
-                                            {
-                                                <input type="checkbox" name="accessdelete">
-                                            }
-                                        </td>
+                                            <td class="text-center">
+                                                @if (Menu.accesscreate == true)
+                                                {
+                                                    <input type="checkbox" checked name="accesscreate">
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" name="accesscreate">
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                @if (Menu.accessedit == true)
+                                                {
+                                                    <input type="checkbox" checked name="accessedit">
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" name="accessedit">
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                @if (Menu.accessdelete == true)
+                                                {
+                                                    <input type="checkbox" checked name="accessdelete">
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" name="accessdelete">
+                                                }
+                                            </td>
                                         </tr>
                                     }
                                 }
@@ -273,15 +275,15 @@
                                             <td class="text-center">
                                                 <input type="checkbox" name="isactive">
                                             </td>
-                                            <td class="text-center" >
-                                            <input type="checkbox" name="accesscreate">
-                                        </td>
-                                        <td class="text-center" >
-                                            <input type="checkbox" name="accessedit">
-                                        </td>
-                                        <td class="text-center" >
-                                            <input type="checkbox" name="accessdelete">
-                                        </td>
+                                            <td class="text-center">
+                                                <input type="checkbox" name="accesscreate">
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="checkbox" name="accessedit">
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="checkbox" name="accessdelete">
+                                            </td>
                                         </tr>
                                     }
                                 }
@@ -297,7 +299,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 @*</section>*@

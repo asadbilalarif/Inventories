@@ -28,30 +28,30 @@
 
     <!-- Page Header -->
     <!-- /Page Header -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            <h5 class="breadcrumb-title">@Resource.Item_List</h5>
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateItemB" style="margin-bottom:1%;">
+                            @if (ViewBag.CreateAccess == true)
+                            {
+                                <a href="@Url.Action("CreateItem","Item")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> @Resource.Create_New_Item</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="breadcrumb-bar">
-                            <div class="container-fluid">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">@Resource.Item_List</h5>
-                                    </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateItemB">
-                                        @if (ViewBag.CreateAccess == true)
-                                        {
-                                            <a href="@Url.Action("CreateItem","Item")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> @Resource.Create_New_Item</a>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
                 <div style="display:none;" class="alert alert-success alert-dismissible fade show" id="SuccessAlert" role="alert">
                     <strong>Success!</strong> @ViewBag.Success
                 </div>
@@ -71,9 +71,9 @@
                                         <th>@Resource.Name</th>
                                         <th>@Resource.Code</th>
                                         @*<th>Base Item</th>
-                                        <th>Formula</th>*@
+                                            <th>Formula</th>*@
 
-                                    <th>@Resource.Action</th>
+                                        <th>@Resource.Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,7 +85,7 @@
                                             <td>@Item.Code</td>
                                             @*<td>@Item.BaseItem</td>
 
-                                            <td>@Item.Formula</td>*@
+                                                <td>@Item.Formula</td>*@
 
                                             <td class="text-end">
                                                 <div class="actions">

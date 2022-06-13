@@ -23,8 +23,8 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="page-title">@Resource.Total_Records</h3>
-                <ul class="breadcrumb">
+                <h3 class="breadcrumb-title">@Resource.Total_Records</h3>
+                <ul class="breadcrumb" style="font-size: 0.7rem !important;">
                     <li class="breadcrumb-item active">@Resource.Please_review_the_total_records_below</li>
                 </ul>
             </div>
@@ -35,7 +35,7 @@
     <div class="row" >
         <div class="col-xl-3 col-sm-6 col-12" >
             <div class="card" style="border-radius: 25px;" >
-                <div class="card-body">
+                <div class="card-body" style="padding: 1rem;">
                     <div class="dash-widget-header">
                         @*<span class="dash-widget-icon text-primary border-primary">
                                 <i class="fe fe-users"></i>
@@ -55,7 +55,7 @@
         </div>
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card" style="border-radius: 25px;">
-                <div class="card-body">
+                <div class="card-body" style="padding: 1rem;">
                     <div class="dash-widget-header">
                         @*<span class="dash-widget-icon text-success">
                                 <i class="fe fe-credit-card"></i>
@@ -76,7 +76,7 @@
         </div>
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card" style="border-radius: 25px;">
-                <div class="card-body">
+                <div class="card-body" style="padding: 1rem;">
                     <div class="dash-widget-header">
                         @*<span class="dash-widget-icon text-danger border-danger">
                                 <i class="fe fe-money"></i>
@@ -97,7 +97,7 @@
         </div>
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card" style="border-radius: 25px;">
-                <div class="card-body">
+                <div class="card-body" style="padding: 1rem;">
                     <div class="dash-widget-header ">
                         @*<span class="dash-widget-icon text-warning border-warning">
                                 <i class="fe fe-folder"></i>
@@ -121,7 +121,7 @@
     <div class="row">
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card" style="border-radius: 25px;">
-                <div class="card-body">
+                <div class="card-body" style="padding: 1rem;">
                     <div class="dash-widget-header">
                         @*<span class="dash-widget-icon text-primary border-primary">
                                 <i class="fe fe-users"></i>
@@ -141,7 +141,7 @@
         </div>
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card" style="border-radius: 25px;">
-                <div class="card-body">
+                <div class="card-body" style="padding: 1rem;">
                     <div class="dash-widget-header">
                         @*<span class="dash-widget-icon text-success">
                                 <i class="fe fe-credit-card"></i>
@@ -162,7 +162,7 @@
         </div>
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card" style="border-radius: 25px;">
-                <div class="card-body">
+                <div class="card-body" style="padding: 1rem;">
                     <div class="dash-widget-header">
                         @*<span class="dash-widget-icon text-danger border-danger">
                                 <i class="fe fe-money"></i>
@@ -183,7 +183,7 @@
         </div>
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card" style="border-radius: 25px;">
-                <div class="card-body">
+                <div class="card-body" style="padding: 1rem;">
                     <div class="dash-widget-header ">
                         @*<span class="dash-widget-icon text-warning border-warning">
                                 <i class="fe fe-folder"></i>
@@ -207,7 +207,7 @@
     <div class="row">
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card" style="border-radius: 25px;">
-                <div class="card-body">
+                <div class="card-body" style="padding: 1rem;">
                     <div class="dash-widget-header">
                         @*<span class="dash-widget-icon text-primary border-primary">
                                 <i class="fe fe-users"></i>
@@ -227,7 +227,7 @@
         </div>
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card" style="border-radius: 25px;">
-                <div class="card-body">
+                <div class="card-body" style="padding: 1rem;">
                     <div class="dash-widget-header">
                         @*<span class="dash-widget-icon text-success">
                                 <i class="fe fe-credit-card"></i>
@@ -248,7 +248,7 @@
         </div>
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card" style="border-radius: 25px;">
-                <div class="card-body">
+                <div class="card-body" style="padding: 1rem;">
                     <div class="dash-widget-header">
                         @*<span class="dash-widget-icon text-danger border-danger">
                                 <i class="fe fe-money"></i>
@@ -269,11 +269,11 @@
         </div>
     </div>
 
-    <div class="page-header">
+    <div class="page-header" >
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="page-title">Report Links</h3>
-                <ul class="breadcrumb">
+                <h3 class="breadcrumb-title" style="margin-bottom: 0px;">@Resource.Report_Links</h3>
+                <ul class="breadcrumb" style="font-size: 0.7rem !important;">
                     <li class="breadcrumb-item active">@Resource.Please_click_to_see_the_report</li>
                 </ul>
             </div>
@@ -281,33 +281,41 @@
     </div>
 
     <div class="row" >
-        <div class="col-xl-3 col-sm-6 col-12" >
-            <div class="card" >
-                <div class="card-body" style="background-color:#374151;color:white;border-radius: 25px;">
-                    <a href="@Url.Action("CheckinReport")" style="background-color:#374151;color:white;">@Resource.Checkin_Report</a>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <a href="@Url.Action("CheckinReport")" style="background-color: #374151; color: white;">
+                <div class="card" style="background-color:#374151;color:white;border-radius: 25px;">
+                    <div class="card-body text-center" style="padding: 0.5rem;">
+                        @Resource.Checkin_Report
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card" >
-                <div class="card-body" style="background-color:#374151;color:white;border-radius: 25px;">
-                    <a href="@Url.Action("CheckoutReport")" style="background-color:#374151;color:white;">@Resource.Checkout_Report</a>
+            <a href="@Url.Action("CheckoutReport")" style="background-color:#374151;color:white;">
+                <div class="card" style="background-color:#374151;color:white;border-radius: 25px;">
+                    <div class="card-body text-center" style="padding: 0.5rem;">
+                        @Resource.Checkout_Report
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card" >
-                <div class="card-body" style="background-color:#374151;color:white;border-radius: 25px;">
-                    <a href="@Url.Action("TransferReport")" style="background-color:#374151;color:white;">@Resource.Transfer_Report</a>
+            <a href="@Url.Action("TransferReport")" style="background-color:#374151;color:white;">
+                <div class="card" style="background-color:#374151;color:white;border-radius: 25px;">
+                    <div class="card-body text-center" style="padding: 0.5rem;">
+                        @Resource.Transfer_Report
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card" >
-                <div class="card-body" style="background-color:#374151;color:white;border-radius: 25px;">
-                    <a href="@Url.Action("AdjustmentReport")" style="background-color:#374151;color:white;">@Resource.Adjustment_Report</a>
+            <a href="@Url.Action("AdjustmentReport")" style="background-color:#374151;color:white;">
+                <div class="card" style="background-color:#374151;color:white;border-radius: 25px;">
+                    <div class="card-body text-center" style="padding: 0.5rem;">
+                        @Resource.Adjustment_Report
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         
     </div>

@@ -28,30 +28,30 @@
 
     <!-- Page Header -->
     <!-- /Page Header -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            <h5 class="breadcrumb-title">@Resource.Contact_List</h5>
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateContactB" style="margin-bottom:1%;">
+                            @if (ViewBag.CreateAccess == true)
+                            {
+                                <a href="@Url.Action("CreateContact","Contact")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> @Resource.Create_New_Contact</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="breadcrumb-bar">
-                            <div class="container-fluid">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">@Resource.Contact_List</h5>
-                                    </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateContactB">
-                                        @if (ViewBag.CreateAccess == true)
-                                        {
-                                            <a href="@Url.Action("CreateContact","Contact")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> @Resource.Create_New_Contact</a>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
                 <div style="display:none;" class="alert alert-success alert-dismissible fade show" id="SuccessAlert" role="alert">
                     <strong>Success!</strong> @ViewBag.Success
                 </div>
@@ -88,7 +88,7 @@
                                             <td>@Contact.ContactType</td>
 
                                             <td>@Contact.Details</td>
-                                            
+
                                             <td class="text-end">
                                                 <div class="actions">
                                                     @if (ViewBag.EditAccess == true)

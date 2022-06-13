@@ -1,0 +1,109 @@
+﻿@model  List<Inventories.Models.CheckinViewData_Result2>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewCheckinPDF</title>
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/style.css">
+    <style>
+        p {
+            margin-top: 0;
+            margin-bottom: 0rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+
+        <div class="content container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="breadcrumb-bar">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 col-6">
+                                    <h5 class="breadcrumb-title">@Resource.Checkin_Report @Resource.Details</h5>
+                                </div>
+                                @*<div class="col-md-6 col-6 text-right" id="" style="margin-bottom:1%;">
+                                        <a href="@Url.Action("PrintCheckinViewDataToPdf","Checkin",new { Id=@Model.FirstOrDefault().CheckinId })" class="btn btn-primary" style="float:right"><i class="fas fa-toggle-off"> PDF</i> </a>
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row" style="border-bottom: 2px solid #dee2e6;">
+                        <div class="col-md-6">
+                            <h3>@Resource.Inventories</h3>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <p>@Model.FirstOrDefault().WarehouseName</p>
+                            <p>@Model.FirstOrDefault().WarehouseAddress</p>
+                            <p>@Model.FirstOrDefault().WarehousePhone</p>
+                            <p>@Model.FirstOrDefault().WarehouseEmail</p>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h4 style="margin-top: 2%; text-transform: uppercase; ">@Resource.Checkin</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>@Resource.Date: @Model.FirstOrDefault().CheckinDate.ToString("MMM dd,yyyy")</p>
+                            <p>@Resource.Reference: @Model.FirstOrDefault().Reference</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><b>@Resource.For:</b></p>
+                            <p>@Model.FirstOrDefault().ContactName</p>
+                            <p>@Model.FirstOrDefault().ContactPhone</p>
+                            <p>@Model.FirstOrDefault().ContactEmail</p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:5%;">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="cell-border table table-hover table-center  mb-0 " id="AdjustmentTable">
+                                    <thead>
+                                        <tr>
+                                            <th>@Resource.Item</th>
+                                            <th>@Resource.Item_Category</th>
+                                            <th>@Resource.Item_Unit</th>
+                                            <th>@Resource.Quantity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (Inventories.Models.CheckinViewData_Result2 Checkin in Model)
+                                        {
+                                            <tr>
+                                                <td>@Checkin.ItemName</td>
+                                                <td>@Checkin.ItemCategory</td>
+                                                <td>@Checkin.ItemUnit</td>
+                                                <td>@Checkin.ItemQuantity</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <script src="/Content/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+</body>
+</html>

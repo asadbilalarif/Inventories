@@ -31,28 +31,30 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <div class="card">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="breadcrumb-bar">
-                            <div class="container-fluid">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 col-6">
-                                        <h5 class="breadcrumb-title">@Resource.Transfer_List</h5>
-                                    </div>
-                                    <div class="col-md-6 col-6 text-right" id="CreateTransferB">
-                                        @if (ViewBag.CreateAccess == true)
-                                        {
-                                            <a href="@Url.Action("CreateTransfer","Transfer")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> @Resource.Create_New_Transfer</a>
-                                        }
-                                        
-                                    </div>
-                                </div>
-                            </div>
+            <div class="breadcrumb-bar">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 col-6">
+                            <h5 class="breadcrumb-title">@Resource.Transfer_List</h5>
+                        </div>
+                        <div class="col-md-6 col-6 text-right" id="CreateTransferB" style="margin-bottom:1%;">
+                            @if (ViewBag.CreateAccess == true)
+                            {
+                                <a href="@Url.Action("CreateTransfer","Transfer")" class="btn btn-primary " style="float:right;"><i class="fa fa-plus"></i> @Resource.Create_New_Transfer</a>
+                            }
+
                         </div>
                     </div>
-
                 </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+
                 <div style="display:none;" class="alert alert-success alert-dismissible fade show" id="SuccessAlert" role="alert">
                     <strong>Success!</strong> @ViewBag.Success
                 </div>
@@ -101,8 +103,8 @@
                                                             <i class="fa fa-trash"></i> @Resource.Delete
                                                         </a>
                                                     }
-                                                    
-                                                    
+
+
                                                 </div>
                                             </td>
                                         </tr>
