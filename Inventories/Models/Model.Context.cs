@@ -207,15 +207,6 @@ namespace Inventories.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CheckinViewData_Result2>("CheckinViewData", idParameter);
         }
     
-        public virtual ObjectResult<CheckoutViewData_Result> CheckoutViewData(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CheckoutViewData_Result>("CheckoutViewData", idParameter);
-        }
-    
         public virtual ObjectResult<AdjustmentViewData_Result> AdjustmentViewData(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -223,6 +214,15 @@ namespace Inventories.Models
                 new ObjectParameter("Id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AdjustmentViewData_Result>("AdjustmentViewData", idParameter);
+        }
+    
+        public virtual ObjectResult<CheckoutViewData_Result> CheckoutViewData(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CheckoutViewData_Result>("CheckoutViewData", idParameter);
         }
     
         public virtual ObjectResult<TransferViewData_Result> TransferViewData(Nullable<int> id)

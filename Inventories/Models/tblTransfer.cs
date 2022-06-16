@@ -34,6 +34,8 @@ namespace Inventories.Models
         public Nullable<System.DateTime> EditDate { get; set; }
         public Nullable<bool> isActive { get; set; }
         public string TransferNumber { get; set; }
+        public string QRCode { get; set; }
+        public string BarCode { get; set; }
     
         public virtual tblWarehouse tblWarehouse { get; set; }
         public virtual tblWarehouse tblWarehouse1 { get; set; }

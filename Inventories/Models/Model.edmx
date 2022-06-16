@@ -36,6 +36,8 @@
           <Property Name="Attachment" Type="nvarchar(max)" />
           <Property Name="Details" Type="nvarchar(max)" />
           <Property Name="draft" Type="bit" />
+          <Property Name="QRCode" Type="nvarchar(max)" />
+          <Property Name="BarCode" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="EditBy" Type="int" />
@@ -96,6 +98,8 @@
           <Property Name="Attachment" Type="nvarchar(max)" />
           <Property Name="Details" Type="nvarchar(max)" />
           <Property Name="draft" Type="bit" />
+          <Property Name="QRCode" Type="nvarchar(max)" />
+          <Property Name="BarCode" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="EditBy" Type="int" />
@@ -133,6 +137,8 @@
           <Property Name="Attachment" Type="nvarchar(max)" />
           <Property Name="Details" Type="nvarchar(max)" />
           <Property Name="draft" Type="bit" />
+          <Property Name="QRCode" Type="nvarchar(max)" />
+          <Property Name="BarCode" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="EditBy" Type="int" />
@@ -284,6 +290,8 @@
           <Property Name="Attachment" Type="nvarchar(max)" />
           <Property Name="Details" Type="nvarchar(max)" />
           <Property Name="draft" Type="bit" />
+          <Property Name="QRCode" Type="nvarchar(max)" />
+          <Property Name="BarCode" Type="nvarchar(max)" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="EditBy" Type="int" />
@@ -1016,14 +1024,14 @@
           <FunctionImport Name="CheckinViewData" ReturnType="Collection(InventoriesModel.CheckinViewData_Result2)">
           <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CheckoutViewData" ReturnType="Collection(InventoriesModel.CheckoutViewData_Result)">
-          <Parameter Name="Id" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="AdjustmentViewData" ReturnType="Collection(InventoriesModel.AdjustmentViewData_Result)">
-          <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CheckoutViewData" ReturnType="Collection(InventoriesModel.CheckoutViewData_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TransferViewData" ReturnType="Collection(InventoriesModel.TransferViewData_Result)">
-          <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="tblAccessLevel">
@@ -1277,6 +1285,8 @@
           <NavigationProperty Name="tblWarehouse1" Relationship="InventoriesModel.TransferToWarehouse" FromRole="tblTransfer" ToRole="tblWarehouse" />
           <NavigationProperty Name="tblTransferItems" Relationship="InventoriesModel.TransferTransfer" FromRole="tblTransfer" ToRole="tblTransferItem" />
           <Property Name="TransferNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QRCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblTransferItem">
           <Key>
@@ -1386,6 +1396,8 @@
           <NavigationProperty Name="tblContact" Relationship="InventoriesModel.CheckinContact" FromRole="tblCheckin" ToRole="tblContact" />
           <NavigationProperty Name="tblWarehouse" Relationship="InventoriesModel.CheckinWarehouse" FromRole="tblCheckin" ToRole="tblWarehouse" />
           <Property Name="CheckinNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QRCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblCheckinItem">
           <Key>
@@ -1476,6 +1488,8 @@
           <NavigationProperty Name="tblContact" Relationship="InventoriesModel.CheckoutContact" FromRole="tblCheckout" ToRole="tblContact" />
           <NavigationProperty Name="tblWarehouse" Relationship="InventoriesModel.CheckoutWarehouse" FromRole="tblCheckout" ToRole="tblWarehouse" />
           <Property Name="CheckoutNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QRCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblCheckoutItem">
           <Key>
@@ -1565,6 +1579,8 @@
           <Property Name="isActive" Type="Boolean" />
           <NavigationProperty Name="tblAdjustmentItems" Relationship="InventoriesModel.AdjustmentAdjustment" FromRole="tblAdjustment" ToRole="tblAdjustmentItem" />
           <NavigationProperty Name="tblWarehouse" Relationship="InventoriesModel.AdjustmentWarehouse" FromRole="tblAdjustment" ToRole="tblWarehouse" />
+          <Property Name="QRCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BarCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblAdjustmentItem">
           <Key>
@@ -2044,33 +2060,8 @@
           <Property Type="String" Name="Attachment" Nullable="true" />
           <Property Type="String" Name="Details" Nullable="true" />
           <Property Type="Boolean" Name="draft" Nullable="true" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="EditBy" Nullable="true" />
-          <Property Type="DateTime" Name="EditDate" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="isActive" Nullable="true" />
-          <Property Type="String" Name="WarehouseName" Nullable="true" />
-          <Property Type="String" Name="WarehouseAddress" Nullable="true" />
-          <Property Type="String" Name="WarehouseEmail" Nullable="true" />
-          <Property Type="String" Name="WarehousePhone" Nullable="true" />
-          <Property Type="String" Name="ItemName" Nullable="true" />
-          <Property Type="String" Name="ItemUnit" Nullable="true" />
-          <Property Type="String" Name="ItemCategory" Nullable="true" />
-          <Property Type="Int32" Name="ItemQuantity" Nullable="true" />
-          <Property Type="String" Name="ContactName" Nullable="true" />
-          <Property Type="String" Name="ContactEmail" Nullable="true" />
-          <Property Type="String" Name="ContactPhone" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="CheckoutViewData_Result">
-          <Property Type="Int32" Name="CheckoutId" Nullable="false" />
-          <Property Type="String" Name="CheckoutNumber" Nullable="true" />
-          <Property Type="DateTime" Name="CheckoutDate" Nullable="false" />
-          <Property Type="String" Name="Reference" Nullable="true" />
-          <Property Type="Int32" Name="Contact" Nullable="true" />
-          <Property Type="Int32" Name="Warehouse" Nullable="true" />
-          <Property Type="String" Name="Attachment" Nullable="true" />
-          <Property Type="String" Name="Details" Nullable="true" />
-          <Property Type="Boolean" Name="draft" Nullable="true" />
+          <Property Type="String" Name="QRCode" Nullable="true" />
+          <Property Type="String" Name="BarCode" Nullable="true" />
           <Property Type="Int32" Name="CreatedBy" Nullable="true" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="EditBy" Nullable="true" />
@@ -2098,6 +2089,8 @@
           <Property Type="String" Name="Attachment" Nullable="true" />
           <Property Type="String" Name="Details" Nullable="true" />
           <Property Type="Boolean" Name="draft" Nullable="true" />
+          <Property Type="String" Name="QRCode" Nullable="true" />
+          <Property Type="String" Name="BarCode" Nullable="true" />
           <Property Type="Int32" Name="CreatedBy" Nullable="true" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="EditBy" Nullable="true" />
@@ -2112,6 +2105,35 @@
           <Property Type="String" Name="ItemCategory" Nullable="true" />
           <Property Type="Int32" Name="ItemQuantity" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="CheckoutViewData_Result">
+          <Property Type="Int32" Name="CheckoutId" Nullable="false" />
+          <Property Type="String" Name="CheckoutNumber" Nullable="true" />
+          <Property Type="DateTime" Name="CheckoutDate" Nullable="false" />
+          <Property Type="String" Name="Reference" Nullable="true" />
+          <Property Type="Int32" Name="Contact" Nullable="true" />
+          <Property Type="Int32" Name="Warehouse" Nullable="true" />
+          <Property Type="String" Name="Attachment" Nullable="true" />
+          <Property Type="String" Name="Details" Nullable="true" />
+          <Property Type="Boolean" Name="draft" Nullable="true" />
+          <Property Type="String" Name="QRCode" Nullable="true" />
+          <Property Type="String" Name="BarCode" Nullable="true" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="EditBy" Nullable="true" />
+          <Property Type="DateTime" Name="EditDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isActive" Nullable="true" />
+          <Property Type="String" Name="WarehouseName" Nullable="true" />
+          <Property Type="String" Name="WarehouseAddress" Nullable="true" />
+          <Property Type="String" Name="WarehouseEmail" Nullable="true" />
+          <Property Type="String" Name="WarehousePhone" Nullable="true" />
+          <Property Type="String" Name="ItemName" Nullable="true" />
+          <Property Type="String" Name="ItemUnit" Nullable="true" />
+          <Property Type="String" Name="ItemCategory" Nullable="true" />
+          <Property Type="Int32" Name="ItemQuantity" Nullable="true" />
+          <Property Type="String" Name="ContactName" Nullable="true" />
+          <Property Type="String" Name="ContactEmail" Nullable="true" />
+          <Property Type="String" Name="ContactPhone" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="TransferViewData_Result">
           <Property Type="Int32" Name="TransferId" Nullable="false" />
           <Property Type="String" Name="TransferNumber" Nullable="true" />
@@ -2122,6 +2144,8 @@
           <Property Type="String" Name="Attachment" Nullable="true" />
           <Property Type="String" Name="Details" Nullable="true" />
           <Property Type="Boolean" Name="draft" Nullable="true" />
+          <Property Type="String" Name="QRCode" Nullable="true" />
+          <Property Type="String" Name="BarCode" Nullable="true" />
           <Property Type="Int32" Name="CreatedBy" Nullable="true" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="EditBy" Nullable="true" />
@@ -2311,6 +2335,8 @@
           <EntitySetMapping Name="tblTransfers">
             <EntityTypeMapping TypeName="InventoriesModel.tblTransfer">
               <MappingFragment StoreEntitySet="tblTransfer">
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="QRCode" ColumnName="QRCode" />
                 <ScalarProperty Name="TransferNumber" ColumnName="TransferNumber" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="EditDate" ColumnName="EditDate" />
@@ -2371,6 +2397,8 @@
           <EntitySetMapping Name="tblCheckins">
             <EntityTypeMapping TypeName="InventoriesModel.tblCheckin">
               <MappingFragment StoreEntitySet="tblCheckin">
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="QRCode" ColumnName="QRCode" />
                 <ScalarProperty Name="CheckinNumber" ColumnName="CheckinNumber" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="EditDate" ColumnName="EditDate" />
@@ -2411,6 +2439,8 @@
           <EntitySetMapping Name="tblCheckouts">
             <EntityTypeMapping TypeName="InventoriesModel.tblCheckout">
               <MappingFragment StoreEntitySet="tblCheckout">
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="QRCode" ColumnName="QRCode" />
                 <ScalarProperty Name="CheckoutNumber" ColumnName="CheckoutNumber" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="EditDate" ColumnName="EditDate" />
@@ -2451,6 +2481,8 @@
           <EntitySetMapping Name="tblAdjustments">
             <EntityTypeMapping TypeName="InventoriesModel.tblAdjustment">
               <MappingFragment StoreEntitySet="tblAdjustment">
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="QRCode" ColumnName="QRCode" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="EditDate" ColumnName="EditDate" />
                 <ScalarProperty Name="EditBy" ColumnName="EditBy" />
@@ -2735,37 +2767,8 @@
                 <ScalarProperty Name="Attachment" ColumnName="Attachment" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="draft" ColumnName="draft" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
-                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
-                <ScalarProperty Name="isActive" ColumnName="isActive" />
-                <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
-                <ScalarProperty Name="WarehouseAddress" ColumnName="WarehouseAddress" />
-                <ScalarProperty Name="WarehouseEmail" ColumnName="WarehouseEmail" />
-                <ScalarProperty Name="WarehousePhone" ColumnName="WarehousePhone" />
-                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-                <ScalarProperty Name="ItemUnit" ColumnName="ItemUnit" />
-                <ScalarProperty Name="ItemCategory" ColumnName="ItemCategory" />
-                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
-                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
-                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
-                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CheckoutViewData" FunctionName="InventoriesModel.Store.CheckoutViewData">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="InventoriesModel.CheckoutViewData_Result">
-                <ScalarProperty Name="CheckoutId" ColumnName="CheckoutId" />
-                <ScalarProperty Name="CheckoutNumber" ColumnName="CheckoutNumber" />
-                <ScalarProperty Name="CheckoutDate" ColumnName="CheckoutDate" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
-                <ScalarProperty Name="Contact" ColumnName="Contact" />
-                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
-                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
-                <ScalarProperty Name="Details" ColumnName="Details" />
-                <ScalarProperty Name="draft" ColumnName="draft" />
+                <ScalarProperty Name="QRCode" ColumnName="QRCode" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="EditBy" ColumnName="EditBy" />
@@ -2797,6 +2800,8 @@
                 <ScalarProperty Name="Attachment" ColumnName="Attachment" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="draft" ColumnName="draft" />
+                <ScalarProperty Name="QRCode" ColumnName="QRCode" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="EditBy" ColumnName="EditBy" />
@@ -2813,6 +2818,39 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CheckoutViewData" FunctionName="InventoriesModel.Store.CheckoutViewData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoriesModel.CheckoutViewData_Result">
+                <ScalarProperty Name="CheckoutId" ColumnName="CheckoutId" />
+                <ScalarProperty Name="CheckoutNumber" ColumnName="CheckoutNumber" />
+                <ScalarProperty Name="CheckoutDate" ColumnName="CheckoutDate" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="draft" ColumnName="draft" />
+                <ScalarProperty Name="QRCode" ColumnName="QRCode" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+                <ScalarProperty Name="WarehouseAddress" ColumnName="WarehouseAddress" />
+                <ScalarProperty Name="WarehouseEmail" ColumnName="WarehouseEmail" />
+                <ScalarProperty Name="WarehousePhone" ColumnName="WarehousePhone" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemUnit" ColumnName="ItemUnit" />
+                <ScalarProperty Name="ItemCategory" ColumnName="ItemCategory" />
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="TransferViewData" FunctionName="InventoriesModel.Store.TransferViewData">
             <ResultMapping>
               <ComplexTypeMapping TypeName="InventoriesModel.TransferViewData_Result">
@@ -2825,6 +2863,8 @@
                 <ScalarProperty Name="Attachment" ColumnName="Attachment" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="draft" ColumnName="draft" />
+                <ScalarProperty Name="QRCode" ColumnName="QRCode" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="EditBy" ColumnName="EditBy" />

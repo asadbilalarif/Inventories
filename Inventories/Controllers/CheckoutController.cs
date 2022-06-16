@@ -2,10 +2,14 @@
 using Inventories.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ZXing;
+using ZXing.QrCode;
 using static Inventories.FilterConfig;
 
 namespace Inventories.Controllers
@@ -115,6 +119,8 @@ namespace Inventories.Controllers
                 Data.Reference = HeadData[0].Reference;
                 Data.Details = HeadData[0].Details;
                 Data.draft = HeadData[0].draft;
+                Data.QRCode = GenerateQRCode(Data.Reference, Data.CheckoutNumber);
+                Data.BarCode = GenerateBarCode(Data.Reference, Data.CheckoutNumber);
                 Data.CreatedDate = DateTime.Now;
                 Data.CreatedBy = UserId;
                 var Path = DB.tblTempPaths.Where(s => s.UserId == UserId).FirstOrDefault();
@@ -207,6 +213,8 @@ namespace Inventories.Controllers
                 Data.Reference = HeadData[0].Reference;
                 Data.Details = HeadData[0].Details;
                 Data.draft = HeadData[0].draft;
+                Data.QRCode = GenerateQRCode(Data.Reference, Data.CheckoutNumber);
+                Data.BarCode = GenerateBarCode(Data.Reference, Data.CheckoutNumber);
                 Data.CreatedDate = DateTime.Now;
                 Data.CreatedBy = UserId;
                 Data.EditDate = DateTime.Now;
@@ -434,9 +442,24 @@ namespace Inventories.Controllers
                 }
                 
             }
+            tblCheckout Obj = DB.tblCheckouts.Where(x => x.CheckoutId == Id).FirstOrDefault();
+            string QRPath = Obj.QRCode;
+            string BarPath = Obj.BarCode;
             DB.tblCheckoutItems.RemoveRange(Data1);
             DB.tblCheckouts.Remove(Data);
             DB.SaveChanges();
+            bool exists1 = (System.IO.File.Exists(Server.MapPath(QRPath)));
+            if (exists1)
+            {
+                System.IO.File.Delete(Server.MapPath(QRPath));
+
+            }
+            exists1 = (System.IO.File.Exists(Server.MapPath(BarPath)));
+            if (exists1)
+            {
+                System.IO.File.Delete(Server.MapPath(BarPath));
+
+            }
             NotificationHub.BroadcastData();
             return Json(1);
         }
@@ -528,6 +551,93 @@ namespace Inventories.Controllers
             }
 
             return View(allsearch);
+        }
+
+        private string GenerateQRCode(string qrcodeText, string Name)
+        {
+            string folderPath = "~/Uploading/QRCode/";
+            string imagePath = "/Uploading/QRCode/" + Name + ".jpg";
+            // If the directory doesn't exist then create it.
+            if (!Directory.Exists(Server.MapPath(folderPath)))
+            {
+                Directory.CreateDirectory(Server.MapPath(folderPath));
+            }
+            bool exists1 = (System.IO.File.Exists(Server.MapPath(imagePath)));
+            if (!exists1)
+            {
+                System.IO.File.Delete(Server.MapPath(imagePath));
+
+            }
+            var width = 70; // width of the Qr Code
+            var height = 70; // height of the Qr Code
+            var margin = 0;
+            var barcodeWriter = new BarcodeWriter();
+            barcodeWriter.Format = BarcodeFormat.QR_CODE;
+            barcodeWriter.Options = new QrCodeEncodingOptions
+            {
+                Height = height,
+                Width = width,
+                Margin = margin,
+            };
+            var result = barcodeWriter.Write(qrcodeText);
+
+            string barcodePath = Server.MapPath(imagePath);
+            var barcodeBitmap = new Bitmap(result);
+            using (MemoryStream memory = new MemoryStream())
+            {
+                using (FileStream fs = new FileStream(barcodePath, FileMode.Create, FileAccess.ReadWrite))
+                {
+                    barcodeBitmap.Save(memory, ImageFormat.Jpeg);
+                    byte[] bytes = memory.ToArray();
+                    fs.Write(bytes, 0, bytes.Length);
+                }
+            }
+            return imagePath;
+        }
+
+
+        private string GenerateBarCode(string qrcodeText, string Name)
+        {
+            string folderPath = "~/Uploading/BarCode/";
+            string imagePath = "/Uploading/BarCode/" + Name + ".jpg";
+            // If the directory doesn't exist then create it.
+            if (!Directory.Exists(Server.MapPath(folderPath)))
+            {
+                Directory.CreateDirectory(Server.MapPath(folderPath));
+            }
+            bool exists1 = (System.IO.File.Exists(Server.MapPath(imagePath)));
+            if (!exists1)
+            {
+                System.IO.File.Delete(Server.MapPath(imagePath));
+
+            }
+            var width = 70; // width of the Qr Code
+            var height = 70; // height of the Qr Code
+            var margin = 0;
+            var barcodeWriter = new BarcodeWriter();
+            barcodeWriter.Format = BarcodeFormat.CODE_128;
+            //barcodeWriter.Options.PureBarcode = true;
+            barcodeWriter.Options = new QrCodeEncodingOptions
+            {
+                Height = height,
+                Width = width,
+                Margin = margin,
+                PureBarcode = true
+            };
+            var result = barcodeWriter.Write(qrcodeText);
+
+            string barcodePath = Server.MapPath(imagePath);
+            var barcodeBitmap = new Bitmap(result);
+            using (MemoryStream memory = new MemoryStream())
+            {
+                using (FileStream fs = new FileStream(barcodePath, FileMode.Create, FileAccess.ReadWrite))
+                {
+                    barcodeBitmap.Save(memory, ImageFormat.Jpeg);
+                    byte[] bytes = memory.ToArray();
+                    fs.Write(bytes, 0, bytes.Length);
+                }
+            }
+            return imagePath;
         }
     }
 }

@@ -22,6 +22,8 @@ namespace Inventories.Models
         public string Attachment { get; set; }
         public string Details { get; set; }
         public Nullable<bool> draft { get; set; }
+        public string QRCode { get; set; }
+        public string BarCode { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> EditBy { get; set; }
