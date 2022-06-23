@@ -16,7 +16,13 @@ namespace Inventories.Controllers
         public ActionResult Login()
         {
             FormsAuthentication.SignOut();
-            
+            HttpCookie Settingcookie = new HttpCookie("Setting");
+            tblSetting Setting = DB.tblSettings.FirstOrDefault();
+            Settingcookie["Name"] = Setting.Name;
+            Settingcookie["Color"] = Setting.Color;
+            Settingcookie["HoverColor"] = Setting.HoverColor;
+            Response.Cookies.Add(Settingcookie);
+            Session["CurrentCulture"] = 0.ToString();
             return View();
         }
         [HttpPost]
@@ -44,12 +50,7 @@ namespace Inventories.Controllers
                     cookie["Role"] = User.tblRole.Role;
 
 
-                    HttpCookie Settingcookie = new HttpCookie("Setting");
-                    tblSetting Setting = DB.tblSettings.FirstOrDefault();
-                    Settingcookie["Name"] = Setting.Name;
-                    Settingcookie["Color"] = Setting.Color;
-                    Settingcookie["HoverColor"] = Setting.HoverColor;
-                    Response.Cookies.Add(Settingcookie);
+                   
 
                     //Session["User"] = DB.tblUsers.Select(r => r).Where(x => x.Email == Email).FirstOrDefault();
                     Session["access"] = DB.tblAccessLevels.Select(r => r).Where(x => x.RoleId == User.RoleId && x.isActive == true).ToList();
